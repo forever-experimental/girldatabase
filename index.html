@@ -1,10 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GIRLS</title>
-  </head>
-  <body>
-    girls with socks
-    <span style="background: tan;">/th/ (thigh highs)</span>
-  </body>
+<head>
+    <title>dogmomai.top</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+        :root {
+            --brown: #633e2b;
+            --tan: #e6c99e;
+
+            background: var(--tan);
+        }
+        body {
+            background: white;
+            box-shadow: 0 0 12px -6px var(--brown);
+
+            width: 600px;
+            min-height: 100vh;
+            margin: 0 auto;
+            
+            font-family: 'Josefin Sans', sans-serif;
+            color: #222;
+        }
+
+        header { padding: 1em; text-align: center; letter-spacing: 4px; }
+        main { padding: 1em; }
+        
+        p { color: #444; font-family: 'PT Serif', serif; }
+        button { background: var(--tan); border-radius: 0; border: 0; padding: 6px 10px 4px; font-family: inherit; color: black; font-size: 1em; }
+        button:hover { cursor: pointer; background: white; }
+
+        div.box { margin: 1em 0; display: flex; gap: 1em; }
+        div.box > div { flex: 1; padding: 1em; border: 1px solid #aaa; border-radius: 4px; }
+        div.box > img { height: 10em; aspect-ratio: 1; border-radius: 4px; }
+        div.box #price { color: var(--brown); font-weight: 400; font-size: 0.8em; }
+        div.box #price::before { content: "/ "; color: initial; }
+
+        #hero { position: relative; overflow: hidden; height: 20em; }
+        #hero > img { position: absolute; filter: blur(4px) brightness(0.5); width: 110%; top: -5%; left: -5%; }
+        #hero > div { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 9; color: white; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 style="margin-top: 6px; font-size: 16px;">DRYWATER CAFE</h2>
+        <strong style="color: var(--brown); font-size: 12px;">ESSEX COUNTY, VA</strong>
+    </header>
+
+    <div id="hero">
+        <img src="https://www.artisancoffeeco.com/cdn/shop/collections/artisan-coffee-co_pod_machine-01_1200x1200.jpg?v=1646736650">
+        <div>
+            <h1 style="margin-top: 0;">Low prices. Great coffee.</h1>
+            <button type="button">Get started</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="box">
+            <div>
+                <h3>MOCHA <span id="price">$3.99</span></h3>
+                <p>The complex, chocolate flavour of mochas are unmatched.</p>
+            </div>
+            <img src="https://images.immediate.co.uk/production/volatile/sites/2/2021/11/Mocha-1fc71f7.png?quality=90&resize=556,505">
+        </div>
+        <div class="box">
+            <div>
+                <h3>LATTE <span id="price">$5.99</span></h3>
+                <p>Feel warm and energized with our creamy, frothy lattes.</p>
+            </div>
+            <img src="https://www.allrecipes.com/thmb/Wh0Qnynwdxok4oN0NZ1Lz-wl0A8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/9428203-9d140a4ed1424824a7ddd358e6161473.jpg">
+        </div>
+        <div class="box">
+            <div>
+                <h3>AMERICANO <span id="price">$4.49</span></h3>
+                <p>Bring yourself back to your roots with a sip of American culture.</p>
+            </div>
+            <img src="https://images.squarespace-cdn.com/content/v1/5a7cbe247131a5f17b3cc8fc/1519447742018-MOHBW2G0VOQ7QSCPJE14/Americano-Coffee-Lounge-Ingredients.jpg">
+        </div>
+    </main>
+</body>
 </html>
