@@ -13,17 +13,25 @@
             border: 1px solid black;
             margin: 1em 0;
         }
-        article #img {
+        article > #img {
             background: #eee;
             padding: 1rem;
             font-size: 0.8em;
             text-align: center;
         }
-        article #img img {
+        article > #img > img {
             max-width: 200px;
             max-height: 200px;
         }
-        article #txt {
+        article > #img > a {
+            max-width: 120px;
+            display: inline-block;
+            
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        article > #txt {
             padding: 0 1em;
             flex: 1;
         }
