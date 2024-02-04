@@ -33,33 +33,30 @@
         }
 
         article {
-            display: flex;
-            border: 1px solid #667;
+            border: 1px solid #666;
+            display: grid;
+            grid-template: 
+            "a a" 800px
+            "b c" 40px / 200px 1fr;
         }
-        article > #data {
-            background: white;
-            padding: 1rem;
-            font-size: 0.8em;
-            text-align: center;
-        }
-        article > #data > img {
-            max-width: 200px;
-            max-height: 200px;
-            display: block;
-            cursor: pointer;
-            box-shadow: 0 0 10px lightgrey;
-        }
-        article > #data > address {
-            max-width: 200px;
+        article > #meta {
+            grid-area: a;
             
-            font-style: normal;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            background: white;
+            padding: 4px;
+            font-size: 0.8em;
+        }
+        article > #image {
+            grid-area: b;
+            
+            max-width: 100%;
+            max-height: 200px;
+            cursor: pointer;
         }
         article > #body {
+            grid-area: c;
+            
             padding: 0 1em;
-            flex: 1;
         }
     </style>
 </head>
@@ -83,42 +80,13 @@
         
         <div id="articles">
             <article>
-                <div id="data">
-                    <img src="res/example0.png">
-                    <address>ishika_san.png</address>
-                    (448x832, 42KB)
-                    <br><br>
-                    <i>14 comments</i>
+                <div id="meta">
+                    ishika_san.png (448x832, 42KB) / <i>14 comments</i>
                 </div>
+                <img src="res/example0.png">
                 <div id="body">
                     <p>OMG I love Ishika Uwagori SO MUCH</p>
                     <p>SHE'S MINE &gt;:(</p>
-                </div>
-            </article>
-            
-            <article>
-                <div id="data">
-                    <img src="res/example1.png">
-                    <address>teacher_table_kawaii_2024.png</address>
-                    (448x832, 31KB)
-                    <br><br>
-                    <i>3 comments</i>
-                </div>
-                <div id="body">
-                    <p>so cute</p>
-                </div>
-            </article>
-
-            <article>
-                <div id="data">
-                    <img src="res/example2.png">
-                    <address>ss.png</address>
-                    (448x832, 37KB)
-                    <br><br>
-                    <i>5 comments</i>
-                </div>
-                <div id="body">
-                    <p>I thought I'd post this gen since her swimsuit is pretty</p>
                 </div>
             </article>
         </div>
