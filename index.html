@@ -7,14 +7,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap');
 
-        /* :root { variables soon pls } */
+        :root {
+            --text: #111;
+            --background: #eee;
+            --background-dark: lightgrey;
+            --border: #666;
+        }
         
         body {
             background-color: #68686a;
             background: repeating-linear-gradient( -45deg, #49494e, #49494e 5px, #68686a 5px, #68686a 25px );
             
             font-family: 'Roboto', sans-serif;
-            color: #111;
+            color: var(--text);
 
             margin: 0;
         }
@@ -23,20 +28,20 @@
             margin: auto;
             width: min(1000px, 100%);
             
-            background: #eee;
+            background: var(--background);
             box-shadow: 0 0 12px black;
         }
 
         nav {
-            border: 1px solid black;
+            border: 1px solid var(--border);
             border-left: 0;
             border-right: 0;
-            background: lightgrey;
+            background: var(--background-dark);
             padding: 0 2px;
         }
 
         #post-form {
-            border: 1px solid #667;
+            border: 1px solid var(--border);
             padding: 1em;
             margin: auto;
             width: 50%;
@@ -50,7 +55,7 @@
         }
 
         article {
-            border: 1px solid #666;
+            border: 1px solid var(--border);
             display: grid;
             grid-template: 
             "a a" 1em
@@ -59,7 +64,7 @@
         article > #meta {
             grid-area: a;
             
-            background: lightgrey;
+            background: var(--background-dark);
             font-size: 0.8em;
             padding-left: 2px;
         }
@@ -82,7 +87,7 @@
         <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
 
         <nav>
-            <a href="">HOME</a>
+            <a href="">/homedir/</a>
             <a href="">/th/</a>
         </nav>
         
