@@ -27,12 +27,9 @@
 
         a { color: var(--text-accent); }
 
-        .center { margin: auto; width: min(1000px, 100%); box-sizing: border-box; }
+        #center { margin: auto; width: min(1000px, 100%); box-sizing: border-box; box-shadow: 0 0 12px black; }
 
-        main {
-            background: var(--background);
-            box-shadow: 0 0 12px black;
-        }
+        main { background: var(--background); }
 
         nav {
             border: 1px solid var(--border);
@@ -85,68 +82,70 @@
     </style>
 </head>
 <body>
-    <header class="center">
-        <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
-        <nav>
-            <a href="">/homedir/</a>
-            <a href="">/th/</a>
-        </nav>
-    </header>
-    <main class="center">
-        <div style="text-align: center; padding: 4em 1em;">
-            <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /th/</h1>
-            <p>Every post must have a girl with thigh highs. Click on an image to view a post and its comments.</p>
-        </div>
-    
-        <form id="post-form"> <!-- action="/action_page.php" -->
-            <input type="file" id="post-image" name="post-image" accept="image/png, image/jpeg"/>
-            <br>
-            <textarea id="post-body" name="post-body" style="min-width: 100%; max-width: 100%; min-height: 1em; max-height: 24em;" rows="4"></textarea>
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+    <div id="center">
+        <header>
+            <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
+            <nav>
+                <a href="">/homedir/</a>
+                <a href="">/th/</a>
+            </nav>
+        </header>
+        <main>
+            <div style="text-align: center; padding: 4em 1em;">
+                <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /th/</h1>
+                <p>Every post must have a girl with thigh highs. Click on an image to view a post and its comments.</p>
+            </div>
         
-        <div id="articles">
-            <article>
-                <img id="image" onclick="alert('wip')" src="res/example0.png">
-                <div id="meta">
-                    ishika_san.png (448x832, 42KB) / <i>14 comments</i>
-                </div>
-                <div id="body">
-                    OMG I love Ishika Uwagori SO MUCH<br>SHE'S MINE &gt;:(
-                </div>
-            </article>
-            <article>
-                <img id="image" onclick="alert('wip')" src="res/example1.png">
-                <div id="meta">
-                    cute_teacher_sitting.png (448x832, 38KB) / <i>2 comments</i>
-                </div>
-                <div id="body">
-                    I thought this generation looked good
-                </div>
-            </article>
-            <article>
-                <img id="image" onclick="alert('wip')" src="res/example2.png">
-                <div id="meta">
-                    swimsuit.png (448x832, 40KB) / <i>5 comments</i>
-                </div>
-                <div id="body">
-                    do you guys ever just feel sad like, all the time
-                </div>
-            </article>
-            <article>
-                <img id="image" onclick="alert('wip')" src="res/example3.png">
-                <div id="meta">
-                    suchacutegirly.png (448x832, 48KB) / <i>51 comments</i>
-                </div>
-                <div id="body">
-                    my OC :)
-                </div>
-            </article>
-        </div>
-    </main>
-    <footer class="center" style="background: var(--background-dark); padding: 1em;">
-        © 2024 Bluebunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
-    </footer>
+            <form id="post-form"> <!-- action="/action_page.php" -->
+                <input type="file" id="post-image" name="post-image" accept="image/png, image/jpeg"/>
+                <br>
+                <textarea id="post-body" name="post-body" style="min-width: 100%; max-width: 100%; min-height: 1em; max-height: 24em;" rows="4"></textarea>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+            
+            <div id="articles">
+                <article>
+                    <img id="image" onclick="alert('wip')" src="res/example0.png">
+                    <div id="meta">
+                        ishika_san.png (448x832, 42KB) / <i>14 comments</i>
+                    </div>
+                    <div id="body">
+                        OMG I love Ishika Uwagori SO MUCH<br>SHE'S MINE &gt;:(
+                    </div>
+                </article>
+                <article>
+                    <img id="image" onclick="alert('wip')" src="res/example1.png">
+                    <div id="meta">
+                        cute_teacher_sitting.png (448x832, 38KB) / <i>2 comments</i>
+                    </div>
+                    <div id="body">
+                        I thought this generation looked good
+                    </div>
+                </article>
+                <article>
+                    <img id="image" onclick="alert('wip')" src="res/example2.png">
+                    <div id="meta">
+                        swimsuit.png (448x832, 40KB) / <i>5 comments</i>
+                    </div>
+                    <div id="body">
+                        do you guys ever just feel sad like, all the time
+                    </div>
+                </article>
+                <article>
+                    <img id="image" onclick="alert('wip')" src="res/example3.png">
+                    <div id="meta">
+                        suchacutegirly.png (448x832, 48KB) / <i>51 comments</i>
+                    </div>
+                    <div id="body">
+                        my OC :)
+                    </div>
+                </article>
+            </div>
+        </main>
+        <footer style="background: var(--background-dark); padding: 1em;">
+            © 2024 Bluebunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
+        </footer>
+    </div>
 </body>
 </html>
