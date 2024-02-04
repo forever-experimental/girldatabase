@@ -6,6 +6,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap');
+
+        /* :root { variables soon pls } */
         
         body {
             background-color: #68686a;
@@ -23,6 +25,13 @@
             
             background: #eee;
             box-shadow: 0 0 12px black;
+        }
+
+        #post-form {
+            border: 1px solid #667;
+            padding: 1em;
+            margin: auto;
+            width: 50%;
         }
 
         #articles {
@@ -63,13 +72,18 @@
 <body>
     <main>    
         <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
-    
+
+        <nav style="border: 1px solid black; border-left: 0; border-right: 0; background: lightgrey;">
+            <a href="">HOME</a>
+            <a href="">/th/</a>
+        </nav>
+        
         <div style="text-align: center; padding: 4em 1em;">
             <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /th/</h1>
             <p>Every post must have a girl with thigh highs. Click on an image to view a post and its comments.</p>
         </div>
     
-        <form style="border: 1px solid #667; padding: 1em; margin: auto; width: 50%;"> <!-- action="/action_page.php" -->
+        <form id="post-form"> <!-- action="/action_page.php" -->
             <input type="file" id="post-image" name="post-image" accept="image/png, image/jpeg"/>
             <br>
             <textarea id="post-body" name="post-body" style="min-width: 100%; max-width: 100%; min-height: 1em; max-height: 24em;" rows="4"></textarea>
