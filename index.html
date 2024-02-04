@@ -19,12 +19,23 @@
             margin: 0;
         }
 
+        a { color: red; }
+
         main {
             margin: auto;
             width: min(1000px, 100%);
             
             background: #eee;
             box-shadow: 0 0 12px black;
+        }
+
+        nav {
+            border: 1px solid black;
+            border-left: 0;
+            border-right: 0;
+            background: lightgrey;
+            font-weight: 700;
+            padding: 0 2px;
         }
 
         #post-form {
@@ -73,7 +84,7 @@
     <main>    
         <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
 
-        <nav style="border: 1px solid black; border-left: 0; border-right: 0; background: lightgrey;">
+        <nav>
             <a href="">HOME</a>
             <a href="">/th/</a>
         </nav>
