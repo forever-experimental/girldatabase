@@ -24,10 +24,11 @@
             margin: 0;
         }
 
+        a { color: #55f; }
+
+        .center { margin: auto; width: min(1000px, 100%); }
+
         main {
-            margin: auto;
-            width: min(1000px, 100%);
-            
             background: var(--background);
             box-shadow: 0 0 12px black;
         }
@@ -83,7 +84,7 @@
     </style>
 </head>
 <body>
-    <main>    
+    <main class="center">
         <div style="height: 80px; background-image: url('res/banner.png'); background-size: contain;"></div>
 
         <nav>
@@ -134,5 +135,8 @@
             </article>
         </div>
     </main>
+    <footer class="center" style="background: var(--background-dark); padding: 1em;">
+        © 2024 Bluebunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
+    </footer>
 </body>
 </html>
