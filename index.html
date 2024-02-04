@@ -17,6 +17,21 @@
             margin: 0;
         }
 
+        main {
+            margin: auto;
+            width: min(1000px, 100%);
+            
+            background: #eee;
+            box-shadow: 0 0 12px black;
+        }
+
+        #articles {
+            padding: 1em 2em;
+            display: flex;
+            gap: 1em;
+            flex-direction: column;
+        }
+
         article {
             display: flex;
             border: 1px solid #667;
@@ -46,12 +61,10 @@
             padding: 0 1em;
             flex: 1;
         }
-
-        #articles { padding: 1em 2em; display: flex; gap: 1em; flex-direction: column; }
     </style>
 </head>
 <body>
-    <main style="margin: auto; width: min(1000px, 100%); background: #eee; box-shadow: 0 0 12px black;">
+    <main>
         
         <div style="height: 80px; background-image: url('https://i.pinimg.com/736x/0d/33/c6/0d33c6633ae53bf07e7adc3509907875.jpg'); background-size: contain;"></div>
     
@@ -86,7 +99,7 @@
             <article>
                 <div id="data">
                     <img src="res/example1.png">
-                    <address>teacher_table_237357642.png</address>
+                    <address>teacher_table_kawaii_2024.png</address>
                     (448x832, 31KB)
                     <br><br>
                     <i>3 comments</i>
