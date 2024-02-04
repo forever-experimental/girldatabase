@@ -36,14 +36,13 @@
             border: 1px solid #666;
             display: grid;
             grid-template: 
-            "a a" 800px
-            "b c" 40px / 200px 1fr;
+            "a a" 1em
+            "b c" 1fr / auto 1fr;
         }
         article > #meta {
             grid-area: a;
             
             background: white;
-            padding: 4px;
             font-size: 0.8em;
         }
         article > #image {
@@ -83,7 +82,7 @@
                 <div id="meta">
                     ishika_san.png (448x832, 42KB) / <i>14 comments</i>
                 </div>
-                <img src="res/example0.png">
+                <img id="image" src="res/example0.png">
                 <div id="body">
                     <p>OMG I love Ishika Uwagori SO MUCH</p>
                     <p>SHE'S MINE &gt;:(</p>
