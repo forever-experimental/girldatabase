@@ -1,0 +1,22 @@
+{
+  "name": "girlsock.directory",
+  "version": "0.1.0",
+  "description": "Gurls.",
+  "main": "/src/index.js",
+  "scripts": {
+    "dev": "node ./src/index.js",
+    "build": "esbuild ./src/index.js --bundle --outfile=minified-bundle.js --minify --sourcemap"
+  },
+  "keywords": [
+    "cute",
+    "development",
+    "deployment",
+    "utility"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cute-socks": "^0.1.0",
+    "micromodal": "^0.4.10"
+  }
+}

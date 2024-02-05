@@ -1,0 +1,2 @@
+(()=>{var s=(t,o)=>()=>(o||t((o={exports:{}}).exports,o),o.exports);var n=s((l,e)=>{var d=t=>document.querySelector(t),u=t=>document.querySelectorAll(t);e.exports={$:d,$$:u}});var{$:c,$$:m}=n();document.addEventListener("DOMContentLoaded",i);function i(){c("#post-form-submit").addEventListener("click",function(t){t.preventDefault(),c("#post-form-submit-loading-modal").style.display="block"})}})();
+//# sourceMappingURL=minified-bundle.js.map
