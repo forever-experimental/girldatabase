@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["node_modules/cute-socks/index.js", "src/index.js"],
+  "sourcesContent": ["const $ = selector => document.querySelector(selector);\r\nconst $$ = selector => document.querySelectorAll(selector);\r\nmodule.exports = {$, $$};", "const {$, $$} = require('cute-socks');\r\n\r\n\r\ndocument.addEventListener('DOMContentLoaded', onDomContentLoad);\r\n\r\n\r\nfunction onDomContentLoad()\r\n{\r\n    $('#post-form-submit').addEventListener('click', function (event)\r\n    {\r\n        event.preventDefault();\r\n        $('#post-form-submit-loading-modal').style.display = 'block';\r\n        submitPost();\r\n    });\r\n}\r\n\r\nfunction submitPost()\r\n{\r\n    // TODO\r\n}"],
+  "mappings": "oEAAA,IAAAA,EAAAC,EAAA,CAAAC,EAAAC,IAAA,KAAMC,EAAIC,GAAY,SAAS,cAAcA,CAAQ,EAC/CC,EAAKD,GAAY,SAAS,iBAAiBA,CAAQ,EACzDF,EAAO,QAAU,CAAC,EAAAC,EAAG,GAAAE,CAAE,ICFvB,GAAM,CAAC,EAAAC,EAAG,GAAAC,CAAE,EAAI,IAGhB,SAAS,iBAAiB,mBAAoBC,CAAgB,EAG9D,SAASA,GACT,CACIF,EAAE,mBAAmB,EAAE,iBAAiB,QAAS,SAAUG,EAC3D,CACIA,EAAM,eAAe,EACrBH,EAAE,iCAAiC,EAAE,MAAM,QAAU,OAEzD,CAAC,CACL",
+  "names": ["require_cute_socks", "__commonJSMin", "exports", "module", "$", "selector", "$$", "$", "$$", "onDomContentLoad", "event"]
+}
