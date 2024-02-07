@@ -16,7 +16,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@aws-sdk/client-cognito-identity": "^3.507.0",
+    "@aws-sdk/client-dynamodb": "^3.507.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.507.0",
+    "@aws-sdk/util-dynamodb": "^3.507.0",
     "cute-socks": "^0.1.0",
+    "cute-util": "^0.1.0",
     "micromodal": "^0.4.10"
   }
 }
