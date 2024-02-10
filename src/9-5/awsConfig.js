@@ -1,10 +1,9 @@
-// Configuration for AWS SDK
 import {CognitoIdentityClient} from "@aws-sdk/client-cognito-identity";
 import {fromCognitoIdentityPool} from "@aws-sdk/credential-provider-cognito-identity";
 import {DynamoDBClient} from "@aws-sdk/client-dynamodb";
 
 const REGION = "us-west-2";
-const IDENTITY_POOL_ID = "us-east-2:a3352194-7c70-4e6f-9a73-255adcdb011a";
+const IDENTITY_POOL_ID = "us-west-2:5cf2c915-001b-4190-ad65-6f10af3a375c";
 
 const dynamoDBClient = new DynamoDBClient({
     region: REGION,

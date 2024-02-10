@@ -1,32 +1,40 @@
-const {$, $$} = require('cute-socks');
-// const {dynamoDBClient} require('./util/awsConfig.js');
-// const {getLatestPosts} require('./util/dynamoDbUtils.js');
-const {compressImage} = require('./util/imageUtils.js');
-const {uploadSockToCloudFunction} = require('./util/googleCloud.js');
+const {$, $$, listen} = require('cute-socks');
+const {dynamoDBClient} = require('./9-5/awsConfig.js');
+const fetchPostsFromBoard = require('./9-5/dynamoDbUtils.js');
+const {compressImage} = require('./9-5/imageUtils.js');
+const {uploadSockToCloudFunction} = require('./9-5/googleCloud.js');
+const {sock} = require('./components/girl.js');
+import {html, render} from 'lit-html';
 
 const {getUriExtension, getFileNameFromUri} = require('cute-util');
 
-const USER_POSTS_TABLE = "girlsockdir"; // DynamoDB Table Name
+const USER_POSTS_TABLE = "girlsockdir";
 
-document.addEventListener('DOMContentLoaded', onDomContentLoad);
+document.addEventListener('DOMContentLoaded', onDomContentLoaded);
 
 
-function onDomContentLoad()
+function onDomContentLoaded()
 {
-    $('#post-form-submit').addEventListener('click', async function (event)
-    {
-        event.preventDefault();
-        $('#post-form-submit-loading-modal').style.display = 'block';
-        let respo = await submitPost();
-        if (respo.ok)
-        {
-            $('#post-form-submit-loading-modal').style.display = 'none';
-        }
-    });
+    getLatest('/th/');
+    listen($('#post-form-submit'), submitPost);
+}
+
+async function getLatest(dir)
+{
+    let posts = await fetchPostsFromBoard(USER_POSTS_TABLE, dynamoDBClient, dir, 50);
+    console.log(posts.items);
+
+    const allSocks = posts.items.map(post =>
+        sock(post.imageUrl, post.theFileName, "1x1", "0KB", 0, post.theText)
+    );
+
+    // Render all socks at once
+    render(html`${allSocks}`, $('#articles'));
 }
 
 async function submitPost()
 {
+    $('#post-form-submit-loading-modal').style.display = 'block';
     const fileInput = $('#post-image');
     const textInput = $('#post-body')?.value;
 
@@ -34,8 +42,11 @@ async function submitPost()
     {
         const compressedImage = await compressImage(fileInput.files[0]);
         const response = await uploadSockToCloudFunction('/th/', getFileNameFromUri(fileInput.files[0].name), compressedImage, textInput);
-        console.log(response.ok);
+        console.log(response);
+        if (response.ok)
+        {
+            $('#post-form-submit-loading-modal').style.display = 'none';
+        }
         return response;
-
     }
 }
