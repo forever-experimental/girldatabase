@@ -24,6 +24,7 @@
             color: var(--text);
 
             margin: 0;
+            min-height: 100vh;
         }
 
         a { color: var(--text-accent); }
@@ -31,7 +32,6 @@
         #center { margin: auto; width: min(1000px, 100%); box-sizing: border-box; box-shadow: 0 0 12px black; }
 
         main { background: var(--background); }
-
         footer { background: var(--background-dark); padding: 1em; }
 
         nav {
@@ -101,6 +101,12 @@
             <!-- directory description -->
             <div style="text-align: center; padding: 4em 1em;">
                <p>Welcome to the directory~!</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em;">
+                <div style="border: 1px solid var(--border); padding: 1em;">
+                    stuff
+                </div>
             </div>
     
             <div id="articles"></div>
