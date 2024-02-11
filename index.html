@@ -85,6 +85,9 @@
 
             padding: 1em;
         }
+
+        #grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; padding: 1em; }
+        #grid > div { border: 1px solid var(--border); padding: 1em; }
     </style>
 <!--    <script type="module" src="/minified-bundle.js"></script>-->
 </head>
@@ -98,18 +101,20 @@
             </nav>
         </header>
         <main>
-            <!-- directory description -->
-            <div style="text-align: center; padding: 4em 1em;">
-               <p>Welcome to the directory~!</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em;">
-                <div style="border: 1px solid var(--border); padding: 1em;">
-                    stuff
+            <div id="grid">
+                <div>
+                    Welcome to the directory~! Please follow the rules.
+                    <br><strong>Rules:</strong>
+                    <ol>
+                        <li>Adhere to the rules of the directory you're posting under.</li>
+                        <li>No discrimination.</li>
+                    </ol>
                 </div>
+                <div></div>
+                <div></div>
             </div>
     
-            <div id="articles"></div>
+            <!--<div id="articles"></div>-->
         </main>
         <footer>
             © 2024 BlueBunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
