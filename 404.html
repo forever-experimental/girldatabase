@@ -34,7 +34,7 @@
         `;
 
         // inject html component. basics.
-        render(exampleComponent(), document.body);
+        render(exampleComponent(), document.getElementById("main"));
     </script>
 
 </head>
@@ -47,9 +47,12 @@
                 <a href="https://girlsock.directory/th/">th/</a>
             </nav>
         </header>
-        <main>
+        <main id="main">
             
         </main>
+        <footer>
+            © 2024 BlueBunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
+        </footer>
     </div>
 </body>
 </html>
