@@ -11,10 +11,11 @@
 
         h1 { font-size: 1em; margin: 1em 0; }
 
-        #articles { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1em; }
-        article > img { max-width: 100px; }
+        #articles { display: flex; flex-direction: column; gap: 1em; }
+        article { display: flex; border: 1px solid var(border); }
+        article > img { max-width: 150px; max-height: 150px; }
         /* the body text */
-        /* article > div { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; } */
+        article > div { padding: 1em; flex: 1; }
     </style>
 </head>
 <body>
