@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="/css/global-style.css">
     <link rel="stylesheet" href="/css/dir-style.css">
 
-    <script src="js/components/index.js"></script>
-
     <script type="module" src="/minified-bundle.js"></script>
 
     <!--    <meta name="description" content="">-->
@@ -29,7 +27,7 @@
 
         const urlThatWasTried = window.location.href.substring("https://girlsock.directory/".length);
 
-        // inject html component
+        // inject html component (for now just index)
         render(index(), document.getElementById("main"));
     </script>
 
