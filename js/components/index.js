@@ -1,4 +1,4 @@
-import {html} from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
+import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
 export const index = () => html`
     <style>
@@ -32,11 +32,11 @@ export const index = () => html`
                     <td style="padding-right: 4em;">index/</td>
                 </tr>
                 <tr>
-                    <td>├── <a href="https://girlsock.directory/th/">th/</a></td>
+                    <td>├── <a href="/th">th/</a></td>
                     <td># thigh highs</td>
                 </tr>
                 <tr>
-                    <td>└── <a href="">f/</a></td>
+                    <td>└── <a href="/f">f/</a></td>
                     <td># fat</td>
                 </tr>
             </table>
