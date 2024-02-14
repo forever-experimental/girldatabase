@@ -25,19 +25,18 @@
     <script type="module">
         import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
         import { index } from './js/components/index.js';
-        // can render index the same
 
         const directoryPath = window.location.href.substring("https://girlsock.directory/".length);
 
         // REMOVE THIS once actual external page content loading is implemented
         export const sock = (url) => html`
-            <p>welcome to "${url}"</p>
+            <p>this page is not index. welcome to "${url}"</p>
         `;
 
         // inject html component corresponding to path in url
         switch(directoryPath) {
             case "": // index
-                render(sock(directoryPath), document.getElementById("main"));
+                render(index(), document.getElementById("main"));
                 break;
             case "th":
                 render(sock(directoryPath), document.getElementById("main"));
