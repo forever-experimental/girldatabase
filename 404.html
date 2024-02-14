@@ -25,14 +25,27 @@
     <script type="module">
         import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
-        const urlThatWasTried = window.location.href.substring("https://girlsock.directory/".length);
+        const directoryPath = window.location.href.substring("https://girlsock.directory/".length);
 
+        // REMOVE THIS once actual external page content loading is implemented
         export const sock = (url) => html`
             <p>welcome to "${url}"</p>
         `;
 
-        // inject (not yet index) html component
-        render(sock(urlThatWasTried), document.getElementById("main"));
+        // inject html component corresponding to path in url
+        switch(directoryPath) {
+            case "": // index
+                render(sock(directoryPath), document.getElementById("main"));
+                break;
+            case "th/":
+                render(sock(directoryPath), document.getElementById("main"));
+                break;
+            case "f/":
+                render(sock(directoryPath), document.getElementById("main"));
+                break;
+            default: // page not found
+                render(sock(directoryPath), document.getElementById("main"));
+        }
     </script>
 
 </head>
