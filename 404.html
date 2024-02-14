@@ -27,8 +27,12 @@
 
         const urlThatWasTried = window.location.href.substring("https://girlsock.directory/".length);
 
-        // inject html component (for now just index)
-        render(index(), document.getElementById("main"));
+        export const sock = (url) => html`
+            <p>welcome to "${url}"</p>
+        `;
+
+        // inject index html component
+        render(index(urlThatWasTried), document.getElementById("main"));
     </script>
 
 </head>
