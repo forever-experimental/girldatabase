@@ -37,10 +37,10 @@
             case "": // index
                 render(sock(directoryPath), document.getElementById("main"));
                 break;
-            case "th/":
+            case "th":
                 render(sock(directoryPath), document.getElementById("main"));
                 break;
-            case "f/":
+            case "f":
                 render(sock(directoryPath), document.getElementById("main"));
                 break;
             default: // page not found
@@ -55,8 +55,8 @@
             <div style="height: 80px; background-image: url('/assets/banner.png'); background-size: contain;"></div>
             <nav>
                 <a href="/">index/</a>
-                <a href="th/">th/</a>
-                <a href="f/">f/</a>
+                <a href="/th">th/</a>
+                <a href="/f">f/</a>
             </nav>
         </header>
         <main id="main">
