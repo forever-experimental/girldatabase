@@ -1,15 +1,22 @@
 <!doctype html>
 <html>
 <head>
+    <title>girlsock.directory</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <link rel="icon" href="https://media.girlsock.directory/img/8828f78d1bfd.webp" type="image/webp">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/css/global-style.css">
+    <link rel="stylesheet" href="/css/dir-style.css">
+
+    <script type="module" src="/minified-bundle.js"></script>
+
     <!--    <meta name="description" content="">-->
     <!--    <meta property="og:title" content="">-->
     <!--    <meta property="og:type" content="">-->
     <!--    <meta property="og:url" content="">-->
     <!--    <meta property="og:image" content="">-->
-    <link rel="icon" href="https://media.girlsock.directory/img/8828f78d1bfd.webp" type="image/webp">
     <!--    <link rel="apple-touch-icon" href="icon.png">-->
     <!--    <link rel="manifest" href="site.webmanifest">-->
     <!--https://css-tricks.com/meta-theme-color-and-trickery/-->
@@ -18,10 +25,10 @@
     <script type="module">
         import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
-        const urlThatWasTried = window.location.href;
+        const urlThatWasTried = window.location.href.substring("https://girlsock.directory/".length);
         const exampleComponent = () => html`
             <div>
-                <h1>${urlThatWasTried}</h1>
+                <h1>Welcome to ${urlThatWasTried}</h1>
                 <p>An example.</p>
             </div>
         `;
