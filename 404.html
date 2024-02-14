@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="/css/global-style.css">
     <link rel="stylesheet" href="/css/dir-style.css">
 
+    <script src="js/components/index.js"></script>
+
     <script type="module" src="/minified-bundle.js"></script>
 
     <!--    <meta name="description" content="">-->
@@ -26,15 +28,9 @@
         import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
         const urlThatWasTried = window.location.href.substring("https://girlsock.directory/".length);
-        const exampleComponent = () => html`
-            <div>
-                <h1>Welcome to ${urlThatWasTried}</h1>
-                <p>An example.</p>
-            </div>
-        `;
 
-        // inject html component. basics.
-        render(exampleComponent(), document.getElementById("main"));
+        // inject html component
+        render(index(), document.getElementById("main"));
     </script>
 
 </head>
