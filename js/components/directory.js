@@ -1,6 +1,8 @@
 import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
-export const index = () => html`
+export const directory = () => html`
+    <script type="module" src="/minified-bundle.js"></script>
+
     <!-- directory description -->
     <div style="text-align: center; padding: 4em 1em;">
         <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /th/</h1>
