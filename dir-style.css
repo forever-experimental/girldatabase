@@ -1,5 +1,5 @@
 #articles {
-    padding: 1em 2em;
+    padding: 1em 0;
     display: flex;
     gap: 1em;
     flex-direction: column;
