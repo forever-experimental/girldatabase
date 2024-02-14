@@ -3,8 +3,8 @@
   "version": "0.9.0",
   "description": "",
   "scripts": {
-    "build": "esbuild ./src/index.js --bundle --outfile=minified-bundle.js --minify",
-    "build-debug": "esbuild ./src/index.js --bundle --outfile=minified-bundle.js --minify --sourcemap"
+    "build": "esbuild js/index.js --bundle --outfile=minified-bundle.js --minify",
+    "build-debug": "esbuild js/index.js --bundle --outfile=minified-bundle.js --minify --sourcemap"
   },
   "keywords": [
     "cute"
@@ -18,6 +18,7 @@
     "@aws-sdk/util-dynamodb": "^3.511.0",
     "cute-socks": "^0.2.0",
     "cute-util": "^0.1.0",
+    "date-fns": "^3.3.1",
     "lit-html": "^3.1.2"
   },
   "devDependencies": {
