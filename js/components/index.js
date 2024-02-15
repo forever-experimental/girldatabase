@@ -36,8 +36,12 @@ export const index = () => html`
                     <td># thigh highs</td>
                 </tr>
                 <tr>
-                    <td>└── <a href="/f">f/</a></td>
+                    <td>├── <a href="/f">f/</a></td>
                     <td># fat</td>
+                </tr>
+                <tr>
+                    <td>└── <a href="/ai">ai/</a></td>
+                    <td># generated art</td>
                 </tr>
             </table>
         </div>
