@@ -28,16 +28,25 @@
         switch (window.location.href.substring("https://girlsock.directory/".length))
         { // inject html component corresponding to path in url
             case "": // index
-                $('#main').render(index());
+                render(index(), document.getElementById("main"));
                 break;
             case "th":
-                $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+                render(
+                    directory("th", "Every post must have a girl with thigh highs."),
+                    document.getElementById("main")
+                );
                 break;
             case "f":
-                $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
+                render(
+                    directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."),
+                    document.getElementById("main")
+                );
                 break;
             default: // page not found
-                $('#main').render(html`<p>The page you are looking for does not exist.</p>`);
+                render(
+                    html`<p>The page you are looking for does not exist.</p>`,
+                    document.getElementById("main")
+                );
         }
     </script>
 
