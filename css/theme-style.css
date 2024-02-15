@@ -59,8 +59,8 @@ article {
     border: 1px solid var(--border);
     display: grid;
     grid-template: 
-    "a a" 1em
-    "b c" 1fr / auto 1fr;
+        "a a" 1em
+        "b c" 1fr / auto 1fr;
 }
 
 article > .meta {
@@ -74,7 +74,7 @@ article > .meta {
 article > .image {
     grid-area: b;
 
-    max-width: 50%;
+    max-width: 200px;
     max-height: 200px;
 }
 
