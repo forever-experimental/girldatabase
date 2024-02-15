@@ -1,12 +1,10 @@
 import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
-export const directory = () => html`
-    <script type="module" src="/minified-bundle.js"></script>
-
+export const directory = (title, description) => html`
     <!-- directory description -->
     <div style="text-align: center; padding: 4em 1em;">
-        <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /th/</h1>
-        <p>Every post must have a girl with thigh highs. Click on an image to view a post and its comments.</p>
+        <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /${title}/</h1>
+        <p>${description}</p>
     </div>
     
     <!-- post submission box -->
@@ -38,4 +36,7 @@ export const directory = () => html`
             Loading....
         </div>
     </div>
+
+    <!-- content loading script -->
+    <script src="/minified-bundle.js"></script>
 `;
