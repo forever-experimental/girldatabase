@@ -1,5 +1,4 @@
-import {html} from 'lit-html';
-
+import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
 export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => html`
     <article>
