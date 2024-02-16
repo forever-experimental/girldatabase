@@ -30,4 +30,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git add js/minified-bundle.js
           git commit -m "Update minified bundle" -a || echo "No changes to commit"
-          git push --force-with-lease
+          git pull --rebase
+          git push
