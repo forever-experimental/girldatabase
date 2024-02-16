@@ -4,7 +4,8 @@ export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeSt
     <article>
         <img class="image", id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy">
         <div class="meta">
-            ${imgFileName} <span id="imgRes-${id}">(${imgRes})</span> /
+            <span style="max-width: 50%; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${imgFileName}</span>
+            <span id="imgRes-${id}">(${imgRes})</span> /
             <i>${timeStr}</i>
         </div>
         <div class="body">
