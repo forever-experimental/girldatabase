@@ -41,7 +41,7 @@ export const index = () => html`
                 </tr>
                 <tr>
                     <td>└── <a href="/ai">ai/</a></td>
-                    <td># generated art</td>
+                    <td># artificial intelligence</td>
                 </tr>
             </table>
         </div>
