@@ -19,6 +19,7 @@ async function main()
     {dirToPull = 'th';}
     getLatest(dirToPull);
     listen($('#post-form-submit'), submitPost);
+    console.log();
 }
 
 
