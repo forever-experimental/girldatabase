@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21.6.2' # Adjust to the current stable Node.js version
+          node-version: '21.6.2' # Use the current stable Node.js version
 
       - name: Install dependencies
         run: npm install
@@ -24,8 +24,10 @@ jobs:
       - name: Run build script
         run: npm run build
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artifacts
-          path: js/minified-bundle.js
+      - name: Commit and push if changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add js/minified-bundle.js
+          git commit -m "Update minified bundle" -a || echo "No changes to commit"
+          git push
