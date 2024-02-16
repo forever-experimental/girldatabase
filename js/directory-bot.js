@@ -11,7 +11,7 @@ const {getFileNameFromUri} = require('cute-util');
 
 const USER_POSTS_TABLE = "girlsockdir";
 
-
+//
 async function main()
 {
     let dirToPull = getLastPartOfUrl();
