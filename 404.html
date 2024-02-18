@@ -70,6 +70,17 @@
     <!-- sock loading script (throws an error on index but w/e) -->
     <script type="module" src="/js/minified-bundle.js"></script>
 
+    <!-- script for making images big when clicked -->
+    <script>
+        function imgToggleBig(img) {
+            if (img.hasAttribute("big")) {
+                img.removeAttribute("big");
+            } else {
+                img.setAttribute("big", "");
+            }
+        }
+    </script>
+
 </head>
 <body>
 
