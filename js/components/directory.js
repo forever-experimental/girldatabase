@@ -1,6 +1,16 @@
 import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
 
 export const directory = (title, description) => html`
+    <script>
+        function imgToggleBig(img) {
+            if (img.hasAttribute("big")) {
+                img.removeAttribute("big");
+            } else {
+                img.setAttribute("big", "");
+            }
+        }
+    </script>
+
     <!-- directory description -->
     <div style="text-align: center; padding: 4em 1em;">
         <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /${title}/</h1>
