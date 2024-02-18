@@ -17,17 +17,6 @@ export const directory = (title, description) => html`
     </form>
     
     <div id="articles">
-        <!--
-        <article>
-            <img class="image" onclick="alert('wip')" src="filename.png">
-            <div class="meta">
-                filename.png (100x100, 100KB) / <i>100 comments</i>
-            </div>
-            <div class="body">
-                body text
-            </div>
-        </article>
-        -->
     </div>
 
     <!-- Loading Modal Structure -->
