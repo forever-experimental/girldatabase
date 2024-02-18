@@ -78,7 +78,7 @@ article > .image {
     max-height: 200px;
 }
 
-article > .image:hover {
+article > .image[big] {
     max-width: 500px;
     max-height: 500px;
 }
