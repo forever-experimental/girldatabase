@@ -78,6 +78,11 @@ article > .image {
     max-height: 200px;
 }
 
+article > .image:hover {
+    max-width: 500px;
+    max-height: 500px;
+}
+
 article > .body {
     grid-area: c;
 
