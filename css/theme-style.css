@@ -74,6 +74,8 @@ article > .meta {
 article > .image {
     grid-area: b;
 
+    cursor: pointer;
+
     max-width: 200px;
     max-height: 200px;
 }
