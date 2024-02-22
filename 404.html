@@ -25,7 +25,8 @@
     <meta name="theme-color" content="#fafafa">
 
     <script type="module">
-        import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
+        //import { html, render } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
+        import { html, $, _} from 'https://cdn.jsdelivr.net/npm/cute-html/src/index.min.js';
         import {index} from './js/components/index.js';
         import {directory} from './js/components/directory.js';
         
@@ -33,37 +34,44 @@
         switch (window.location.href.substring("https://girlsock.directory/".length))
         {
             case "": // index
-                render(index(), document.getElementById("main"));
+                //render(index(), document.getElementById("main"));
+                $('#main').render(index);
                 break;
             case "th":
-                render(
-                    directory("th", "Every post must have a girl with thigh highs."),
-                    document.getElementById("main")
-                );
+                // render(
+                //     directory("th", "Every post must have a girl with thigh highs."),
+                //     document.getElementById("main")
+                // );
+                $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
                 break;
             case "f":
-                render(
-                    directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."),
-                    document.getElementById("main")
-                );
+                // render(
+                //     directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."),
+                //     document.getElementById("main")
+                // );
+                $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
                 break;
             case "ai":
-                render(
-                    directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."),
-                    document.getElementById("main")
-                );
+                // render(
+                //     directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."),
+                //     document.getElementById("main")
+                // );
+                $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
                 break;
             case "l":
-                render(
-                    directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humourous posts are welcome."),
-                    document.getElementById("main")
-                );
+                // render(
+                //     directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humourous posts are welcome."),
+                //     document.getElementById("main")
+                // );
+                $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humourous posts are welcome."));
                 break;
             default: // page not found
-                render(
-                    html`<p>The page you are looking for does not exist.</p>`,
-                    document.getElementById("main")
-                );
+                // render(
+                //     html`<p>The page you are looking for does not exist.</p>`,
+                //     document.getElementById("main")
+                // );
+                $('#main').render(html`<p>The page you are looking for does not exist.</p>`);
+                break;
         }
     </script>
 
