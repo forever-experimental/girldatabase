@@ -40,8 +40,12 @@ export const index = () => html`
                     <td># fat</td>
                 </tr>
                 <tr>
-                    <td>└── <a href="/ai">ai/</a></td>
+                    <td>├── <a href="/ai">ai/</a></td>
                     <td># artificial intelligence</td>
+                </tr>
+                <tr>
+                    <td>└── <a href="/l">l/</a></td>
+                    <td># conlangs and linguistics</td>
                 </tr>
             </table>
         </div>

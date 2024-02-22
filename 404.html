@@ -53,6 +53,12 @@
                     document.getElementById("main")
                 );
                 break;
+            case "l":
+                render(
+                    directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humourous posts are welcome."),
+                    document.getElementById("main")
+                );
+                break;
             default: // page not found
                 render(
                     html`<p>The page you are looking for does not exist.</p>`,
@@ -63,6 +69,17 @@
 
     <!-- sock loading script (throws an error on index but w/e) -->
     <script type="module" src="/js/minified-bundle.js"></script>
+
+    <!-- script for making images big when clicked -->
+    <script>
+        function imgToggleBig(img) {
+            if (img.hasAttribute("big")) {
+                img.removeAttribute("big");
+            } else {
+                img.setAttribute("big", "");
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -75,6 +92,7 @@
                 <a href="/th">th/</a>
                 <a href="/f">f/</a>
                 <a href="/ai">ai/</a>
+                <a href="/l">l/</a>
             </nav>
         </header>
         <main id="main">
