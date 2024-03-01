@@ -51,25 +51,14 @@ export const index = () => html`
         </div>
     </div>
 
-    <!--
-    <h1 style="text-align: center;">Popular Posts</h1>
-    <div id="articles">
-        <article>
-            <img onclick="alert('wip')" src="res/example0.png">
-            <div>I love super hot girls so freaking much omg</div>
-        </article>
-        <article>
-            <img onclick="alert('wip')" src="res/example1.png">
-            <div>I love super hot girls so freaking much omg</div>
-        </article>
-        <article>
-            <img onclick="alert('wip')" src="res/example2.png">
-            <div>I love super hot girls so freaking much omg</div>
-        </article>
-        <article>
-            <img onclick="alert('wip')" src="res/example3.png">
-            <div>I love super hot girls so freaking much omg</div>
-        </article>
-    </div>
-    -->
+    <script>
+        var t = setInterval(function() {
+            if (window.goatcounter && window.goatcounter.visit_count) {
+                clearInterval(t)
+                window.goatcounter.visit_count({append: 'body'})
+            }
+        }, 100)
+    </script>
+    <script data-goatcounter="https://wetrackyouinyoursleep.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 `;
