@@ -51,6 +51,6 @@ export const index = () => html`
         </div>
     </div>
 
-    <!-- goat stats widget -->
-    <iframe src="https://wetrackyouinyoursleep.goatcounter.com/?hideui=1"></iframe>
+    <!-- goat stats widget (doesn't look very good) -->
+    <!-- <iframe src="https://wetrackyouinyoursleep.goatcounter.com/?hideui=1"></iframe> -->
 `;
