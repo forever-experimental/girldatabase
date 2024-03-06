@@ -3,8 +3,8 @@
   "version": "0.9.0",
   "description": "",
   "scripts": {
-    "build": "esbuild js/directory-bot.js --bundle --outfile=js/minified-bundle.js --minify",
-    "build-debug": "esbuild js/directory-bot.js --bundle --outfile=js/minified-bundle.js --minify --sourcemap"
+    "build": "esbuild src/js/directory-bot.js --bundle --outfile=src/js/minified-bundle.js --minify",
+    "build-debug": "esbuild src/js/directory-bot.js --bundle --outfile=src/js/minified-bundle.js --minify --sourcemap"
   },
   "keywords": [
     "cute"
@@ -12,11 +12,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-cognito-identity": "^3.511.0",
-    "@aws-sdk/client-dynamodb": "^3.511.0",
-    "@aws-sdk/credential-provider-cognito-identity": "^3.511.0",
-    "@aws-sdk/util-dynamodb": "^3.511.0",
-    "cute-socks": "^0.2.0",
+    "@aws-sdk/client-cognito-identity": "^3.525.0",
+    "@aws-sdk/client-dynamodb": "^3.525.0",
+    "@aws-sdk/credential-provider-cognito-identity": "^3.525.0",
+    "@aws-sdk/util-dynamodb": "^3.525.0",
+    "cute-html": "^0.2.4",
     "cute-util": "^0.1.0",
     "date-fns": "^3.3.1",
     "lit-html": "^3.1.2"

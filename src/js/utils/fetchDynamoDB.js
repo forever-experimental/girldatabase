@@ -1,13 +1,10 @@
 // DynamoDB utility functions
-import {DynamoDBClient, ScanCommand, QueryCommand} from "@aws-sdk/client-dynamodb";
-import {unmarshall} from "@aws-sdk/util-dynamodb";
-
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
 
 async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,)
 {
     theDirectoryWeWant = `/${theDirectoryWeWant}/`;
-    try
-    {
+    try {
         const params = {
             TableName: tableName, // Replace with your DynamoDB table name
             KeyConditionExpression: "#pk = :boardId", ExpressionAttributeNames: {
@@ -17,8 +14,8 @@ async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant
             }, ScanIndexForward: false, // Set to false to get the newest posts first
             Limit: limit,
         };
-        // If starting after a specific post, include the ExclusiveStartKey in the query
-        if (startAfterPostId)
+
+        if (startAfterPostId) // If starting after a specific post, include the ExclusiveStartKey in the query
         {
             params.ExclusiveStartKey = {
                 "dir": {S: theDirectoryWeWant}, "unix": {S: startAfterPostId},
@@ -39,32 +36,10 @@ async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant
             items: processedItems, lastEvaluatedKey: LastEvaluatedKey ? LastEvaluatedKey.unix.S : null,
         };
     }
-    catch (error)
-    {
+    catch (error) {
         console.error("Error fetching posts:", error);
         throw new Error("Failed to fetch posts");
     }
 }
-
-
-// async function getLatestPosts(client, tableName, limit = 10)
-// {
-//     const command = new ScanCommand({
-//         TableName: tableName, FilterExpression: "attribute_exists(UnixTime)", Limit: limit,
-//     });
-//
-//     try
-//     {
-//         const {Items} = await client.send(command);
-//         // Sorting by UnixTime in descending order
-//         Items.sort((a, b) => b.UnixTime.N - a.UnixTime.N);
-//         return Items.map(item => unmarshall(item));
-//     }
-//     catch (error)
-//     {
-//         console.error("Error fetching latest posts: ", error);
-//         return [];
-//     }
-// }
 
 module.exports = fetchPostsFromBoard;
