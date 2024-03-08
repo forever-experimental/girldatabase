@@ -40,7 +40,7 @@
         import { directory } from '/src/js/components/directory.js';
         // Calculate base path dynamically to support different deployment environments (GitHub Pages, localhost, etc.)
 const basePath = window.location.pathname.split('/').slice(0, window.location.pathname.includes('/src/') ? -2 : -1).join('/') + "/";
-alert(basePath);
+while (true) _("wtf");
 // Function to get the relative path from the URL
 function getRelativePath() {
     return window.location.pathname.replace(basePath, '');
