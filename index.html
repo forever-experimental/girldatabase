@@ -32,12 +32,15 @@
     errorText.style.cssText = 'background-color: red; color: white; padding: 10px; margin: 10px 0;';
     errorText.textContent = `Error: ${event.message} at ${event.filename}, line: ${event.lineno}`;
     document.body.prepend(errorText);
+          console.log("1);
 });
     </script>
     <script type="module">
+        console.log("1);
         import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
         import { index } from '/src/js/components';
         import { directory } from '/src/js/components/directory.js';
+        console.log("1);
         // Calculate base path dynamically to support different deployment environments (GitHub Pages, localhost, etc.)
 const basePath = window.location.pathname.split('/').slice(0, window.location.pathname.includes('/src/') ? -2 : -1).join('/') + "/";
 while (true) _("wtf");
