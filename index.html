@@ -43,7 +43,7 @@ import { directory } from './src/js/components/directory.js';
 const basePath = window.location.pathname.split('/').slice(0, window.location.pathname.includes('/src/') ? -2 : -1).join('/') + "/";
 // Function to get the relative path from the URL
 function getRelativePath() {
-    _("f", urlPath.split('/').filter(part => part !== ""));
+    _("f", window.location.pathname.split('/').filter(part => part !== ""));
     _("f1", window.location.pathname);
     _("f2", basePath);
     _("f3", window.location.pathname.replace(basePath, ''));
