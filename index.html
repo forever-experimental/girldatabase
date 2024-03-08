@@ -38,22 +38,12 @@
 import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
 import { index } from './src/js/components/index.js';
 import { directory } from './src/js/components/directory.js';
-
-// Calculate base path dynamically to support different deployment environments (GitHub Pages, localhost, etc.)
-const basePath = window.location.pathname.split('/').slice(0, -1).join('/') + "/";
-// Function to get the relative path from the URL
-function getRelativePath() {
-    _("f", window.location.pathname.split('/').filter(part => part !== ""));
-    _("f1", window.location.pathname);
-    _("f2", basePath);
-    _("f2", window.location.pathname.split('/').slice(0, -1));
-    _("f3", window.location.pathname.replace(basePath, ''));
-    
-    return window.location.pathname.replace(basePath, '');
-}
+let localPathArr = window.location.pathname.split('/').filter(part => part !== "");
+_(window.location.pathname.split('/'));
+_(window.location.pathname.split('/').filter(part => part !== ""));
 
 // Use the relative path for routing
-switch (getRelativePath()) {
+switch (localPathArr.length == 0 ? '' : localPathArr[0]) {
     case "": // index
         $('#main').render(index);
         break;
