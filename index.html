@@ -38,13 +38,10 @@
 import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
 import { index } from './src/js/components/index.js';
 import { directory } from './src/js/components/directory.js';
-let localPathArr = window.location.pathname.split('/').filter(part => part !== "");
-_(window.location.pathname.split('/'));
-_(window.location.pathname.split('/').filter(part => part !== ""));
-
+let localPathArr = _(window.location.pathname.split('/').filter(part => part !== ""));
 // Use the relative path for routing
-switch (localPathArr.length == 0 ? '' : localPathArr[0]) {
-    case "": // index
+switch (localPathArr[0]) {
+    case undefined: // index
         $('#main').render(index);
         break;
     case "th":
