@@ -38,13 +38,13 @@
 import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
 import { index } from './src/js/components/index.js';
 import { directory } from './src/js/components/directory.js';
-let localPathArr = _(window.location.pathname.split('/').filter(part => part !== ""));
 // Use the relative path for routing
-if (localPathArr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
-else if (localPathArr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
-else if (localPathArr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
-else if (localPathArr.includes('l')) $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
-else if (localPathArr.includes('test')) $('#main').render(directory("test", "test test"));
+let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
+if (rel_path_split_arr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+else if (rel_path_split_arr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
+else if (rel_path_split_arr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
+else if (rel_path_split_arr.includes('l')) $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
+else if (rel_path_split_arr.includes('test')) $('#main').render(directory("test", "test test"));
 else $('#main').render(index);
     </script>
 
