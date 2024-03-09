@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add js/minified-bundle.js
+          git add src/js/frontend/socks.index.esbuild.js
           git commit -m "Update minified bundle" -a || echo "No changes to commit"
           git pull --rebase
           git push
