@@ -48,8 +48,14 @@ else if (rel_path_split_arr.includes('test')) $('#main').render(directory("test"
 else $('#main').render(index);
     </script>
 
+
+    <script type="module">
+if (window.location.pathname !== "/") {
+    import('./src/js/minified-bundle.js');
+}
+</script>
     <!-- sock loading script (throws an error on index but w/e) -->
-    <script type="module" src="src/js/minified-bundle.js"></script>
+  <!--  <script type="module" src="src/js/minified-bundle.js"></script> -->
 
     <!-- script for making images big when clicked -->
     <script>
