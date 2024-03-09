@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
+import { html } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
 
 export const directory = (title, description) => html`
     <!-- directory description -->
@@ -6,7 +6,7 @@ export const directory = (title, description) => html`
         <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /${title}/</h1>
         <p>${description}</p>
     </div>
-    
+
     <!-- post submission box -->
     <form id="post-form">
         <input type="file" id="post-image" name="post-image" accept="image/png, image/jpeg"/>
@@ -15,9 +15,8 @@ export const directory = (title, description) => html`
         <br>
         <input id="post-form-submit" type="submit" value="Submit">
     </form>
-    
-    <div id="articles">
-    </div>
+
+    <div id="articles"></div>
 
     <!-- Loading Modal Structure -->
     <div id="post-form-submit-loading-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
@@ -25,7 +24,4 @@ export const directory = (title, description) => html`
             Loading....
         </div>
     </div>
-
-    <!-- content loading script -->
-    <script src="/src/js/minified-bundle.js"></script>
 `;

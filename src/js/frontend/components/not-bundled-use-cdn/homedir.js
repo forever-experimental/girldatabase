@@ -1,6 +1,6 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/lit-html/lit-html.js';
+import { html } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
 
-export const index = () => html`
+export const homedir = () => html`
     <style>
         #flex { display: flex; gap: 1em; }
         #flex > div { flex: 1; border: 1px solid var(--border); padding: 1em; }

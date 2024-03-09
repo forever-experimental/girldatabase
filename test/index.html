@@ -29,12 +29,12 @@
 
     <script type="module">
         import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
-        import { index } from '/src/js/components';
-        import { directory } from '/src/js/components/directory.js';
+        import { homedir } from '/src/js/frontend/components/not-bundled-use-cdn/homedir';
+        import { directory } from '/src/js/frontend/components/not-bundled-use-cdn/directory.js';
         // inject html component corresponding to path in url
         switch (window.location.href.substring("https://girlsock.directory/".length)) {
             case "": // index
-                $('#main').render(index);
+                $('#main').render(homedir);
                 break;
             case "th":
                 $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
@@ -61,7 +61,7 @@
     </script>
 
     <!-- sock loading script (throws an error on index but w/e) -->
-    <script type="module" src="/src/js/minified-bundle.js"></script>
+    <script type="module" src="/src/js/frontend/socks.index.esbuild.js"></script>
 
     <!-- script for making images big when clicked -->
     <script>
