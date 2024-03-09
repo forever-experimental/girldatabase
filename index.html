@@ -26,28 +26,26 @@
     <!--https://css-tricks.com/meta-theme-color-and-trickery/-->
     <meta name="theme-color" content="#fafafa">
     <!--print errors-->
-    <script>
-    window.addEventListener('error', function(event) {
-    let errorText = document.createElement('div');
-    errorText.style.cssText = 'background-color: red; color: white; padding: 10px; margin: 10px 0;';
-    errorText.textContent = `Error: ${event.message} at ${event.filename}, line: ${event.lineno}`;
-    document.body.prepend(errorText);
-    });
+    <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
+    <script type="module"> // Use the relative path for routing
+        import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
+        import { index } from './src/js/components/index.js';
+        import { directory } from './src/js/components/directory.js';
+        let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
+        if (rel_path_split_arr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+        else if (rel_path_split_arr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
+        else if (rel_path_split_arr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
+        else if (rel_path_split_arr.includes('l')) $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
+        else if (rel_path_split_arr.includes('test')) $('#main').render(directory("test", "test test"));
+        else $('#main').render(index);
     </script>
-    <script type="module">
-import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
-import { index } from './src/js/components/index.js';
-import { directory } from './src/js/components/directory.js';
-// Use the relative path for routing
-let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
-if (rel_path_split_arr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
-else if (rel_path_split_arr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
-else if (rel_path_split_arr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
-else if (rel_path_split_arr.includes('l')) $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
-else if (rel_path_split_arr.includes('test')) $('#main').render(directory("test", "test test"));
-else $('#main').render(index);
+    <script>
+    if (window.location.pathname !== '/') {
+      document.write('<script type="module" src="src/js/minified-bundle.js"><\/script>');
+    }
     </script>
 
+    
     <!-- script for making images big when clicked -->
     <script>
         function imgToggleBig(img)
@@ -63,7 +61,19 @@ else $('#main').render(index);
 
 </head>
 <body>
+<script type="module">
+    function createErrorAfterDelay(delay) {
+      setTimeout(() => {
+        throw new Error(`Automated error triggered after ${delay} milliseconds`);
+      }, delay);
+    }
 
+    console.log('Script started');
+
+    createErrorAfterDelay(6000); // 6000 milliseconds = 6 seconds
+
+    console.log('Script continues executing');
+  </script>
 <div id="center">
     <header>
         <div style="height: 80px; background-image: url('assets/banner.png'); background-size: contain;"></div>
