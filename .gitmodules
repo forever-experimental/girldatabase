@@ -1,0 +1,3 @@
+[submodule "src/js/backend/cloudflare-worker-girl"]
+	path = src/js/backend/cloudflare-worker-girl
+	url = https://github.com/planetrenox/api.girlsock.directory.git
