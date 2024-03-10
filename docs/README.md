@@ -14,7 +14,7 @@ Technical: It works due to the free tiers of Google Cloud Functions, Cloudflare 
   <summary>Run your own</summary>
 
 ##### The code is provided for everything. Assuming you create the accounts and understand how to use them, you can run your own version of this imageboard.
-alternatively Send an email to `wedontreplydontbother@protonmail.com` and we will create it for you at a cost.
+alternatively send an email to `wedontreplydontbother@protonmail.com` and we will create it for you at a cost.
 </details>
 
 ![License](https://img.shields.io/badge/license-MIT-green)
