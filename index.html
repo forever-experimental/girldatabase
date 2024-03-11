@@ -28,7 +28,7 @@
     <!--print errors-->
     <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
     <script type="module"> // Use the relative path for routing
-        import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html@0.3.6';
+        import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm';
         import { homedir } from './src/js/frontend/components/not-bundled-use-cdn/homedir.js';
         import { directory } from './src/js/frontend/components/not-bundled-use-cdn/directory.js';
         let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
