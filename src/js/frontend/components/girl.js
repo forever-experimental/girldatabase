@@ -1,4 +1,4 @@
-import { html } from 'cute-html';
+import { html } from 'lit-html';
 
 export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => html`
     <article>
