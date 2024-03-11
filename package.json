@@ -20,6 +20,7 @@
     "lit-html": "latest",
     "cute-util": "^0.1.0",
     "date-fns": "^3.3.1"
+    "cute-socks": "latest"
   },
   "devDependencies": {
     "buffer": "^6.0.3",
