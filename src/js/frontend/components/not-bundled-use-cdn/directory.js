@@ -24,4 +24,7 @@ export const directory = (title, description) => html`
             Loading....
         </div>
     </div>
+
+    <!-- content loading script -->
+    <script src="/src/js/minified-bundle.js"></script>
 `;
