@@ -26,5 +26,5 @@ export const directory = (title, description) => html`
     </div>
 
     <!-- content loading script -->
-    <script src="/src/js/frontend.socks.index.esbuild.js"></script>
+    <script src="/src/js/frontend/socks.index.esbuild.js"></script>
 `;
