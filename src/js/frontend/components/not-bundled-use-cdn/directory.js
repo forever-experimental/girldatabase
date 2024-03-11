@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
+import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm';
 
 export const directory = (title, description) => html`
     <!-- directory description -->
