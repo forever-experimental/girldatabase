@@ -6,6 +6,7 @@ const {uploadSockToCloudFunction} = require('./utils/GCF_PostPost.js');
 const {sock} = require('./components/girl.js');
 import {html, render} from 'lit-html';
 import {formatDistanceToNow} from 'date-fns';
+import {erro} from 'cute-con';
 
 const {getFileNameFromUri} = require('cute-util');
 
@@ -24,9 +25,14 @@ async function main()
 
 async function getLatest(dir)
 {
+    try{
     CuteLoadingModal.show();
     let posts = await fetchPostsFromBoard(USER_POSTS_TABLE, createDynamoDBClient(), dir, 20);
-    CuteLoadingModal.hide();
+    CuteLoadingModal.hide();}
+    catch (r)
+    {
+       erro(r);
+    }
     if (posts.items.length === 0 || undefined || null)
     {
         alert("Nothing found or server error.");
