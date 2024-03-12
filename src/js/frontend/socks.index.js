@@ -41,10 +41,10 @@ async function getLatest(dir)
     const allSocks = posts.items.map((post, index) => sock(post.imageUrl, post.theFileName, "1x1", 0, post.theText, index, unixToRelativeTime(post.theUnix)));
 
     // Render all socks at once
-    render(html`${allSocks}`, $('#articles'));
+    render(html`${allSocks}`, document.querySelector('#articles'));
 
     // set res metatag of all images
-    $$('img.image').forEach(img =>
+    document.querySelectorAll('img.image').forEach(img =>
     {
         const setDim = () => document.getElementById(`imgRes-${img.id.split('-')[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
         img.complete ? setDim() : img.onload = setDim;
@@ -59,8 +59,8 @@ async function submitPost()
     if (dir === "index.html") // local test
     {dir = 'th';}
 
-    const fileInput = $('#post-image');
-    const textInput = $('#post-body')?.value;
+    const fileInput =  document.querySelector('#post-image');
+    const textInput = document.querySelector('#post-body')?.value;
 
     if (fileInput.files.length > 0)
     {
@@ -95,10 +95,10 @@ const CuteLoadingModal = (() =>
     return {
         show: () =>
         {
-            $('#post-form-submit-loading-modal').style.display = 'block';
+            document.querySelector('#post-form-submit-loading-modal').style.display = 'block';
         }, hide: () =>
         {
-            $('#post-form-submit-loading-modal').style.display = 'none';
+            document.querySelector('#post-form-submit-loading-modal').style.display = 'none';
         }
     };
 })();
