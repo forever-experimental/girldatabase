@@ -19,7 +19,7 @@ async function main()
     if (dirToPull === "index.html") // local test
     {dirToPull = 'th';}
     getLatest(dirToPull);
-    listen($('#post-form-submit'), submitPost);
+    $('#post-form-submit').click(submitPost);
 }
 
 
