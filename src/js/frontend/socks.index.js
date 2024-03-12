@@ -5,6 +5,7 @@ const {uploadSockToCloudFunction} = require('./utils/GCF_PostPost.js');
 const {sock} = require('./components/girl.js');
 import {html, render} from 'lit-html';
 import {formatDistanceToNow} from 'date-fns';
+import {html as chtml, $ as qhtml} from 'cute-html';
 
 const {getFileNameFromUri} = require('cute-util');
 
@@ -76,22 +77,15 @@ async function submitPost()
 }
 
 const CuteLoadingModal = (() => {
-  const modalTemplate = () => html`
+  const modalTemplate = chtml`
     <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
       <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
         Loading....
       </div>
     </div>
   `;
-
   const modalId = 'post-form-submit-loading-modal';
-  const showModal = () => render(modalTemplate(), document.body);
-  const hideModal = () => {
-    const modalElement = document.getElementById(modalId);
-    if (modalElement) modalElement.remove();
-  };
-
-  return { show: showModal, hide: hideModal };
+  return { show: () => qhtml(body).inject(modalTemplate), hide: () => qhtml(modalId).remove() };
 })();
 
 
