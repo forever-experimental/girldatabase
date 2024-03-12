@@ -21875,7 +21875,7 @@ Stack Trace: ${error.stack}`);
   }
 
   // src/js/frontend/socks.index.js
-  var { $: $3, $$: $$2, listen } = (init_index_cjs(), __toCommonJS(index_cjs_exports));
+  var { $: $3, $$: $$2 } = (init_index_cjs(), __toCommonJS(index_cjs_exports));
   var { createDynamoDBClient } = require_createDynamoDBClient();
   var fetchPostsFromBoard = require_fetchDynamoDB();
   var { compressImage } = require_convertImageToCompressedWebP();
@@ -21888,8 +21888,7 @@ Stack Trace: ${error.stack}`);
     if (dirToPull === "index.html") {
       dirToPull = "th";
     }
-    getLatest(dirToPull);
-    $3("#post-form-submit").click(submitPost);
+    await getLatest(dirToPull);
   }
   async function getLatest(dir) {
     try {
@@ -21908,28 +21907,6 @@ Stack Trace: ${error.stack}`);
       const setDim = () => document.getElementById(`imgRes-${img.id.split("-")[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
       img.complete ? setDim() : img.onload = setDim;
     });
-  }
-  async function submitPost() {
-    CuteLoadingModal.show();
-    let dir = getLastPartOfUrl();
-    if (dir === "index.html") {
-      dir = "th";
-    }
-    const fileInput = $3("#post-image");
-    const textInput = $3("#post-body")?.value;
-    if (fileInput.files.length > 0) {
-      const compressedImage = await compressImage(fileInput.files[0]);
-      const response = await uploadSockToCloudFunction(`/${dir}/`, getFileNameFromUri(fileInput.files[0].name), compressedImage, textInput);
-      console.log(response);
-      if (response.ok) {
-        CuteLoadingModal.hide();
-        window.location.reload();
-      } else {
-        CuteLoadingModal.hide();
-        alert("Upload failed: " + response);
-      }
-      return response;
-    }
   }
   var CuteLoadingModal = /* @__PURE__ */ (() => {
     const cuteLoadingModalDisplayNoneHtml = () => x`
