@@ -76,30 +76,22 @@ async function submitPost()
 }
 
 const CuteLoadingModal = (() => {
-    const modalId = 'post-form-submit-loading-modal';
-    const getModalHtml = () => `
-        <div id="${modalId}" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
-            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
-                Loading....
-            </div>
-        </div>
-    `;
+  const modalTemplate = () => html`
+    <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
+        Loading....
+      </div>
+    </div>
+  `;
 
-    const injectModalHtml = () => {
-        document.body.insertAdjacentHTML('beforeend', getModalHtml());
-    };
+  const modalId = 'post-form-submit-loading-modal';
+  const showModal = () => render(modalTemplate(), document.body);
+  const hideModal = () => {
+    const modalElement = document.getElementById(modalId);
+    if (modalElement) modalElement.remove();
+  };
 
-    const removeModalHtml = () => {
-        const modalElement = document.getElementById(modalId);
-        if (modalElement) {
-            modalElement.parentNode.removeChild(modalElement);
-        }
-    };
-
-    return {
-        show: injectModalHtml,
-        hide: removeModalHtml
-    };
+  return { show: showModal, hide: hideModal };
 })();
 
 
