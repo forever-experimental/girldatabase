@@ -17,7 +17,7 @@ async function main()
     if (dirToPull === "index.html") // local test
     {dirToPull = 'th';}
     await getLatest(dirToPull);
-    // $('#post-form-submit').click(submitPost);
+    document.querySelector('#post-form-submit').addEventListener("click", submitPost);
 }
 
 
