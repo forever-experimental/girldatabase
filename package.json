@@ -20,7 +20,7 @@
     "date-fns": "~3.3",
     "cute-socks": "~0.4",
     "cute-con": "~1.0",
-    "cute-html": "0.3.7"
+    "cute-html": "0.2.4"
   },
   "devDependencies": {
     "buffer": "~6.0",
