@@ -1,34 +1,21 @@
 name: esbuild
-
 on:
   workflow_dispatch:
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '21.6.2' # Use the current stable Node.js version
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install esbuild globally
-        run: npm install -g esbuild
-
-      - name: Run build script
-        run: npm run build
-
-      - name: Commit and push if changes
-        run: |
+          node-version: 20
+      - run: npm install
+      - run: npm run build
+      - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add src/js/frontend/socks.index.esbuild.js
-          git commit -m "Update minified bundle" -a || echo "No changes to commit"
+          git commit -m "Update socks.index.esbuild.js" -a || echo "No changes to commit"
           git pull --rebase
           git push
