@@ -85,7 +85,9 @@ const CuteLoadingModal = (() => {
     </div>
   `;
   const modalId = 'post-form-submit-loading-modal';
-  return { show: () => qhtml(body).inject(modalTemplate), hide: () => (qhtml(modalId)).remove() };
+  const sshow = () => qhtml(body).inject(CuteLoadingModal.modalTemplate);
+  const hhide = () => (qhtml(modalId)).remove();
+  return { show: CuteLoadingModal.sshow , hide: CuteLoadingModal.hhide };
 })();
 
 
