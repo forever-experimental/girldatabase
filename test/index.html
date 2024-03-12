@@ -43,6 +43,45 @@
     <meta name="theme-color" content="#fafafa">
     <!--print errors-->
     <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
+
+
+
+    
+    <!-- script for making images big when clicked -->
+    <script>
+        function imgToggleBig(img)
+        {
+            if (img.hasAttribute("big")) {
+                img.removeAttribute("big");
+            }
+            else {
+                img.setAttribute("big", "");
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div id="center">
+    <header>
+        <div style="height: 80px; background-image: url('assets/banner.png'); background-size: contain;"></div>
+        <nav>
+            <a href="/">index/</a>
+            <a href="/th">th/</a>
+            <a href="/f">f/</a>
+            <a href="/ai">ai/</a>
+            <a href="/l">l/</a>
+        </nav>
+    </header>
+    <main id="main">
+        
+    </main>
+    <footer>
+        © 2024 BlueBunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
+    </footer>
+</div>
+
+</body>
     <!--Dynamic rendering based on path logic-->
     <script type="module">
       function adjustPathsToMatchBASE_URL() {
@@ -129,42 +168,4 @@
         document.body.appendChild(script);
       }
     </script>
-
-
-    
-    <!-- script for making images big when clicked -->
-    <script>
-        function imgToggleBig(img)
-        {
-            if (img.hasAttribute("big")) {
-                img.removeAttribute("big");
-            }
-            else {
-                img.setAttribute("big", "");
-            }
-        }
-    </script>
-
-</head>
-<body>
-<div id="center">
-    <header>
-        <div style="height: 80px; background-image: url('assets/banner.png'); background-size: contain;"></div>
-        <nav>
-            <a href="/">index/</a>
-            <a href="/th">th/</a>
-            <a href="/f">f/</a>
-            <a href="/ai">ai/</a>
-            <a href="/l">l/</a>
-        </nav>
-    </header>
-    <main id="main">
-        
-    </main>
-    <footer>
-        © 2024 BlueBunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a>
-    </footer>
-</div>
-
-</body>
 </html>
