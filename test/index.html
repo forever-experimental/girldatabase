@@ -8,19 +8,19 @@
 
     <script> <!-- Dynamic URL Management -->
         // Define manualBaseOverride for specific deployment setups like GitHub Pages URLs.
-        const manualBaseOverride = ''; // Example: "/girlsockfork/"
+        let manualBaseOverride = ''; // Example: "/girlsockfork/"
+        const onGitHubPages = window.location.hostname.includes('github.io');
+        const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
         
         // Computes the base URL for the application, considering potential manual override.
-        const computedBaseURL = manualBaseOverride || (() => {
-          const onGitHubPages = window.location.hostname.includes('github.io');
-          const urlPathSegments = window.location.pathname.split('/').filter(part => part !== "");
-          return onGitHubPages && urlPathSegments.length >= 1 
-            ? `${window.location.origin}/${urlPathSegments[0]}/` // Adjust for GitHub Pages
+        const BASE_URL = manualBaseOverride || (() => {
+          return onGitHubPages && pathSegments.length >= 1 
+            ? `${window.location.origin}/${pathSegments[0]}/` // Adjust for GitHub Pages
             : `${window.location.origin}/`; // Default to origin for root hosting
         })();
         
-        // Adjusts all resource paths to start with the computedBaseURL.
-        function adjustPathsToMatchBaseURL() {
+        // Adjusts all resource paths to start with the BASE_URL.
+        function adjustPathsToMatchBASE_URL() {
           document.querySelectorAll('a[href], script[src], link[href], img[src]').forEach(element => {
             const attribute = element.hasAttribute('href') ? 'href' : 'src';
             let path = element.getAttribute(attribute);
@@ -28,16 +28,16 @@
             // Skip fully qualified URLs.
             if (path.startsWith('http://') || path.startsWith('https://')) return;
             
-            // Prepend computedBaseURL if not already there.
-            if (!path.startsWith(computedBaseURL)) {
+            // Prepend BASE_URL if not already there.
+            if (!path.startsWith(BASE_URL)) {
               // Handle root-relative and relative paths uniformly.
               path = path.startsWith('/') ? path : `/${path}`;
-              element.setAttribute(attribute, computedBaseURL + path.substring(1));
+              element.setAttribute(attribute, BASE_URL + path.substring(1));
             }
           });
         }
         
-        document.addEventListener('DOMContentLoaded', adjustPathsToMatchBaseURL);
+        document.addEventListener('DOMContentLoaded', adjustPathsToMatchBASE_URL);
     </script>
 
 
@@ -66,12 +66,12 @@
     <!--Dynamic rendering based on path logic-->
     <script type="module">
       // Determines if the current location is the "home directory"
-      console.log(computedBaseURL);
+      console.log(BASE_URL);
       const atHomeDir = () => {
         if (manualBaseOverride) {
           const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
           return pathSegments.slice(overrideSegments.length).length === 0;
-        } else if (isGitHubPages) {
+        } else if (onGitHubPages) {
           return pathSegments.length === 1;
         }
         return pathSegments.length === 0;
@@ -80,14 +80,14 @@
       // Dynamic imports with computed base URL
       Promise.all([
         import('https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm'),
-        import(`${baseURL}src/js/frontend/components/not-bundled-use-cdn/homedir.js`),
-        import(`${baseURL}src/js/frontend/components/not-bundled-use-cdn/directory.js`)
+        import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/homedir.js`),
+        import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/directory.js`)
       ]).then(([cuteHtml, homedirModule, directoryModule]) => {
         const { html, $, _ } = cuteHtml;
         const { homedir } = homedirModule;
         const { directory } = directoryModule;
     
-        const firstSegment = pathSegments[isGitHubPages && pathSegments.length > 1 ? 1 : 0]; // Adjusting for GitHub Pages
+        const firstSegment = pathSegments[onGitHubPages && pathSegments.length > 1 ? 1 : 0]; // Adjusting for GitHub Pages
     
         if (atHomeDir()) {
           $('#main').render(homedir);
@@ -119,7 +119,7 @@
       if (!atHomeDir()) {
         const script = document.createElement('script');
         script.type = 'module';
-        script.src = `${baseURL}src/js/frontend/socks.index.esbuild.js`;
+        script.src = `${BASE_URL}src/js/frontend/socks.index.esbuild.js`;
         document.body.appendChild(script);
       }
     </script>
