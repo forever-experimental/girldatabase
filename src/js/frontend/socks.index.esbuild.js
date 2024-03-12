@@ -21902,8 +21902,8 @@ Stack Trace: ${error.stack}`);
       alert("Nothing found or server error.");
     }
     const allSocks = posts.items.map((post, index) => sock2(post.imageUrl, post.theFileName, "1x1", 0, post.theText, index, unixToRelativeTime(post.theUnix)));
-    j(x`${allSocks}`, $3("#articles"));
-    $$2("img.image").forEach((img) => {
+    j(x`${allSocks}`, document.querySelector("#articles"));
+    document.querySelectorAll("img.image").forEach((img) => {
       const setDim = () => document.getElementById(`imgRes-${img.id.split("-")[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
       img.complete ? setDim() : img.onload = setDim;
     });
@@ -21918,10 +21918,10 @@ Stack Trace: ${error.stack}`);
     `;
     return {
       show: () => {
-        $3("#post-form-submit-loading-modal").style.display = "block";
+        document.querySelector("#post-form-submit-loading-modal").style.display = "block";
       },
       hide: () => {
-        $3("#post-form-submit-loading-modal").style.display = "none";
+        document.querySelector("#post-form-submit-loading-modal").style.display = "none";
       }
     };
   })();
