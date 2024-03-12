@@ -27,23 +27,89 @@
     <meta name="theme-color" content="#fafafa">
     <!--print errors-->
     <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
-    <script type="module"> // Use the relative path for routing
-        import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html/+esm';
-        import { homedir } from './src/js/frontend/components/not-bundled-use-cdn/homedir.js';
-        import { directory } from './src/js/frontend/components/not-bundled-use-cdn/directory.js';
-        let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
-        if (rel_path_split_arr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
-        else if (rel_path_split_arr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
-        else if (rel_path_split_arr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
-        else if (rel_path_split_arr.includes('l')) $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
-        else if (rel_path_split_arr.includes('test')) $('#main').render(directory("test", "test test"));
-        else $('#main').render(homedir);
+    <!--Dynamic rendering based on path logic-->
+    <script type="module">
+      // Base Override Configuration
+      // MANUAL BASE OVERRIDE: Set this variable if you need to manually specify the base path.
+      // For GitHub Pages or subdirectories, set it to the project name or path, e.g., '/projectname/'.
+      // For root deployments, leave it as an empty string ('').
+      // Example for GitHub Pages: const manualBaseOverride = '/girlsockfork/';
+      // Example for root deployment: const manualBaseOverride = '';
+      const manualBaseOverride = ''; // <-- Adjust this based on your deployment
+    
+      // Determines if the site is hosted on GitHub Pages
+      const isGitHubPages = window.location.hostname.includes('github.io');
+      // Splits and filters the pathname to work with
+      const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
+    
+      // Computes the base URL dynamically or uses the manual override
+      const baseURL = manualBaseOverride || (() => {
+        if (isGitHubPages && pathSegments.length >= 1) {
+          // Adjusts for GitHub Pages
+          return `${window.location.origin}/${pathSegments[0]}/`;
+        }
+        // Default for other scenarios
+        return `${window.location.origin}/`;
+      })();
+    
+      // Determines if the current location is the "home directory"
+      const atHomeDir = () => {
+        if (manualBaseOverride) {
+          const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
+          return pathSegments.slice(overrideSegments.length).length === 0;
+        } else if (isGitHubPages) {
+          return pathSegments.length === 1;
+        }
+        return pathSegments.length === 0;
+      };
+    
+      // Dynamic imports with computed base URL
+      Promise.all([
+        import('https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm'),
+        import(`${baseURL}src/js/frontend/components/not-bundled-use-cdn/homedir.js`),
+        import(`${baseURL}src/js/frontend/components/not-bundled-use-cdn/directory.js`)
+      ]).then(([cuteHtml, homedirModule, directoryModule]) => {
+        const { html, $, _ } = cuteHtml;
+        const { homedir } = homedirModule;
+        const { directory } = directoryModule;
+    
+        const firstSegment = pathSegments[isGitHubPages && pathSegments.length > 1 ? 1 : 0]; // Adjusting for GitHub Pages
+    
+        if (atHomeDir()) {
+          $('#main').render(homedir);
+        } else {
+          switch (firstSegment) {
+            case 'th':
+              $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+              break;
+            case 'f':
+              $('#main').render(directory("f", "Every post must have a girl that is in some way thick, fat, chubby, or obese."));
+              break;
+            case 'ai':
+              $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
+              break;
+            case 'l':
+              $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
+              break;
+            case 'test':
+              $('#main').render(directory("test", "Test directory."));
+              break;
+            default:
+              // No default action for unmatched paths
+              break;
+          }
+        }
+      });
+    
+      // Conditionally load other scripts, not at the "home directory"
+      if (!atHomeDir()) {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = `${baseURL}src/js/frontend/socks.index.esbuild.js`;
+        document.body.appendChild(script);
+      }
     </script>
-    <script>
-    if (window.location.pathname !== '/') {
-      document.write('<script type="module" src="src/js/frontend/socks.index.esbuild.js"><\/script>');
-    }
-    </script>
+
 
     
     <!-- script for making images big when clicked -->
