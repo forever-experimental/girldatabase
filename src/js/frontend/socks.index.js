@@ -18,8 +18,8 @@ async function main()
     let dirToPull = getLastPartOfUrl();
     if (dirToPull === "index.html") // local test
     {dirToPull = 'th';}
-    getLatest(dirToPull);
-    $('#post-form-submit').click(submitPost);
+    await getLatest(dirToPull);
+    // $('#post-form-submit').click(submitPost);
 }
 
 
