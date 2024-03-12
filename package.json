@@ -16,7 +16,7 @@
     "@aws-sdk/client-dynamodb": "^3.529.1",
     "@aws-sdk/credential-provider-cognito-identity": "^3.529.1",
     "@aws-sdk/util-dynamodb": "^3.529.1",
-    "cute-html": "^0.2.4",
+    "cute-html": "0.2.4",
     "lit-html": "latest",
     "cute-util": "^0.1.0",
     "date-fns": "^3.3.1",
