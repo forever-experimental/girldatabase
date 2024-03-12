@@ -3,8 +3,7 @@
   "version": "0.9.0",
   "description": "",
   "scripts": {
-    "build": "esbuild src/js/frontend/socks.index.js --bundle --outfile=src/js/frontend/socks.index.esbuild.js",
-    "build-debug": "esbuild src/js/frontend/socks.index.js --bundle --outfile=src/js/frontend/socks.index.esbuild.js --minify --sourcemap"
+    "build": "esbuild src/js/frontend/socks.index.js --bundle --outfile=src/js/frontend/socks.index.esbuild.js --minify --sourcemap"
   },
   "keywords": [
     "cute"
@@ -12,19 +11,20 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@aws-sdk/client-cognito-identity": "^3.529.1",
-    "@aws-sdk/client-dynamodb": "^3.529.1",
-    "@aws-sdk/credential-provider-cognito-identity": "^3.529.1",
-    "@aws-sdk/util-dynamodb": "^3.529.1",
-    "cute-html": "0.2.4",
-    "lit-html": "latest",
-    "cute-util": "^0.1.0",
-    "date-fns": "^3.3.1",
-    "cute-socks": "latest",
-    "cute-con": "latest"
+    "@aws-sdk/client-cognito-identity": "~3.529",
+    "@aws-sdk/client-dynamodb": "~3.529",
+    "@aws-sdk/credential-provider-cognito-identity": "~3.529",
+    "@aws-sdk/util-dynamodb": "~3.529.1",
+    "cute-html": "~0.2",
+    "lit-html": "~3.1",
+    "cute-util": "~0.1",
+    "date-fns": "~3.3",
+    "cute-socks": "~0.4",
+    "cute-con": "~1.0"
   },
   "devDependencies": {
-    "buffer": "^6.0.3",
-    "process": "^0.11.10"
+    "buffer": "~6.0",
+    "process": "~0.11"
+    "esbuild": "~0.20";
   }
 }
