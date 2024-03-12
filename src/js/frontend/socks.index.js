@@ -83,9 +83,9 @@ const CuteLoadingModal = {
         Loading....
       </div>
     </div>
-  `;
-  show = () => qhtml(body).inject(CuteLoadingModal.modalTemplate);
-  hide = () => qhtml('#post-form-submit-loading-modal').remove();
+  `,
+  show = () => qhtml(body).inject(CuteLoadingModal.modalTemplate),
+  hide = () => qhtml('#post-form-submit-loading-modal').remove()
 };
 
 
