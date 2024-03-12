@@ -77,15 +77,15 @@ async function submitPost()
 }
 
 const CuteLoadingModal = {
-  modalTemplate = chtml`
+  modalTemplate : chtml`
     <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
       <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
         Loading....
       </div>
     </div>
   `,
-  show = () => qhtml(body).inject(CuteLoadingModal.modalTemplate),
-  hide = () => qhtml('#post-form-submit-loading-modal').remove()
+  show : () => qhtml(body).inject(CuteLoadingModal.modalTemplate),
+  hide : () => qhtml('#post-form-submit-loading-modal').remove()
 };
 
 
