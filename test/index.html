@@ -6,6 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://media.girlsock.directory/img/8828f78d1bfd.webp" type="image/webp">
 
+    <script> <!-- Dynamic URL Management -->
+        // Define manualBaseOverride for specific deployment setups like GitHub Pages URLs.
+        const manualBaseOverride = ''; // Example: "/girlsockfork/"
+        
+        // Computes the base URL for the application, considering potential manual override.
+        const computedBaseURL = manualBaseOverride || (() => {
+          const onGitHubPages = window.location.hostname.includes('github.io');
+          const urlPathSegments = window.location.pathname.split('/').filter(part => part !== "");
+          return onGitHubPages && urlPathSegments.length >= 1 
+            ? `${window.location.origin}/${urlPathSegments[0]}/` // Adjust for GitHub Pages
+            : `${window.location.origin}/`; // Default to origin for root hosting
+        })();
+        
+        // Adjusts all resource paths to start with the computedBaseURL.
+        function adjustPathsToMatchBaseURL() {
+          document.querySelectorAll('a[href], script[src], link[href], img[src]').forEach(element => {
+            const attribute = element.hasAttribute('href') ? 'href' : 'src';
+            let path = element.getAttribute(attribute);
+            
+            // Skip fully qualified URLs.
+            if (path.startsWith('http://') || path.startsWith('https://')) return;
+            
+            // Prepend computedBaseURL if not already there.
+            if (!path.startsWith(computedBaseURL)) {
+              // Handle root-relative and relative paths uniformly.
+              path = path.startsWith('/') ? path : `/${path}`;
+              element.setAttribute(attribute, computedBaseURL + path.substring(1));
+            }
+          });
+        }
+        
+        document.addEventListener('DOMContentLoaded', adjustPathsToMatchBaseURL);
+    </script>
+
+
+    
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/css/theme-style.css">
 
@@ -29,30 +65,8 @@
     <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
     <!--Dynamic rendering based on path logic-->
     <script type="module">
-      // Base Override Configuration
-      // MANUAL BASE OVERRIDE: Set this variable if you need to manually specify the base path.
-      // For GitHub Pages or subdirectories, set it to the project name or path, e.g., '/projectname/'.
-      // For root deployments, leave it as an empty string ('').
-      // Example for GitHub Pages: const manualBaseOverride = '/girlsockfork/';
-      // Example for root deployment: const manualBaseOverride = '';
-      const manualBaseOverride = ''; // <-- Adjust this based on your deployment
-    
-      // Determines if the site is hosted on GitHub Pages
-      const isGitHubPages = window.location.hostname.includes('github.io');
-      // Splits and filters the pathname to work with
-      const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
-    
-      // Computes the base URL dynamically or uses the manual override
-      const baseURL = manualBaseOverride || (() => {
-        if (isGitHubPages && pathSegments.length >= 1) {
-          // Adjusts for GitHub Pages
-          return `${window.location.origin}/${pathSegments[0]}/`;
-        }
-        // Default for other scenarios
-        return `${window.location.origin}/`;
-      })();
-    
       // Determines if the current location is the "home directory"
+      console.log(computedBaseURL);
       const atHomeDir = () => {
         if (manualBaseOverride) {
           const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
