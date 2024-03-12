@@ -18,26 +18,6 @@
             ? `${window.location.origin}/${pathSegments[0]}/` // Adjust for GitHub Pages
             : `${window.location.origin}/`; // Default to origin for root hosting
         })();
-        
-        // Adjusts all resource paths to start with the BASE_URL.
-        function adjustPathsToMatchBASE_URL() {
-          document.querySelectorAll('a[href], script[src], link[href], img[src]').forEach(element => {
-            const attribute = element.hasAttribute('href') ? 'href' : 'src';
-            let path = element.getAttribute(attribute);
-            
-            // Skip fully qualified URLs.
-            if (path.startsWith('http://') || path.startsWith('https://')) return;
-            
-            // Prepend BASE_URL if not already there.
-            if (!path.startsWith(BASE_URL)) {
-              // Handle root-relative and relative paths uniformly.
-              path = path.startsWith('/') ? path : `/${path}`;
-              element.setAttribute(attribute, BASE_URL + path.substring(1));
-            }
-          });
-        }
-        
-        document.addEventListener('DOMContentLoaded', adjustPathsToMatchBASE_URL);
     </script>
 
 
@@ -65,7 +45,25 @@
     <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
     <!--Dynamic rendering based on path logic-->
     <script type="module">
-      // Determines if the current location is the "home directory"
+        // Adjusts all resource paths to start with the BASE_URL.
+        function adjustPathsToMatchBASE_URL() {
+          document.querySelectorAll('a[href], script[src], link[href], img[src]').forEach(element => {
+            const attribute = element.hasAttribute('href') ? 'href' : 'src';
+            let path = element.getAttribute(attribute);
+            
+            // Skip fully qualified URLs.
+            if (path.startsWith('http://') || path.startsWith('https://')) return;
+            
+            // Prepend BASE_URL if not already there.
+            if (!path.startsWith(BASE_URL)) {
+              // Handle root-relative and relative paths uniformly.
+              path = path.startsWith('/') ? path : `/${path}`;
+              element.setAttribute(attribute, BASE_URL + path.substring(1));
+            }
+          });
+        }
+        
+      adjustPathsToMatchBASE_URL();
       console.log(BASE_URL);
       const atHomeDir = () => {
         if (manualBaseOverride) {
