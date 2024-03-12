@@ -21556,6 +21556,7 @@ ${toHex(hashedRequest)}`;
       dirToPull = "th";
     }
     await getLatest(dirToPull);
+    document.querySelector("#post-form-submit").addEventListener("click", submitPost);
   }
   async function getLatest(dir) {
     CuteLoadingModal.show();
@@ -21570,6 +21571,28 @@ ${toHex(hashedRequest)}`;
       const setDim = () => document.getElementById(`imgRes-${img.id.split("-")[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
       img.complete ? setDim() : img.onload = setDim;
     });
+  }
+  async function submitPost() {
+    CuteLoadingModal.show();
+    let dir = getLastPartOfUrl();
+    if (dir === "index.html") {
+      dir = "th";
+    }
+    const fileInput = document.querySelector("#post-image");
+    const textInput = document.querySelector("#post-body")?.value;
+    if (fileInput.files.length > 0) {
+      const compressedImage = await compressImage(fileInput.files[0]);
+      const response = await uploadSockToCloudFunction(`/${dir}/`, getFileNameFromUri(fileInput.files[0].name), compressedImage, textInput);
+      console.log(response);
+      if (response.ok) {
+        CuteLoadingModal.hide();
+        window.location.reload();
+      } else {
+        CuteLoadingModal.hide();
+        alert("Upload failed: " + response);
+      }
+      return response;
+    }
   }
   var CuteLoadingModal = /* @__PURE__ */ (() => {
     const cuteLoadingModalDisplayNoneHtml = () => x`
