@@ -21859,21 +21859,6 @@ ${toHex(hashedRequest)}`;
     return formatDistance2(date, Date.now(), options);
   }
 
-  // node_modules/cute-con/src/index.js
-  var erro = (r5) => {
-    detailedErrorLogger(r5);
-  };
-  function detailedErrorLogger(error, context = "") {
-    console.error(`[Error${context ? ` in ${context}` : ""}]: ${error.message}
-Error Name: ${error.name}
-Stack Trace: ${error.stack}`);
-    Object.keys(error).forEach((key) => {
-      if (!["name", "message", "stack"].includes(key)) {
-        console.log(`Additional Info - ${key}: ${error[key]}`);
-      }
-    });
-  }
-
   // src/js/frontend/socks.index.js
   var { $: $3, $$: $$2 } = (init_index_cjs(), __toCommonJS(index_cjs_exports));
   var { createDynamoDBClient } = require_createDynamoDBClient();
@@ -21891,13 +21876,9 @@ Stack Trace: ${error.stack}`);
     await getLatest(dirToPull);
   }
   async function getLatest(dir) {
-    try {
-      CuteLoadingModal.show();
-      let posts2 = await fetchPostsFromBoard(USER_POSTS_TABLE, createDynamoDBClient(), dir, 20);
-      CuteLoadingModal.hide();
-    } catch (r5) {
-      erro(r5);
-    }
+    CuteLoadingModal.show();
+    let posts = await fetchPostsFromBoard(USER_POSTS_TABLE, createDynamoDBClient(), dir, 20);
+    CuteLoadingModal.hide();
     if (posts.items.length === 0 || void 0 || null) {
       alert("Nothing found or server error.");
     }
