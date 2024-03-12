@@ -21611,7 +21611,7 @@ Stack Trace: ${error.stack}`);
       dirToPull = "th";
     }
     getLatest(dirToPull);
-    listen($2("#post-form-submit"), submitPost);
+    $2("#post-form-submit").click(submitPost);
   }
   async function getLatest(dir) {
     try {
