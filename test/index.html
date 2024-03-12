@@ -82,35 +82,42 @@
 </div>
 
 </body>
+<script type="module">
+  function adjustPathsToMatchBASE_URL() {
+    document.querySelectorAll('a[href], script[src], link[href], img[src], [style]').forEach(element => {
+      if (element.hasAttribute('style')) {
+        // Handling inline styles for background images and other URLs.
+        const styleContent = element.getAttribute('style');
+        const urlPattern = /url\(['"]?(?!http)([^'"\)]+)['"]?\)/g; // Matches URLs that don't start with "http"
+        const adjustedStyleContent = styleContent.replace(urlPattern, (match, p1) => {
+          // If p1 starts with '/', adjust directly. Otherwise, prepend './' to make it relative to BASE_URL.
+          const correctedPath = p1.startsWith('/') ? p1 : `./${p1}`;
+          return `url('${BASE_URL}${correctedPath.substring(1)}')`;
+        });
+        element.setAttribute('style', adjustedStyleContent);
+      } else {
+        // Handling href and src attributes.
+        const attribute = element.hasAttribute('href') ? 'href' : 'src';
+        let path = element.getAttribute(attribute);
+        
+        // Skip fully qualified URLs.
+        if (path.startsWith('http://') || path.startsWith('https://')) return;
+        
+        // Prepend BASE_URL if not already there.
+        if (!path.startsWith(BASE_URL)) {
+          // Uniform handling for root-relative and relative paths.
+          path = path.startsWith('/') ? path : `/${path}`;
+          element.setAttribute(attribute, BASE_URL + path.substring(1));
+        }
+      }
+    });
+  }
+  
+  adjustPathsToMatchBASE_URL();
+</script>
+
     <!--Dynamic rendering based on path logic-->
     <script type="module">
-      function adjustPathsToMatchBASE_URL() {
-        document.querySelectorAll('a[href], script[src], link[href], img[src], [style]').forEach(element => {
-          if (element.hasAttribute('style')) {
-            // Handling inline styles for background images.
-            const styleContent = element.getAttribute('style');
-            const urlPattern = /url\(['"]?(\/[^'"\)]+)['"]?\)/g; // Matches URLs starting with '/'
-            const adjustedStyleContent = styleContent.replace(urlPattern, (match, p1) => `url('${BASE_URL}${p1.substring(1)}')`);
-            element.setAttribute('style', adjustedStyleContent);
-          } else {
-            // Handling href and src attributes.
-            const attribute = element.hasAttribute('href') ? 'href' : 'src';
-            let path = element.getAttribute(attribute);
-    
-            // Skip fully qualified URLs.
-            if (!path.startsWith('http://') && !path.startsWith('https://')) {
-              // Prepend BASE_URL if not already there.
-              if (!path.startsWith(BASE_URL)) {
-                // Uniform handling for root-relative and relative paths.
-                path = path.startsWith('/') ? path : `/${path}`;
-                element.setAttribute(attribute, BASE_URL + path.substring(1));
-              }
-            }
-          }
-        });
-      }
-    
-      adjustPathsToMatchBASE_URL();
       console.log(BASE_URL);
       const atHomeDir = () => {
         if (manualBaseOverride) {
