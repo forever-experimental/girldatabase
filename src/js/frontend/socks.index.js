@@ -1,4 +1,4 @@
-const {$, $$, listen} = require('cute-html');
+const {$, $$} = require('cute-html');
 const {createDynamoDBClient} = require('./utils/createDynamoDBClient.js');
 const fetchPostsFromBoard = require('./utils/fetchDynamoDB.js');
 const {compressImage} = require('./utils/convertImageToCompressedWebP.js');
