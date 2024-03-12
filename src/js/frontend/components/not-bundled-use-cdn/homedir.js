@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm';
+import { html } from 'https://cdn.jsdelivr.net/npm/lit-html';
 
 export const homedir = () => html`
     <style>
