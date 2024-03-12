@@ -75,26 +75,33 @@ async function submitPost()
     }
 }
 
-const CuteLoadingModal = (() =>
-{
-    const cuteLoadingModalDisplayNoneHtml = () => html`
-        <div id="post-form-submit-loading-modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+const CuteLoadingModal = (() => {
+    const modalId = 'post-form-submit-loading-modal';
+    const getModalHtml = () => html`
+        <div id="${modalId}" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
             <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
                 Loading....
             </div>
         </div>
     `;
 
-    return {
-        show: () =>
-        {
-            document.querySelector('#post-form-submit-loading-modal').style.display = 'block';
-        }, hide: () =>
-        {
-            document.querySelector('#post-form-submit-loading-modal').style.display = 'none';
+    const injectModalHtml = () => {
+        document.body.insertAdjacentHTML('beforeend', getModalHtml());
+    };
+
+    const removeModalHtml = () => {
+        const modalElement = document.getElementById(modalId);
+        if (modalElement) {
+            modalElement.parentNode.removeChild(modalElement);
         }
     };
+
+    return {
+        show: injectModalHtml,
+        hide: removeModalHtml
+    };
 })();
+
 
 const unixTimeToDateTimeStr = (unixTime) => new Date(unixTime * 1000).toLocaleString();
 const unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1000)) + ' ago';
