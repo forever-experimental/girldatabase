@@ -21602,7 +21602,7 @@ ${toHex(hashedRequest)}`;
       </div>
     </div>
   `,
-    show: () => document.querySelector("body").inject(CuteLoadingModal.modalTemplate),
+    show: () => qhtml("body").inject(CuteLoadingModal.modalTemplate),
     hide: () => qhtml("#post-form-submit-loading-modal").remove()
   };
   var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1e3)) + " ago";
