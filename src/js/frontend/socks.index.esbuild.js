@@ -21830,17 +21830,17 @@ ${toHex(hashedRequest)}`;
       return response;
     }
   }
-  var CuteLoadingModal = (() => {
-    const modalTemplate = (void 0)`
+  var CuteLoadingModal = {
+    modalTemplate: (void 0)`
     <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
       <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
         Loading....
       </div>
     </div>
-  `;
-    const modalId = "post-form-submit-loading-modal";
-    return { show: () => (void 0)(body).inject(modalTemplate), hide: () => (void 0)(modalId).remove() };
-  })();
+  `,
+    show: () => (void 0)(body).inject(CuteLoadingModal.modalTemplate),
+    hide: () => (void 0)("#post-form-submit-loading-modal").remove()
+  };
   var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1e3)) + " ago";
   var getLastPartOfUrl = () => {
     const segments = window.location.pathname.split("/").filter(Boolean);
