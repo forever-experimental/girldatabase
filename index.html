@@ -31,7 +31,7 @@
         import { html, $, _ } from 'https://cdn.jsdelivr.net/npm/cute-html@0.2.4/+esm';
         import { homedir } from './src/js/frontend/components/not-bundled-use-cdn/homedir.js';
         import { directory } from './src/js/frontend/components/not-bundled-use-cdn/directory.js';
-        let rel_path_split_arr = _(window.location.pathname.split('/').filter(part => part !== "")); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
+        let rel_path_split_arr = window.location.pathname.split('/').filter(part => part !== ""); // exp:  girlsock.directory/th/next/ -> ['th', 'next'] 
         if (rel_path_split_arr.includes('th')) $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
         else if (rel_path_split_arr.includes('f')) $('#main').render(directory("f", "Every post much have a girl that is in some way thick, fat, chubby, or obese."));
         else if (rel_path_split_arr.includes('ai')) $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
