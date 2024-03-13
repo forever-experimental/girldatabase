@@ -3,7 +3,8 @@ const fetchPostsFromBoard = require('./utils/fetchDynamoDB.js');
 const {compressImage} = require('./utils/convertImageToCompressedWebP.js');
 const {uploadSockToCloudFunction} = require('./utils/GCF_PostPost.js');
 const {sock} = require('./components/girl.js');
-import {html, render} from 'lit-html';
+import {render} from 'lit-html';
+import {html, $} from 'cute-html';
 import {formatDistanceToNow} from 'date-fns';
 
 const {getFileNameFromUri} = require('cute-util');
@@ -83,8 +84,8 @@ const CuteLoadingModal = {
       </div>
     </div>
   `,
-  show : () => qhtml('body').inject(CuteLoadingModal.modalTemplate),
-  hide : () => qhtml('#post-form-submit-loading-modal').remove()
+  show : () => $('body').inject(CuteLoadingModal.modalTemplate),
+  hide : () => $('#post-form-submit-loading-modal').remove()
 };
 
 
