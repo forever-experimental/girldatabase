@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/lit-html';
+import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@1.0.1';
 
 export const homedir = () => html`
     <style>
@@ -50,7 +50,4 @@ export const homedir = () => html`
             </table>
         </div>
     </div>
-
-    <!-- goat stats widget (doesn't look very good) -->
-    <!-- <iframe src="https://wetrackyouinyoursleep.goatcounter.com/?hideui=1"></iframe> -->
 `;

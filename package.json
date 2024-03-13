@@ -15,11 +15,10 @@
     "@aws-sdk/client-dynamodb": "~3.529",
     "@aws-sdk/credential-provider-cognito-identity": "~3.529",
     "@aws-sdk/util-dynamodb": "~3.529",
-    "lit-html": "~3.1",
     "cute-util": "~0.1",
     "date-fns": "~3.3",
     "cute-con": "~1.0",
-    "cute-html": "0.2.4"
+    "cute-html": "~1.0"
   },
   "devDependencies": {
     "buffer": "~6.0",

@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/lit-html';
+import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@1.0.1';
 
 export const directory = (title, description) => html`
     <!-- directory description -->
@@ -17,7 +17,4 @@ export const directory = (title, description) => html`
     </form>
 
     <div id="articles"></div>
-
-    <!-- content loading script -->
-   <!--<script src="/src/js/frontend/socks.index.esbuild.js"></script>-->
 `;

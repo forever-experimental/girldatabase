@@ -3,8 +3,7 @@ const fetchPostsFromBoard = require('./utils/fetchDynamoDB.js');
 const {compressImage} = require('./utils/convertImageToCompressedWebP.js');
 const {uploadSockToCloudFunction} = require('./utils/GCF_PostPost.js');
 const {sock} = require('./components/girl.js');
-import { render } from 'lit-html';
-import { html, $ } from 'cute-html';
+import { html, $ , $$} from 'cute-html';
 import { formatDistanceToNow } from 'date-fns';
 
 const {getFileNameFromUri} = require('cute-util');
@@ -14,10 +13,8 @@ const USER_POSTS_TABLE = "girlsockdir";
 async function main()
 {
     let dirToPull = getLastPartOfUrl();
-    if (dirToPull === "index.html") // local test
-    {dirToPull = 'th';}
     await getLatest(dirToPull);
-    document.querySelector('#post-form-submit').onclick = submitPost;
+    $('#post-form-submit').onclick = submitPost;
 }
 
 async function getLatest(dir)
@@ -32,10 +29,9 @@ async function getLatest(dir)
     const allSocks = posts.items.map((post, index) => sock(post.imageUrl, post.theFileName, "1x1", 0, post.theText, index, unixToRelativeTime(post.theUnix)));
 
     // Render all socks at once
-    render(html`${allSocks}`, document.querySelector('#articles'));
-
+    $('#articles').render(html`${allSocks}`);
     // set res metatag of all images
-    document.querySelectorAll('img.image').forEach(img =>
+   $$('img.image').forEach(img =>
     {
         const setDim = () => document.getElementById(`imgRes-${img.id.split('-')[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
         img.complete ? setDim() : img.onload = setDim;
@@ -49,8 +45,8 @@ async function submitPost(event)
 
     let dir = getLastPartOfUrl();
 
-    const fileInput = document.querySelector('#post-image');
-    const textInput = document.querySelector('#post-body')?.value;
+    const fileInput = $('#post-image');
+    const textInput = $('#post-body')?.value;
 
     if (fileInput.files.length > 0) {
         const compressedImage = await compressImage(fileInput.files[0]);
