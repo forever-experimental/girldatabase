@@ -64,7 +64,10 @@ async function submitPost(event)
         }
         return response;
     }
-    else {alert("No image selected.");}
+    else {
+        alert("No image selected.");
+        CuteLoadingModal.hide();
+    }
 }
 
 const CuteLoadingModal = {

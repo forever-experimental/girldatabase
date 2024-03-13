@@ -21654,6 +21654,7 @@ ${toHex(hashedRequest)}`;
       return response;
     } else {
       alert("No image selected.");
+      CuteLoadingModal.hide();
     }
   }
   var CuteLoadingModal = {
