@@ -21836,7 +21836,7 @@ ${toHex(hashedRequest)}`;
       dirToPull = "th";
     }
     await getLatest(dirToPull);
-    document.querySelector("#post-form-submit").addEventListener("click", submitPost);
+    document.querySelector("#post-form-submit").onclick = submitPost;
   }
   async function getLatest(dir) {
     CuteLoadingModal.show();
@@ -21852,12 +21852,10 @@ ${toHex(hashedRequest)}`;
       img.complete ? setDim() : img.onload = setDim;
     });
   }
-  async function submitPost() {
+  async function submitPost(event) {
+    event.preventDefault();
     CuteLoadingModal.show();
     let dir = getLastPartOfUrl();
-    if (dir === "index.html") {
-      dir = "th";
-    }
     const fileInput = document.querySelector("#post-image");
     const textInput = document.querySelector("#post-body")?.value;
     if (fileInput.files.length > 0) {
@@ -21867,21 +21865,24 @@ ${toHex(hashedRequest)}`;
       if (response.ok) {
         CuteLoadingModal.hide();
         window.location.reload();
+        console.log("reloaded");
       } else {
         CuteLoadingModal.hide();
         alert("Upload failed: " + response);
       }
       return response;
+    } else {
+      alert("No image selected.");
     }
   }
   var CuteLoadingModal = {
     modalTemplate: html`
-    <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
-      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
-        Loading....
+      <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
+          Loading....
+        </div>
       </div>
-    </div>
-  `,
+    `,
     show: () => $2("body").inject(CuteLoadingModal.modalTemplate),
     hide: () => $2("#post-form-submit-loading-modal").remove()
   };
