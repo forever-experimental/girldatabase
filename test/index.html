@@ -1,25 +1,11 @@
 <!doctype html>
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
-<!-- ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html -->
 <html>
-<head>
+  <head>
     <title>girlsock.directory</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="https://media.girlsock.directory/img/8828f78d1bfd.webp" type="image/webp">
-    <meta property="og:description" content="An imageboard for pictures of girls, socks, and some other stuff. Stop on by.">
-    <meta property="og:title" content="Click here for girlsocks.">
-    <meta property="og:site_name" content="girlsock.directory">
-    <meta name="theme-color" content="#fafafa">
-  
+    
     <script> // cleans localhost URLs
     if (window.location.hostname === 'localhost') {
       const url = new URL(window.location);
@@ -29,29 +15,141 @@
       window.history.replaceState({}, document.title, window.location.pathname.replace("/index.html", ""));
     }
     </script>
-  
-    <script> // Base URL Detection and replacement of HTML !!
-      let manualBaseOverride = '';  // Base URL override
-      const onGitHubPages = window.location.hostname.includes('github.io');
-      const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
-      const BASE_URL = manualBaseOverride || (() => {
-        return (window.location.hostname === 'localhost' || onGitHubPages) && pathSegments.length > 0
-            ? `${window.location.origin}/${pathSegments[0]}/`
-            : `${window.location.origin}/`;
-      })();
-      fetch(`${BASE_URL}index.html`.replace(/([^:]\/)\/+/g, "$1")) // Immediately fetch and replace all html
-        .then(response => {
-          if (!response.ok) throw new Error('Failed to fetch index.html');
-          return response.text();
-        }).then(html => {
-          document.open();
-          document.write(html);
-          document.close();
-        }).catch(error => console.error('Error fetching or replacing content:', error));
+
+    <script> // Dynamic URL Management !!!
+    let manualBaseOverride = ''; // Override base URL in case of failure or need. Example: "/girlsockfork/"
+    const onGitHubPages = window.location.hostname.includes('github.io');
+    const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
+    const BASE_URL = manualBaseOverride || (() =>
+    {
+      return (window.location.hostname === 'localhost' || onGitHubPages) && pathSegments.length >= 1
+          ? `${window.location.origin}/${pathSegments[0]}/` // Adjust for GitHub Pages or localhost
+          : `${window.location.origin}/`; // Default to origin for root hosting
+    })();
     </script>
+    
+    <!-- stylesheets --> <link rel="stylesheet" href="/src/css/theme-style.css">
+    <!-- goat stats --> <script data-goatcounter="https://girl.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <!-- discord OpenGraph tags https://www.reddit.com/r/discordapp/comments/82p8i6/a_basic_tutorial_on_how_to_get_the_most_out_of/ --> 
+    <meta property="og:description" content="An imageboard for pictures of girls, socks, and some other stuff. Stop on by.">
+    <meta property="og:title" content="Click here for girlsocks.">
+    <meta property="og:site_name" content="girlsock.directory">
+    <!--    <meta property="og:image" content="">-->
+    <!--    <meta property="og:type" content="">-->
+    <!--    <meta property="og:url" content="">-->
+    <!--    <link rel="apple-touch-icon" href="icon.png">-->
+    <!--    <link rel="manifest" href="site.webmanifest">-->
+    <!--https://css-tricks.com/meta-theme-color-and-trickery/-->
+    <meta name="theme-color" content="#fafafa">
+    <!--print errors--> <script src="https://cdn.jsdelivr.net/npm/piercer-error"></script>
+    
+    <script> // script for making images big when clicked
+    function imgToggleBig(img)
+    {
+      if (img.hasAttribute("big")) {
+        img.removeAttribute("big");
+      }
+      else {
+        img.setAttribute("big", "");
+      }
+    }
+    </script>
+    
+  </head>
+  <body>
+    <div id="center">
+      <header>
+        <div style="height: 80px; background-image: url('assets/banner.png'); background-size: contain;"></div>
+        <nav>
+          <a href="/">index/</a> <a href="/th">th/</a> <a href="/f">f/</a> <a href="/ai">ai/</a> <a href="/l">l/</a>
+        </nav>
+      </header>
+      <main id="main"></main>
+      <footer>
+        © 2024 BlueBunnex & Renox. <a href="https://github.com/BlueBunnex/girldatabase">View source code.</a> Stats are public at <a href="https://girl.goatcounter.com/">girl.goatcounter.com</a>
+      </footer>
+    </div>
+  </body>
   
-</head>
-<body>
-    <!-- The body content will be replaced by index.html content, keeping this for initial page load view -->
-</body>
+  <script type="module"> // adjustPathsToMatchBASE_URL
+  document.querySelectorAll('a[href], script[src], link[href], img[src], [style]').forEach(element =>
+  {
+    if (element.hasAttribute('style')) {
+      const styleContent = element.getAttribute('style'); // Handling inline styles for background images and other URLs.
+      const urlPattern = /url\(['"]?(?!http)([^'"\)]+)['"]?\)/g; // Matches URLs that don't start with "http"
+      const adjustedStyleContent = styleContent.replace(urlPattern, (match, p1) =>
+      {
+        // If p1 starts with '/', adjust directly. Otherwise, prepend './' to make it relative to BASE_URL.
+        const correctedPath = p1.startsWith('/') ? p1 : `./${p1}`;
+        return `url('${BASE_URL}${correctedPath.substring(1)}')`;
+      });
+      element.setAttribute('style', adjustedStyleContent);
+    }
+    else {
+      const attribute = element.hasAttribute('href') ? 'href' : 'src'; // Handling href and src attributes.
+      let path = element.getAttribute(attribute);
+      if (path.startsWith('http://') || path.startsWith('https://')) return; // Skip fully qualified URLs.
+      if (!path.startsWith(BASE_URL)) { // Prepend BASE_URL if not already there.
+        path = path.startsWith('/') ? path : `/${path}`; // Uniform handling for root-relative and relative paths.
+        element.setAttribute(attribute, BASE_URL + path.substring(1));
+      }
+    }
+  });
+  </script>
+  
+  <script type="module"> // Dynamic rendering based on path logic
+  const atHomeDir = () =>
+  {
+    if (manualBaseOverride) {
+      const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
+      return pathSegments.slice(overrideSegments.length).length === 0;
+    }
+    else if (onGitHubPages || window.location.hostname === 'localhost') return pathSegments.length === 1;
+    return pathSegments.length === 0;
+  };
+  await Promise.all([ // Dynamic imports with computed base URL
+    import('https://cdn.jsdelivr.net/npm/cute-html@1.0.1'),
+    import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/homedir.js`),
+    import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/directory.js`)
+  ]).then(([cuteHtml, homedirModule, directoryModule]) =>
+  {
+    const {
+            html,
+            $
+          } = cuteHtml;
+    const {homedir} = homedirModule;
+    const {directory} = directoryModule;
+    const firstSegment = pathSegments[(onGitHubPages || window.location.hostname === 'localhost') && pathSegments.length > 1 ? 1 : 0]; // Adjusting for GitHub Pages
+    if (atHomeDir()) $('#main').render(homedir);
+    else {
+      switch (firstSegment) {
+        case 'th':
+          $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+          break;
+        case 'f':
+          $('#main').render(directory("f", "Every post must have a girl that is in some way thick, fat, chubby, or obese."));
+          break;
+        case 'ai':
+          $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
+          break;
+        case 'l':
+          $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
+          break;
+        case 'test':
+          $('#main').render(directory("test", "Test directory."));
+          break;
+        default:
+          $('#main').render(html`<p>The page you are looking for does not exist.</p>`);
+          break;
+      }
+    }
+    if (!atHomeDir()) {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = `${BASE_URL}src/js/frontend/socks.index.esbuild.js`;
+      document.body.appendChild(script);
+    }
+  });
+  </script>
+  
 </html>
