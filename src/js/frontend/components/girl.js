@@ -10,6 +10,19 @@ export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeSt
         <div class="body">
             ${txt}
         </div>
+        <div style="grid-area: d; padding: 1em; display: flex; flex-direction: column; gap: 1em;">
+
+            <!--
+            <div style="border: 1px solid var(--border); padding: 1em;">comment 1</div>
+            <div style="border: 1px solid var(--border); padding: 1em;">comment 2</div>
+            <div style="border: 1px solid var(--border); padding: 1em;">comment 3</div>
+            -->
+            
+            <form>
+                <textarea id="comment-body" name="comment-body" style="min-width: calc(100% - 9em); max-width: calc(100% - 9em); min-height: 1em; max-height: 4em; margin: 0px;" rows="1"></textarea>
+                <input id="comment-form-submit" type="submit" value="Add comment" style="transform: translateY(-6px);">
+            </form>
+        </div>
     </article>
 `;
 
