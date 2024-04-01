@@ -20740,15 +20740,15 @@ ${toHex(hashedRequest)}`;
         </div>
         <div style="grid-area: d; padding: 1em; display: flex; flex-direction: column; gap: 1em;">
 
-            <!--
-            <div style="border: 1px solid var(--border); padding: 1em;">comment 1</div>
-            <div style="border: 1px solid var(--border); padding: 1em;">comment 2</div>
-            <div style="border: 1px solid var(--border); padding: 1em;">comment 3</div>
-            -->
-            
-            <form>
-                <textarea id="comment-body" name="comment-body" style="min-width: calc(100% - 9em); max-width: calc(100% - 9em); min-height: 1em; max-height: 4em; margin: 0px;" rows="1"></textarea>
-                <input id="comment-form-submit" type="submit" value="Add comment" style="transform: translateY(-6px);">
+            <div style="border-top: 1px solid var(--border); padding: 1em;">comment 1</div>
+            <div style="border-top: 1px solid var(--border); padding: 1em;">comment 2</div>
+            <div style="border-top: 1px solid var(--border); padding: 1em;">comment 3</div>
+
+            <a href>Write comment</a>
+            <form style="display: none;">
+                <textarea id="comment-body" name="comment-body" style="min-width: 40em; max-width: 40em; min-height: 1em; max-height: 8em; margin: 0px;" rows="4"></textarea>
+                <br>
+                <input id="comment-form-submit" type="submit" value="Add comment">
             </form>
         </div>
     </article>
