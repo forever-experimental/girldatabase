@@ -20730,15 +20730,15 @@ ${toHex(hashedRequest)}`;
       init_cute_html();
       sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => X`
     <article>
-        <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
-        <div class="meta">
+        <img id="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
+        <div id="meta">
             <span style="max-width: 50%; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${imgFileName}</span>
             <span style="display: inline-block; overflow: hidden;"><span id="imgRes-${id}">(${imgRes})</span> / <i>${timeStr}</i></span>
         </div>
-        <div class="body">
+        <div id="body">
             ${txt}
         </div>
-        <div style="grid-area: d; padding: 1em; display: flex; flex-direction: column;">
+        <div id="comments">
 
             <div class="comment">comment 1</div>
             <div class="comment">comment 2</div>
