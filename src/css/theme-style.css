@@ -60,7 +60,8 @@ article {
     display: grid;
     grid-template: 
         "a a" 1em
-        "b c" 1fr / auto 1fr;
+        "b c" 1fr
+        "d d" auto / auto 1fr;
 }
 
 article > .meta {
