@@ -1,4 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@1.0.1';
+import { html } from 'cute-html';
 
 export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => html`
     <article>
