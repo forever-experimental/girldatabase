@@ -64,7 +64,7 @@ article {
         "d d" auto / auto 1fr;
 }
 
-article > .meta {
+article > #meta {
     grid-area: a;
 
     background: var(--background-dark);
@@ -72,7 +72,7 @@ article > .meta {
     padding-left: 2px;
 }
 
-article > .image {
+article > #image {
     grid-area: b;
 
     cursor: pointer;
@@ -81,13 +81,27 @@ article > .image {
     max-height: 200px;
 }
 
-article > .image[big] {
+article > #image[big] {
     max-width: 500px;
     max-height: 500px;
 }
 
-article > .body {
+article > #body {
     grid-area: c;
 
     padding: 1em;
 }
+
+article > #comments {
+    grid-area: d;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    border-top: 1px solid var(--border); padding: 1em;
+}
+
+summary { font-size: smaller; }
+form > #comment-body { min-width: 40em; max-width: 40em; min-height: 1em; max-height: 8em; margin: 0px; }
