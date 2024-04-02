@@ -3447,10 +3447,10 @@
     }
   });
 
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/rng.js
+  // node_modules/uuid/dist/esm-browser/rng.js
   function rng() {
     if (!getRandomValues) {
-      getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== "undefined" && typeof msCrypto.getRandomValues === "function" && msCrypto.getRandomValues.bind(msCrypto);
+      getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
       if (!getRandomValues) {
         throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
       }
@@ -3459,79 +3459,67 @@
   }
   var getRandomValues, rnds8;
   var init_rng = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/rng.js"() {
+    "node_modules/uuid/dist/esm-browser/rng.js"() {
       rnds8 = new Uint8Array(16);
     }
   });
 
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/regex.js
-  var regex_default;
-  var init_regex = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/regex.js"() {
-      regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
-    }
-  });
-
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/validate.js
-  function validate(uuid) {
-    return typeof uuid === "string" && regex_default.test(uuid);
+  // node_modules/uuid/dist/esm-browser/stringify.js
+  function unsafeStringify(arr, offset = 0) {
+    return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
   }
-  var validate_default;
-  var init_validate = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/validate.js"() {
-      init_regex();
-      validate_default = validate;
-    }
-  });
-
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/stringify.js
-  function stringify(arr) {
-    var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
-    var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
-    if (!validate_default(uuid)) {
-      throw TypeError("Stringified UUID is invalid");
-    }
-    return uuid;
-  }
-  var byteToHex, i4, stringify_default;
+  var byteToHex;
   var init_stringify = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/stringify.js"() {
-      init_validate();
+    "node_modules/uuid/dist/esm-browser/stringify.js"() {
       byteToHex = [];
-      for (i4 = 0; i4 < 256; ++i4) {
-        byteToHex.push((i4 + 256).toString(16).substr(1));
+      for (let i4 = 0; i4 < 256; ++i4) {
+        byteToHex.push((i4 + 256).toString(16).slice(1));
       }
-      stringify_default = stringify;
     }
   });
 
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/v4.js
+  // node_modules/uuid/dist/esm-browser/native.js
+  var randomUUID, native_default;
+  var init_native = __esm({
+    "node_modules/uuid/dist/esm-browser/native.js"() {
+      randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+      native_default = {
+        randomUUID
+      };
+    }
+  });
+
+  // node_modules/uuid/dist/esm-browser/v4.js
   function v4(options, buf, offset) {
+    if (native_default.randomUUID && !buf && !options) {
+      return native_default.randomUUID();
+    }
     options = options || {};
-    var rnds = options.random || (options.rng || rng)();
+    const rnds = options.random || (options.rng || rng)();
     rnds[6] = rnds[6] & 15 | 64;
     rnds[8] = rnds[8] & 63 | 128;
     if (buf) {
       offset = offset || 0;
-      for (var i4 = 0; i4 < 16; ++i4) {
+      for (let i4 = 0; i4 < 16; ++i4) {
         buf[offset + i4] = rnds[i4];
       }
       return buf;
     }
-    return stringify_default(rnds);
+    return unsafeStringify(rnds);
   }
   var v4_default;
   var init_v4 = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/v4.js"() {
+    "node_modules/uuid/dist/esm-browser/v4.js"() {
+      init_native();
       init_rng();
       init_stringify();
       v4_default = v4;
     }
   });
 
-  // node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/index.js
+  // node_modules/uuid/dist/esm-browser/index.js
   var init_esm_browser = __esm({
-    "node_modules/@smithy/middleware-retry/node_modules/uuid/dist/esm-browser/index.js"() {
+    "node_modules/uuid/dist/esm-browser/index.js"() {
       init_v4();
     }
   });
@@ -4594,11 +4582,11 @@
             static getEndpointParameterInstructions() {
               return closure._ep;
             }
-            constructor(input) {
+            constructor(...[input]) {
               super();
-              this.input = input;
               this.serialize = closure._serializer;
               this.deserialize = closure._deserializer;
+              this.input = input ?? {};
               closure._init(this);
             }
             resolveMiddleware(stack, configuration, options) {
@@ -11162,8 +11150,8 @@ ${toHex(hashedRequest)}`;
       exports.supportsWebCrypto = supportsWebCrypto;
       function supportsSecureRandom(window2) {
         if (typeof window2 === "object" && typeof window2.crypto === "object") {
-          var getRandomValues3 = window2.crypto.getRandomValues;
-          return typeof getRandomValues3 === "function";
+          var getRandomValues2 = window2.crypto.getRandomValues;
+          return typeof getRandomValues2 === "function";
         }
         return false;
       }
@@ -11638,10 +11626,10 @@ ${toHex(hashedRequest)}`;
       }
       function isMsWindow(window2) {
         if (quacksLikeAnMsWindow(window2) && window2.msCrypto.subtle !== void 0) {
-          var _a = window2.msCrypto, getRandomValues3 = _a.getRandomValues, subtle_1 = _a.subtle;
+          var _a = window2.msCrypto, getRandomValues2 = _a.getRandomValues, subtle_1 = _a.subtle;
           return msSubtleCryptoMethods.map(function(methodName) {
             return subtle_1[methodName];
-          }).concat(getRandomValues3).every(function(method) {
+          }).concat(getRandomValues2).every(function(method) {
             return typeof method === "function";
           });
         }
@@ -15326,83 +15314,6 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/uuid/dist/esm-browser/rng.js
-  function rng2() {
-    if (!getRandomValues2) {
-      getRandomValues2 = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto);
-      if (!getRandomValues2) {
-        throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-      }
-    }
-    return getRandomValues2(rnds82);
-  }
-  var getRandomValues2, rnds82;
-  var init_rng2 = __esm({
-    "node_modules/uuid/dist/esm-browser/rng.js"() {
-      rnds82 = new Uint8Array(16);
-    }
-  });
-
-  // node_modules/uuid/dist/esm-browser/stringify.js
-  function unsafeStringify(arr, offset = 0) {
-    return byteToHex2[arr[offset + 0]] + byteToHex2[arr[offset + 1]] + byteToHex2[arr[offset + 2]] + byteToHex2[arr[offset + 3]] + "-" + byteToHex2[arr[offset + 4]] + byteToHex2[arr[offset + 5]] + "-" + byteToHex2[arr[offset + 6]] + byteToHex2[arr[offset + 7]] + "-" + byteToHex2[arr[offset + 8]] + byteToHex2[arr[offset + 9]] + "-" + byteToHex2[arr[offset + 10]] + byteToHex2[arr[offset + 11]] + byteToHex2[arr[offset + 12]] + byteToHex2[arr[offset + 13]] + byteToHex2[arr[offset + 14]] + byteToHex2[arr[offset + 15]];
-  }
-  var byteToHex2;
-  var init_stringify2 = __esm({
-    "node_modules/uuid/dist/esm-browser/stringify.js"() {
-      byteToHex2 = [];
-      for (let i4 = 0; i4 < 256; ++i4) {
-        byteToHex2.push((i4 + 256).toString(16).slice(1));
-      }
-    }
-  });
-
-  // node_modules/uuid/dist/esm-browser/native.js
-  var randomUUID, native_default;
-  var init_native = __esm({
-    "node_modules/uuid/dist/esm-browser/native.js"() {
-      randomUUID = typeof crypto !== "undefined" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
-      native_default = {
-        randomUUID
-      };
-    }
-  });
-
-  // node_modules/uuid/dist/esm-browser/v4.js
-  function v42(options, buf, offset) {
-    if (native_default.randomUUID && !buf && !options) {
-      return native_default.randomUUID();
-    }
-    options = options || {};
-    const rnds = options.random || (options.rng || rng2)();
-    rnds[6] = rnds[6] & 15 | 64;
-    rnds[8] = rnds[8] & 63 | 128;
-    if (buf) {
-      offset = offset || 0;
-      for (let i4 = 0; i4 < 16; ++i4) {
-        buf[offset + i4] = rnds[i4];
-      }
-      return buf;
-    }
-    return unsafeStringify(rnds);
-  }
-  var v4_default2;
-  var init_v42 = __esm({
-    "node_modules/uuid/dist/esm-browser/v4.js"() {
-      init_native();
-      init_rng2();
-      init_stringify2();
-      v4_default2 = v42;
-    }
-  });
-
-  // node_modules/uuid/dist/esm-browser/index.js
-  var init_esm_browser2 = __esm({
-    "node_modules/uuid/dist/esm-browser/index.js"() {
-      init_v42();
-    }
-  });
-
   // node_modules/@aws-sdk/client-dynamodb/dist-es/models/DynamoDBServiceException.js
   var DynamoDBServiceException;
   var init_DynamoDBServiceException = __esm({
@@ -15853,7 +15764,7 @@ ${toHex(hashedRequest)}`;
       init_dist_es33();
       init_dist_es2();
       init_dist_es26();
-      init_esm_browser2();
+      init_esm_browser();
       init_DynamoDBServiceException();
       init_models_02();
       se_BatchExecuteStatementCommand = async (input, context) => {
@@ -17443,7 +17354,7 @@ ${toHex(hashedRequest)}`;
       };
       se_ExecuteTransactionInput = (input, context) => {
         return take(input, {
-          ClientRequestToken: [true, (_2) => _2 ?? v4_default2()],
+          ClientRequestToken: [true, (_2) => _2 ?? v4_default()],
           ReturnConsumedCapacity: [],
           TransactStatements: (_2) => se_ParameterizedStatements(_2, context)
         });
@@ -17467,7 +17378,7 @@ ${toHex(hashedRequest)}`;
       };
       se_ExportTableToPointInTimeInput = (input, context) => {
         return take(input, {
-          ClientToken: [true, (_2) => _2 ?? v4_default2()],
+          ClientToken: [true, (_2) => _2 ?? v4_default()],
           ExportFormat: [],
           ExportTime: (_2) => Math.round(_2.getTime() / 1e3),
           ExportType: [],
@@ -17542,7 +17453,7 @@ ${toHex(hashedRequest)}`;
       };
       se_ImportTableInput = (input, context) => {
         return take(input, {
-          ClientToken: [true, (_2) => _2 ?? v4_default2()],
+          ClientToken: [true, (_2) => _2 ?? v4_default()],
           InputCompressionType: [],
           InputFormat: [],
           InputFormatOptions: _json,
@@ -17809,7 +17720,7 @@ ${toHex(hashedRequest)}`;
       };
       se_TransactWriteItemsInput = (input, context) => {
         return take(input, {
-          ClientRequestToken: [true, (_2) => _2 ?? v4_default2()],
+          ClientRequestToken: [true, (_2) => _2 ?? v4_default()],
           ReturnConsumedCapacity: [],
           ReturnItemCollectionMetrics: [],
           TransactItems: (_2) => se_TransactWriteItemList(_2, context)
@@ -20582,7 +20493,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/util-waiter/dist-es/utils/validate.js
-  var init_validate2 = __esm({
+  var init_validate = __esm({
     "node_modules/@smithy/util-waiter/dist-es/utils/validate.js"() {
     }
   });
@@ -20591,7 +20502,7 @@ ${toHex(hashedRequest)}`;
   var init_utils3 = __esm({
     "node_modules/@smithy/util-waiter/dist-es/utils/index.js"() {
       init_sleep();
-      init_validate2();
+      init_validate();
     }
   });
 
@@ -20819,13 +20730,28 @@ ${toHex(hashedRequest)}`;
       init_cute_html();
       sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => X`
     <article>
-        <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
-        <div class="meta">
+        <img id="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
+        <div id="meta">
             <span style="max-width: 50%; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${imgFileName}</span>
             <span style="display: inline-block; overflow: hidden;"><span id="imgRes-${id}">(${imgRes})</span> / <i>${timeStr}</i></span>
         </div>
-        <div class="body">
+        <div id="body">
             ${txt}
+        </div>
+        <div id="comments">
+
+            <div class="comment">comment 1</div>
+            <div class="comment">comment 2</div>
+            <div class="comment">comment 3</div>
+
+            <details>
+                <summary>Write comment</summary>
+                <form>
+                    <textarea id="comment-body" name="comment-body" rows="4"></textarea>
+                    <br>
+                    <input id="comment-form-submit" type="submit" value="Add comment">
+                </form>
+            </details>
         </div>
     </article>
 `;

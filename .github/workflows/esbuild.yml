@@ -1,7 +1,5 @@
-name: esbuild
 on:
-  workflow_dispatch:
-  
+  push:  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +15,7 @@ jobs:
       - run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add src/js/frontend/socks.index.esbuild.js
-          git commit -m "Update socks.index.esbuild.js" -a || echo "No changes to commit"
-          git pull --rebase
+          git add .
+          git pull
+          git commit -m "Gh Action New Build" -a || echo "No changes to commit"
           git push
