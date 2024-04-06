@@ -2634,13 +2634,13 @@
       DOTS_PATTERN = /\.\./;
       isDnsCompatibleBucketName = (bucketName) => DOMAIN_PATTERN.test(bucketName) && !IP_ADDRESS_PATTERN.test(bucketName) && !DOTS_PATTERN.test(bucketName);
       isArnBucketName = (bucketName) => {
-        const [arn, partition2, service, region, account, typeOrId] = bucketName.split(":");
+        const [arn, partition2, service, , , bucket] = bucketName.split(":");
         const isArn = arn === "arn" && bucketName.split(":").length >= 6;
-        const isValidArn = [arn, partition2, service, account, typeOrId].filter(Boolean).length === 5;
+        const isValidArn = Boolean(isArn && partition2 && service && bucket);
         if (isArn && !isValidArn) {
           throw new Error(`Invalid ARN: ${bucketName} was an invalid ARN.`);
         }
-        return arn === "arn" && !!partition2 && !!service && !!account && !!typeOrId;
+        return isValidArn;
       };
     }
   });
@@ -5740,1205 +5740,6 @@
     }
   });
 
-  // node_modules/@aws-crypto/crc32/node_modules/tslib/tslib.es6.js
-  var tslib_es6_exports = {};
-  __export(tslib_es6_exports, {
-    __assign: () => __assign,
-    __asyncDelegator: () => __asyncDelegator,
-    __asyncGenerator: () => __asyncGenerator,
-    __asyncValues: () => __asyncValues,
-    __await: () => __await,
-    __awaiter: () => __awaiter,
-    __classPrivateFieldGet: () => __classPrivateFieldGet,
-    __classPrivateFieldSet: () => __classPrivateFieldSet,
-    __createBinding: () => __createBinding,
-    __decorate: () => __decorate,
-    __exportStar: () => __exportStar,
-    __extends: () => __extends,
-    __generator: () => __generator,
-    __importDefault: () => __importDefault,
-    __importStar: () => __importStar,
-    __makeTemplateObject: () => __makeTemplateObject,
-    __metadata: () => __metadata,
-    __param: () => __param,
-    __read: () => __read,
-    __rest: () => __rest,
-    __spread: () => __spread,
-    __spreadArrays: () => __spreadArrays,
-    __values: () => __values
-  });
-  function __extends(d4, b4) {
-    extendStatics(d4, b4);
-    function __() {
-      this.constructor = d4;
-    }
-    d4.prototype = b4 === null ? Object.create(b4) : (__.prototype = b4.prototype, new __());
-  }
-  function __rest(s4, e4) {
-    var t4 = {};
-    for (var p4 in s4)
-      if (Object.prototype.hasOwnProperty.call(s4, p4) && e4.indexOf(p4) < 0)
-        t4[p4] = s4[p4];
-    if (s4 != null && typeof Object.getOwnPropertySymbols === "function")
-      for (var i4 = 0, p4 = Object.getOwnPropertySymbols(s4); i4 < p4.length; i4++) {
-        if (e4.indexOf(p4[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s4, p4[i4]))
-          t4[p4[i4]] = s4[p4[i4]];
-      }
-    return t4;
-  }
-  function __decorate(decorators, target, key, desc) {
-    var c4 = arguments.length, r4 = c4 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d4;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r4 = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i4 = decorators.length - 1; i4 >= 0; i4--)
-        if (d4 = decorators[i4])
-          r4 = (c4 < 3 ? d4(r4) : c4 > 3 ? d4(target, key, r4) : d4(target, key)) || r4;
-    return c4 > 3 && r4 && Object.defineProperty(target, key, r4), r4;
-  }
-  function __param(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  }
-  function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(metadataKey, metadataValue);
-  }
-  function __awaiter(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e4) {
-          reject(e4);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e4) {
-          reject(e4);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  }
-  function __generator(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t4[0] & 1)
-        throw t4[1];
-      return t4[1];
-    }, trys: [], ops: [] }, f4, y3, t4, g4;
-    return g4 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g4[Symbol.iterator] = function() {
-      return this;
-    }), g4;
-    function verb(n4) {
-      return function(v5) {
-        return step([n4, v5]);
-      };
-    }
-    function step(op) {
-      if (f4)
-        throw new TypeError("Generator is already executing.");
-      while (_2)
-        try {
-          if (f4 = 1, y3 && (t4 = op[0] & 2 ? y3["return"] : op[0] ? y3["throw"] || ((t4 = y3["return"]) && t4.call(y3), 0) : y3.next) && !(t4 = t4.call(y3, op[1])).done)
-            return t4;
-          if (y3 = 0, t4)
-            op = [op[0] & 2, t4.value];
-          switch (op[0]) {
-            case 0:
-            case 1:
-              t4 = op;
-              break;
-            case 4:
-              _2.label++;
-              return { value: op[1], done: false };
-            case 5:
-              _2.label++;
-              y3 = op[1];
-              op = [0];
-              continue;
-            case 7:
-              op = _2.ops.pop();
-              _2.trys.pop();
-              continue;
-            default:
-              if (!(t4 = _2.trys, t4 = t4.length > 0 && t4[t4.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                _2 = 0;
-                continue;
-              }
-              if (op[0] === 3 && (!t4 || op[1] > t4[0] && op[1] < t4[3])) {
-                _2.label = op[1];
-                break;
-              }
-              if (op[0] === 6 && _2.label < t4[1]) {
-                _2.label = t4[1];
-                t4 = op;
-                break;
-              }
-              if (t4 && _2.label < t4[2]) {
-                _2.label = t4[2];
-                _2.ops.push(op);
-                break;
-              }
-              if (t4[2])
-                _2.ops.pop();
-              _2.trys.pop();
-              continue;
-          }
-          op = body.call(thisArg, _2);
-        } catch (e4) {
-          op = [6, e4];
-          y3 = 0;
-        } finally {
-          f4 = t4 = 0;
-        }
-      if (op[0] & 5)
-        throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  }
-  function __createBinding(o4, m4, k4, k22) {
-    if (k22 === void 0)
-      k22 = k4;
-    o4[k22] = m4[k4];
-  }
-  function __exportStar(m4, exports) {
-    for (var p4 in m4)
-      if (p4 !== "default" && !exports.hasOwnProperty(p4))
-        exports[p4] = m4[p4];
-  }
-  function __values(o4) {
-    var s4 = typeof Symbol === "function" && Symbol.iterator, m4 = s4 && o4[s4], i4 = 0;
-    if (m4)
-      return m4.call(o4);
-    if (o4 && typeof o4.length === "number")
-      return {
-        next: function() {
-          if (o4 && i4 >= o4.length)
-            o4 = void 0;
-          return { value: o4 && o4[i4++], done: !o4 };
-        }
-      };
-    throw new TypeError(s4 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  }
-  function __read(o4, n4) {
-    var m4 = typeof Symbol === "function" && o4[Symbol.iterator];
-    if (!m4)
-      return o4;
-    var i4 = m4.call(o4), r4, ar = [], e4;
-    try {
-      while ((n4 === void 0 || n4-- > 0) && !(r4 = i4.next()).done)
-        ar.push(r4.value);
-    } catch (error) {
-      e4 = { error };
-    } finally {
-      try {
-        if (r4 && !r4.done && (m4 = i4["return"]))
-          m4.call(i4);
-      } finally {
-        if (e4)
-          throw e4.error;
-      }
-    }
-    return ar;
-  }
-  function __spread() {
-    for (var ar = [], i4 = 0; i4 < arguments.length; i4++)
-      ar = ar.concat(__read(arguments[i4]));
-    return ar;
-  }
-  function __spreadArrays() {
-    for (var s4 = 0, i4 = 0, il = arguments.length; i4 < il; i4++)
-      s4 += arguments[i4].length;
-    for (var r4 = Array(s4), k4 = 0, i4 = 0; i4 < il; i4++)
-      for (var a4 = arguments[i4], j4 = 0, jl = a4.length; j4 < jl; j4++, k4++)
-        r4[k4] = a4[j4];
-    return r4;
-  }
-  function __await(v5) {
-    return this instanceof __await ? (this.v = v5, this) : new __await(v5);
-  }
-  function __asyncGenerator(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g4 = generator.apply(thisArg, _arguments || []), i4, q4 = [];
-    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4;
-    function verb(n4) {
-      if (g4[n4])
-        i4[n4] = function(v5) {
-          return new Promise(function(a4, b4) {
-            q4.push([n4, v5, a4, b4]) > 1 || resume(n4, v5);
-          });
-        };
-    }
-    function resume(n4, v5) {
-      try {
-        step(g4[n4](v5));
-      } catch (e4) {
-        settle(q4[0][3], e4);
-      }
-    }
-    function step(r4) {
-      r4.value instanceof __await ? Promise.resolve(r4.value.v).then(fulfill, reject) : settle(q4[0][2], r4);
-    }
-    function fulfill(value) {
-      resume("next", value);
-    }
-    function reject(value) {
-      resume("throw", value);
-    }
-    function settle(f4, v5) {
-      if (f4(v5), q4.shift(), q4.length)
-        resume(q4[0][0], q4[0][1]);
-    }
-  }
-  function __asyncDelegator(o4) {
-    var i4, p4;
-    return i4 = {}, verb("next"), verb("throw", function(e4) {
-      throw e4;
-    }), verb("return"), i4[Symbol.iterator] = function() {
-      return this;
-    }, i4;
-    function verb(n4, f4) {
-      i4[n4] = o4[n4] ? function(v5) {
-        return (p4 = !p4) ? { value: __await(o4[n4](v5)), done: n4 === "return" } : f4 ? f4(v5) : v5;
-      } : f4;
-    }
-  }
-  function __asyncValues(o4) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m4 = o4[Symbol.asyncIterator], i4;
-    return m4 ? m4.call(o4) : (o4 = typeof __values === "function" ? __values(o4) : o4[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4);
-    function verb(n4) {
-      i4[n4] = o4[n4] && function(v5) {
-        return new Promise(function(resolve, reject) {
-          v5 = o4[n4](v5), settle(resolve, reject, v5.done, v5.value);
-        });
-      };
-    }
-    function settle(resolve, reject, d4, v5) {
-      Promise.resolve(v5).then(function(v6) {
-        resolve({ value: v6, done: d4 });
-      }, reject);
-    }
-  }
-  function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) {
-      Object.defineProperty(cooked, "raw", { value: raw });
-    } else {
-      cooked.raw = raw;
-    }
-    return cooked;
-  }
-  function __importStar(mod) {
-    if (mod && mod.__esModule)
-      return mod;
-    var result = {};
-    if (mod != null) {
-      for (var k4 in mod)
-        if (Object.hasOwnProperty.call(mod, k4))
-          result[k4] = mod[k4];
-    }
-    result.default = mod;
-    return result;
-  }
-  function __importDefault(mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  }
-  function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-      throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-  }
-  function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-      throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
-  }
-  var extendStatics, __assign;
-  var init_tslib_es6 = __esm({
-    "node_modules/@aws-crypto/crc32/node_modules/tslib/tslib.es6.js"() {
-      extendStatics = function(d4, b4) {
-        extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
-          d5.__proto__ = b5;
-        } || function(d5, b5) {
-          for (var p4 in b5)
-            if (b5.hasOwnProperty(p4))
-              d5[p4] = b5[p4];
-        };
-        return extendStatics(d4, b4);
-      };
-      __assign = function() {
-        __assign = Object.assign || function __assign6(t4) {
-          for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
-            s4 = arguments[i4];
-            for (var p4 in s4)
-              if (Object.prototype.hasOwnProperty.call(s4, p4))
-                t4[p4] = s4[p4];
-          }
-          return t4;
-        };
-        return __assign.apply(this, arguments);
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/pureJs.js
-  var require_pureJs = __commonJS({
-    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/pureJs.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.toUtf8 = exports.fromUtf8 = void 0;
-      var fromUtf82 = (input) => {
-        const bytes = [];
-        for (let i4 = 0, len = input.length; i4 < len; i4++) {
-          const value = input.charCodeAt(i4);
-          if (value < 128) {
-            bytes.push(value);
-          } else if (value < 2048) {
-            bytes.push(value >> 6 | 192, value & 63 | 128);
-          } else if (i4 + 1 < input.length && (value & 64512) === 55296 && (input.charCodeAt(i4 + 1) & 64512) === 56320) {
-            const surrogatePair = 65536 + ((value & 1023) << 10) + (input.charCodeAt(++i4) & 1023);
-            bytes.push(surrogatePair >> 18 | 240, surrogatePair >> 12 & 63 | 128, surrogatePair >> 6 & 63 | 128, surrogatePair & 63 | 128);
-          } else {
-            bytes.push(value >> 12 | 224, value >> 6 & 63 | 128, value & 63 | 128);
-          }
-        }
-        return Uint8Array.from(bytes);
-      };
-      exports.fromUtf8 = fromUtf82;
-      var toUtf82 = (input) => {
-        let decoded = "";
-        for (let i4 = 0, len = input.length; i4 < len; i4++) {
-          const byte = input[i4];
-          if (byte < 128) {
-            decoded += String.fromCharCode(byte);
-          } else if (192 <= byte && byte < 224) {
-            const nextByte = input[++i4];
-            decoded += String.fromCharCode((byte & 31) << 6 | nextByte & 63);
-          } else if (240 <= byte && byte < 365) {
-            const surrogatePair = [byte, input[++i4], input[++i4], input[++i4]];
-            const encoded = "%" + surrogatePair.map((byteValue) => byteValue.toString(16)).join("%");
-            decoded += decodeURIComponent(encoded);
-          } else {
-            decoded += String.fromCharCode((byte & 15) << 12 | (input[++i4] & 63) << 6 | input[++i4] & 63);
-          }
-        }
-        return decoded;
-      };
-      exports.toUtf8 = toUtf82;
-    }
-  });
-
-  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/whatwgEncodingApi.js
-  var require_whatwgEncodingApi = __commonJS({
-    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/whatwgEncodingApi.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.toUtf8 = exports.fromUtf8 = void 0;
-      function fromUtf82(input) {
-        return new TextEncoder().encode(input);
-      }
-      exports.fromUtf8 = fromUtf82;
-      function toUtf82(input) {
-        return new TextDecoder("utf-8").decode(input);
-      }
-      exports.toUtf8 = toUtf82;
-    }
-  });
-
-  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/index.js
-  var require_dist_cjs = __commonJS({
-    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.toUtf8 = exports.fromUtf8 = void 0;
-      var pureJs_1 = require_pureJs();
-      var whatwgEncodingApi_1 = require_whatwgEncodingApi();
-      var fromUtf82 = (input) => typeof TextEncoder === "function" ? (0, whatwgEncodingApi_1.fromUtf8)(input) : (0, pureJs_1.fromUtf8)(input);
-      exports.fromUtf8 = fromUtf82;
-      var toUtf82 = (input) => typeof TextDecoder === "function" ? (0, whatwgEncodingApi_1.toUtf8)(input) : (0, pureJs_1.toUtf8)(input);
-      exports.toUtf8 = toUtf82;
-    }
-  });
-
-  // node_modules/@aws-crypto/util/build/convertToBuffer.js
-  var require_convertToBuffer = __commonJS({
-    "node_modules/@aws-crypto/util/build/convertToBuffer.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.convertToBuffer = void 0;
-      var util_utf8_browser_1 = require_dist_cjs();
-      var fromUtf82 = typeof Buffer !== "undefined" && Buffer.from ? function(input) {
-        return Buffer.from(input, "utf8");
-      } : util_utf8_browser_1.fromUtf8;
-      function convertToBuffer(data) {
-        if (data instanceof Uint8Array)
-          return data;
-        if (typeof data === "string") {
-          return fromUtf82(data);
-        }
-        if (ArrayBuffer.isView(data)) {
-          return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-        }
-        return new Uint8Array(data);
-      }
-      exports.convertToBuffer = convertToBuffer;
-    }
-  });
-
-  // node_modules/@aws-crypto/util/build/isEmptyData.js
-  var require_isEmptyData = __commonJS({
-    "node_modules/@aws-crypto/util/build/isEmptyData.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.isEmptyData = void 0;
-      function isEmptyData(data) {
-        if (typeof data === "string") {
-          return data.length === 0;
-        }
-        return data.byteLength === 0;
-      }
-      exports.isEmptyData = isEmptyData;
-    }
-  });
-
-  // node_modules/@aws-crypto/util/build/numToUint8.js
-  var require_numToUint8 = __commonJS({
-    "node_modules/@aws-crypto/util/build/numToUint8.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.numToUint8 = void 0;
-      function numToUint8(num) {
-        return new Uint8Array([
-          (num & 4278190080) >> 24,
-          (num & 16711680) >> 16,
-          (num & 65280) >> 8,
-          num & 255
-        ]);
-      }
-      exports.numToUint8 = numToUint8;
-    }
-  });
-
-  // node_modules/@aws-crypto/util/build/uint32ArrayFrom.js
-  var require_uint32ArrayFrom = __commonJS({
-    "node_modules/@aws-crypto/util/build/uint32ArrayFrom.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.uint32ArrayFrom = void 0;
-      function uint32ArrayFrom(a_lookUpTable) {
-        if (!Uint32Array.from) {
-          var return_array = new Uint32Array(a_lookUpTable.length);
-          var a_index = 0;
-          while (a_index < a_lookUpTable.length) {
-            return_array[a_index] = a_lookUpTable[a_index];
-            a_index += 1;
-          }
-          return return_array;
-        }
-        return Uint32Array.from(a_lookUpTable);
-      }
-      exports.uint32ArrayFrom = uint32ArrayFrom;
-    }
-  });
-
-  // node_modules/@aws-crypto/util/build/index.js
-  var require_build = __commonJS({
-    "node_modules/@aws-crypto/util/build/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.uint32ArrayFrom = exports.numToUint8 = exports.isEmptyData = exports.convertToBuffer = void 0;
-      var convertToBuffer_1 = require_convertToBuffer();
-      Object.defineProperty(exports, "convertToBuffer", { enumerable: true, get: function() {
-        return convertToBuffer_1.convertToBuffer;
-      } });
-      var isEmptyData_1 = require_isEmptyData();
-      Object.defineProperty(exports, "isEmptyData", { enumerable: true, get: function() {
-        return isEmptyData_1.isEmptyData;
-      } });
-      var numToUint8_1 = require_numToUint8();
-      Object.defineProperty(exports, "numToUint8", { enumerable: true, get: function() {
-        return numToUint8_1.numToUint8;
-      } });
-      var uint32ArrayFrom_1 = require_uint32ArrayFrom();
-      Object.defineProperty(exports, "uint32ArrayFrom", { enumerable: true, get: function() {
-        return uint32ArrayFrom_1.uint32ArrayFrom;
-      } });
-    }
-  });
-
-  // node_modules/@aws-crypto/crc32/build/aws_crc32.js
-  var require_aws_crc32 = __commonJS({
-    "node_modules/@aws-crypto/crc32/build/aws_crc32.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.AwsCrc32 = void 0;
-      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
-      var util_1 = require_build();
-      var index_1 = require_build2();
-      var AwsCrc32 = (
-        /** @class */
-        function() {
-          function AwsCrc322() {
-            this.crc32 = new index_1.Crc32();
-          }
-          AwsCrc322.prototype.update = function(toHash) {
-            if ((0, util_1.isEmptyData)(toHash))
-              return;
-            this.crc32.update((0, util_1.convertToBuffer)(toHash));
-          };
-          AwsCrc322.prototype.digest = function() {
-            return tslib_1.__awaiter(this, void 0, void 0, function() {
-              return tslib_1.__generator(this, function(_a) {
-                return [2, (0, util_1.numToUint8)(this.crc32.digest())];
-              });
-            });
-          };
-          AwsCrc322.prototype.reset = function() {
-            this.crc32 = new index_1.Crc32();
-          };
-          return AwsCrc322;
-        }()
-      );
-      exports.AwsCrc32 = AwsCrc32;
-    }
-  });
-
-  // node_modules/@aws-crypto/crc32/build/index.js
-  var require_build2 = __commonJS({
-    "node_modules/@aws-crypto/crc32/build/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.AwsCrc32 = exports.Crc32 = exports.crc32 = void 0;
-      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
-      var util_1 = require_build();
-      function crc32(data) {
-        return new Crc323().update(data).digest();
-      }
-      exports.crc32 = crc32;
-      var Crc323 = (
-        /** @class */
-        function() {
-          function Crc324() {
-            this.checksum = 4294967295;
-          }
-          Crc324.prototype.update = function(data) {
-            var e_1, _a;
-            try {
-              for (var data_1 = tslib_1.__values(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
-                var byte = data_1_1.value;
-                this.checksum = this.checksum >>> 8 ^ lookupTable[(this.checksum ^ byte) & 255];
-              }
-            } catch (e_1_1) {
-              e_1 = { error: e_1_1 };
-            } finally {
-              try {
-                if (data_1_1 && !data_1_1.done && (_a = data_1.return))
-                  _a.call(data_1);
-              } finally {
-                if (e_1)
-                  throw e_1.error;
-              }
-            }
-            return this;
-          };
-          Crc324.prototype.digest = function() {
-            return (this.checksum ^ 4294967295) >>> 0;
-          };
-          return Crc324;
-        }()
-      );
-      exports.Crc32 = Crc323;
-      var a_lookUpTable = [
-        0,
-        1996959894,
-        3993919788,
-        2567524794,
-        124634137,
-        1886057615,
-        3915621685,
-        2657392035,
-        249268274,
-        2044508324,
-        3772115230,
-        2547177864,
-        162941995,
-        2125561021,
-        3887607047,
-        2428444049,
-        498536548,
-        1789927666,
-        4089016648,
-        2227061214,
-        450548861,
-        1843258603,
-        4107580753,
-        2211677639,
-        325883990,
-        1684777152,
-        4251122042,
-        2321926636,
-        335633487,
-        1661365465,
-        4195302755,
-        2366115317,
-        997073096,
-        1281953886,
-        3579855332,
-        2724688242,
-        1006888145,
-        1258607687,
-        3524101629,
-        2768942443,
-        901097722,
-        1119000684,
-        3686517206,
-        2898065728,
-        853044451,
-        1172266101,
-        3705015759,
-        2882616665,
-        651767980,
-        1373503546,
-        3369554304,
-        3218104598,
-        565507253,
-        1454621731,
-        3485111705,
-        3099436303,
-        671266974,
-        1594198024,
-        3322730930,
-        2970347812,
-        795835527,
-        1483230225,
-        3244367275,
-        3060149565,
-        1994146192,
-        31158534,
-        2563907772,
-        4023717930,
-        1907459465,
-        112637215,
-        2680153253,
-        3904427059,
-        2013776290,
-        251722036,
-        2517215374,
-        3775830040,
-        2137656763,
-        141376813,
-        2439277719,
-        3865271297,
-        1802195444,
-        476864866,
-        2238001368,
-        4066508878,
-        1812370925,
-        453092731,
-        2181625025,
-        4111451223,
-        1706088902,
-        314042704,
-        2344532202,
-        4240017532,
-        1658658271,
-        366619977,
-        2362670323,
-        4224994405,
-        1303535960,
-        984961486,
-        2747007092,
-        3569037538,
-        1256170817,
-        1037604311,
-        2765210733,
-        3554079995,
-        1131014506,
-        879679996,
-        2909243462,
-        3663771856,
-        1141124467,
-        855842277,
-        2852801631,
-        3708648649,
-        1342533948,
-        654459306,
-        3188396048,
-        3373015174,
-        1466479909,
-        544179635,
-        3110523913,
-        3462522015,
-        1591671054,
-        702138776,
-        2966460450,
-        3352799412,
-        1504918807,
-        783551873,
-        3082640443,
-        3233442989,
-        3988292384,
-        2596254646,
-        62317068,
-        1957810842,
-        3939845945,
-        2647816111,
-        81470997,
-        1943803523,
-        3814918930,
-        2489596804,
-        225274430,
-        2053790376,
-        3826175755,
-        2466906013,
-        167816743,
-        2097651377,
-        4027552580,
-        2265490386,
-        503444072,
-        1762050814,
-        4150417245,
-        2154129355,
-        426522225,
-        1852507879,
-        4275313526,
-        2312317920,
-        282753626,
-        1742555852,
-        4189708143,
-        2394877945,
-        397917763,
-        1622183637,
-        3604390888,
-        2714866558,
-        953729732,
-        1340076626,
-        3518719985,
-        2797360999,
-        1068828381,
-        1219638859,
-        3624741850,
-        2936675148,
-        906185462,
-        1090812512,
-        3747672003,
-        2825379669,
-        829329135,
-        1181335161,
-        3412177804,
-        3160834842,
-        628085408,
-        1382605366,
-        3423369109,
-        3138078467,
-        570562233,
-        1426400815,
-        3317316542,
-        2998733608,
-        733239954,
-        1555261956,
-        3268935591,
-        3050360625,
-        752459403,
-        1541320221,
-        2607071920,
-        3965973030,
-        1969922972,
-        40735498,
-        2617837225,
-        3943577151,
-        1913087877,
-        83908371,
-        2512341634,
-        3803740692,
-        2075208622,
-        213261112,
-        2463272603,
-        3855990285,
-        2094854071,
-        198958881,
-        2262029012,
-        4057260610,
-        1759359992,
-        534414190,
-        2176718541,
-        4139329115,
-        1873836001,
-        414664567,
-        2282248934,
-        4279200368,
-        1711684554,
-        285281116,
-        2405801727,
-        4167216745,
-        1634467795,
-        376229701,
-        2685067896,
-        3608007406,
-        1308918612,
-        956543938,
-        2808555105,
-        3495958263,
-        1231636301,
-        1047427035,
-        2932959818,
-        3654703836,
-        1088359270,
-        936918e3,
-        2847714899,
-        3736837829,
-        1202900863,
-        817233897,
-        3183342108,
-        3401237130,
-        1404277552,
-        615818150,
-        3134207493,
-        3453421203,
-        1423857449,
-        601450431,
-        3009837614,
-        3294710456,
-        1567103746,
-        711928724,
-        3020668471,
-        3272380065,
-        1510334235,
-        755167117
-      ];
-      var lookupTable = (0, util_1.uint32ArrayFrom)(a_lookUpTable);
-      var aws_crc32_1 = require_aws_crc32();
-      Object.defineProperty(exports, "AwsCrc32", { enumerable: true, get: function() {
-        return aws_crc32_1.AwsCrc32;
-      } });
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/Int64.js
-  function negate(bytes) {
-    for (let i4 = 0; i4 < 8; i4++) {
-      bytes[i4] ^= 255;
-    }
-    for (let i4 = 7; i4 > -1; i4--) {
-      bytes[i4]++;
-      if (bytes[i4] !== 0)
-        break;
-    }
-  }
-  var Int64;
-  var init_Int64 = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/Int64.js"() {
-      init_dist_es24();
-      Int64 = class _Int64 {
-        constructor(bytes) {
-          this.bytes = bytes;
-          if (bytes.byteLength !== 8) {
-            throw new Error("Int64 buffers must be exactly 8 bytes");
-          }
-        }
-        static fromNumber(number) {
-          if (number > 9223372036854776e3 || number < -9223372036854776e3) {
-            throw new Error(`${number} is too large (or, if negative, too small) to represent as an Int64`);
-          }
-          const bytes = new Uint8Array(8);
-          for (let i4 = 7, remaining = Math.abs(Math.round(number)); i4 > -1 && remaining > 0; i4--, remaining /= 256) {
-            bytes[i4] = remaining;
-          }
-          if (number < 0) {
-            negate(bytes);
-          }
-          return new _Int64(bytes);
-        }
-        valueOf() {
-          const bytes = this.bytes.slice(0);
-          const negative = bytes[0] & 128;
-          if (negative) {
-            negate(bytes);
-          }
-          return parseInt(toHex(bytes), 16) * (negative ? -1 : 1);
-        }
-        toString() {
-          return String(this.valueOf());
-        }
-      };
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/HeaderMarshaller.js
-  var HeaderMarshaller, HEADER_VALUE_TYPE, BOOLEAN_TAG, BYTE_TAG, SHORT_TAG, INT_TAG, LONG_TAG, BINARY_TAG, STRING_TAG, TIMESTAMP_TAG, UUID_TAG, UUID_PATTERN;
-  var init_HeaderMarshaller = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/HeaderMarshaller.js"() {
-      init_dist_es24();
-      init_Int64();
-      HeaderMarshaller = class {
-        constructor(toUtf82, fromUtf82) {
-          this.toUtf8 = toUtf82;
-          this.fromUtf8 = fromUtf82;
-        }
-        format(headers) {
-          const chunks = [];
-          for (const headerName of Object.keys(headers)) {
-            const bytes = this.fromUtf8(headerName);
-            chunks.push(Uint8Array.from([bytes.byteLength]), bytes, this.formatHeaderValue(headers[headerName]));
-          }
-          const out = new Uint8Array(chunks.reduce((carry, bytes) => carry + bytes.byteLength, 0));
-          let position = 0;
-          for (const chunk of chunks) {
-            out.set(chunk, position);
-            position += chunk.byteLength;
-          }
-          return out;
-        }
-        formatHeaderValue(header) {
-          switch (header.type) {
-            case "boolean":
-              return Uint8Array.from([header.value ? 0 : 1]);
-            case "byte":
-              return Uint8Array.from([2, header.value]);
-            case "short":
-              const shortView = new DataView(new ArrayBuffer(3));
-              shortView.setUint8(0, 3);
-              shortView.setInt16(1, header.value, false);
-              return new Uint8Array(shortView.buffer);
-            case "integer":
-              const intView = new DataView(new ArrayBuffer(5));
-              intView.setUint8(0, 4);
-              intView.setInt32(1, header.value, false);
-              return new Uint8Array(intView.buffer);
-            case "long":
-              const longBytes = new Uint8Array(9);
-              longBytes[0] = 5;
-              longBytes.set(header.value.bytes, 1);
-              return longBytes;
-            case "binary":
-              const binView = new DataView(new ArrayBuffer(3 + header.value.byteLength));
-              binView.setUint8(0, 6);
-              binView.setUint16(1, header.value.byteLength, false);
-              const binBytes = new Uint8Array(binView.buffer);
-              binBytes.set(header.value, 3);
-              return binBytes;
-            case "string":
-              const utf8Bytes = this.fromUtf8(header.value);
-              const strView = new DataView(new ArrayBuffer(3 + utf8Bytes.byteLength));
-              strView.setUint8(0, 7);
-              strView.setUint16(1, utf8Bytes.byteLength, false);
-              const strBytes = new Uint8Array(strView.buffer);
-              strBytes.set(utf8Bytes, 3);
-              return strBytes;
-            case "timestamp":
-              const tsBytes = new Uint8Array(9);
-              tsBytes[0] = 8;
-              tsBytes.set(Int64.fromNumber(header.value.valueOf()).bytes, 1);
-              return tsBytes;
-            case "uuid":
-              if (!UUID_PATTERN.test(header.value)) {
-                throw new Error(`Invalid UUID received: ${header.value}`);
-              }
-              const uuidBytes = new Uint8Array(17);
-              uuidBytes[0] = 9;
-              uuidBytes.set(fromHex(header.value.replace(/\-/g, "")), 1);
-              return uuidBytes;
-          }
-        }
-        parse(headers) {
-          const out = {};
-          let position = 0;
-          while (position < headers.byteLength) {
-            const nameLength = headers.getUint8(position++);
-            const name = this.toUtf8(new Uint8Array(headers.buffer, headers.byteOffset + position, nameLength));
-            position += nameLength;
-            switch (headers.getUint8(position++)) {
-              case 0:
-                out[name] = {
-                  type: BOOLEAN_TAG,
-                  value: true
-                };
-                break;
-              case 1:
-                out[name] = {
-                  type: BOOLEAN_TAG,
-                  value: false
-                };
-                break;
-              case 2:
-                out[name] = {
-                  type: BYTE_TAG,
-                  value: headers.getInt8(position++)
-                };
-                break;
-              case 3:
-                out[name] = {
-                  type: SHORT_TAG,
-                  value: headers.getInt16(position, false)
-                };
-                position += 2;
-                break;
-              case 4:
-                out[name] = {
-                  type: INT_TAG,
-                  value: headers.getInt32(position, false)
-                };
-                position += 4;
-                break;
-              case 5:
-                out[name] = {
-                  type: LONG_TAG,
-                  value: new Int64(new Uint8Array(headers.buffer, headers.byteOffset + position, 8))
-                };
-                position += 8;
-                break;
-              case 6:
-                const binaryLength = headers.getUint16(position, false);
-                position += 2;
-                out[name] = {
-                  type: BINARY_TAG,
-                  value: new Uint8Array(headers.buffer, headers.byteOffset + position, binaryLength)
-                };
-                position += binaryLength;
-                break;
-              case 7:
-                const stringLength = headers.getUint16(position, false);
-                position += 2;
-                out[name] = {
-                  type: STRING_TAG,
-                  value: this.toUtf8(new Uint8Array(headers.buffer, headers.byteOffset + position, stringLength))
-                };
-                position += stringLength;
-                break;
-              case 8:
-                out[name] = {
-                  type: TIMESTAMP_TAG,
-                  value: new Date(new Int64(new Uint8Array(headers.buffer, headers.byteOffset + position, 8)).valueOf())
-                };
-                position += 8;
-                break;
-              case 9:
-                const uuidBytes = new Uint8Array(headers.buffer, headers.byteOffset + position, 16);
-                position += 16;
-                out[name] = {
-                  type: UUID_TAG,
-                  value: `${toHex(uuidBytes.subarray(0, 4))}-${toHex(uuidBytes.subarray(4, 6))}-${toHex(uuidBytes.subarray(6, 8))}-${toHex(uuidBytes.subarray(8, 10))}-${toHex(uuidBytes.subarray(10))}`
-                };
-                break;
-              default:
-                throw new Error(`Unrecognized header type tag`);
-            }
-          }
-          return out;
-        }
-      };
-      (function(HEADER_VALUE_TYPE2) {
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["boolTrue"] = 0] = "boolTrue";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["boolFalse"] = 1] = "boolFalse";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["byte"] = 2] = "byte";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["short"] = 3] = "short";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["integer"] = 4] = "integer";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["long"] = 5] = "long";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["byteArray"] = 6] = "byteArray";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["string"] = 7] = "string";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["timestamp"] = 8] = "timestamp";
-        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["uuid"] = 9] = "uuid";
-      })(HEADER_VALUE_TYPE || (HEADER_VALUE_TYPE = {}));
-      BOOLEAN_TAG = "boolean";
-      BYTE_TAG = "byte";
-      SHORT_TAG = "short";
-      INT_TAG = "integer";
-      LONG_TAG = "long";
-      BINARY_TAG = "binary";
-      STRING_TAG = "string";
-      TIMESTAMP_TAG = "timestamp";
-      UUID_TAG = "uuid";
-      UUID_PATTERN = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/splitMessage.js
-  var import_crc32, PRELUDE_MEMBER_LENGTH, PRELUDE_LENGTH, CHECKSUM_LENGTH, MINIMUM_MESSAGE_LENGTH;
-  var init_splitMessage = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/splitMessage.js"() {
-      import_crc32 = __toESM(require_build2());
-      PRELUDE_MEMBER_LENGTH = 4;
-      PRELUDE_LENGTH = PRELUDE_MEMBER_LENGTH * 2;
-      CHECKSUM_LENGTH = 4;
-      MINIMUM_MESSAGE_LENGTH = PRELUDE_LENGTH + CHECKSUM_LENGTH * 2;
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/EventStreamCodec.js
-  var import_crc322;
-  var init_EventStreamCodec = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/EventStreamCodec.js"() {
-      import_crc322 = __toESM(require_build2());
-      init_HeaderMarshaller();
-      init_splitMessage();
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/Message.js
-  var init_Message = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/Message.js"() {
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/MessageDecoderStream.js
-  var init_MessageDecoderStream = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/MessageDecoderStream.js"() {
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/MessageEncoderStream.js
-  var init_MessageEncoderStream = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/MessageEncoderStream.js"() {
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/SmithyMessageDecoderStream.js
-  var init_SmithyMessageDecoderStream = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/SmithyMessageDecoderStream.js"() {
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/SmithyMessageEncoderStream.js
-  var init_SmithyMessageEncoderStream = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/SmithyMessageEncoderStream.js"() {
-    }
-  });
-
-  // node_modules/@smithy/eventstream-codec/dist-es/index.js
-  var init_dist_es30 = __esm({
-    "node_modules/@smithy/eventstream-codec/dist-es/index.js"() {
-      init_EventStreamCodec();
-      init_HeaderMarshaller();
-      init_Int64();
-      init_Message();
-      init_MessageDecoderStream();
-      init_MessageEncoderStream();
-      init_SmithyMessageDecoderStream();
-      init_SmithyMessageEncoderStream();
-    }
-  });
-
   // node_modules/@smithy/signature-v4/dist-es/constants.js
   var ALGORITHM_QUERY_PARAM, CREDENTIAL_QUERY_PARAM, AMZ_DATE_QUERY_PARAM, SIGNED_HEADERS_QUERY_PARAM, EXPIRES_QUERY_PARAM, SIGNATURE_QUERY_PARAM, TOKEN_QUERY_PARAM, AUTH_HEADER, AMZ_DATE_HEADER, DATE_HEADER, GENERATED_HEADERS, SIGNATURE_HEADER, SHA256_HEADER, TOKEN_HEADER, ALWAYS_UNSIGNABLE_HEADERS, PROXY_HEADER_PATTERN, SEC_HEADER_PATTERN, ALGORITHM_IDENTIFIER, EVENT_ALGORITHM_IDENTIFIER, UNSIGNED_PAYLOAD, MAX_CACHE_SIZE, KEY_TYPE_IDENTIFIER, MAX_PRESIGNED_TTL;
   var init_constants5 = __esm({
@@ -7071,7 +5872,7 @@
 
   // node_modules/@smithy/is-array-buffer/dist-es/index.js
   var isArrayBuffer;
-  var init_dist_es31 = __esm({
+  var init_dist_es30 = __esm({
     "node_modules/@smithy/is-array-buffer/dist-es/index.js"() {
       isArrayBuffer = (arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]";
     }
@@ -7081,7 +5882,7 @@
   var getPayloadHash;
   var init_getPayloadHash = __esm({
     "node_modules/@smithy/signature-v4/dist-es/getPayloadHash.js"() {
-      init_dist_es31();
+      init_dist_es30();
       init_dist_es24();
       init_dist_es19();
       init_constants5();
@@ -7099,6 +5900,137 @@
           return toHex(await hashCtor.digest());
         }
         return UNSIGNED_PAYLOAD;
+      };
+    }
+  });
+
+  // node_modules/@smithy/signature-v4/dist-es/HeaderFormatter.js
+  function negate(bytes) {
+    for (let i4 = 0; i4 < 8; i4++) {
+      bytes[i4] ^= 255;
+    }
+    for (let i4 = 7; i4 > -1; i4--) {
+      bytes[i4]++;
+      if (bytes[i4] !== 0)
+        break;
+    }
+  }
+  var HeaderFormatter, HEADER_VALUE_TYPE, UUID_PATTERN, Int64;
+  var init_HeaderFormatter = __esm({
+    "node_modules/@smithy/signature-v4/dist-es/HeaderFormatter.js"() {
+      init_dist_es24();
+      init_dist_es19();
+      HeaderFormatter = class {
+        format(headers) {
+          const chunks = [];
+          for (const headerName of Object.keys(headers)) {
+            const bytes = fromUtf8(headerName);
+            chunks.push(Uint8Array.from([bytes.byteLength]), bytes, this.formatHeaderValue(headers[headerName]));
+          }
+          const out = new Uint8Array(chunks.reduce((carry, bytes) => carry + bytes.byteLength, 0));
+          let position = 0;
+          for (const chunk of chunks) {
+            out.set(chunk, position);
+            position += chunk.byteLength;
+          }
+          return out;
+        }
+        formatHeaderValue(header) {
+          switch (header.type) {
+            case "boolean":
+              return Uint8Array.from([header.value ? 0 : 1]);
+            case "byte":
+              return Uint8Array.from([2, header.value]);
+            case "short":
+              const shortView = new DataView(new ArrayBuffer(3));
+              shortView.setUint8(0, 3);
+              shortView.setInt16(1, header.value, false);
+              return new Uint8Array(shortView.buffer);
+            case "integer":
+              const intView = new DataView(new ArrayBuffer(5));
+              intView.setUint8(0, 4);
+              intView.setInt32(1, header.value, false);
+              return new Uint8Array(intView.buffer);
+            case "long":
+              const longBytes = new Uint8Array(9);
+              longBytes[0] = 5;
+              longBytes.set(header.value.bytes, 1);
+              return longBytes;
+            case "binary":
+              const binView = new DataView(new ArrayBuffer(3 + header.value.byteLength));
+              binView.setUint8(0, 6);
+              binView.setUint16(1, header.value.byteLength, false);
+              const binBytes = new Uint8Array(binView.buffer);
+              binBytes.set(header.value, 3);
+              return binBytes;
+            case "string":
+              const utf8Bytes = fromUtf8(header.value);
+              const strView = new DataView(new ArrayBuffer(3 + utf8Bytes.byteLength));
+              strView.setUint8(0, 7);
+              strView.setUint16(1, utf8Bytes.byteLength, false);
+              const strBytes = new Uint8Array(strView.buffer);
+              strBytes.set(utf8Bytes, 3);
+              return strBytes;
+            case "timestamp":
+              const tsBytes = new Uint8Array(9);
+              tsBytes[0] = 8;
+              tsBytes.set(Int64.fromNumber(header.value.valueOf()).bytes, 1);
+              return tsBytes;
+            case "uuid":
+              if (!UUID_PATTERN.test(header.value)) {
+                throw new Error(`Invalid UUID received: ${header.value}`);
+              }
+              const uuidBytes = new Uint8Array(17);
+              uuidBytes[0] = 9;
+              uuidBytes.set(fromHex(header.value.replace(/\-/g, "")), 1);
+              return uuidBytes;
+          }
+        }
+      };
+      (function(HEADER_VALUE_TYPE2) {
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["boolTrue"] = 0] = "boolTrue";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["boolFalse"] = 1] = "boolFalse";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["byte"] = 2] = "byte";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["short"] = 3] = "short";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["integer"] = 4] = "integer";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["long"] = 5] = "long";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["byteArray"] = 6] = "byteArray";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["string"] = 7] = "string";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["timestamp"] = 8] = "timestamp";
+        HEADER_VALUE_TYPE2[HEADER_VALUE_TYPE2["uuid"] = 9] = "uuid";
+      })(HEADER_VALUE_TYPE || (HEADER_VALUE_TYPE = {}));
+      UUID_PATTERN = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
+      Int64 = class _Int64 {
+        constructor(bytes) {
+          this.bytes = bytes;
+          if (bytes.byteLength !== 8) {
+            throw new Error("Int64 buffers must be exactly 8 bytes");
+          }
+        }
+        static fromNumber(number) {
+          if (number > 9223372036854776e3 || number < -9223372036854776e3) {
+            throw new Error(`${number} is too large (or, if negative, too small) to represent as an Int64`);
+          }
+          const bytes = new Uint8Array(8);
+          for (let i4 = 7, remaining = Math.abs(Math.round(number)); i4 > -1 && remaining > 0; i4--, remaining /= 256) {
+            bytes[i4] = remaining;
+          }
+          if (number < 0) {
+            negate(bytes);
+          }
+          return new _Int64(bytes);
+        }
+        valueOf() {
+          const bytes = this.bytes.slice(0);
+          const negative = bytes[0] & 128;
+          if (negative) {
+            negate(bytes);
+          }
+          return parseInt(toHex(bytes), 16) * (negative ? -1 : 1);
+        }
+        toString() {
+          return String(this.valueOf());
+        }
       };
     }
   });
@@ -7203,7 +6135,6 @@
   var SignatureV4, formatDate, getCanonicalHeaderList;
   var init_SignatureV4 = __esm({
     "node_modules/@smithy/signature-v4/dist-es/SignatureV4.js"() {
-      init_dist_es30();
       init_dist_es24();
       init_dist_es10();
       init_dist_es19();
@@ -7212,13 +6143,14 @@
       init_getCanonicalHeaders();
       init_getCanonicalQuery();
       init_getPayloadHash();
+      init_HeaderFormatter();
       init_headerUtil();
       init_moveHeadersToQuery();
       init_prepareRequest();
       init_utilDate();
       SignatureV4 = class {
         constructor({ applyChecksum, credentials, region, service, sha256, uriEscapePath = true }) {
-          this.headerMarshaller = new HeaderMarshaller(toUtf8, fromUtf8);
+          this.headerFormatter = new HeaderFormatter();
           this.service = service;
           this.sha256 = sha256;
           this.uriEscapePath = uriEscapePath;
@@ -7280,7 +6212,7 @@
         }
         async signMessage(signableMessage, { signingDate = /* @__PURE__ */ new Date(), signingRegion, signingService }) {
           const promise = this.signEvent({
-            headers: this.headerMarshaller.format(signableMessage.message.headers),
+            headers: this.headerFormatter.format(signableMessage.message.headers),
             payload: signableMessage.message.body
           }, {
             signingDate,
@@ -7387,7 +6319,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/signature-v4/dist-es/index.js
-  var init_dist_es32 = __esm({
+  var init_dist_es31 = __esm({
     "node_modules/@smithy/signature-v4/dist-es/index.js"() {
       init_SignatureV4();
       init_getCanonicalHeaders();
@@ -7404,7 +6336,7 @@ ${toHex(hashedRequest)}`;
   var init_resolveAwsSdkSigV4Config = __esm({
     "node_modules/@aws-sdk/core/dist-es/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.js"() {
       init_dist_es28();
-      init_dist_es32();
+      init_dist_es31();
       resolveAwsSdkSigV4Config = (config) => {
         let normalizedCreds;
         if (config.credentials) {
@@ -9285,7 +8217,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/core/dist-es/index.js
-  var init_dist_es33 = __esm({
+  var init_dist_es32 = __esm({
     "node_modules/@aws-sdk/core/dist-es/index.js"() {
       init_client3();
       init_httpAuthSchemes2();
@@ -9317,7 +8249,7 @@ ${toHex(hashedRequest)}`;
   var defaultCognitoIdentityHttpAuthSchemeParametersProvider, defaultCognitoIdentityHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig;
   var init_httpAuthSchemeProvider = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/auth/httpAuthSchemeProvider.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es10();
       defaultCognitoIdentityHttpAuthSchemeParametersProvider = async (config, context, input) => {
         return {
@@ -9495,6 +8427,808 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-crypto/sha256-browser/node_modules/tslib/tslib.es6.js
+  var tslib_es6_exports = {};
+  __export(tslib_es6_exports, {
+    __assign: () => __assign,
+    __asyncDelegator: () => __asyncDelegator,
+    __asyncGenerator: () => __asyncGenerator,
+    __asyncValues: () => __asyncValues,
+    __await: () => __await,
+    __awaiter: () => __awaiter,
+    __classPrivateFieldGet: () => __classPrivateFieldGet,
+    __classPrivateFieldSet: () => __classPrivateFieldSet,
+    __createBinding: () => __createBinding,
+    __decorate: () => __decorate,
+    __exportStar: () => __exportStar,
+    __extends: () => __extends,
+    __generator: () => __generator,
+    __importDefault: () => __importDefault,
+    __importStar: () => __importStar,
+    __makeTemplateObject: () => __makeTemplateObject,
+    __metadata: () => __metadata,
+    __param: () => __param,
+    __read: () => __read,
+    __rest: () => __rest,
+    __spread: () => __spread,
+    __spreadArrays: () => __spreadArrays,
+    __values: () => __values
+  });
+  function __extends(d4, b4) {
+    extendStatics(d4, b4);
+    function __() {
+      this.constructor = d4;
+    }
+    d4.prototype = b4 === null ? Object.create(b4) : (__.prototype = b4.prototype, new __());
+  }
+  function __rest(s4, e4) {
+    var t4 = {};
+    for (var p4 in s4)
+      if (Object.prototype.hasOwnProperty.call(s4, p4) && e4.indexOf(p4) < 0)
+        t4[p4] = s4[p4];
+    if (s4 != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i4 = 0, p4 = Object.getOwnPropertySymbols(s4); i4 < p4.length; i4++) {
+        if (e4.indexOf(p4[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s4, p4[i4]))
+          t4[p4[i4]] = s4[p4[i4]];
+      }
+    return t4;
+  }
+  function __decorate(decorators, target, key, desc) {
+    var c4 = arguments.length, r4 = c4 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d4;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r4 = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i4 = decorators.length - 1; i4 >= 0; i4--)
+        if (d4 = decorators[i4])
+          r4 = (c4 < 3 ? d4(r4) : c4 > 3 ? d4(target, key, r4) : d4(target, key)) || r4;
+    return c4 > 3 && r4 && Object.defineProperty(target, key, r4), r4;
+  }
+  function __param(paramIndex, decorator) {
+    return function(target, key) {
+      decorator(target, key, paramIndex);
+    };
+  }
+  function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+      return Reflect.metadata(metadataKey, metadataValue);
+  }
+  function __awaiter(thisArg, _arguments, P2, generator) {
+    function adopt(value) {
+      return value instanceof P2 ? value : new P2(function(resolve) {
+        resolve(value);
+      });
+    }
+    return new (P2 || (P2 = Promise))(function(resolve, reject) {
+      function fulfilled(value) {
+        try {
+          step(generator.next(value));
+        } catch (e4) {
+          reject(e4);
+        }
+      }
+      function rejected(value) {
+        try {
+          step(generator["throw"](value));
+        } catch (e4) {
+          reject(e4);
+        }
+      }
+      function step(result) {
+        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+      }
+      step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+  }
+  function __generator(thisArg, body) {
+    var _2 = { label: 0, sent: function() {
+      if (t4[0] & 1)
+        throw t4[1];
+      return t4[1];
+    }, trys: [], ops: [] }, f4, y3, t4, g4;
+    return g4 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g4[Symbol.iterator] = function() {
+      return this;
+    }), g4;
+    function verb(n4) {
+      return function(v5) {
+        return step([n4, v5]);
+      };
+    }
+    function step(op) {
+      if (f4)
+        throw new TypeError("Generator is already executing.");
+      while (_2)
+        try {
+          if (f4 = 1, y3 && (t4 = op[0] & 2 ? y3["return"] : op[0] ? y3["throw"] || ((t4 = y3["return"]) && t4.call(y3), 0) : y3.next) && !(t4 = t4.call(y3, op[1])).done)
+            return t4;
+          if (y3 = 0, t4)
+            op = [op[0] & 2, t4.value];
+          switch (op[0]) {
+            case 0:
+            case 1:
+              t4 = op;
+              break;
+            case 4:
+              _2.label++;
+              return { value: op[1], done: false };
+            case 5:
+              _2.label++;
+              y3 = op[1];
+              op = [0];
+              continue;
+            case 7:
+              op = _2.ops.pop();
+              _2.trys.pop();
+              continue;
+            default:
+              if (!(t4 = _2.trys, t4 = t4.length > 0 && t4[t4.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                _2 = 0;
+                continue;
+              }
+              if (op[0] === 3 && (!t4 || op[1] > t4[0] && op[1] < t4[3])) {
+                _2.label = op[1];
+                break;
+              }
+              if (op[0] === 6 && _2.label < t4[1]) {
+                _2.label = t4[1];
+                t4 = op;
+                break;
+              }
+              if (t4 && _2.label < t4[2]) {
+                _2.label = t4[2];
+                _2.ops.push(op);
+                break;
+              }
+              if (t4[2])
+                _2.ops.pop();
+              _2.trys.pop();
+              continue;
+          }
+          op = body.call(thisArg, _2);
+        } catch (e4) {
+          op = [6, e4];
+          y3 = 0;
+        } finally {
+          f4 = t4 = 0;
+        }
+      if (op[0] & 5)
+        throw op[1];
+      return { value: op[0] ? op[1] : void 0, done: true };
+    }
+  }
+  function __createBinding(o4, m4, k4, k22) {
+    if (k22 === void 0)
+      k22 = k4;
+    o4[k22] = m4[k4];
+  }
+  function __exportStar(m4, exports) {
+    for (var p4 in m4)
+      if (p4 !== "default" && !exports.hasOwnProperty(p4))
+        exports[p4] = m4[p4];
+  }
+  function __values(o4) {
+    var s4 = typeof Symbol === "function" && Symbol.iterator, m4 = s4 && o4[s4], i4 = 0;
+    if (m4)
+      return m4.call(o4);
+    if (o4 && typeof o4.length === "number")
+      return {
+        next: function() {
+          if (o4 && i4 >= o4.length)
+            o4 = void 0;
+          return { value: o4 && o4[i4++], done: !o4 };
+        }
+      };
+    throw new TypeError(s4 ? "Object is not iterable." : "Symbol.iterator is not defined.");
+  }
+  function __read(o4, n4) {
+    var m4 = typeof Symbol === "function" && o4[Symbol.iterator];
+    if (!m4)
+      return o4;
+    var i4 = m4.call(o4), r4, ar = [], e4;
+    try {
+      while ((n4 === void 0 || n4-- > 0) && !(r4 = i4.next()).done)
+        ar.push(r4.value);
+    } catch (error) {
+      e4 = { error };
+    } finally {
+      try {
+        if (r4 && !r4.done && (m4 = i4["return"]))
+          m4.call(i4);
+      } finally {
+        if (e4)
+          throw e4.error;
+      }
+    }
+    return ar;
+  }
+  function __spread() {
+    for (var ar = [], i4 = 0; i4 < arguments.length; i4++)
+      ar = ar.concat(__read(arguments[i4]));
+    return ar;
+  }
+  function __spreadArrays() {
+    for (var s4 = 0, i4 = 0, il = arguments.length; i4 < il; i4++)
+      s4 += arguments[i4].length;
+    for (var r4 = Array(s4), k4 = 0, i4 = 0; i4 < il; i4++)
+      for (var a4 = arguments[i4], j4 = 0, jl = a4.length; j4 < jl; j4++, k4++)
+        r4[k4] = a4[j4];
+    return r4;
+  }
+  function __await(v5) {
+    return this instanceof __await ? (this.v = v5, this) : new __await(v5);
+  }
+  function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g4 = generator.apply(thisArg, _arguments || []), i4, q4 = [];
+    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
+      return this;
+    }, i4;
+    function verb(n4) {
+      if (g4[n4])
+        i4[n4] = function(v5) {
+          return new Promise(function(a4, b4) {
+            q4.push([n4, v5, a4, b4]) > 1 || resume(n4, v5);
+          });
+        };
+    }
+    function resume(n4, v5) {
+      try {
+        step(g4[n4](v5));
+      } catch (e4) {
+        settle(q4[0][3], e4);
+      }
+    }
+    function step(r4) {
+      r4.value instanceof __await ? Promise.resolve(r4.value.v).then(fulfill, reject) : settle(q4[0][2], r4);
+    }
+    function fulfill(value) {
+      resume("next", value);
+    }
+    function reject(value) {
+      resume("throw", value);
+    }
+    function settle(f4, v5) {
+      if (f4(v5), q4.shift(), q4.length)
+        resume(q4[0][0], q4[0][1]);
+    }
+  }
+  function __asyncDelegator(o4) {
+    var i4, p4;
+    return i4 = {}, verb("next"), verb("throw", function(e4) {
+      throw e4;
+    }), verb("return"), i4[Symbol.iterator] = function() {
+      return this;
+    }, i4;
+    function verb(n4, f4) {
+      i4[n4] = o4[n4] ? function(v5) {
+        return (p4 = !p4) ? { value: __await(o4[n4](v5)), done: n4 === "return" } : f4 ? f4(v5) : v5;
+      } : f4;
+    }
+  }
+  function __asyncValues(o4) {
+    if (!Symbol.asyncIterator)
+      throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m4 = o4[Symbol.asyncIterator], i4;
+    return m4 ? m4.call(o4) : (o4 = typeof __values === "function" ? __values(o4) : o4[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
+      return this;
+    }, i4);
+    function verb(n4) {
+      i4[n4] = o4[n4] && function(v5) {
+        return new Promise(function(resolve, reject) {
+          v5 = o4[n4](v5), settle(resolve, reject, v5.done, v5.value);
+        });
+      };
+    }
+    function settle(resolve, reject, d4, v5) {
+      Promise.resolve(v5).then(function(v6) {
+        resolve({ value: v6, done: d4 });
+      }, reject);
+    }
+  }
+  function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) {
+      Object.defineProperty(cooked, "raw", { value: raw });
+    } else {
+      cooked.raw = raw;
+    }
+    return cooked;
+  }
+  function __importStar(mod) {
+    if (mod && mod.__esModule)
+      return mod;
+    var result = {};
+    if (mod != null) {
+      for (var k4 in mod)
+        if (Object.hasOwnProperty.call(mod, k4))
+          result[k4] = mod[k4];
+    }
+    result.default = mod;
+    return result;
+  }
+  function __importDefault(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  }
+  function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+      throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+  }
+  function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+      throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+  }
+  var extendStatics, __assign;
+  var init_tslib_es6 = __esm({
+    "node_modules/@aws-crypto/sha256-browser/node_modules/tslib/tslib.es6.js"() {
+      extendStatics = function(d4, b4) {
+        extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
+          d5.__proto__ = b5;
+        } || function(d5, b5) {
+          for (var p4 in b5)
+            if (b5.hasOwnProperty(p4))
+              d5[p4] = b5[p4];
+        };
+        return extendStatics(d4, b4);
+      };
+      __assign = function() {
+        __assign = Object.assign || function __assign5(t4) {
+          for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
+            s4 = arguments[i4];
+            for (var p4 in s4)
+              if (Object.prototype.hasOwnProperty.call(s4, p4))
+                t4[p4] = s4[p4];
+          }
+          return t4;
+        };
+        return __assign.apply(this, arguments);
+      };
+    }
+  });
+
+  // node_modules/@aws-crypto/sha256-browser/build/isEmptyData.js
+  var require_isEmptyData = __commonJS({
+    "node_modules/@aws-crypto/sha256-browser/build/isEmptyData.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.isEmptyData = void 0;
+      function isEmptyData(data) {
+        if (typeof data === "string") {
+          return data.length === 0;
+        }
+        return data.byteLength === 0;
+      }
+      exports.isEmptyData = isEmptyData;
+    }
+  });
+
+  // node_modules/@aws-crypto/sha256-browser/build/constants.js
+  var require_constants = __commonJS({
+    "node_modules/@aws-crypto/sha256-browser/build/constants.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.EMPTY_DATA_SHA_256 = exports.SHA_256_HMAC_ALGO = exports.SHA_256_HASH = void 0;
+      exports.SHA_256_HASH = { name: "SHA-256" };
+      exports.SHA_256_HMAC_ALGO = {
+        name: "HMAC",
+        hash: exports.SHA_256_HASH
+      };
+      exports.EMPTY_DATA_SHA_256 = new Uint8Array([
+        227,
+        176,
+        196,
+        66,
+        152,
+        252,
+        28,
+        20,
+        154,
+        251,
+        244,
+        200,
+        153,
+        111,
+        185,
+        36,
+        39,
+        174,
+        65,
+        228,
+        100,
+        155,
+        147,
+        76,
+        164,
+        149,
+        153,
+        27,
+        120,
+        82,
+        184,
+        85
+      ]);
+    }
+  });
+
+  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/pureJs.js
+  var require_pureJs = __commonJS({
+    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/pureJs.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.toUtf8 = exports.fromUtf8 = void 0;
+      var fromUtf82 = (input) => {
+        const bytes = [];
+        for (let i4 = 0, len = input.length; i4 < len; i4++) {
+          const value = input.charCodeAt(i4);
+          if (value < 128) {
+            bytes.push(value);
+          } else if (value < 2048) {
+            bytes.push(value >> 6 | 192, value & 63 | 128);
+          } else if (i4 + 1 < input.length && (value & 64512) === 55296 && (input.charCodeAt(i4 + 1) & 64512) === 56320) {
+            const surrogatePair = 65536 + ((value & 1023) << 10) + (input.charCodeAt(++i4) & 1023);
+            bytes.push(surrogatePair >> 18 | 240, surrogatePair >> 12 & 63 | 128, surrogatePair >> 6 & 63 | 128, surrogatePair & 63 | 128);
+          } else {
+            bytes.push(value >> 12 | 224, value >> 6 & 63 | 128, value & 63 | 128);
+          }
+        }
+        return Uint8Array.from(bytes);
+      };
+      exports.fromUtf8 = fromUtf82;
+      var toUtf82 = (input) => {
+        let decoded = "";
+        for (let i4 = 0, len = input.length; i4 < len; i4++) {
+          const byte = input[i4];
+          if (byte < 128) {
+            decoded += String.fromCharCode(byte);
+          } else if (192 <= byte && byte < 224) {
+            const nextByte = input[++i4];
+            decoded += String.fromCharCode((byte & 31) << 6 | nextByte & 63);
+          } else if (240 <= byte && byte < 365) {
+            const surrogatePair = [byte, input[++i4], input[++i4], input[++i4]];
+            const encoded = "%" + surrogatePair.map((byteValue) => byteValue.toString(16)).join("%");
+            decoded += decodeURIComponent(encoded);
+          } else {
+            decoded += String.fromCharCode((byte & 15) << 12 | (input[++i4] & 63) << 6 | input[++i4] & 63);
+          }
+        }
+        return decoded;
+      };
+      exports.toUtf8 = toUtf82;
+    }
+  });
+
+  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/whatwgEncodingApi.js
+  var require_whatwgEncodingApi = __commonJS({
+    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/whatwgEncodingApi.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.toUtf8 = exports.fromUtf8 = void 0;
+      function fromUtf82(input) {
+        return new TextEncoder().encode(input);
+      }
+      exports.fromUtf8 = fromUtf82;
+      function toUtf82(input) {
+        return new TextDecoder("utf-8").decode(input);
+      }
+      exports.toUtf8 = toUtf82;
+    }
+  });
+
+  // node_modules/@aws-sdk/util-utf8-browser/dist-cjs/index.js
+  var require_dist_cjs = __commonJS({
+    "node_modules/@aws-sdk/util-utf8-browser/dist-cjs/index.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.toUtf8 = exports.fromUtf8 = void 0;
+      var pureJs_1 = require_pureJs();
+      var whatwgEncodingApi_1 = require_whatwgEncodingApi();
+      var fromUtf82 = (input) => typeof TextEncoder === "function" ? (0, whatwgEncodingApi_1.fromUtf8)(input) : (0, pureJs_1.fromUtf8)(input);
+      exports.fromUtf8 = fromUtf82;
+      var toUtf82 = (input) => typeof TextDecoder === "function" ? (0, whatwgEncodingApi_1.toUtf8)(input) : (0, pureJs_1.toUtf8)(input);
+      exports.toUtf8 = toUtf82;
+    }
+  });
+
+  // node_modules/@aws-sdk/util-locate-window/dist-cjs/index.js
+  var require_dist_cjs2 = __commonJS({
+    "node_modules/@aws-sdk/util-locate-window/dist-cjs/index.js"(exports, module) {
+      var __defProp2 = Object.defineProperty;
+      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
+      var __getOwnPropNames2 = Object.getOwnPropertyNames;
+      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
+      var __name = (target, value) => __defProp2(target, "name", { value, configurable: true });
+      var __export2 = (target, all) => {
+        for (var name in all)
+          __defProp2(target, name, { get: all[name], enumerable: true });
+      };
+      var __copyProps2 = (to, from, except, desc) => {
+        if (from && typeof from === "object" || typeof from === "function") {
+          for (let key of __getOwnPropNames2(from))
+            if (!__hasOwnProp2.call(to, key) && key !== except)
+              __defProp2(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
+        }
+        return to;
+      };
+      var __toCommonJS2 = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
+      var src_exports = {};
+      __export2(src_exports, {
+        locateWindow: () => locateWindow
+      });
+      module.exports = __toCommonJS2(src_exports);
+      var fallbackWindow = {};
+      function locateWindow() {
+        if (typeof window !== "undefined") {
+          return window;
+        } else if (typeof self !== "undefined") {
+          return self;
+        }
+        return fallbackWindow;
+      }
+      __name(locateWindow, "locateWindow");
+    }
+  });
+
+  // node_modules/@aws-crypto/sha256-browser/build/ie11Sha256.js
+  var require_ie11Sha256 = __commonJS({
+    "node_modules/@aws-crypto/sha256-browser/build/ie11Sha256.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.Sha256 = void 0;
+      var isEmptyData_1 = require_isEmptyData();
+      var constants_1 = require_constants();
+      var util_utf8_browser_1 = require_dist_cjs();
+      var util_locate_window_1 = require_dist_cjs2();
+      var Sha2563 = (
+        /** @class */
+        function() {
+          function Sha2564(secret) {
+            this.secret = secret;
+            this.reset();
+          }
+          Sha2564.prototype.update = function(toHash) {
+            var _this = this;
+            if ((0, isEmptyData_1.isEmptyData)(toHash)) {
+              return;
+            }
+            this.operation = this.operation.then(function(operation) {
+              operation.onerror = function() {
+                _this.operation = Promise.reject(new Error("Error encountered updating hash"));
+              };
+              operation.process(toArrayBufferView(toHash));
+              return operation;
+            });
+            this.operation.catch(function() {
+            });
+          };
+          Sha2564.prototype.digest = function() {
+            return this.operation.then(function(operation) {
+              return new Promise(function(resolve, reject) {
+                operation.onerror = function() {
+                  reject(new Error("Error encountered finalizing hash"));
+                };
+                operation.oncomplete = function() {
+                  if (operation.result) {
+                    resolve(new Uint8Array(operation.result));
+                  }
+                  reject(new Error("Error encountered finalizing hash"));
+                };
+                operation.finish();
+              });
+            });
+          };
+          Sha2564.prototype.reset = function() {
+            if (this.secret) {
+              this.operation = getKeyPromise(this.secret).then(function(keyData) {
+                return (0, util_locate_window_1.locateWindow)().msCrypto.subtle.sign(constants_1.SHA_256_HMAC_ALGO, keyData);
+              });
+              this.operation.catch(function() {
+              });
+            } else {
+              this.operation = Promise.resolve((0, util_locate_window_1.locateWindow)().msCrypto.subtle.digest("SHA-256"));
+            }
+          };
+          return Sha2564;
+        }()
+      );
+      exports.Sha256 = Sha2563;
+      function getKeyPromise(secret) {
+        return new Promise(function(resolve, reject) {
+          var keyOperation = (0, util_locate_window_1.locateWindow)().msCrypto.subtle.importKey("raw", toArrayBufferView(secret), constants_1.SHA_256_HMAC_ALGO, false, ["sign"]);
+          keyOperation.oncomplete = function() {
+            if (keyOperation.result) {
+              resolve(keyOperation.result);
+            }
+            reject(new Error("ImportKey completed without importing key."));
+          };
+          keyOperation.onerror = function() {
+            reject(new Error("ImportKey failed to import key."));
+          };
+        });
+      }
+      function toArrayBufferView(data) {
+        if (typeof data === "string") {
+          return (0, util_utf8_browser_1.fromUtf8)(data);
+        }
+        if (ArrayBuffer.isView(data)) {
+          return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+        }
+        return new Uint8Array(data);
+      }
+    }
+  });
+
+  // node_modules/@aws-crypto/util/build/convertToBuffer.js
+  var require_convertToBuffer = __commonJS({
+    "node_modules/@aws-crypto/util/build/convertToBuffer.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.convertToBuffer = void 0;
+      var util_utf8_browser_1 = require_dist_cjs();
+      var fromUtf82 = typeof Buffer !== "undefined" && Buffer.from ? function(input) {
+        return Buffer.from(input, "utf8");
+      } : util_utf8_browser_1.fromUtf8;
+      function convertToBuffer(data) {
+        if (data instanceof Uint8Array)
+          return data;
+        if (typeof data === "string") {
+          return fromUtf82(data);
+        }
+        if (ArrayBuffer.isView(data)) {
+          return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+        }
+        return new Uint8Array(data);
+      }
+      exports.convertToBuffer = convertToBuffer;
+    }
+  });
+
+  // node_modules/@aws-crypto/util/build/isEmptyData.js
+  var require_isEmptyData2 = __commonJS({
+    "node_modules/@aws-crypto/util/build/isEmptyData.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.isEmptyData = void 0;
+      function isEmptyData(data) {
+        if (typeof data === "string") {
+          return data.length === 0;
+        }
+        return data.byteLength === 0;
+      }
+      exports.isEmptyData = isEmptyData;
+    }
+  });
+
+  // node_modules/@aws-crypto/util/build/numToUint8.js
+  var require_numToUint8 = __commonJS({
+    "node_modules/@aws-crypto/util/build/numToUint8.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.numToUint8 = void 0;
+      function numToUint8(num) {
+        return new Uint8Array([
+          (num & 4278190080) >> 24,
+          (num & 16711680) >> 16,
+          (num & 65280) >> 8,
+          num & 255
+        ]);
+      }
+      exports.numToUint8 = numToUint8;
+    }
+  });
+
+  // node_modules/@aws-crypto/util/build/uint32ArrayFrom.js
+  var require_uint32ArrayFrom = __commonJS({
+    "node_modules/@aws-crypto/util/build/uint32ArrayFrom.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.uint32ArrayFrom = void 0;
+      function uint32ArrayFrom(a_lookUpTable) {
+        if (!Uint32Array.from) {
+          var return_array = new Uint32Array(a_lookUpTable.length);
+          var a_index = 0;
+          while (a_index < a_lookUpTable.length) {
+            return_array[a_index] = a_lookUpTable[a_index];
+            a_index += 1;
+          }
+          return return_array;
+        }
+        return Uint32Array.from(a_lookUpTable);
+      }
+      exports.uint32ArrayFrom = uint32ArrayFrom;
+    }
+  });
+
+  // node_modules/@aws-crypto/util/build/index.js
+  var require_build = __commonJS({
+    "node_modules/@aws-crypto/util/build/index.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.uint32ArrayFrom = exports.numToUint8 = exports.isEmptyData = exports.convertToBuffer = void 0;
+      var convertToBuffer_1 = require_convertToBuffer();
+      Object.defineProperty(exports, "convertToBuffer", { enumerable: true, get: function() {
+        return convertToBuffer_1.convertToBuffer;
+      } });
+      var isEmptyData_1 = require_isEmptyData2();
+      Object.defineProperty(exports, "isEmptyData", { enumerable: true, get: function() {
+        return isEmptyData_1.isEmptyData;
+      } });
+      var numToUint8_1 = require_numToUint8();
+      Object.defineProperty(exports, "numToUint8", { enumerable: true, get: function() {
+        return numToUint8_1.numToUint8;
+      } });
+      var uint32ArrayFrom_1 = require_uint32ArrayFrom();
+      Object.defineProperty(exports, "uint32ArrayFrom", { enumerable: true, get: function() {
+        return uint32ArrayFrom_1.uint32ArrayFrom;
+      } });
+    }
+  });
+
+  // node_modules/@aws-crypto/sha256-browser/build/webCryptoSha256.js
+  var require_webCryptoSha256 = __commonJS({
+    "node_modules/@aws-crypto/sha256-browser/build/webCryptoSha256.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.Sha256 = void 0;
+      var util_1 = require_build();
+      var constants_1 = require_constants();
+      var util_locate_window_1 = require_dist_cjs2();
+      var Sha2563 = (
+        /** @class */
+        function() {
+          function Sha2564(secret) {
+            this.toHash = new Uint8Array(0);
+            this.secret = secret;
+            this.reset();
+          }
+          Sha2564.prototype.update = function(data) {
+            if ((0, util_1.isEmptyData)(data)) {
+              return;
+            }
+            var update = (0, util_1.convertToBuffer)(data);
+            var typedArray = new Uint8Array(this.toHash.byteLength + update.byteLength);
+            typedArray.set(this.toHash, 0);
+            typedArray.set(update, this.toHash.byteLength);
+            this.toHash = typedArray;
+          };
+          Sha2564.prototype.digest = function() {
+            var _this = this;
+            if (this.key) {
+              return this.key.then(function(key) {
+                return (0, util_locate_window_1.locateWindow)().crypto.subtle.sign(constants_1.SHA_256_HMAC_ALGO, key, _this.toHash).then(function(data) {
+                  return new Uint8Array(data);
+                });
+              });
+            }
+            if ((0, util_1.isEmptyData)(this.toHash)) {
+              return Promise.resolve(constants_1.EMPTY_DATA_SHA_256);
+            }
+            return Promise.resolve().then(function() {
+              return (0, util_locate_window_1.locateWindow)().crypto.subtle.digest(constants_1.SHA_256_HASH, _this.toHash);
+            }).then(function(data) {
+              return Promise.resolve(new Uint8Array(data));
+            });
+          };
+          Sha2564.prototype.reset = function() {
+            var _this = this;
+            this.toHash = new Uint8Array(0);
+            if (this.secret && this.secret !== void 0) {
+              this.key = new Promise(function(resolve, reject) {
+                (0, util_locate_window_1.locateWindow)().crypto.subtle.importKey("raw", (0, util_1.convertToBuffer)(_this.secret), constants_1.SHA_256_HMAC_ALGO, false, ["sign"]).then(resolve, reject);
+              });
+              this.key.catch(function() {
+              });
+            }
+          };
+          return Sha2564;
+        }()
+      );
+      exports.Sha256 = Sha2563;
+    }
+  });
+
+  // node_modules/@aws-crypto/sha256-js/node_modules/tslib/tslib.es6.js
   var tslib_es6_exports2 = {};
   __export(tslib_es6_exports2, {
     __assign: () => __assign2,
@@ -9830,7 +9564,7 @@ ${toHex(hashedRequest)}`;
   }
   var extendStatics2, __assign2;
   var init_tslib_es62 = __esm({
-    "node_modules/@aws-crypto/sha256-browser/node_modules/tslib/tslib.es6.js"() {
+    "node_modules/@aws-crypto/sha256-js/node_modules/tslib/tslib.es6.js"() {
       extendStatics2 = function(d4, b4) {
         extendStatics2 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
           d5.__proto__ = b5;
@@ -9842,7 +9576,7 @@ ${toHex(hashedRequest)}`;
         return extendStatics2(d4, b4);
       };
       __assign2 = function() {
-        __assign2 = Object.assign || function __assign6(t4) {
+        __assign2 = Object.assign || function __assign5(t4) {
           for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
             s4 = arguments[i4];
             for (var p4 in s4)
@@ -9856,262 +9590,295 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/@aws-crypto/sha256-browser/build/isEmptyData.js
-  var require_isEmptyData2 = __commonJS({
-    "node_modules/@aws-crypto/sha256-browser/build/isEmptyData.js"(exports) {
+  // node_modules/@aws-crypto/sha256-js/build/constants.js
+  var require_constants2 = __commonJS({
+    "node_modules/@aws-crypto/sha256-js/build/constants.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.isEmptyData = void 0;
-      function isEmptyData(data) {
-        if (typeof data === "string") {
-          return data.length === 0;
-        }
-        return data.byteLength === 0;
-      }
-      exports.isEmptyData = isEmptyData;
-    }
-  });
-
-  // node_modules/@aws-crypto/sha256-browser/build/constants.js
-  var require_constants = __commonJS({
-    "node_modules/@aws-crypto/sha256-browser/build/constants.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.EMPTY_DATA_SHA_256 = exports.SHA_256_HMAC_ALGO = exports.SHA_256_HASH = void 0;
-      exports.SHA_256_HASH = { name: "SHA-256" };
-      exports.SHA_256_HMAC_ALGO = {
-        name: "HMAC",
-        hash: exports.SHA_256_HASH
-      };
-      exports.EMPTY_DATA_SHA_256 = new Uint8Array([
-        227,
-        176,
-        196,
-        66,
-        152,
-        252,
-        28,
-        20,
-        154,
-        251,
-        244,
-        200,
-        153,
-        111,
-        185,
-        36,
-        39,
-        174,
-        65,
-        228,
-        100,
-        155,
-        147,
-        76,
-        164,
-        149,
-        153,
-        27,
-        120,
-        82,
-        184,
-        85
+      exports.MAX_HASHABLE_LENGTH = exports.INIT = exports.KEY = exports.DIGEST_LENGTH = exports.BLOCK_SIZE = void 0;
+      exports.BLOCK_SIZE = 64;
+      exports.DIGEST_LENGTH = 32;
+      exports.KEY = new Uint32Array([
+        1116352408,
+        1899447441,
+        3049323471,
+        3921009573,
+        961987163,
+        1508970993,
+        2453635748,
+        2870763221,
+        3624381080,
+        310598401,
+        607225278,
+        1426881987,
+        1925078388,
+        2162078206,
+        2614888103,
+        3248222580,
+        3835390401,
+        4022224774,
+        264347078,
+        604807628,
+        770255983,
+        1249150122,
+        1555081692,
+        1996064986,
+        2554220882,
+        2821834349,
+        2952996808,
+        3210313671,
+        3336571891,
+        3584528711,
+        113926993,
+        338241895,
+        666307205,
+        773529912,
+        1294757372,
+        1396182291,
+        1695183700,
+        1986661051,
+        2177026350,
+        2456956037,
+        2730485921,
+        2820302411,
+        3259730800,
+        3345764771,
+        3516065817,
+        3600352804,
+        4094571909,
+        275423344,
+        430227734,
+        506948616,
+        659060556,
+        883997877,
+        958139571,
+        1322822218,
+        1537002063,
+        1747873779,
+        1955562222,
+        2024104815,
+        2227730452,
+        2361852424,
+        2428436474,
+        2756734187,
+        3204031479,
+        3329325298
       ]);
+      exports.INIT = [
+        1779033703,
+        3144134277,
+        1013904242,
+        2773480762,
+        1359893119,
+        2600822924,
+        528734635,
+        1541459225
+      ];
+      exports.MAX_HASHABLE_LENGTH = Math.pow(2, 53) - 1;
     }
   });
 
-  // node_modules/@aws-sdk/util-locate-window/dist-cjs/index.js
-  var require_dist_cjs2 = __commonJS({
-    "node_modules/@aws-sdk/util-locate-window/dist-cjs/index.js"(exports, module) {
-      var __defProp2 = Object.defineProperty;
-      var __getOwnPropDesc2 = Object.getOwnPropertyDescriptor;
-      var __getOwnPropNames2 = Object.getOwnPropertyNames;
-      var __hasOwnProp2 = Object.prototype.hasOwnProperty;
-      var __name = (target, value) => __defProp2(target, "name", { value, configurable: true });
-      var __export2 = (target, all) => {
-        for (var name in all)
-          __defProp2(target, name, { get: all[name], enumerable: true });
-      };
-      var __copyProps2 = (to, from, except, desc) => {
-        if (from && typeof from === "object" || typeof from === "function") {
-          for (let key of __getOwnPropNames2(from))
-            if (!__hasOwnProp2.call(to, key) && key !== except)
-              __defProp2(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc2(from, key)) || desc.enumerable });
-        }
-        return to;
-      };
-      var __toCommonJS2 = (mod) => __copyProps2(__defProp2({}, "__esModule", { value: true }), mod);
-      var src_exports = {};
-      __export2(src_exports, {
-        locateWindow: () => locateWindow
-      });
-      module.exports = __toCommonJS2(src_exports);
-      var fallbackWindow = {};
-      function locateWindow() {
-        if (typeof window !== "undefined") {
-          return window;
-        } else if (typeof self !== "undefined") {
-          return self;
-        }
-        return fallbackWindow;
-      }
-      __name(locateWindow, "locateWindow");
+  // node_modules/@aws-crypto/sha256-js/build/RawSha256.js
+  var require_RawSha256 = __commonJS({
+    "node_modules/@aws-crypto/sha256-js/build/RawSha256.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", { value: true });
+      exports.RawSha256 = void 0;
+      var constants_1 = require_constants2();
+      var RawSha256 = (
+        /** @class */
+        function() {
+          function RawSha2562() {
+            this.state = Int32Array.from(constants_1.INIT);
+            this.temp = new Int32Array(64);
+            this.buffer = new Uint8Array(64);
+            this.bufferLength = 0;
+            this.bytesHashed = 0;
+            this.finished = false;
+          }
+          RawSha2562.prototype.update = function(data) {
+            if (this.finished) {
+              throw new Error("Attempted to update an already finished hash.");
+            }
+            var position = 0;
+            var byteLength = data.byteLength;
+            this.bytesHashed += byteLength;
+            if (this.bytesHashed * 8 > constants_1.MAX_HASHABLE_LENGTH) {
+              throw new Error("Cannot hash more than 2^53 - 1 bits");
+            }
+            while (byteLength > 0) {
+              this.buffer[this.bufferLength++] = data[position++];
+              byteLength--;
+              if (this.bufferLength === constants_1.BLOCK_SIZE) {
+                this.hashBuffer();
+                this.bufferLength = 0;
+              }
+            }
+          };
+          RawSha2562.prototype.digest = function() {
+            if (!this.finished) {
+              var bitsHashed = this.bytesHashed * 8;
+              var bufferView = new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength);
+              var undecoratedLength = this.bufferLength;
+              bufferView.setUint8(this.bufferLength++, 128);
+              if (undecoratedLength % constants_1.BLOCK_SIZE >= constants_1.BLOCK_SIZE - 8) {
+                for (var i4 = this.bufferLength; i4 < constants_1.BLOCK_SIZE; i4++) {
+                  bufferView.setUint8(i4, 0);
+                }
+                this.hashBuffer();
+                this.bufferLength = 0;
+              }
+              for (var i4 = this.bufferLength; i4 < constants_1.BLOCK_SIZE - 8; i4++) {
+                bufferView.setUint8(i4, 0);
+              }
+              bufferView.setUint32(constants_1.BLOCK_SIZE - 8, Math.floor(bitsHashed / 4294967296), true);
+              bufferView.setUint32(constants_1.BLOCK_SIZE - 4, bitsHashed);
+              this.hashBuffer();
+              this.finished = true;
+            }
+            var out = new Uint8Array(constants_1.DIGEST_LENGTH);
+            for (var i4 = 0; i4 < 8; i4++) {
+              out[i4 * 4] = this.state[i4] >>> 24 & 255;
+              out[i4 * 4 + 1] = this.state[i4] >>> 16 & 255;
+              out[i4 * 4 + 2] = this.state[i4] >>> 8 & 255;
+              out[i4 * 4 + 3] = this.state[i4] >>> 0 & 255;
+            }
+            return out;
+          };
+          RawSha2562.prototype.hashBuffer = function() {
+            var _a = this, buffer = _a.buffer, state = _a.state;
+            var state0 = state[0], state1 = state[1], state2 = state[2], state3 = state[3], state4 = state[4], state5 = state[5], state6 = state[6], state7 = state[7];
+            for (var i4 = 0; i4 < constants_1.BLOCK_SIZE; i4++) {
+              if (i4 < 16) {
+                this.temp[i4] = (buffer[i4 * 4] & 255) << 24 | (buffer[i4 * 4 + 1] & 255) << 16 | (buffer[i4 * 4 + 2] & 255) << 8 | buffer[i4 * 4 + 3] & 255;
+              } else {
+                var u4 = this.temp[i4 - 2];
+                var t1_1 = (u4 >>> 17 | u4 << 15) ^ (u4 >>> 19 | u4 << 13) ^ u4 >>> 10;
+                u4 = this.temp[i4 - 15];
+                var t2_1 = (u4 >>> 7 | u4 << 25) ^ (u4 >>> 18 | u4 << 14) ^ u4 >>> 3;
+                this.temp[i4] = (t1_1 + this.temp[i4 - 7] | 0) + (t2_1 + this.temp[i4 - 16] | 0);
+              }
+              var t1 = (((state4 >>> 6 | state4 << 26) ^ (state4 >>> 11 | state4 << 21) ^ (state4 >>> 25 | state4 << 7)) + (state4 & state5 ^ ~state4 & state6) | 0) + (state7 + (constants_1.KEY[i4] + this.temp[i4] | 0) | 0) | 0;
+              var t22 = ((state0 >>> 2 | state0 << 30) ^ (state0 >>> 13 | state0 << 19) ^ (state0 >>> 22 | state0 << 10)) + (state0 & state1 ^ state0 & state2 ^ state1 & state2) | 0;
+              state7 = state6;
+              state6 = state5;
+              state5 = state4;
+              state4 = state3 + t1 | 0;
+              state3 = state2;
+              state2 = state1;
+              state1 = state0;
+              state0 = t1 + t22 | 0;
+            }
+            state[0] += state0;
+            state[1] += state1;
+            state[2] += state2;
+            state[3] += state3;
+            state[4] += state4;
+            state[5] += state5;
+            state[6] += state6;
+            state[7] += state7;
+          };
+          return RawSha2562;
+        }()
+      );
+      exports.RawSha256 = RawSha256;
     }
   });
 
-  // node_modules/@aws-crypto/sha256-browser/build/ie11Sha256.js
-  var require_ie11Sha256 = __commonJS({
-    "node_modules/@aws-crypto/sha256-browser/build/ie11Sha256.js"(exports) {
+  // node_modules/@aws-crypto/sha256-js/build/jsSha256.js
+  var require_jsSha256 = __commonJS({
+    "node_modules/@aws-crypto/sha256-js/build/jsSha256.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.Sha256 = void 0;
-      var isEmptyData_1 = require_isEmptyData2();
-      var constants_1 = require_constants();
-      var util_utf8_browser_1 = require_dist_cjs();
-      var util_locate_window_1 = require_dist_cjs2();
+      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
+      var constants_1 = require_constants2();
+      var RawSha256_1 = require_RawSha256();
+      var util_1 = require_build();
       var Sha2563 = (
         /** @class */
         function() {
           function Sha2564(secret) {
             this.secret = secret;
+            this.hash = new RawSha256_1.RawSha256();
             this.reset();
           }
           Sha2564.prototype.update = function(toHash) {
-            var _this = this;
-            if ((0, isEmptyData_1.isEmptyData)(toHash)) {
+            if ((0, util_1.isEmptyData)(toHash) || this.error) {
               return;
             }
-            this.operation = this.operation.then(function(operation) {
-              operation.onerror = function() {
-                _this.operation = Promise.reject(new Error("Error encountered updating hash"));
-              };
-              operation.process(toArrayBufferView(toHash));
-              return operation;
-            });
-            this.operation.catch(function() {
-            });
+            try {
+              this.hash.update((0, util_1.convertToBuffer)(toHash));
+            } catch (e4) {
+              this.error = e4;
+            }
+          };
+          Sha2564.prototype.digestSync = function() {
+            if (this.error) {
+              throw this.error;
+            }
+            if (this.outer) {
+              if (!this.outer.finished) {
+                this.outer.update(this.hash.digest());
+              }
+              return this.outer.digest();
+            }
+            return this.hash.digest();
           };
           Sha2564.prototype.digest = function() {
-            return this.operation.then(function(operation) {
-              return new Promise(function(resolve, reject) {
-                operation.onerror = function() {
-                  reject(new Error("Error encountered finalizing hash"));
-                };
-                operation.oncomplete = function() {
-                  if (operation.result) {
-                    resolve(new Uint8Array(operation.result));
-                  }
-                  reject(new Error("Error encountered finalizing hash"));
-                };
-                operation.finish();
+            return tslib_1.__awaiter(this, void 0, void 0, function() {
+              return tslib_1.__generator(this, function(_a) {
+                return [2, this.digestSync()];
               });
             });
           };
           Sha2564.prototype.reset = function() {
+            this.hash = new RawSha256_1.RawSha256();
             if (this.secret) {
-              this.operation = getKeyPromise(this.secret).then(function(keyData) {
-                return (0, util_locate_window_1.locateWindow)().msCrypto.subtle.sign(constants_1.SHA_256_HMAC_ALGO, keyData);
-              });
-              this.operation.catch(function() {
-              });
-            } else {
-              this.operation = Promise.resolve((0, util_locate_window_1.locateWindow)().msCrypto.subtle.digest("SHA-256"));
+              this.outer = new RawSha256_1.RawSha256();
+              var inner = bufferFromSecret(this.secret);
+              var outer = new Uint8Array(constants_1.BLOCK_SIZE);
+              outer.set(inner);
+              for (var i4 = 0; i4 < constants_1.BLOCK_SIZE; i4++) {
+                inner[i4] ^= 54;
+                outer[i4] ^= 92;
+              }
+              this.hash.update(inner);
+              this.outer.update(outer);
+              for (var i4 = 0; i4 < inner.byteLength; i4++) {
+                inner[i4] = 0;
+              }
             }
           };
           return Sha2564;
         }()
       );
       exports.Sha256 = Sha2563;
-      function getKeyPromise(secret) {
-        return new Promise(function(resolve, reject) {
-          var keyOperation = (0, util_locate_window_1.locateWindow)().msCrypto.subtle.importKey("raw", toArrayBufferView(secret), constants_1.SHA_256_HMAC_ALGO, false, ["sign"]);
-          keyOperation.oncomplete = function() {
-            if (keyOperation.result) {
-              resolve(keyOperation.result);
-            }
-            reject(new Error("ImportKey completed without importing key."));
-          };
-          keyOperation.onerror = function() {
-            reject(new Error("ImportKey failed to import key."));
-          };
-        });
-      }
-      function toArrayBufferView(data) {
-        if (typeof data === "string") {
-          return (0, util_utf8_browser_1.fromUtf8)(data);
+      function bufferFromSecret(secret) {
+        var input = (0, util_1.convertToBuffer)(secret);
+        if (input.byteLength > constants_1.BLOCK_SIZE) {
+          var bufferHash = new RawSha256_1.RawSha256();
+          bufferHash.update(input);
+          input = bufferHash.digest();
         }
-        if (ArrayBuffer.isView(data)) {
-          return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-        }
-        return new Uint8Array(data);
+        var buffer = new Uint8Array(constants_1.BLOCK_SIZE);
+        buffer.set(input);
+        return buffer;
       }
     }
   });
 
-  // node_modules/@aws-crypto/sha256-browser/build/webCryptoSha256.js
-  var require_webCryptoSha256 = __commonJS({
-    "node_modules/@aws-crypto/sha256-browser/build/webCryptoSha256.js"(exports) {
+  // node_modules/@aws-crypto/sha256-js/build/index.js
+  var require_build2 = __commonJS({
+    "node_modules/@aws-crypto/sha256-js/build/index.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.Sha256 = void 0;
-      var util_1 = require_build();
-      var constants_1 = require_constants();
-      var util_locate_window_1 = require_dist_cjs2();
-      var Sha2563 = (
-        /** @class */
-        function() {
-          function Sha2564(secret) {
-            this.toHash = new Uint8Array(0);
-            this.secret = secret;
-            this.reset();
-          }
-          Sha2564.prototype.update = function(data) {
-            if ((0, util_1.isEmptyData)(data)) {
-              return;
-            }
-            var update = (0, util_1.convertToBuffer)(data);
-            var typedArray = new Uint8Array(this.toHash.byteLength + update.byteLength);
-            typedArray.set(this.toHash, 0);
-            typedArray.set(update, this.toHash.byteLength);
-            this.toHash = typedArray;
-          };
-          Sha2564.prototype.digest = function() {
-            var _this = this;
-            if (this.key) {
-              return this.key.then(function(key) {
-                return (0, util_locate_window_1.locateWindow)().crypto.subtle.sign(constants_1.SHA_256_HMAC_ALGO, key, _this.toHash).then(function(data) {
-                  return new Uint8Array(data);
-                });
-              });
-            }
-            if ((0, util_1.isEmptyData)(this.toHash)) {
-              return Promise.resolve(constants_1.EMPTY_DATA_SHA_256);
-            }
-            return Promise.resolve().then(function() {
-              return (0, util_locate_window_1.locateWindow)().crypto.subtle.digest(constants_1.SHA_256_HASH, _this.toHash);
-            }).then(function(data) {
-              return Promise.resolve(new Uint8Array(data));
-            });
-          };
-          Sha2564.prototype.reset = function() {
-            var _this = this;
-            this.toHash = new Uint8Array(0);
-            if (this.secret && this.secret !== void 0) {
-              this.key = new Promise(function(resolve, reject) {
-                (0, util_locate_window_1.locateWindow)().crypto.subtle.importKey("raw", (0, util_1.convertToBuffer)(_this.secret), constants_1.SHA_256_HMAC_ALGO, false, ["sign"]).then(resolve, reject);
-              });
-              this.key.catch(function() {
-              });
-            }
-          };
-          return Sha2564;
-        }()
-      );
-      exports.Sha256 = Sha2563;
+      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
+      tslib_1.__exportStar(require_jsSha256(), exports);
     }
   });
 
-  // node_modules/@aws-crypto/sha256-js/node_modules/tslib/tslib.es6.js
+  // node_modules/@aws-crypto/supports-web-crypto/node_modules/tslib/tslib.es6.js
   var tslib_es6_exports3 = {};
   __export(tslib_es6_exports3, {
     __assign: () => __assign3,
@@ -10447,7 +10214,7 @@ ${toHex(hashedRequest)}`;
   }
   var extendStatics3, __assign3;
   var init_tslib_es63 = __esm({
-    "node_modules/@aws-crypto/sha256-js/node_modules/tslib/tslib.es6.js"() {
+    "node_modules/@aws-crypto/supports-web-crypto/node_modules/tslib/tslib.es6.js"() {
       extendStatics3 = function(d4, b4) {
         extendStatics3 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
           d5.__proto__ = b5;
@@ -10459,7 +10226,7 @@ ${toHex(hashedRequest)}`;
         return extendStatics3(d4, b4);
       };
       __assign3 = function() {
-        __assign3 = Object.assign || function __assign6(t4) {
+        __assign3 = Object.assign || function __assign5(t4) {
           for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
             s4 = arguments[i4];
             for (var p4 in s4)
@@ -10473,295 +10240,95 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/@aws-crypto/sha256-js/build/constants.js
-  var require_constants2 = __commonJS({
-    "node_modules/@aws-crypto/sha256-js/build/constants.js"(exports) {
+  // node_modules/@aws-crypto/supports-web-crypto/build/supportsWebCrypto.js
+  var require_supportsWebCrypto = __commonJS({
+    "node_modules/@aws-crypto/supports-web-crypto/build/supportsWebCrypto.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      exports.MAX_HASHABLE_LENGTH = exports.INIT = exports.KEY = exports.DIGEST_LENGTH = exports.BLOCK_SIZE = void 0;
-      exports.BLOCK_SIZE = 64;
-      exports.DIGEST_LENGTH = 32;
-      exports.KEY = new Uint32Array([
-        1116352408,
-        1899447441,
-        3049323471,
-        3921009573,
-        961987163,
-        1508970993,
-        2453635748,
-        2870763221,
-        3624381080,
-        310598401,
-        607225278,
-        1426881987,
-        1925078388,
-        2162078206,
-        2614888103,
-        3248222580,
-        3835390401,
-        4022224774,
-        264347078,
-        604807628,
-        770255983,
-        1249150122,
-        1555081692,
-        1996064986,
-        2554220882,
-        2821834349,
-        2952996808,
-        3210313671,
-        3336571891,
-        3584528711,
-        113926993,
-        338241895,
-        666307205,
-        773529912,
-        1294757372,
-        1396182291,
-        1695183700,
-        1986661051,
-        2177026350,
-        2456956037,
-        2730485921,
-        2820302411,
-        3259730800,
-        3345764771,
-        3516065817,
-        3600352804,
-        4094571909,
-        275423344,
-        430227734,
-        506948616,
-        659060556,
-        883997877,
-        958139571,
-        1322822218,
-        1537002063,
-        1747873779,
-        1955562222,
-        2024104815,
-        2227730452,
-        2361852424,
-        2428436474,
-        2756734187,
-        3204031479,
-        3329325298
-      ]);
-      exports.INIT = [
-        1779033703,
-        3144134277,
-        1013904242,
-        2773480762,
-        1359893119,
-        2600822924,
-        528734635,
-        1541459225
+      exports.supportsZeroByteGCM = exports.supportsSubtleCrypto = exports.supportsSecureRandom = exports.supportsWebCrypto = void 0;
+      var tslib_1 = (init_tslib_es63(), __toCommonJS(tslib_es6_exports3));
+      var subtleCryptoMethods = [
+        "decrypt",
+        "digest",
+        "encrypt",
+        "exportKey",
+        "generateKey",
+        "importKey",
+        "sign",
+        "verify"
       ];
-      exports.MAX_HASHABLE_LENGTH = Math.pow(2, 53) - 1;
-    }
-  });
-
-  // node_modules/@aws-crypto/sha256-js/build/RawSha256.js
-  var require_RawSha256 = __commonJS({
-    "node_modules/@aws-crypto/sha256-js/build/RawSha256.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.RawSha256 = void 0;
-      var constants_1 = require_constants2();
-      var RawSha256 = (
-        /** @class */
-        function() {
-          function RawSha2562() {
-            this.state = Int32Array.from(constants_1.INIT);
-            this.temp = new Int32Array(64);
-            this.buffer = new Uint8Array(64);
-            this.bufferLength = 0;
-            this.bytesHashed = 0;
-            this.finished = false;
-          }
-          RawSha2562.prototype.update = function(data) {
-            if (this.finished) {
-              throw new Error("Attempted to update an already finished hash.");
-            }
-            var position = 0;
-            var byteLength = data.byteLength;
-            this.bytesHashed += byteLength;
-            if (this.bytesHashed * 8 > constants_1.MAX_HASHABLE_LENGTH) {
-              throw new Error("Cannot hash more than 2^53 - 1 bits");
-            }
-            while (byteLength > 0) {
-              this.buffer[this.bufferLength++] = data[position++];
-              byteLength--;
-              if (this.bufferLength === constants_1.BLOCK_SIZE) {
-                this.hashBuffer();
-                this.bufferLength = 0;
-              }
-            }
-          };
-          RawSha2562.prototype.digest = function() {
-            if (!this.finished) {
-              var bitsHashed = this.bytesHashed * 8;
-              var bufferView = new DataView(this.buffer.buffer, this.buffer.byteOffset, this.buffer.byteLength);
-              var undecoratedLength = this.bufferLength;
-              bufferView.setUint8(this.bufferLength++, 128);
-              if (undecoratedLength % constants_1.BLOCK_SIZE >= constants_1.BLOCK_SIZE - 8) {
-                for (var i4 = this.bufferLength; i4 < constants_1.BLOCK_SIZE; i4++) {
-                  bufferView.setUint8(i4, 0);
-                }
-                this.hashBuffer();
-                this.bufferLength = 0;
-              }
-              for (var i4 = this.bufferLength; i4 < constants_1.BLOCK_SIZE - 8; i4++) {
-                bufferView.setUint8(i4, 0);
-              }
-              bufferView.setUint32(constants_1.BLOCK_SIZE - 8, Math.floor(bitsHashed / 4294967296), true);
-              bufferView.setUint32(constants_1.BLOCK_SIZE - 4, bitsHashed);
-              this.hashBuffer();
-              this.finished = true;
-            }
-            var out = new Uint8Array(constants_1.DIGEST_LENGTH);
-            for (var i4 = 0; i4 < 8; i4++) {
-              out[i4 * 4] = this.state[i4] >>> 24 & 255;
-              out[i4 * 4 + 1] = this.state[i4] >>> 16 & 255;
-              out[i4 * 4 + 2] = this.state[i4] >>> 8 & 255;
-              out[i4 * 4 + 3] = this.state[i4] >>> 0 & 255;
-            }
-            return out;
-          };
-          RawSha2562.prototype.hashBuffer = function() {
-            var _a = this, buffer = _a.buffer, state = _a.state;
-            var state0 = state[0], state1 = state[1], state2 = state[2], state3 = state[3], state4 = state[4], state5 = state[5], state6 = state[6], state7 = state[7];
-            for (var i4 = 0; i4 < constants_1.BLOCK_SIZE; i4++) {
-              if (i4 < 16) {
-                this.temp[i4] = (buffer[i4 * 4] & 255) << 24 | (buffer[i4 * 4 + 1] & 255) << 16 | (buffer[i4 * 4 + 2] & 255) << 8 | buffer[i4 * 4 + 3] & 255;
-              } else {
-                var u4 = this.temp[i4 - 2];
-                var t1_1 = (u4 >>> 17 | u4 << 15) ^ (u4 >>> 19 | u4 << 13) ^ u4 >>> 10;
-                u4 = this.temp[i4 - 15];
-                var t2_1 = (u4 >>> 7 | u4 << 25) ^ (u4 >>> 18 | u4 << 14) ^ u4 >>> 3;
-                this.temp[i4] = (t1_1 + this.temp[i4 - 7] | 0) + (t2_1 + this.temp[i4 - 16] | 0);
-              }
-              var t1 = (((state4 >>> 6 | state4 << 26) ^ (state4 >>> 11 | state4 << 21) ^ (state4 >>> 25 | state4 << 7)) + (state4 & state5 ^ ~state4 & state6) | 0) + (state7 + (constants_1.KEY[i4] + this.temp[i4] | 0) | 0) | 0;
-              var t22 = ((state0 >>> 2 | state0 << 30) ^ (state0 >>> 13 | state0 << 19) ^ (state0 >>> 22 | state0 << 10)) + (state0 & state1 ^ state0 & state2 ^ state1 & state2) | 0;
-              state7 = state6;
-              state6 = state5;
-              state5 = state4;
-              state4 = state3 + t1 | 0;
-              state3 = state2;
-              state2 = state1;
-              state1 = state0;
-              state0 = t1 + t22 | 0;
-            }
-            state[0] += state0;
-            state[1] += state1;
-            state[2] += state2;
-            state[3] += state3;
-            state[4] += state4;
-            state[5] += state5;
-            state[6] += state6;
-            state[7] += state7;
-          };
-          return RawSha2562;
-        }()
-      );
-      exports.RawSha256 = RawSha256;
-    }
-  });
-
-  // node_modules/@aws-crypto/sha256-js/build/jsSha256.js
-  var require_jsSha256 = __commonJS({
-    "node_modules/@aws-crypto/sha256-js/build/jsSha256.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.Sha256 = void 0;
-      var tslib_1 = (init_tslib_es63(), __toCommonJS(tslib_es6_exports3));
-      var constants_1 = require_constants2();
-      var RawSha256_1 = require_RawSha256();
-      var util_1 = require_build();
-      var Sha2563 = (
-        /** @class */
-        function() {
-          function Sha2564(secret) {
-            this.secret = secret;
-            this.hash = new RawSha256_1.RawSha256();
-            this.reset();
-          }
-          Sha2564.prototype.update = function(toHash) {
-            if ((0, util_1.isEmptyData)(toHash) || this.error) {
-              return;
-            }
-            try {
-              this.hash.update((0, util_1.convertToBuffer)(toHash));
-            } catch (e4) {
-              this.error = e4;
-            }
-          };
-          Sha2564.prototype.digestSync = function() {
-            if (this.error) {
-              throw this.error;
-            }
-            if (this.outer) {
-              if (!this.outer.finished) {
-                this.outer.update(this.hash.digest());
-              }
-              return this.outer.digest();
-            }
-            return this.hash.digest();
-          };
-          Sha2564.prototype.digest = function() {
-            return tslib_1.__awaiter(this, void 0, void 0, function() {
-              return tslib_1.__generator(this, function(_a) {
-                return [2, this.digestSync()];
-              });
-            });
-          };
-          Sha2564.prototype.reset = function() {
-            this.hash = new RawSha256_1.RawSha256();
-            if (this.secret) {
-              this.outer = new RawSha256_1.RawSha256();
-              var inner = bufferFromSecret(this.secret);
-              var outer = new Uint8Array(constants_1.BLOCK_SIZE);
-              outer.set(inner);
-              for (var i4 = 0; i4 < constants_1.BLOCK_SIZE; i4++) {
-                inner[i4] ^= 54;
-                outer[i4] ^= 92;
-              }
-              this.hash.update(inner);
-              this.outer.update(outer);
-              for (var i4 = 0; i4 < inner.byteLength; i4++) {
-                inner[i4] = 0;
-              }
-            }
-          };
-          return Sha2564;
-        }()
-      );
-      exports.Sha256 = Sha2563;
-      function bufferFromSecret(secret) {
-        var input = (0, util_1.convertToBuffer)(secret);
-        if (input.byteLength > constants_1.BLOCK_SIZE) {
-          var bufferHash = new RawSha256_1.RawSha256();
-          bufferHash.update(input);
-          input = bufferHash.digest();
+      function supportsWebCrypto(window2) {
+        if (supportsSecureRandom(window2) && typeof window2.crypto.subtle === "object") {
+          var subtle = window2.crypto.subtle;
+          return supportsSubtleCrypto(subtle);
         }
-        var buffer = new Uint8Array(constants_1.BLOCK_SIZE);
-        buffer.set(input);
-        return buffer;
+        return false;
       }
+      exports.supportsWebCrypto = supportsWebCrypto;
+      function supportsSecureRandom(window2) {
+        if (typeof window2 === "object" && typeof window2.crypto === "object") {
+          var getRandomValues2 = window2.crypto.getRandomValues;
+          return typeof getRandomValues2 === "function";
+        }
+        return false;
+      }
+      exports.supportsSecureRandom = supportsSecureRandom;
+      function supportsSubtleCrypto(subtle) {
+        return subtle && subtleCryptoMethods.every(function(methodName) {
+          return typeof subtle[methodName] === "function";
+        });
+      }
+      exports.supportsSubtleCrypto = supportsSubtleCrypto;
+      function supportsZeroByteGCM(subtle) {
+        return tslib_1.__awaiter(this, void 0, void 0, function() {
+          var key, zeroByteAuthTag, _a;
+          return tslib_1.__generator(this, function(_b) {
+            switch (_b.label) {
+              case 0:
+                if (!supportsSubtleCrypto(subtle))
+                  return [2, false];
+                _b.label = 1;
+              case 1:
+                _b.trys.push([1, 4, , 5]);
+                return [4, subtle.generateKey({ name: "AES-GCM", length: 128 }, false, ["encrypt"])];
+              case 2:
+                key = _b.sent();
+                return [4, subtle.encrypt({
+                  name: "AES-GCM",
+                  iv: new Uint8Array(Array(12)),
+                  additionalData: new Uint8Array(Array(16)),
+                  tagLength: 128
+                }, key, new Uint8Array(0))];
+              case 3:
+                zeroByteAuthTag = _b.sent();
+                return [2, zeroByteAuthTag.byteLength === 16];
+              case 4:
+                _a = _b.sent();
+                return [2, false];
+              case 5:
+                return [
+                  2
+                  /*return*/
+                ];
+            }
+          });
+        });
+      }
+      exports.supportsZeroByteGCM = supportsZeroByteGCM;
     }
   });
 
-  // node_modules/@aws-crypto/sha256-js/build/index.js
+  // node_modules/@aws-crypto/supports-web-crypto/build/index.js
   var require_build3 = __commonJS({
-    "node_modules/@aws-crypto/sha256-js/build/index.js"(exports) {
+    "node_modules/@aws-crypto/supports-web-crypto/build/index.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       var tslib_1 = (init_tslib_es63(), __toCommonJS(tslib_es6_exports3));
-      tslib_1.__exportStar(require_jsSha256(), exports);
+      tslib_1.__exportStar(require_supportsWebCrypto(), exports);
     }
   });
 
-  // node_modules/@aws-crypto/supports-web-crypto/node_modules/tslib/tslib.es6.js
+  // node_modules/@aws-crypto/ie11-detection/node_modules/tslib/tslib.es6.js
   var tslib_es6_exports4 = {};
   __export(tslib_es6_exports4, {
     __assign: () => __assign4,
@@ -11097,7 +10664,7 @@ ${toHex(hashedRequest)}`;
   }
   var extendStatics4, __assign4;
   var init_tslib_es64 = __esm({
-    "node_modules/@aws-crypto/supports-web-crypto/node_modules/tslib/tslib.es6.js"() {
+    "node_modules/@aws-crypto/ie11-detection/node_modules/tslib/tslib.es6.js"() {
       extendStatics4 = function(d4, b4) {
         extendStatics4 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
           d5.__proto__ = b5;
@@ -11109,7 +10676,7 @@ ${toHex(hashedRequest)}`;
         return extendStatics4(d4, b4);
       };
       __assign4 = function() {
-        __assign4 = Object.assign || function __assign6(t4) {
+        __assign4 = Object.assign || function __assign5(t4) {
           for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
             s4 = arguments[i4];
             for (var p4 in s4)
@@ -11119,456 +10686,6 @@ ${toHex(hashedRequest)}`;
           return t4;
         };
         return __assign4.apply(this, arguments);
-      };
-    }
-  });
-
-  // node_modules/@aws-crypto/supports-web-crypto/build/supportsWebCrypto.js
-  var require_supportsWebCrypto = __commonJS({
-    "node_modules/@aws-crypto/supports-web-crypto/build/supportsWebCrypto.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      exports.supportsZeroByteGCM = exports.supportsSubtleCrypto = exports.supportsSecureRandom = exports.supportsWebCrypto = void 0;
-      var tslib_1 = (init_tslib_es64(), __toCommonJS(tslib_es6_exports4));
-      var subtleCryptoMethods = [
-        "decrypt",
-        "digest",
-        "encrypt",
-        "exportKey",
-        "generateKey",
-        "importKey",
-        "sign",
-        "verify"
-      ];
-      function supportsWebCrypto(window2) {
-        if (supportsSecureRandom(window2) && typeof window2.crypto.subtle === "object") {
-          var subtle = window2.crypto.subtle;
-          return supportsSubtleCrypto(subtle);
-        }
-        return false;
-      }
-      exports.supportsWebCrypto = supportsWebCrypto;
-      function supportsSecureRandom(window2) {
-        if (typeof window2 === "object" && typeof window2.crypto === "object") {
-          var getRandomValues2 = window2.crypto.getRandomValues;
-          return typeof getRandomValues2 === "function";
-        }
-        return false;
-      }
-      exports.supportsSecureRandom = supportsSecureRandom;
-      function supportsSubtleCrypto(subtle) {
-        return subtle && subtleCryptoMethods.every(function(methodName) {
-          return typeof subtle[methodName] === "function";
-        });
-      }
-      exports.supportsSubtleCrypto = supportsSubtleCrypto;
-      function supportsZeroByteGCM(subtle) {
-        return tslib_1.__awaiter(this, void 0, void 0, function() {
-          var key, zeroByteAuthTag, _a;
-          return tslib_1.__generator(this, function(_b) {
-            switch (_b.label) {
-              case 0:
-                if (!supportsSubtleCrypto(subtle))
-                  return [2, false];
-                _b.label = 1;
-              case 1:
-                _b.trys.push([1, 4, , 5]);
-                return [4, subtle.generateKey({ name: "AES-GCM", length: 128 }, false, ["encrypt"])];
-              case 2:
-                key = _b.sent();
-                return [4, subtle.encrypt({
-                  name: "AES-GCM",
-                  iv: new Uint8Array(Array(12)),
-                  additionalData: new Uint8Array(Array(16)),
-                  tagLength: 128
-                }, key, new Uint8Array(0))];
-              case 3:
-                zeroByteAuthTag = _b.sent();
-                return [2, zeroByteAuthTag.byteLength === 16];
-              case 4:
-                _a = _b.sent();
-                return [2, false];
-              case 5:
-                return [
-                  2
-                  /*return*/
-                ];
-            }
-          });
-        });
-      }
-      exports.supportsZeroByteGCM = supportsZeroByteGCM;
-    }
-  });
-
-  // node_modules/@aws-crypto/supports-web-crypto/build/index.js
-  var require_build4 = __commonJS({
-    "node_modules/@aws-crypto/supports-web-crypto/build/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", { value: true });
-      var tslib_1 = (init_tslib_es64(), __toCommonJS(tslib_es6_exports4));
-      tslib_1.__exportStar(require_supportsWebCrypto(), exports);
-    }
-  });
-
-  // node_modules/@aws-crypto/ie11-detection/node_modules/tslib/tslib.es6.js
-  var tslib_es6_exports5 = {};
-  __export(tslib_es6_exports5, {
-    __assign: () => __assign5,
-    __asyncDelegator: () => __asyncDelegator5,
-    __asyncGenerator: () => __asyncGenerator5,
-    __asyncValues: () => __asyncValues5,
-    __await: () => __await5,
-    __awaiter: () => __awaiter5,
-    __classPrivateFieldGet: () => __classPrivateFieldGet5,
-    __classPrivateFieldSet: () => __classPrivateFieldSet5,
-    __createBinding: () => __createBinding5,
-    __decorate: () => __decorate5,
-    __exportStar: () => __exportStar5,
-    __extends: () => __extends5,
-    __generator: () => __generator5,
-    __importDefault: () => __importDefault5,
-    __importStar: () => __importStar5,
-    __makeTemplateObject: () => __makeTemplateObject5,
-    __metadata: () => __metadata5,
-    __param: () => __param5,
-    __read: () => __read5,
-    __rest: () => __rest5,
-    __spread: () => __spread5,
-    __spreadArrays: () => __spreadArrays5,
-    __values: () => __values5
-  });
-  function __extends5(d4, b4) {
-    extendStatics5(d4, b4);
-    function __() {
-      this.constructor = d4;
-    }
-    d4.prototype = b4 === null ? Object.create(b4) : (__.prototype = b4.prototype, new __());
-  }
-  function __rest5(s4, e4) {
-    var t4 = {};
-    for (var p4 in s4)
-      if (Object.prototype.hasOwnProperty.call(s4, p4) && e4.indexOf(p4) < 0)
-        t4[p4] = s4[p4];
-    if (s4 != null && typeof Object.getOwnPropertySymbols === "function")
-      for (var i4 = 0, p4 = Object.getOwnPropertySymbols(s4); i4 < p4.length; i4++) {
-        if (e4.indexOf(p4[i4]) < 0 && Object.prototype.propertyIsEnumerable.call(s4, p4[i4]))
-          t4[p4[i4]] = s4[p4[i4]];
-      }
-    return t4;
-  }
-  function __decorate5(decorators, target, key, desc) {
-    var c4 = arguments.length, r4 = c4 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d4;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r4 = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i4 = decorators.length - 1; i4 >= 0; i4--)
-        if (d4 = decorators[i4])
-          r4 = (c4 < 3 ? d4(r4) : c4 > 3 ? d4(target, key, r4) : d4(target, key)) || r4;
-    return c4 > 3 && r4 && Object.defineProperty(target, key, r4), r4;
-  }
-  function __param5(paramIndex, decorator) {
-    return function(target, key) {
-      decorator(target, key, paramIndex);
-    };
-  }
-  function __metadata5(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-      return Reflect.metadata(metadataKey, metadataValue);
-  }
-  function __awaiter5(thisArg, _arguments, P2, generator) {
-    function adopt(value) {
-      return value instanceof P2 ? value : new P2(function(resolve) {
-        resolve(value);
-      });
-    }
-    return new (P2 || (P2 = Promise))(function(resolve, reject) {
-      function fulfilled(value) {
-        try {
-          step(generator.next(value));
-        } catch (e4) {
-          reject(e4);
-        }
-      }
-      function rejected(value) {
-        try {
-          step(generator["throw"](value));
-        } catch (e4) {
-          reject(e4);
-        }
-      }
-      function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-      }
-      step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-  }
-  function __generator5(thisArg, body) {
-    var _2 = { label: 0, sent: function() {
-      if (t4[0] & 1)
-        throw t4[1];
-      return t4[1];
-    }, trys: [], ops: [] }, f4, y3, t4, g4;
-    return g4 = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g4[Symbol.iterator] = function() {
-      return this;
-    }), g4;
-    function verb(n4) {
-      return function(v5) {
-        return step([n4, v5]);
-      };
-    }
-    function step(op) {
-      if (f4)
-        throw new TypeError("Generator is already executing.");
-      while (_2)
-        try {
-          if (f4 = 1, y3 && (t4 = op[0] & 2 ? y3["return"] : op[0] ? y3["throw"] || ((t4 = y3["return"]) && t4.call(y3), 0) : y3.next) && !(t4 = t4.call(y3, op[1])).done)
-            return t4;
-          if (y3 = 0, t4)
-            op = [op[0] & 2, t4.value];
-          switch (op[0]) {
-            case 0:
-            case 1:
-              t4 = op;
-              break;
-            case 4:
-              _2.label++;
-              return { value: op[1], done: false };
-            case 5:
-              _2.label++;
-              y3 = op[1];
-              op = [0];
-              continue;
-            case 7:
-              op = _2.ops.pop();
-              _2.trys.pop();
-              continue;
-            default:
-              if (!(t4 = _2.trys, t4 = t4.length > 0 && t4[t4.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                _2 = 0;
-                continue;
-              }
-              if (op[0] === 3 && (!t4 || op[1] > t4[0] && op[1] < t4[3])) {
-                _2.label = op[1];
-                break;
-              }
-              if (op[0] === 6 && _2.label < t4[1]) {
-                _2.label = t4[1];
-                t4 = op;
-                break;
-              }
-              if (t4 && _2.label < t4[2]) {
-                _2.label = t4[2];
-                _2.ops.push(op);
-                break;
-              }
-              if (t4[2])
-                _2.ops.pop();
-              _2.trys.pop();
-              continue;
-          }
-          op = body.call(thisArg, _2);
-        } catch (e4) {
-          op = [6, e4];
-          y3 = 0;
-        } finally {
-          f4 = t4 = 0;
-        }
-      if (op[0] & 5)
-        throw op[1];
-      return { value: op[0] ? op[1] : void 0, done: true };
-    }
-  }
-  function __createBinding5(o4, m4, k4, k22) {
-    if (k22 === void 0)
-      k22 = k4;
-    o4[k22] = m4[k4];
-  }
-  function __exportStar5(m4, exports) {
-    for (var p4 in m4)
-      if (p4 !== "default" && !exports.hasOwnProperty(p4))
-        exports[p4] = m4[p4];
-  }
-  function __values5(o4) {
-    var s4 = typeof Symbol === "function" && Symbol.iterator, m4 = s4 && o4[s4], i4 = 0;
-    if (m4)
-      return m4.call(o4);
-    if (o4 && typeof o4.length === "number")
-      return {
-        next: function() {
-          if (o4 && i4 >= o4.length)
-            o4 = void 0;
-          return { value: o4 && o4[i4++], done: !o4 };
-        }
-      };
-    throw new TypeError(s4 ? "Object is not iterable." : "Symbol.iterator is not defined.");
-  }
-  function __read5(o4, n4) {
-    var m4 = typeof Symbol === "function" && o4[Symbol.iterator];
-    if (!m4)
-      return o4;
-    var i4 = m4.call(o4), r4, ar = [], e4;
-    try {
-      while ((n4 === void 0 || n4-- > 0) && !(r4 = i4.next()).done)
-        ar.push(r4.value);
-    } catch (error) {
-      e4 = { error };
-    } finally {
-      try {
-        if (r4 && !r4.done && (m4 = i4["return"]))
-          m4.call(i4);
-      } finally {
-        if (e4)
-          throw e4.error;
-      }
-    }
-    return ar;
-  }
-  function __spread5() {
-    for (var ar = [], i4 = 0; i4 < arguments.length; i4++)
-      ar = ar.concat(__read5(arguments[i4]));
-    return ar;
-  }
-  function __spreadArrays5() {
-    for (var s4 = 0, i4 = 0, il = arguments.length; i4 < il; i4++)
-      s4 += arguments[i4].length;
-    for (var r4 = Array(s4), k4 = 0, i4 = 0; i4 < il; i4++)
-      for (var a4 = arguments[i4], j4 = 0, jl = a4.length; j4 < jl; j4++, k4++)
-        r4[k4] = a4[j4];
-    return r4;
-  }
-  function __await5(v5) {
-    return this instanceof __await5 ? (this.v = v5, this) : new __await5(v5);
-  }
-  function __asyncGenerator5(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g4 = generator.apply(thisArg, _arguments || []), i4, q4 = [];
-    return i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4;
-    function verb(n4) {
-      if (g4[n4])
-        i4[n4] = function(v5) {
-          return new Promise(function(a4, b4) {
-            q4.push([n4, v5, a4, b4]) > 1 || resume(n4, v5);
-          });
-        };
-    }
-    function resume(n4, v5) {
-      try {
-        step(g4[n4](v5));
-      } catch (e4) {
-        settle(q4[0][3], e4);
-      }
-    }
-    function step(r4) {
-      r4.value instanceof __await5 ? Promise.resolve(r4.value.v).then(fulfill, reject) : settle(q4[0][2], r4);
-    }
-    function fulfill(value) {
-      resume("next", value);
-    }
-    function reject(value) {
-      resume("throw", value);
-    }
-    function settle(f4, v5) {
-      if (f4(v5), q4.shift(), q4.length)
-        resume(q4[0][0], q4[0][1]);
-    }
-  }
-  function __asyncDelegator5(o4) {
-    var i4, p4;
-    return i4 = {}, verb("next"), verb("throw", function(e4) {
-      throw e4;
-    }), verb("return"), i4[Symbol.iterator] = function() {
-      return this;
-    }, i4;
-    function verb(n4, f4) {
-      i4[n4] = o4[n4] ? function(v5) {
-        return (p4 = !p4) ? { value: __await5(o4[n4](v5)), done: n4 === "return" } : f4 ? f4(v5) : v5;
-      } : f4;
-    }
-  }
-  function __asyncValues5(o4) {
-    if (!Symbol.asyncIterator)
-      throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m4 = o4[Symbol.asyncIterator], i4;
-    return m4 ? m4.call(o4) : (o4 = typeof __values5 === "function" ? __values5(o4) : o4[Symbol.iterator](), i4 = {}, verb("next"), verb("throw"), verb("return"), i4[Symbol.asyncIterator] = function() {
-      return this;
-    }, i4);
-    function verb(n4) {
-      i4[n4] = o4[n4] && function(v5) {
-        return new Promise(function(resolve, reject) {
-          v5 = o4[n4](v5), settle(resolve, reject, v5.done, v5.value);
-        });
-      };
-    }
-    function settle(resolve, reject, d4, v5) {
-      Promise.resolve(v5).then(function(v6) {
-        resolve({ value: v6, done: d4 });
-      }, reject);
-    }
-  }
-  function __makeTemplateObject5(cooked, raw) {
-    if (Object.defineProperty) {
-      Object.defineProperty(cooked, "raw", { value: raw });
-    } else {
-      cooked.raw = raw;
-    }
-    return cooked;
-  }
-  function __importStar5(mod) {
-    if (mod && mod.__esModule)
-      return mod;
-    var result = {};
-    if (mod != null) {
-      for (var k4 in mod)
-        if (Object.hasOwnProperty.call(mod, k4))
-          result[k4] = mod[k4];
-    }
-    result.default = mod;
-    return result;
-  }
-  function __importDefault5(mod) {
-    return mod && mod.__esModule ? mod : { default: mod };
-  }
-  function __classPrivateFieldGet5(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-      throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-  }
-  function __classPrivateFieldSet5(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-      throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
-  }
-  var extendStatics5, __assign5;
-  var init_tslib_es65 = __esm({
-    "node_modules/@aws-crypto/ie11-detection/node_modules/tslib/tslib.es6.js"() {
-      extendStatics5 = function(d4, b4) {
-        extendStatics5 = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(d5, b5) {
-          d5.__proto__ = b5;
-        } || function(d5, b5) {
-          for (var p4 in b5)
-            if (b5.hasOwnProperty(p4))
-              d5[p4] = b5[p4];
-        };
-        return extendStatics5(d4, b4);
-      };
-      __assign5 = function() {
-        __assign5 = Object.assign || function __assign6(t4) {
-          for (var s4, i4 = 1, n4 = arguments.length; i4 < n4; i4++) {
-            s4 = arguments[i4];
-            for (var p4 in s4)
-              if (Object.prototype.hasOwnProperty.call(s4, p4))
-                t4[p4] = s4[p4];
-          }
-          return t4;
-        };
-        return __assign5.apply(this, arguments);
       };
     }
   });
@@ -11640,11 +10757,11 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-crypto/ie11-detection/build/index.js
-  var require_build5 = __commonJS({
+  var require_build4 = __commonJS({
     "node_modules/@aws-crypto/ie11-detection/build/index.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
-      var tslib_1 = (init_tslib_es65(), __toCommonJS(tslib_es6_exports5));
+      var tslib_1 = (init_tslib_es64(), __toCommonJS(tslib_es6_exports4));
       tslib_1.__exportStar(require_CryptoOperation(), exports);
       tslib_1.__exportStar(require_Key(), exports);
       tslib_1.__exportStar(require_KeyOperation(), exports);
@@ -11661,9 +10778,9 @@ ${toHex(hashedRequest)}`;
       exports.Sha256 = void 0;
       var ie11Sha256_1 = require_ie11Sha256();
       var webCryptoSha256_1 = require_webCryptoSha256();
-      var sha256_js_1 = require_build3();
-      var supports_web_crypto_1 = require_build4();
-      var ie11_detection_1 = require_build5();
+      var sha256_js_1 = require_build2();
+      var supports_web_crypto_1 = require_build3();
+      var ie11_detection_1 = require_build4();
       var util_locate_window_1 = require_dist_cjs2();
       var util_1 = require_build();
       var Sha2563 = (
@@ -11695,12 +10812,12 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-crypto/sha256-browser/build/index.js
-  var require_build6 = __commonJS({
+  var require_build5 = __commonJS({
     "node_modules/@aws-crypto/sha256-browser/build/index.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.WebCryptoSha256 = exports.Ie11Sha256 = void 0;
-      var tslib_1 = (init_tslib_es62(), __toCommonJS(tslib_es6_exports2));
+      var tslib_1 = (init_tslib_es6(), __toCommonJS(tslib_es6_exports));
       tslib_1.__exportStar(require_crossPlatformSha256(), exports);
       var ie11Sha256_1 = require_ie11Sha256();
       Object.defineProperty(exports, "Ie11Sha256", { enumerable: true, get: function() {
@@ -12377,7 +11494,7 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/@aws-sdk/util-user-agent-browser/dist-es/index.js
   var import_bowser, defaultUserAgent;
-  var init_dist_es34 = __esm({
+  var init_dist_es33 = __esm({
     "node_modules/@aws-sdk/util-user-agent-browser/dist-es/index.js"() {
       import_bowser = __toESM(require_es5());
       defaultUserAgent = ({ serviceId, clientVersion }) => async () => {
@@ -12412,7 +11529,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/invalid-dependency/dist-es/index.js
-  var init_dist_es35 = __esm({
+  var init_dist_es34 = __esm({
     "node_modules/@smithy/invalid-dependency/dist-es/index.js"() {
       init_invalidFunction();
       init_invalidProvider();
@@ -12451,7 +11568,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/util-body-length-browser/dist-es/index.js
-  var init_dist_es36 = __esm({
+  var init_dist_es35 = __esm({
     "node_modules/@smithy/util-body-length-browser/dist-es/index.js"() {
       init_calculateBodyLength();
     }
@@ -12507,7 +11624,7 @@ ${toHex(hashedRequest)}`;
   var getRuntimeConfig;
   var init_runtimeConfig_shared = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/runtimeConfig.shared.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es28();
       init_dist_es26();
       init_dist_es13();
@@ -12652,7 +11769,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/property-provider/dist-es/index.js
-  var init_dist_es37 = __esm({
+  var init_dist_es36 = __esm({
     "node_modules/@smithy/property-provider/dist-es/index.js"() {
       init_CredentialsProviderError();
       init_ProviderError();
@@ -12675,7 +11792,7 @@ ${toHex(hashedRequest)}`;
   var import_bowser2, resolveDefaultsModeConfig, isMobileBrowser;
   var init_resolveDefaultsModeConfig = __esm({
     "node_modules/@smithy/util-defaults-mode-browser/dist-es/resolveDefaultsModeConfig.js"() {
-      init_dist_es37();
+      init_dist_es36();
       import_bowser2 = __toESM(require_es5());
       init_constants6();
       resolveDefaultsModeConfig = ({ defaultsMode } = {}) => memoize(async () => {
@@ -12704,7 +11821,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/util-defaults-mode-browser/dist-es/index.js
-  var init_dist_es38 = __esm({
+  var init_dist_es37 = __esm({
     "node_modules/@smithy/util-defaults-mode-browser/dist-es/index.js"() {
       init_resolveDefaultsModeConfig();
     }
@@ -12715,16 +11832,16 @@ ${toHex(hashedRequest)}`;
   var init_runtimeConfig_browser = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/runtimeConfig.browser.js"() {
       init_package();
-      import_sha256_browser = __toESM(require_build6());
-      init_dist_es34();
+      import_sha256_browser = __toESM(require_build5());
+      init_dist_es33();
       init_dist_es11();
       init_dist_es23();
+      init_dist_es34();
       init_dist_es35();
-      init_dist_es36();
       init_dist_es17();
       init_runtimeConfig_shared();
       init_dist_es26();
-      init_dist_es38();
+      init_dist_es37();
       getRuntimeConfig2 = (config) => {
         const defaultsMode = resolveDefaultsModeConfig(config);
         const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
@@ -12818,7 +11935,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/region-config-resolver/dist-es/index.js
-  var init_dist_es39 = __esm({
+  var init_dist_es38 = __esm({
     "node_modules/@aws-sdk/region-config-resolver/dist-es/index.js"() {
       init_extensions4();
       init_regionConfig2();
@@ -12873,7 +11990,7 @@ ${toHex(hashedRequest)}`;
   var asPartial, resolveRuntimeExtensions;
   var init_runtimeExtensions = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/runtimeExtensions.js"() {
-      init_dist_es39();
+      init_dist_es38();
       init_dist_es2();
       init_dist_es26();
       init_httpAuthExtensionConfiguration();
@@ -13119,7 +12236,7 @@ ${toHex(hashedRequest)}`;
   var se_CreateIdentityPoolCommand, se_DeleteIdentitiesCommand, se_DeleteIdentityPoolCommand, se_DescribeIdentityCommand, se_DescribeIdentityPoolCommand, se_GetCredentialsForIdentityCommand, se_GetIdCommand, se_GetIdentityPoolRolesCommand, se_GetOpenIdTokenCommand, se_GetOpenIdTokenForDeveloperIdentityCommand, se_GetPrincipalTagAttributeMapCommand, se_ListIdentitiesCommand, se_ListIdentityPoolsCommand, se_ListTagsForResourceCommand, se_LookupDeveloperIdentityCommand, se_MergeDeveloperIdentitiesCommand, se_SetIdentityPoolRolesCommand, se_SetPrincipalTagAttributeMapCommand, se_TagResourceCommand, se_UnlinkDeveloperIdentityCommand, se_UnlinkIdentityCommand, se_UntagResourceCommand, se_UpdateIdentityPoolCommand, de_CreateIdentityPoolCommand, de_DeleteIdentitiesCommand, de_DeleteIdentityPoolCommand, de_DescribeIdentityCommand, de_DescribeIdentityPoolCommand, de_GetCredentialsForIdentityCommand, de_GetIdCommand, de_GetIdentityPoolRolesCommand, de_GetOpenIdTokenCommand, de_GetOpenIdTokenForDeveloperIdentityCommand, de_GetPrincipalTagAttributeMapCommand, de_ListIdentitiesCommand, de_ListIdentityPoolsCommand, de_ListTagsForResourceCommand, de_LookupDeveloperIdentityCommand, de_MergeDeveloperIdentitiesCommand, de_SetIdentityPoolRolesCommand, de_SetPrincipalTagAttributeMapCommand, de_TagResourceCommand, de_UnlinkDeveloperIdentityCommand, de_UnlinkIdentityCommand, de_UntagResourceCommand, de_UpdateIdentityPoolCommand, de_CommandError, de_ConcurrentModificationExceptionRes, de_DeveloperUserAlreadyRegisteredExceptionRes, de_ExternalServiceExceptionRes, de_InternalErrorExceptionRes, de_InvalidIdentityPoolConfigurationExceptionRes, de_InvalidParameterExceptionRes, de_LimitExceededExceptionRes, de_NotAuthorizedExceptionRes, de_ResourceConflictExceptionRes, de_ResourceNotFoundExceptionRes, de_TooManyRequestsExceptionRes, de_Credentials, de_GetCredentialsForIdentityResponse, de_IdentitiesList, de_IdentityDescription, de_ListIdentitiesResponse, deserializeMetadata2, throwDefaultError2, buildHttpRpcRequest;
   var init_Aws_json1_1 = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/protocols/Aws_json1_1.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es2();
       init_dist_es26();
       init_CognitoIdentityServiceException();
@@ -14365,7 +13482,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/client-cognito-identity/dist-es/index.js
-  var init_dist_es40 = __esm({
+  var init_dist_es39 = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/index.js"() {
       init_CognitoIdentityClient();
       init_CognitoIdentity();
@@ -14423,7 +13540,7 @@ ${toHex(hashedRequest)}`;
   });
   var init_loadCognitoIdentity = __esm({
     "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/loadCognitoIdentity.js"() {
-      init_dist_es40();
+      init_dist_es39();
     }
   });
 
@@ -14459,7 +13576,7 @@ ${toHex(hashedRequest)}`;
   }
   var init_fromCognitoIdentity = __esm({
     "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js"() {
-      init_dist_es37();
+      init_dist_es36();
       init_resolveLogins();
     }
   });
@@ -14622,7 +13739,7 @@ ${toHex(hashedRequest)}`;
   }
   var init_fromCognitoIdentityPool = __esm({
     "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentityPool.js"() {
-      init_dist_es37();
+      init_dist_es36();
       init_fromCognitoIdentity();
       init_localStorage();
       init_resolveLogins();
@@ -14630,7 +13747,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/index.js
-  var init_dist_es41 = __esm({
+  var init_dist_es40 = __esm({
     "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/index.js"() {
       init_CognitoProviderParameters();
       init_Logins();
@@ -15215,7 +14332,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/endpoint-cache/dist-es/index.js
-  var init_dist_es42 = __esm({
+  var init_dist_es41 = __esm({
     "node_modules/@aws-sdk/endpoint-cache/dist-es/index.js"() {
       init_Endpoint();
       init_EndpointCache();
@@ -15226,7 +14343,7 @@ ${toHex(hashedRequest)}`;
   var resolveEndpointDiscoveryConfig;
   var init_resolveEndpointDiscoveryConfig = __esm({
     "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/resolveEndpointDiscoveryConfig.js"() {
-      init_dist_es42();
+      init_dist_es41();
       resolveEndpointDiscoveryConfig = (input, { endpointDiscoveryCommandCtor }) => ({
         ...input,
         endpointDiscoveryCommandCtor,
@@ -15238,7 +14355,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/index.js
-  var init_dist_es43 = __esm({
+  var init_dist_es42 = __esm({
     "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/index.js"() {
       init_configurations3();
       init_getEndpointDiscoveryPlugin();
@@ -15265,7 +14382,7 @@ ${toHex(hashedRequest)}`;
   var defaultDynamoDBHttpAuthSchemeParametersProvider, defaultDynamoDBHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig2;
   var init_httpAuthSchemeProvider2 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthSchemeProvider.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es10();
       defaultDynamoDBHttpAuthSchemeParametersProvider = async (config, context, input) => {
         return {
@@ -15761,7 +14878,7 @@ ${toHex(hashedRequest)}`;
   var se_BatchExecuteStatementCommand, se_BatchGetItemCommand, se_BatchWriteItemCommand, se_CreateBackupCommand, se_CreateGlobalTableCommand, se_CreateTableCommand, se_DeleteBackupCommand, se_DeleteItemCommand, se_DeleteTableCommand, se_DescribeBackupCommand, se_DescribeContinuousBackupsCommand, se_DescribeContributorInsightsCommand, se_DescribeEndpointsCommand, se_DescribeExportCommand, se_DescribeGlobalTableCommand, se_DescribeGlobalTableSettingsCommand, se_DescribeImportCommand, se_DescribeKinesisStreamingDestinationCommand, se_DescribeLimitsCommand, se_DescribeTableCommand, se_DescribeTableReplicaAutoScalingCommand, se_DescribeTimeToLiveCommand, se_DisableKinesisStreamingDestinationCommand, se_EnableKinesisStreamingDestinationCommand, se_ExecuteStatementCommand, se_ExecuteTransactionCommand, se_ExportTableToPointInTimeCommand, se_GetItemCommand, se_ImportTableCommand, se_ListBackupsCommand, se_ListContributorInsightsCommand, se_ListExportsCommand, se_ListGlobalTablesCommand, se_ListImportsCommand, se_ListTablesCommand, se_ListTagsOfResourceCommand, se_PutItemCommand, se_QueryCommand, se_RestoreTableFromBackupCommand, se_RestoreTableToPointInTimeCommand, se_ScanCommand, se_TagResourceCommand2, se_TransactGetItemsCommand, se_TransactWriteItemsCommand, se_UntagResourceCommand2, se_UpdateContinuousBackupsCommand, se_UpdateContributorInsightsCommand, se_UpdateGlobalTableCommand, se_UpdateGlobalTableSettingsCommand, se_UpdateItemCommand, se_UpdateKinesisStreamingDestinationCommand, se_UpdateTableCommand, se_UpdateTableReplicaAutoScalingCommand, se_UpdateTimeToLiveCommand, de_BatchExecuteStatementCommand, de_BatchGetItemCommand, de_BatchWriteItemCommand, de_CreateBackupCommand, de_CreateGlobalTableCommand, de_CreateTableCommand, de_DeleteBackupCommand, de_DeleteItemCommand, de_DeleteTableCommand, de_DescribeBackupCommand, de_DescribeContinuousBackupsCommand, de_DescribeContributorInsightsCommand, de_DescribeEndpointsCommand, de_DescribeExportCommand, de_DescribeGlobalTableCommand, de_DescribeGlobalTableSettingsCommand, de_DescribeImportCommand, de_DescribeKinesisStreamingDestinationCommand, de_DescribeLimitsCommand, de_DescribeTableCommand, de_DescribeTableReplicaAutoScalingCommand, de_DescribeTimeToLiveCommand, de_DisableKinesisStreamingDestinationCommand, de_EnableKinesisStreamingDestinationCommand, de_ExecuteStatementCommand, de_ExecuteTransactionCommand, de_ExportTableToPointInTimeCommand, de_GetItemCommand, de_ImportTableCommand, de_ListBackupsCommand, de_ListContributorInsightsCommand, de_ListExportsCommand, de_ListGlobalTablesCommand, de_ListImportsCommand, de_ListTablesCommand, de_ListTagsOfResourceCommand, de_PutItemCommand, de_QueryCommand, de_RestoreTableFromBackupCommand, de_RestoreTableToPointInTimeCommand, de_ScanCommand, de_TagResourceCommand2, de_TransactGetItemsCommand, de_TransactWriteItemsCommand, de_UntagResourceCommand2, de_UpdateContinuousBackupsCommand, de_UpdateContributorInsightsCommand, de_UpdateGlobalTableCommand, de_UpdateGlobalTableSettingsCommand, de_UpdateItemCommand, de_UpdateKinesisStreamingDestinationCommand, de_UpdateTableCommand, de_UpdateTableReplicaAutoScalingCommand, de_UpdateTimeToLiveCommand, de_CommandError2, de_BackupInUseExceptionRes, de_BackupNotFoundExceptionRes, de_ConditionalCheckFailedExceptionRes, de_ContinuousBackupsUnavailableExceptionRes, de_DuplicateItemExceptionRes, de_ExportConflictExceptionRes, de_ExportNotFoundExceptionRes, de_GlobalTableAlreadyExistsExceptionRes, de_GlobalTableNotFoundExceptionRes, de_IdempotentParameterMismatchExceptionRes, de_ImportConflictExceptionRes, de_ImportNotFoundExceptionRes, de_IndexNotFoundExceptionRes, de_InternalServerErrorRes, de_InvalidEndpointExceptionRes, de_InvalidExportTimeExceptionRes, de_InvalidRestoreTimeExceptionRes, de_ItemCollectionSizeLimitExceededExceptionRes, de_LimitExceededExceptionRes2, de_PointInTimeRecoveryUnavailableExceptionRes, de_ProvisionedThroughputExceededExceptionRes, de_ReplicaAlreadyExistsExceptionRes, de_ReplicaNotFoundExceptionRes, de_RequestLimitExceededRes, de_ResourceInUseExceptionRes, de_ResourceNotFoundExceptionRes2, de_TableAlreadyExistsExceptionRes, de_TableInUseExceptionRes, de_TableNotFoundExceptionRes, de_TransactionCanceledExceptionRes, de_TransactionConflictExceptionRes, de_TransactionInProgressExceptionRes, se_AttributeUpdates, se_AttributeValue, se_AttributeValueList, se_AttributeValueUpdate, se_AutoScalingPolicyUpdate, se_AutoScalingSettingsUpdate, se_AutoScalingTargetTrackingScalingPolicyConfigurationUpdate, se_BatchExecuteStatementInput, se_BatchGetItemInput, se_BatchGetRequestMap, se_BatchStatementRequest, se_BatchWriteItemInput, se_BatchWriteItemRequestMap, se_BinarySetAttributeValue, se_Condition, se_ConditionCheck, se_Delete, se_DeleteItemInput, se_DeleteRequest, se_ExecuteStatementInput, se_ExecuteTransactionInput, se_ExpectedAttributeMap, se_ExpectedAttributeValue, se_ExportTableToPointInTimeInput, se_ExpressionAttributeValueMap, se_FilterConditionMap, se_Get, se_GetItemInput, se_GlobalSecondaryIndexAutoScalingUpdate, se_GlobalSecondaryIndexAutoScalingUpdateList, se_GlobalTableGlobalSecondaryIndexSettingsUpdate, se_GlobalTableGlobalSecondaryIndexSettingsUpdateList, se_ImportTableInput, se_IncrementalExportSpecification, se_Key, se_KeyConditions, se_KeyList, se_KeysAndAttributes, se_ListAttributeValue, se_ListBackupsInput, se_MapAttributeValue, se_ParameterizedStatement, se_ParameterizedStatements, se_PartiQLBatchRequest, se_PreparedStatementParameters, se_Put, se_PutItemInput, se_PutItemInputAttributeMap, se_PutRequest, se_QueryInput, se_ReplicaAutoScalingUpdate, se_ReplicaAutoScalingUpdateList, se_ReplicaGlobalSecondaryIndexAutoScalingUpdate, se_ReplicaGlobalSecondaryIndexAutoScalingUpdateList, se_ReplicaGlobalSecondaryIndexSettingsUpdate, se_ReplicaGlobalSecondaryIndexSettingsUpdateList, se_ReplicaSettingsUpdate, se_ReplicaSettingsUpdateList, se_RestoreTableToPointInTimeInput, se_ScanInput, se_TransactGetItem, se_TransactGetItemList, se_TransactGetItemsInput, se_TransactWriteItem, se_TransactWriteItemList, se_TransactWriteItemsInput, se_Update, se_UpdateGlobalTableSettingsInput, se_UpdateItemInput, se_UpdateTableReplicaAutoScalingInput, se_WriteRequest, se_WriteRequests, de_ArchivalSummary, de_AttributeMap, de_AttributeValue, de_AutoScalingPolicyDescription, de_AutoScalingPolicyDescriptionList, de_AutoScalingSettingsDescription, de_AutoScalingTargetTrackingScalingPolicyConfigurationDescription, de_BackupDescription, de_BackupDetails, de_BackupSummaries, de_BackupSummary, de_BatchExecuteStatementOutput, de_BatchGetItemOutput, de_BatchGetRequestMap, de_BatchGetResponseMap, de_BatchStatementError, de_BatchStatementResponse, de_BatchWriteItemOutput, de_BatchWriteItemRequestMap, de_BillingModeSummary, de_BinarySetAttributeValue, de_CancellationReason, de_CancellationReasonList, de_Capacity, de_ConditionalCheckFailedException, de_ConsumedCapacity, de_ConsumedCapacityMultiple, de_ContinuousBackupsDescription, de_CreateBackupOutput, de_CreateGlobalTableOutput, de_CreateTableOutput, de_DeleteBackupOutput, de_DeleteItemOutput, de_DeleteRequest, de_DeleteTableOutput, de_DescribeBackupOutput, de_DescribeContinuousBackupsOutput, de_DescribeContributorInsightsOutput, de_DescribeExportOutput, de_DescribeGlobalTableOutput, de_DescribeGlobalTableSettingsOutput, de_DescribeImportOutput, de_DescribeTableOutput, de_DescribeTableReplicaAutoScalingOutput, de_ExecuteStatementOutput, de_ExecuteTransactionOutput, de_ExportDescription, de_ExportTableToPointInTimeOutput, de_GetItemOutput, de_GlobalSecondaryIndexDescription, de_GlobalSecondaryIndexDescriptionList, de_GlobalTableDescription, de_ImportSummary, de_ImportSummaryList, de_ImportTableDescription, de_ImportTableOutput, de_IncrementalExportSpecification, de_ItemCollectionKeyAttributeMap, de_ItemCollectionMetrics, de_ItemCollectionMetricsMultiple, de_ItemCollectionMetricsPerTable, de_ItemCollectionSizeEstimateRange, de_ItemList, de_ItemResponse, de_ItemResponseList, de_Key, de_KeyList, de_KeysAndAttributes, de_ListAttributeValue, de_ListBackupsOutput, de_ListImportsOutput, de_MapAttributeValue, de_PartiQLBatchResponse, de_PointInTimeRecoveryDescription, de_ProvisionedThroughputDescription, de_PutItemInputAttributeMap, de_PutItemOutput, de_PutRequest, de_QueryOutput, de_ReplicaAutoScalingDescription, de_ReplicaAutoScalingDescriptionList, de_ReplicaDescription, de_ReplicaDescriptionList, de_ReplicaGlobalSecondaryIndexAutoScalingDescription, de_ReplicaGlobalSecondaryIndexAutoScalingDescriptionList, de_ReplicaGlobalSecondaryIndexSettingsDescription, de_ReplicaGlobalSecondaryIndexSettingsDescriptionList, de_ReplicaSettingsDescription, de_ReplicaSettingsDescriptionList, de_RestoreSummary, de_RestoreTableFromBackupOutput, de_RestoreTableToPointInTimeOutput, de_ScanOutput, de_SecondaryIndexesCapacityMap, de_SourceTableDetails, de_SourceTableFeatureDetails, de_SSEDescription, de_TableAutoScalingDescription, de_TableClassSummary, de_TableDescription, de_TransactGetItemsOutput, de_TransactionCanceledException, de_TransactWriteItemsOutput, de_UpdateContinuousBackupsOutput, de_UpdateGlobalTableOutput, de_UpdateGlobalTableSettingsOutput, de_UpdateItemOutput, de_UpdateTableOutput, de_UpdateTableReplicaAutoScalingOutput, de_WriteRequest, de_WriteRequests, deserializeMetadata3, throwDefaultError3, buildHttpRpcRequest2;
   var init_Aws_json1_0 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/protocols/Aws_json1_0.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es2();
       init_dist_es26();
       init_esm_browser();
@@ -18875,7 +17992,7 @@ ${toHex(hashedRequest)}`;
   var getRuntimeConfig3;
   var init_runtimeConfig_shared2 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.shared.js"() {
-      init_dist_es33();
+      init_dist_es32();
       init_dist_es26();
       init_dist_es13();
       init_dist_es20();
@@ -18913,16 +18030,16 @@ ${toHex(hashedRequest)}`;
   var init_runtimeConfig_browser2 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.browser.js"() {
       init_package2();
-      import_sha256_browser2 = __toESM(require_build6());
-      init_dist_es34();
+      import_sha256_browser2 = __toESM(require_build5());
+      init_dist_es33();
       init_dist_es11();
       init_dist_es23();
+      init_dist_es34();
       init_dist_es35();
-      init_dist_es36();
       init_dist_es17();
       init_runtimeConfig_shared2();
       init_dist_es26();
-      init_dist_es38();
+      init_dist_es37();
       getRuntimeConfig4 = (config) => {
         const defaultsMode = resolveDefaultsModeConfig(config);
         const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
@@ -18997,7 +18114,7 @@ ${toHex(hashedRequest)}`;
   var asPartial2, resolveRuntimeExtensions2;
   var init_runtimeExtensions2 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeExtensions.js"() {
-      init_dist_es39();
+      init_dist_es38();
       init_dist_es2();
       init_dist_es26();
       init_httpAuthExtensionConfiguration2();
@@ -19025,7 +18142,7 @@ ${toHex(hashedRequest)}`;
   var DynamoDBClient;
   var init_DynamoDBClient = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDBClient.js"() {
-      init_dist_es43();
+      init_dist_es42();
       init_dist_es3();
       init_dist_es4();
       init_dist_es5();
@@ -20516,7 +19633,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@smithy/util-waiter/dist-es/index.js
-  var init_dist_es44 = __esm({
+  var init_dist_es43 = __esm({
     "node_modules/@smithy/util-waiter/dist-es/index.js"() {
       init_createWaiter();
       init_waiter2();
@@ -20526,14 +19643,14 @@ ${toHex(hashedRequest)}`;
   // node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableExists.js
   var init_waitForTableExists = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableExists.js"() {
-      init_dist_es44();
+      init_dist_es43();
     }
   });
 
   // node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableNotExists.js
   var init_waitForTableNotExists = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableNotExists.js"() {
-      init_dist_es44();
+      init_dist_es43();
     }
   });
 
@@ -20553,7 +19670,7 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/client-dynamodb/dist-es/index.js
-  var init_dist_es45 = __esm({
+  var init_dist_es44 = __esm({
     "node_modules/@aws-sdk/client-dynamodb/dist-es/index.js"() {
       init_DynamoDBClient();
       init_DynamoDB();
@@ -20568,9 +19685,9 @@ ${toHex(hashedRequest)}`;
   // src/js/frontend/utils/createDynamoDBClient.js
   var require_createDynamoDBClient = __commonJS({
     "src/js/frontend/utils/createDynamoDBClient.js"(exports, module) {
+      init_dist_es39();
       init_dist_es40();
-      init_dist_es41();
-      init_dist_es45();
+      init_dist_es44();
       var createDynamoDBClient2 = (region = "us-west-2", identityPoolId = "us-west-2:5cf2c915-001b-4190-ad65-6f10af3a375c") => {
         return new DynamoDBClient({
           region,
@@ -20587,7 +19704,7 @@ ${toHex(hashedRequest)}`;
   // src/js/frontend/utils/fetchDynamoDB.js
   var require_fetchDynamoDB = __commonJS({
     "src/js/frontend/utils/fetchDynamoDB.js"(exports, module) {
-      init_dist_es45();
+      init_dist_es44();
       async function fetchPostsFromBoard2(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
         theDirectoryWeWant = `/${theDirectoryWeWant}/`;
         try {
@@ -21605,22 +20722,6 @@ ${toHex(hashedRequest)}`;
 
 cute-html/dist/cute-html.mjs:
   (*! For license information please see cute-html.mjs.LICENSE.txt *)
-
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
 
 tslib/tslib.es6.js:
   (*! *****************************************************************************
