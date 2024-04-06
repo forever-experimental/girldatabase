@@ -107,4 +107,4 @@ summary { /* for opening "make comment" box */
     font-size: smaller;
 }
 
-form > #comment-body { min-width: 40em; max-width: 40em; min-height: 1em; max-height: 8em; margin: 0px; }
+form > .comment-body { min-width: 40em; max-width: 40em; min-height: 2em; max-height: 12em; margin: 0px; }
