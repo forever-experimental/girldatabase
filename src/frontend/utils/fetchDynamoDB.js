@@ -1,8 +1,8 @@
 // DynamoDB utility functions
-import { QueryCommand } from "@aws-sdk/client-dynamodb";
+import {QueryCommand} from "@aws-sdk/client-dynamodb";
+import {_} from 'cute-con';
 
-async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,)
-{
+async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,) {
     theDirectoryWeWant = `/${theDirectoryWeWant}/`;
     try {
         const params = {
@@ -24,19 +24,33 @@ async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant
         const command = new QueryCommand(params);
         const {Items, LastEvaluatedKey} = await dynamoDBClient.send(command);
         // Process and return the fetched items, along with the last evaluated key for pagination
-        const processedItems = Items.map(item => ({
-            theDir: item.dir.S,
-            imageUrl: item.imgURL?.S || "",
-            comments: item.comments?.S || "",
-            theFileName: item.ogfilename?.S || "",
-            theText: item.text?.S || "",
-            theUnix: item.unix.N || "",
-        }));
+        let processedItems = [];
+        for (let i = 0; i < Items.length; i++) {
+            if (Items[i].JSON) {
+                const fromJson = JSON.parse(Items[i].JSON.S);
+                processedItems[i] = {
+                    dir: fromJson.dir.S,
+                    imgURL: fromJson.imgURL || "",
+                    comments: fromJson.comments || "",
+                    ogfilename: fromJson.ogfilename || "",
+                    text: fromJson.text || "",
+                    unix: fromJson.unix || "",
+                }
+            } else {
+                processedItems[i] = {
+                    dir: Items[i].dir.S,
+                    imgURL: Items[i].imgURL?.S || "",
+                    comments: Items[i].comments?.S || "",
+                    ogfilename: Items[i].ogfilename?.S || "",
+                    text: Items[i].text?.S || "",
+                    unix: Items[i].unix.N || "",
+                }
+            }
+        }
         return {
             items: processedItems, lastEvaluatedKey: LastEvaluatedKey ? LastEvaluatedKey.unix.S : null,
         };
-    }
-    catch (error) {
+    } catch (error) {
         console.error("Error fetching posts:", error);
         throw new Error("Failed to fetch posts");
     }

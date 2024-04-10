@@ -19682,9 +19682,9 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/utils/createDynamoDBClient.js
+  // src/frontend/utils/createDynamoDBClient.js
   var require_createDynamoDBClient = __commonJS({
-    "src/js/frontend/utils/createDynamoDBClient.js"(exports, module) {
+    "src/frontend/utils/createDynamoDBClient.js"(exports, module) {
       init_dist_es39();
       init_dist_es40();
       init_dist_es44();
@@ -19701,10 +19701,17 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/utils/fetchDynamoDB.js
+  // node_modules/cute-con/src/index.js
+  var init_src = __esm({
+    "node_modules/cute-con/src/index.js"() {
+    }
+  });
+
+  // src/frontend/utils/fetchDynamoDB.js
   var require_fetchDynamoDB = __commonJS({
-    "src/js/frontend/utils/fetchDynamoDB.js"(exports, module) {
+    "src/frontend/utils/fetchDynamoDB.js"(exports, module) {
       init_dist_es44();
+      init_src();
       async function fetchPostsFromBoard2(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
         theDirectoryWeWant = `/${theDirectoryWeWant}/`;
         try {
@@ -19730,14 +19737,29 @@ ${toHex(hashedRequest)}`;
           }
           const command = new QueryCommand(params);
           const { Items, LastEvaluatedKey } = await dynamoDBClient.send(command);
-          const processedItems = Items.map((item) => ({
-            theDir: item.dir.S,
-            imageUrl: item.imgURL?.S || "",
-            comments: item.comments?.S || "",
-            theFileName: item.ogfilename?.S || "",
-            theText: item.text?.S || "",
-            theUnix: item.unix.N || ""
-          }));
+          let processedItems = [];
+          for (let i4 = 0; i4 < Items.length; i4++) {
+            if (Items[i4].JSON) {
+              const fromJson = JSON.parse(Items[i4].JSON.S);
+              processedItems[i4] = {
+                dir: fromJson.dir.S,
+                imgURL: fromJson.imgURL || "",
+                comments: fromJson.comments || "",
+                ogfilename: fromJson.ogfilename || "",
+                text: fromJson.text || "",
+                unix: fromJson.unix || ""
+              };
+            } else {
+              processedItems[i4] = {
+                dir: Items[i4].dir.S,
+                imgURL: Items[i4].imgURL?.S || "",
+                comments: Items[i4].comments?.S || "",
+                ogfilename: Items[i4].ogfilename?.S || "",
+                text: Items[i4].text?.S || "",
+                unix: Items[i4].unix.N || ""
+              };
+            }
+          }
           return {
             items: processedItems,
             lastEvaluatedKey: LastEvaluatedKey ? LastEvaluatedKey.unix.S : null
@@ -19751,9 +19773,9 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/utils/convertImageToCompressedWebP.js
+  // src/frontend/utils/convertImageToCompressedWebP.js
   var require_convertImageToCompressedWebP = __commonJS({
-    "src/js/frontend/utils/convertImageToCompressedWebP.js"(exports, module) {
+    "src/frontend/utils/convertImageToCompressedWebP.js"(exports, module) {
       async function compressImage2(file) {
         const MAX_SIZE_MB = 3;
         const MB = 1024 * 1024;
@@ -19797,9 +19819,9 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/utils/GCF_PostPost.js
+  // src/frontend/utils/GCF_PostPost.js
   var require_GCF_PostPost = __commonJS({
-    "src/js/frontend/utils/GCF_PostPost.js"(exports, module) {
+    "src/frontend/utils/GCF_PostPost.js"(exports, module) {
       async function uploadSockToCloudFunction2(dir, fileName, imageBlob, text) {
         const cloudFunctionUrl = "https://us-central1-enduring-maxim-411523.cloudfunctions.net/girlsock-directory_image-upload";
         const imageContent = await toBase642(imageBlob);
@@ -19836,16 +19858,16 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/components/girl.js
+  // src/frontend/components/girl.js
   var girl_exports = {};
   __export(girl_exports, {
     sock: () => sock
   });
   var sock;
   var init_girl = __esm({
-    "src/js/frontend/components/girl.js"() {
+    "src/frontend/components/girl.js"() {
       init_cute_html();
-      sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => X`
+      sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => X`
     <article>
         <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
         <div class="meta">
@@ -19855,7 +19877,7 @@ ${toHex(hashedRequest)}`;
         <div class="body">
             ${txt}
         </div>
-        <div class="comments">
+        <div id="comments-${unix}" class="comments">
 
             <!--
             <div class="comment">comment 1</div>
@@ -19868,7 +19890,7 @@ ${toHex(hashedRequest)}`;
                 <form>
                     <textarea class="comment-body" name="comment-body" rows="4"></textarea>
                     <br>
-                    <input class="comment-form-submit" type="submit" value="Add comment">
+                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)>
                 </form>
             </details>
         </div>
@@ -19877,9 +19899,9 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/cute-util/src/index.js
-  var require_src = __commonJS({
-    "node_modules/cute-util/src/index.js"(exports, module) {
+  // node_modules/uriurl/index.js
+  var require_uriurl = __commonJS({
+    "node_modules/uriurl/index.js"(exports, module) {
       function getLastExtensionFromUri(uri) {
         let ext = getFileNameFromUri2(uri).split(".").pop().toLowerCase();
         return ext ? ext : "";
@@ -19912,7 +19934,7 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/js/frontend/socks.index.js
+  // src/frontend/socks.index.js
   init_cute_html();
 
   // node_modules/date-fns/toDate.mjs
@@ -20651,13 +20673,13 @@ ${toHex(hashedRequest)}`;
     return formatDistance2(date, Date.now(), options);
   }
 
-  // src/js/frontend/socks.index.js
+  // src/frontend/socks.index.js
   var { createDynamoDBClient } = require_createDynamoDBClient();
   var fetchPostsFromBoard = require_fetchDynamoDB();
   var { compressImage } = require_convertImageToCompressedWebP();
   var { uploadSockToCloudFunction } = require_GCF_PostPost();
   var { sock: sock2 } = (init_girl(), __toCommonJS(girl_exports));
-  var { getFileNameFromUri } = require_src();
+  var { getFileNameFromUri } = require_uriurl();
   var USER_POSTS_TABLE = "girlsockdir";
   async function main() {
     let dirToPull = getLastPartOfUrl();
@@ -20668,11 +20690,15 @@ ${toHex(hashedRequest)}`;
     CuteLoadingModal.show();
     let posts = await fetchPostsFromBoard(USER_POSTS_TABLE, createDynamoDBClient(), dir, 20);
     CuteLoadingModal.hide();
-    if (posts.items.length === 0 || void 0 || null) {
+    if (posts.items.length === 0 || void 0 || null)
       alert("Nothing found or server error.");
+    for (let i4 = 0; i4 < posts.items.length; i4++) {
+      let userPost = sock2(posts.items[i4].imgURL, posts.items[i4].ogfilename, "1x1", 0, posts.items[i4].text, posts.items[i4], unixToRelativeTime(posts.items[i4].unix), posts.items[i4].unix);
+      await D("#articles").inject(userPost);
+      for (let c4 = 0; c4 < posts.items[i4].comments.length; c4++) {
+        D(`#comments-${posts.items[i4].unix}`).inject(X`<div class="comment">${posts.items[i4].comments[c4].text}</div>`);
+      }
     }
-    const allSocks = posts.items.map((post, index) => sock2(post.imageUrl, post.theFileName, "1x1", 0, post.theText, index, unixToRelativeTime(post.theUnix)));
-    D("#articles").render(X`${allSocks}`);
     V("img.image").forEach((img) => {
       const setDim = () => document.getElementById(`imgRes-${img.id.split("-")[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
       img.complete ? setDim() : img.onload = setDim;
@@ -20704,11 +20730,12 @@ ${toHex(hashedRequest)}`;
   }
   var CuteLoadingModal = {
     modalTemplate: X`
-      <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
-          Loading....
+        <div id="post-form-submit-loading-modal"
+             style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
+                Loading....
+            </div>
         </div>
-      </div>
     `,
     show: () => D("body").inject(CuteLoadingModal.modalTemplate),
     hide: () => D("#post-form-submit-loading-modal").remove()
