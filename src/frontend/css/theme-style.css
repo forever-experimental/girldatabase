@@ -82,8 +82,8 @@ article > .image {
 }
 
 article > .image[big] {
-    max-width: 50%;
-    max-height: auto;
+    max-width: 100%;
+    max-height: 60vh;
 }
 
 article > .body {
