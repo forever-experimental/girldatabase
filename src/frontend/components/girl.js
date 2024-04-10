@@ -1,5 +1,8 @@
 import { html } from 'cute-html';
 
+// the below is inserted into the <div class="comments"></div>
+// <div class="comment">comment here</div>
+
 export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => html`
     <article>
         <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
@@ -12,20 +15,15 @@ export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeSt
         </div>
         <div id="comments-${unix}" class="comments">
 
-            <!--
-            <div class="comment">comment 1</div>
-            <div class="comment">comment 2</div>
-            <div class="comment">comment 3</div>
-            -->
-
             <details>
                 <summary>Write comment</summary>
                 <form>
                     <textarea class="comment-body" name="comment-body" rows="4"></textarea>
                     <br>
-                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)>
+                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)">
                 </form>
             </details>
+            
         </div>
     </article>
 `;
