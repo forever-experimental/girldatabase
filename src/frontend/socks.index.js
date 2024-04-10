@@ -6,7 +6,7 @@ const {sock} = require('./components/girl.js');
 import { html, $ , $$} from 'cute-html';
 import { formatDistanceToNow } from 'date-fns';
 
-const {getFileNameFromUri} = require('cute-util');
+const {getFileNameFromUri} = require('uriurl');
 
 const USER_POSTS_TABLE = "girlsockdir";
 
@@ -26,7 +26,7 @@ async function getLatest(dir)
         alert("Nothing found or server error.");
     }
 
-    const allSocks = posts.items.map((post, index) => sock(post.imageUrl, post.theFileName, "1x1", 0, post.theText, index, unixToRelativeTime(post.theUnix)));
+    const allSocks = posts.items.map((post, index) => sock(post.imgURL, post.ogfilename, "1x1", 0, post.text, index, unixToRelativeTime(post.unix)));
 
     // Render all socks at once
     $('#articles').render(html`${allSocks}`);

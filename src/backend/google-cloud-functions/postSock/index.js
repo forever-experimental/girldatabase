@@ -5,7 +5,7 @@ const sharp = require('sharp');
 const crypto = require('crypto');
 const dotenv = require('dotenv');
 const cors = require('cors')({ origin: true });
-const {getLastExtension} = require('cute-util');
+const {getLastExtension} = require('uriurl');
 
 dotenv.config();
 

@@ -28,7 +28,7 @@
     })();
     </script>
     
-    <!-- stylesheets --> <link rel="stylesheet" href="/src/css/theme-style.css">
+    <!-- stylesheets --> <link rel="stylesheet" href="/src/frontend/css/theme-style.css">
     <!-- goat stats --> <script data-goatcounter="https://girl.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <!-- discord OpenGraph tags https://www.reddit.com/r/discordapp/comments/82p8i6/a_basic_tutorial_on_how_to_get_the_most_out_of/ --> 
     <meta property="og:description" content="An imageboard for pictures of girls, socks, and some other stuff. Stop on by.">
@@ -109,8 +109,8 @@
   };
   await Promise.all([ // Dynamic imports with computed base URL
     import('https://cdn.jsdelivr.net/npm/cute-html@1.0.1'),
-    import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/homedir.js`),
-    import(`${BASE_URL}src/js/frontend/components/not-bundled-use-cdn/directory.js`)
+    import(`${BASE_URL}src/frontend/components/not-bundled-use-cdn/homedir.js`),
+    import(`${BASE_URL}src/frontend/components/not-bundled-use-cdn/directory.js`)
   ]).then(([cuteHtml, homedirModule, directoryModule]) =>
   {
     const {
@@ -146,7 +146,7 @@
     if (!atHomeDir()) {
       const script = document.createElement('script');
       script.type = 'module';
-      script.src = `${BASE_URL}src/js/frontend/socks.index.esbuild.js`;
+      script.src = `${BASE_URL}src/frontend/socks.index.esbuild.js`;
       document.body.appendChild(script);
     }
   });
