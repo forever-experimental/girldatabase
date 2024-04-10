@@ -19867,7 +19867,7 @@ ${toHex(hashedRequest)}`;
   var init_girl = __esm({
     "src/frontend/components/girl.js"() {
       init_cute_html();
-      sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr) => X`
+      sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => X`
     <article>
         <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
         <div class="meta">
@@ -19877,7 +19877,7 @@ ${toHex(hashedRequest)}`;
         <div class="body">
             ${txt}
         </div>
-        <div class="comments">
+        <div id="comments-${unix}" class="comments">
 
             <!--
             <div class="comment">comment 1</div>
@@ -19890,7 +19890,7 @@ ${toHex(hashedRequest)}`;
                 <form>
                     <textarea class="comment-body" name="comment-body" rows="4"></textarea>
                     <br>
-                    <input class="comment-form-submit" type="submit" value="Add comment">
+                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)>
                 </form>
             </details>
         </div>
@@ -20690,11 +20690,15 @@ ${toHex(hashedRequest)}`;
     CuteLoadingModal.show();
     let posts = await fetchPostsFromBoard(USER_POSTS_TABLE, createDynamoDBClient(), dir, 20);
     CuteLoadingModal.hide();
-    if (posts.items.length === 0 || void 0 || null) {
+    if (posts.items.length === 0 || void 0 || null)
       alert("Nothing found or server error.");
+    for (let i4 = 0; i4 < posts.items.length; i4++) {
+      let userPost = sock2(posts.items[i4].imgURL, posts.items[i4].ogfilename, "1x1", 0, posts.items[i4].text, posts.items[i4], unixToRelativeTime(posts.items[i4].unix), posts.items[i4].unix);
+      await D("#articles").inject(userPost);
+      for (let c4 = 0; c4 < posts.items[i4].comments.length; c4++) {
+        D(`#comments-${posts.items[i4].unix}`).inject(X`<div class="comment">${posts.items[i4].comments[c4].text}</div>`);
+      }
     }
-    const allSocks = posts.items.map((post, index) => sock2(post.imgURL, post.ogfilename, "1x1", 0, post.text, index, unixToRelativeTime(post.unix)));
-    D("#articles").render(X`${allSocks}`);
     V("img.image").forEach((img) => {
       const setDim = () => document.getElementById(`imgRes-${img.id.split("-")[1]}`).textContent = `(${img.naturalWidth}x${img.naturalHeight})`;
       img.complete ? setDim() : img.onload = setDim;
@@ -20726,11 +20730,12 @@ ${toHex(hashedRequest)}`;
   }
   var CuteLoadingModal = {
     modalTemplate: X`
-      <div id="post-form-submit-loading-modal" style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
-          Loading....
+        <div id="post-form-submit-loading-modal"
+             style="position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; background:#fff;">
+                Loading....
+            </div>
         </div>
-      </div>
     `,
     show: () => D("body").inject(CuteLoadingModal.modalTemplate),
     hide: () => D("#post-form-submit-loading-modal").remove()
