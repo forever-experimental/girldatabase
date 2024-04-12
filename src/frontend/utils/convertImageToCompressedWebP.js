@@ -1,6 +1,6 @@
 // js/imageUtils.js
 
-async function compressImage(file) {
+export async function compressImage(file) {
     const MAX_SIZE_MB = 3;
     const MB = 1024 * 1024;
 
@@ -47,4 +47,3 @@ async function compressImage(file) {
     });
 }
 
-module.exports.compressImage = compressImage;

@@ -109,8 +109,8 @@
   };
   await Promise.all([ // Dynamic imports with computed base URL
     import('https://cdn.jsdelivr.net/npm/cute-html@1.0.1'),
-    import(`${BASE_URL}src/frontend/components/not-bundled-use-cdn/homedir.js`),
-    import(`${BASE_URL}src/frontend/components/not-bundled-use-cdn/directory.js`)
+    import(`${BASE_URL}src/frontend/components/homedir.js`),
+    import(`${BASE_URL}src/frontend/components/directory.js`)
   ]).then(([cuteHtml, homedirModule, directoryModule]) =>
   {
     const {

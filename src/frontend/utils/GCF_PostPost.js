@@ -1,4 +1,4 @@
-async function uploadSockToCloudFunction(dir, fileName, imageBlob, text)
+export async function uploadSockToCloudFunction(dir, fileName, imageBlob, text)
 {
     const cloudFunctionUrl = 'https://us-central1-enduring-maxim-411523.cloudfunctions.net/girlsock-directory_image-upload';
 
@@ -45,5 +45,3 @@ function toBase64(file)
         reader.onerror = error => reject(error);
     });
 }
-
-module.exports.uploadSockToCloudFunction = uploadSockToCloudFunction;

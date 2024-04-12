@@ -96,7 +96,11 @@
     }
   });
   </script>
-  
+  <script>
+    const script = document.createElement('script');
+    script.src = `${BASE_URL}src/frontend/submitComment.js`;
+    document.body.appendChild(script);
+  </script>
   <script type="module"> // Dynamic rendering based on path logic
   const atHomeDir = () =>
   {
@@ -107,10 +111,10 @@
     else if (onGitHubPages || window.location.hostname === 'localhost') return pathSegments.length === 1;
     return pathSegments.length === 0;
   };
-  await Promise.all([ // Dynamic imports with computed base URL
+  await Promise.all([ // These are imported before the rest of the code runs
     import('https://cdn.jsdelivr.net/npm/cute-html@1.0.1'),
-    import(`${BASE_URL}src//frontend/components/not-bundled-use-cdn/homedir.js`),
-    import(`${BASE_URL}src//frontend/components/not-bundled-use-cdn/directory.js`)
+    import(`${BASE_URL}src/frontend/components/homedir.js`),
+    import(`${BASE_URL}src/frontend/components/directory.js`)
   ]).then(([cuteHtml, homedirModule, directoryModule]) =>
   {
     const {
@@ -146,7 +150,7 @@
     if (!atHomeDir()) {
       const script = document.createElement('script');
       script.type = 'module';
-      script.src = `${BASE_URL}src//frontend/socks.index.esbuild.js`;
+      script.src = `${BASE_URL}src/frontend/socks.index.esbuild.js`;
       document.body.appendChild(script);
     }
   });

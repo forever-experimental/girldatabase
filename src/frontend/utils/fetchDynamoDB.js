@@ -1,8 +1,8 @@
 // DynamoDB utility functions
 import {QueryCommand} from "@aws-sdk/client-dynamodb";
-import {_} from 'cute-con';
+//import {_} from 'https://cdn.jsdelivr.net/npm/cute-con';
 
-async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,) {
+export async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,) {
     theDirectoryWeWant = `/${theDirectoryWeWant}/`;
     try {
         const params = {
@@ -55,5 +55,3 @@ async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant
         throw new Error("Failed to fetch posts");
     }
 }
-
-module.exports = fetchPostsFromBoard;

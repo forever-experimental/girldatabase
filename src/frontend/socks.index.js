@@ -1,23 +1,18 @@
-const {createDynamoDBClient} = require('./utils/createDynamoDBClient.js');
-const fetchPostsFromBoard = require('./utils/fetchDynamoDB.js');
-const {compressImage} = require('./utils/convertImageToCompressedWebP.js');
-const {uploadSockToCloudFunction} = require('./utils/GCF_PostPost.js');
-const {sock} = require('./components/girl.js');
+import {createDynamoDBClient} from "./utils/createDynamoDBClient.js";
+import {fetchPostsFromBoard} from './utils/fetchDynamoDB.js';
+import {compressImage} from './utils/convertImageToCompressedWebP.js';
+import {uploadSockToCloudFunction} from './utils/GCF_PostPost.js';
+import {sock} from './components/girl.js';
 import {html, $, $$} from 'cute-html';
 import {formatDistanceToNow} from 'date-fns';
-const {getFileNameFromUri} = require('uriurl');
-import fch from 'cute-fetch';
+import {getFileNameFromUri} from 'uriurl';
 
 const USER_POSTS_TABLE = "girlsockdir";
 
 async function main() {
     let dirToPull = getLastPartOfUrl();
     await getLatest(dirToPull);
-    $('#post-form-submit').onclick = submitPost;
-}
-
-async function submitComment(input){
-    console.log("submit");
+    $('#post-form-submit').onclick = onclick_submitPost;
 }
 
 async function getLatest(dir) {
@@ -30,7 +25,8 @@ async function getLatest(dir) {
         let userPost = sock(posts.items[i].imgURL, posts.items[i].ogfilename, "1x1", 0, posts.items[i].text, posts.items[i], unixToRelativeTime(posts.items[i].unix), posts.items[i].unix);
         await $('#articles').inject(userPost);
         for (let c = 0; c < posts.items[i].comments.length; c++) {
-            $(`#comments-${posts.items[i].unix}`).inject(html`<div class="comment">${posts.items[i].comments[c].text}</div>`);
+            $(`#comments-${posts.items[i].unix}`).inject(html`
+                <div class="comment">${posts.items[i].comments[c].text}</div>`);
         }
     }
     // set res metatag of all images
@@ -40,7 +36,7 @@ async function getLatest(dir) {
     });
 }
 
-async function submitPost(event) {
+async function onclick_submitPost(event) {
     event.preventDefault();
     CuteLoadingModal.show();
 
@@ -57,7 +53,6 @@ async function submitPost(event) {
         if (response.ok) {
             CuteLoadingModal.hide();
             window.location.reload();
-            console.log("reloaded");
         } else {
             CuteLoadingModal.hide();
             alert("Upload failed: " + response);
