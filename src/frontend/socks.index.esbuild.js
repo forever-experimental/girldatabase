@@ -33,341 +33,6 @@
   ));
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // node_modules/cute-html/dist/cute-html.mjs
-  function b(t4, e4) {
-    if (!Array.isArray(t4) || !t4.hasOwnProperty("raw"))
-      throw Error("invalid template strings array");
-    return void 0 !== s ? s.createHTML(e4) : e4;
-  }
-  function w(t4, e4, n4 = t4, i4) {
-    if (e4 === x)
-      return e4;
-    let s4 = void 0 !== i4 ? n4._$Co?.[i4] : n4._$Cl;
-    const o4 = $(e4) ? void 0 : e4._$litDirective$;
-    return s4?.constructor !== o4 && (s4?._$AO?.(false), void 0 === o4 ? s4 = void 0 : (s4 = new o4(t4), s4._$AT(t4, n4, i4)), void 0 !== i4 ? (n4._$Co ??= [])[i4] = s4 : n4._$Cl = s4), void 0 !== s4 && (e4 = w(t4, s4._$AS(t4, e4.values), s4, i4)), e4;
-  }
-  var t, e, n, i, s, o, r, h, l, c, a, $, d, p, A, u, _, f, g, y, m, v, H, x, N, T, M, E, C, S, L, j, I, B, P, U, R, O, W, k, q, D, V, z, X, Z;
-  var init_cute_html = __esm({
-    "node_modules/cute-html/dist/cute-html.mjs"() {
-      t = { d: (e4, n4) => {
-        for (var i4 in n4)
-          t.o(n4, i4) && !t.o(e4, i4) && Object.defineProperty(e4, i4, { enumerable: true, get: n4[i4] });
-      }, o: (t4, e4) => Object.prototype.hasOwnProperty.call(t4, e4) };
-      e = {};
-      t.d(e, { $: () => k, $$: () => q, _: () => W, q: () => H, X: () => O });
-      n = globalThis;
-      i = n.trustedTypes;
-      s = i ? i.createPolicy("lit-html", { createHTML: (t4) => t4 }) : void 0;
-      o = "$lit$";
-      r = `lit$${(Math.random() + "").slice(9)}$`;
-      h = "?" + r;
-      l = `<${h}>`;
-      c = document;
-      a = () => c.createComment("");
-      $ = (t4) => null === t4 || "object" != typeof t4 && "function" != typeof t4;
-      d = Array.isArray;
-      p = "[ 	\n\f\r]";
-      A = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
-      u = /-->/g;
-      _ = />/g;
-      f = RegExp(`>|${p}(?:([^\\s"'>=/]+)(${p}*=${p}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g");
-      g = /'/g;
-      y = /"/g;
-      m = /^(?:script|style|textarea|title)$/i;
-      v = (t4) => (e4, ...n4) => ({ _$litType$: t4, strings: e4, values: n4 });
-      H = v(1);
-      x = (v(2), Symbol.for("lit-noChange"));
-      N = Symbol.for("lit-nothing");
-      T = /* @__PURE__ */ new WeakMap();
-      M = c.createTreeWalker(c, 129);
-      E = (t4, e4) => {
-        const n4 = t4.length - 1, i4 = [];
-        let s4, h4 = 2 === e4 ? "<svg>" : "", c4 = A;
-        for (let e5 = 0; e5 < n4; e5++) {
-          const n5 = t4[e5];
-          let a4, $2, d4 = -1, p4 = 0;
-          for (; p4 < n5.length && (c4.lastIndex = p4, $2 = c4.exec(n5), null !== $2); )
-            p4 = c4.lastIndex, c4 === A ? "!--" === $2[1] ? c4 = u : void 0 !== $2[1] ? c4 = _ : void 0 !== $2[2] ? (m.test($2[2]) && (s4 = RegExp("</" + $2[2], "g")), c4 = f) : void 0 !== $2[3] && (c4 = f) : c4 === f ? ">" === $2[0] ? (c4 = s4 ?? A, d4 = -1) : void 0 === $2[1] ? d4 = -2 : (d4 = c4.lastIndex - $2[2].length, a4 = $2[1], c4 = void 0 === $2[3] ? f : '"' === $2[3] ? y : g) : c4 === y || c4 === g ? c4 = f : c4 === u || c4 === _ ? c4 = A : (c4 = f, s4 = void 0);
-          const v5 = c4 === f && t4[e5 + 1].startsWith("/>") ? " " : "";
-          h4 += c4 === A ? n5 + l : d4 >= 0 ? (i4.push(a4), n5.slice(0, d4) + o + n5.slice(d4) + r + v5) : n5 + r + (-2 === d4 ? e5 : v5);
-        }
-        return [b(t4, h4 + (t4[n4] || "<?>") + (2 === e4 ? "</svg>" : "")), i4];
-      };
-      C = class _C {
-        constructor({ strings: t4, _$litType$: e4 }, n4) {
-          let s4;
-          this.parts = [];
-          let l4 = 0, c4 = 0;
-          const $2 = t4.length - 1, d4 = this.parts, [p4, A2] = E(t4, e4);
-          if (this.el = _C.createElement(p4, n4), M.currentNode = this.el.content, 2 === e4) {
-            const t5 = this.el.content.firstChild;
-            t5.replaceWith(...t5.childNodes);
-          }
-          for (; null !== (s4 = M.nextNode()) && d4.length < $2; ) {
-            if (1 === s4.nodeType) {
-              if (s4.hasAttributes())
-                for (const t5 of s4.getAttributeNames())
-                  if (t5.endsWith(o)) {
-                    const e5 = A2[c4++], n5 = s4.getAttribute(t5).split(r), i4 = /([.?@])?(.*)/.exec(e5);
-                    d4.push({ type: 1, index: l4, name: i4[2], strings: n5, ctor: "." === i4[1] ? I : "?" === i4[1] ? B : "@" === i4[1] ? P : j }), s4.removeAttribute(t5);
-                  } else
-                    t5.startsWith(r) && (d4.push({ type: 6, index: l4 }), s4.removeAttribute(t5));
-              if (m.test(s4.tagName)) {
-                const t5 = s4.textContent.split(r), e5 = t5.length - 1;
-                if (e5 > 0) {
-                  s4.textContent = i ? i.emptyScript : "";
-                  for (let n5 = 0; n5 < e5; n5++)
-                    s4.append(t5[n5], a()), M.nextNode(), d4.push({ type: 2, index: ++l4 });
-                  s4.append(t5[e5], a());
-                }
-              }
-            } else if (8 === s4.nodeType)
-              if (s4.data === h)
-                d4.push({ type: 2, index: l4 });
-              else {
-                let t5 = -1;
-                for (; -1 !== (t5 = s4.data.indexOf(r, t5 + 1)); )
-                  d4.push({ type: 7, index: l4 }), t5 += r.length - 1;
-              }
-            l4++;
-          }
-        }
-        static createElement(t4, e4) {
-          const n4 = c.createElement("template");
-          return n4.innerHTML = t4, n4;
-        }
-      };
-      S = class {
-        constructor(t4, e4) {
-          this._$AV = [], this._$AN = void 0, this._$AD = t4, this._$AM = e4;
-        }
-        get parentNode() {
-          return this._$AM.parentNode;
-        }
-        get _$AU() {
-          return this._$AM._$AU;
-        }
-        u(t4) {
-          const { el: { content: e4 }, parts: n4 } = this._$AD, i4 = (t4?.creationScope ?? c).importNode(e4, true);
-          M.currentNode = i4;
-          let s4 = M.nextNode(), o4 = 0, r4 = 0, h4 = n4[0];
-          for (; void 0 !== h4; ) {
-            if (o4 === h4.index) {
-              let e5;
-              2 === h4.type ? e5 = new L(s4, s4.nextSibling, this, t4) : 1 === h4.type ? e5 = new h4.ctor(s4, h4.name, h4.strings, this, t4) : 6 === h4.type && (e5 = new U(s4, this, t4)), this._$AV.push(e5), h4 = n4[++r4];
-            }
-            o4 !== h4?.index && (s4 = M.nextNode(), o4++);
-          }
-          return M.currentNode = c, i4;
-        }
-        p(t4) {
-          let e4 = 0;
-          for (const n4 of this._$AV)
-            void 0 !== n4 && (void 0 !== n4.strings ? (n4._$AI(t4, n4, e4), e4 += n4.strings.length - 2) : n4._$AI(t4[e4])), e4++;
-        }
-      };
-      L = class _L {
-        get _$AU() {
-          return this._$AM?._$AU ?? this._$Cv;
-        }
-        constructor(t4, e4, n4, i4) {
-          this.type = 2, this._$AH = N, this._$AN = void 0, this._$AA = t4, this._$AB = e4, this._$AM = n4, this.options = i4, this._$Cv = i4?.isConnected ?? true;
-        }
-        get parentNode() {
-          let t4 = this._$AA.parentNode;
-          const e4 = this._$AM;
-          return void 0 !== e4 && 11 === t4?.nodeType && (t4 = e4.parentNode), t4;
-        }
-        get startNode() {
-          return this._$AA;
-        }
-        get endNode() {
-          return this._$AB;
-        }
-        _$AI(t4, e4 = this) {
-          t4 = w(this, t4, e4), $(t4) ? t4 === N || null == t4 || "" === t4 ? (this._$AH !== N && this._$AR(), this._$AH = N) : t4 !== this._$AH && t4 !== x && this._(t4) : void 0 !== t4._$litType$ ? this.$(t4) : void 0 !== t4.nodeType ? this.T(t4) : ((t5) => d(t5) || "function" == typeof t5?.[Symbol.iterator])(t4) ? this.k(t4) : this._(t4);
-        }
-        S(t4) {
-          return this._$AA.parentNode.insertBefore(t4, this._$AB);
-        }
-        T(t4) {
-          this._$AH !== t4 && (this._$AR(), this._$AH = this.S(t4));
-        }
-        _(t4) {
-          this._$AH !== N && $(this._$AH) ? this._$AA.nextSibling.data = t4 : this.T(c.createTextNode(t4)), this._$AH = t4;
-        }
-        $(t4) {
-          const { values: e4, _$litType$: n4 } = t4, i4 = "number" == typeof n4 ? this._$AC(t4) : (void 0 === n4.el && (n4.el = C.createElement(b(n4.h, n4.h[0]), this.options)), n4);
-          if (this._$AH?._$AD === i4)
-            this._$AH.p(e4);
-          else {
-            const t5 = new S(i4, this), n5 = t5.u(this.options);
-            t5.p(e4), this.T(n5), this._$AH = t5;
-          }
-        }
-        _$AC(t4) {
-          let e4 = T.get(t4.strings);
-          return void 0 === e4 && T.set(t4.strings, e4 = new C(t4)), e4;
-        }
-        k(t4) {
-          d(this._$AH) || (this._$AH = [], this._$AR());
-          const e4 = this._$AH;
-          let n4, i4 = 0;
-          for (const s4 of t4)
-            i4 === e4.length ? e4.push(n4 = new _L(this.S(a()), this.S(a()), this, this.options)) : n4 = e4[i4], n4._$AI(s4), i4++;
-          i4 < e4.length && (this._$AR(n4 && n4._$AB.nextSibling, i4), e4.length = i4);
-        }
-        _$AR(t4 = this._$AA.nextSibling, e4) {
-          for (this._$AP?.(false, true, e4); t4 && t4 !== this._$AB; ) {
-            const e5 = t4.nextSibling;
-            t4.remove(), t4 = e5;
-          }
-        }
-        setConnected(t4) {
-          void 0 === this._$AM && (this._$Cv = t4, this._$AP?.(t4));
-        }
-      };
-      j = class {
-        get tagName() {
-          return this.element.tagName;
-        }
-        get _$AU() {
-          return this._$AM._$AU;
-        }
-        constructor(t4, e4, n4, i4, s4) {
-          this.type = 1, this._$AH = N, this._$AN = void 0, this.element = t4, this.name = e4, this._$AM = i4, this.options = s4, n4.length > 2 || "" !== n4[0] || "" !== n4[1] ? (this._$AH = Array(n4.length - 1).fill(new String()), this.strings = n4) : this._$AH = N;
-        }
-        _$AI(t4, e4 = this, n4, i4) {
-          const s4 = this.strings;
-          let o4 = false;
-          if (void 0 === s4)
-            t4 = w(this, t4, e4, 0), o4 = !$(t4) || t4 !== this._$AH && t4 !== x, o4 && (this._$AH = t4);
-          else {
-            const i5 = t4;
-            let r4, h4;
-            for (t4 = s4[0], r4 = 0; r4 < s4.length - 1; r4++)
-              h4 = w(this, i5[n4 + r4], e4, r4), h4 === x && (h4 = this._$AH[r4]), o4 ||= !$(h4) || h4 !== this._$AH[r4], h4 === N ? t4 = N : t4 !== N && (t4 += (h4 ?? "") + s4[r4 + 1]), this._$AH[r4] = h4;
-          }
-          o4 && !i4 && this.j(t4);
-        }
-        j(t4) {
-          t4 === N ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t4 ?? "");
-        }
-      };
-      I = class extends j {
-        constructor() {
-          super(...arguments), this.type = 3;
-        }
-        j(t4) {
-          this.element[this.name] = t4 === N ? void 0 : t4;
-        }
-      };
-      B = class extends j {
-        constructor() {
-          super(...arguments), this.type = 4;
-        }
-        j(t4) {
-          this.element.toggleAttribute(this.name, !!t4 && t4 !== N);
-        }
-      };
-      P = class extends j {
-        constructor(t4, e4, n4, i4, s4) {
-          super(t4, e4, n4, i4, s4), this.type = 5;
-        }
-        _$AI(t4, e4 = this) {
-          if ((t4 = w(this, t4, e4, 0) ?? N) === x)
-            return;
-          const n4 = this._$AH, i4 = t4 === N && n4 !== N || t4.capture !== n4.capture || t4.once !== n4.once || t4.passive !== n4.passive, s4 = t4 !== N && (n4 === N || i4);
-          i4 && this.element.removeEventListener(this.name, this, n4), s4 && this.element.addEventListener(this.name, this, t4), this._$AH = t4;
-        }
-        handleEvent(t4) {
-          "function" == typeof this._$AH ? this._$AH.call(this.options?.host ?? this.element, t4) : this._$AH.handleEvent(t4);
-        }
-      };
-      U = class {
-        constructor(t4, e4, n4) {
-          this.element = t4, this.type = 6, this._$AN = void 0, this._$AM = e4, this.options = n4;
-        }
-        get _$AU() {
-          return this._$AM._$AU;
-        }
-        _$AI(t4) {
-          w(this, t4);
-        }
-      };
-      R = n.litHtmlPolyfillSupport;
-      R?.(C, L), (n.litHtmlVersions ??= []).push("3.1.2");
-      O = (t4, e4, n4) => {
-        const i4 = n4?.renderBefore ?? e4;
-        let s4 = i4._$litPart$;
-        if (void 0 === s4) {
-          const t5 = n4?.renderBefore ?? null;
-          i4._$litPart$ = s4 = new L(e4.insertBefore(a(), t5), t5, void 0, n4 ?? {});
-        }
-        return s4._$AI(t4), s4;
-      };
-      W = (...t4) => (console.log(...t4), t4[t4.length - 1]);
-      k = function(t4) {
-        var e4 = document.querySelector(t4);
-        if (!e4)
-          throw new Error("Element not found: ".concat(t4));
-        return e4.render = function(t5) {
-          "function" == typeof t5 && (t5 = t5()), "string" == typeof t5 ? e4.innerHTML = t5 : t5 instanceof HTMLElement ? (e4.innerHTML = "", e4.appendChild(t5)) : O(t5, e4);
-        }, e4.inject = function(t5) {
-          if ("function" == typeof t5 && (t5 = t5()), "string" == typeof t5)
-            e4.insertAdjacentHTML("beforeend", t5);
-          else if (t5 instanceof HTMLElement)
-            e4.appendChild(t5);
-          else {
-            var n4 = document.createElement("template");
-            O(t5, n4.content), e4.appendChild(n4.content);
-          }
-        }, e4.hide = function() {
-          return e4.style.display = "none";
-        }, e4.show = function() {
-          return e4.style.display = "";
-        }, e4.toggle = function() {
-          return e4.style.display = "none" === e4.style.display ? "" : "none";
-        }, e4;
-      };
-      q = function(t4) {
-        var e4 = document.querySelectorAll(t4);
-        if (!e4.length)
-          throw new Error("No elements found: ".concat(t4));
-        return e4.render = function(t5) {
-          e4.forEach(function(e5) {
-            "function" == typeof t5 && (t5 = t5()), "string" == typeof t5 ? e5.innerHTML = t5 : t5 instanceof HTMLElement ? (e5.innerHTML = "", e5.appendChild(t5.cloneNode(true))) : O(t5, e5);
-          });
-        }, e4.inject = function(t5) {
-          e4.forEach(function(e5) {
-            if ("function" == typeof t5 && (t5 = t5()), "string" == typeof t5)
-              e5.insertAdjacentHTML("beforeend", t5);
-            else if (t5 instanceof HTMLElement)
-              e5.appendChild(t5.cloneNode(true));
-            else {
-              var n4 = document.createElement("template");
-              O(t5, n4.content), e5.appendChild(n4.content.cloneNode(true));
-            }
-          });
-        }, e4.hide = function() {
-          return e4.forEach(function(t5) {
-            return t5.style.display = "none";
-          });
-        }, e4.show = function() {
-          return e4.forEach(function(t5) {
-            return t5.style.display = "";
-          });
-        }, e4;
-      };
-      D = e.$;
-      V = e.$$;
-      z = e._;
-      X = e.q;
-      Z = e.X;
-    }
-  });
-
   // node_modules/@smithy/protocol-http/dist-es/extensions/httpExtensionConfiguration.js
   var getHttpHandlerExtensionConfiguration, resolveHttpHandlerRuntimeConfig;
   var init_httpExtensionConfiguration = __esm({
@@ -4617,9 +4282,9 @@
   var createAggregatedClient;
   var init_create_aggregated_client = __esm({
     "node_modules/@smithy/smithy-client/dist-es/create-aggregated-client.js"() {
-      createAggregatedClient = (commands3, Client2) => {
-        for (const command of Object.keys(commands3)) {
-          const CommandCtor = commands3[command];
+      createAggregatedClient = (commands2, Client2) => {
+        for (const command of Object.keys(commands2)) {
+          const CommandCtor = commands2[command];
           const methodImpl = async function(args, optionsOrCb, cb) {
             const command2 = new CommandCtor(args);
             if (typeof optionsOrCb === "function") {
@@ -5117,22 +4782,8 @@
   });
 
   // node_modules/@smithy/smithy-client/dist-es/ser-utils.js
-  var serializeFloat;
   var init_ser_utils = __esm({
     "node_modules/@smithy/smithy-client/dist-es/ser-utils.js"() {
-      serializeFloat = (value) => {
-        if (value !== value) {
-          return "NaN";
-        }
-        switch (value) {
-          case Infinity:
-            return "Infinity";
-          case -Infinity:
-            return "-Infinity";
-          default:
-            return value;
-        }
-      };
     }
   });
 
@@ -6112,11 +5763,11 @@
   });
 
   // node_modules/@smithy/signature-v4/dist-es/utilDate.js
-  var iso8601, toDate2;
+  var iso8601, toDate;
   var init_utilDate = __esm({
     "node_modules/@smithy/signature-v4/dist-es/utilDate.js"() {
-      iso8601 = (time) => toDate2(time).toISOString().replace(/\.\d{3}Z$/, "Z");
-      toDate2 = (time) => {
+      iso8601 = (time) => toDate(time).toISOString().replace(/\.\d{3}Z$/, "Z");
+      toDate = (time) => {
         if (typeof time === "number") {
           return new Date(time * 1e3);
         }
@@ -11575,32 +11226,32 @@ ${toHex(hashedRequest)}`;
   });
 
   // node_modules/@aws-sdk/client-cognito-identity/dist-es/endpoint/ruleset.js
-  var s2, t2, u2, v2, a2, b2, c2, d2, e2, f2, g2, h2, i2, j2, k2, l2, m2, n2, o2, p2, q2, r2, _data, ruleSet;
+  var s, t, u, v, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, _data, ruleSet;
   var init_ruleset = __esm({
     "node_modules/@aws-sdk/client-cognito-identity/dist-es/endpoint/ruleset.js"() {
-      s2 = "required";
-      t2 = "fn";
-      u2 = "argv";
-      v2 = "ref";
-      a2 = true;
-      b2 = "isSet";
-      c2 = "booleanEquals";
-      d2 = "error";
-      e2 = "endpoint";
-      f2 = "tree";
-      g2 = "PartitionResult";
-      h2 = { [s2]: false, "type": "String" };
-      i2 = { [s2]: true, "default": false, "type": "Boolean" };
-      j2 = { [v2]: "Endpoint" };
-      k2 = { [t2]: c2, [u2]: [{ [v2]: "UseFIPS" }, true] };
-      l2 = { [t2]: c2, [u2]: [{ [v2]: "UseDualStack" }, true] };
-      m2 = {};
-      n2 = { [t2]: "getAttr", [u2]: [{ [v2]: g2 }, "supportsFIPS"] };
-      o2 = { [t2]: c2, [u2]: [true, { [t2]: "getAttr", [u2]: [{ [v2]: g2 }, "supportsDualStack"] }] };
-      p2 = [k2];
-      q2 = [l2];
-      r2 = [{ [v2]: "Region" }];
-      _data = { version: "1.0", parameters: { Region: h2, UseDualStack: i2, UseFIPS: i2, Endpoint: h2 }, rules: [{ conditions: [{ [t2]: b2, [u2]: [j2] }], rules: [{ conditions: p2, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d2 }, { conditions: q2, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: d2 }, { endpoint: { url: j2, properties: m2, headers: m2 }, type: e2 }], type: f2 }, { conditions: [{ [t2]: b2, [u2]: r2 }], rules: [{ conditions: [{ [t2]: "aws.partition", [u2]: r2, assign: g2 }], rules: [{ conditions: [k2, l2], rules: [{ conditions: [{ [t2]: c2, [u2]: [a2, n2] }, o2], rules: [{ endpoint: { url: "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: m2, headers: m2 }, type: e2 }], type: f2 }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: d2 }], type: f2 }, { conditions: p2, rules: [{ conditions: [{ [t2]: c2, [u2]: [n2, a2] }], rules: [{ endpoint: { url: "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}", properties: m2, headers: m2 }, type: e2 }], type: f2 }, { error: "FIPS is enabled but this partition does not support FIPS", type: d2 }], type: f2 }, { conditions: q2, rules: [{ conditions: [o2], rules: [{ endpoint: { url: "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: m2, headers: m2 }, type: e2 }], type: f2 }, { error: "DualStack is enabled but this partition does not support DualStack", type: d2 }], type: f2 }, { endpoint: { url: "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}", properties: m2, headers: m2 }, type: e2 }], type: f2 }], type: f2 }, { error: "Invalid Configuration: Missing Region", type: d2 }] };
+      s = "required";
+      t = "fn";
+      u = "argv";
+      v = "ref";
+      a = true;
+      b = "isSet";
+      c = "booleanEquals";
+      d = "error";
+      e = "endpoint";
+      f = "tree";
+      g = "PartitionResult";
+      h = { [s]: false, "type": "String" };
+      i = { [s]: true, "default": false, "type": "Boolean" };
+      j = { [v]: "Endpoint" };
+      k = { [t]: c, [u]: [{ [v]: "UseFIPS" }, true] };
+      l = { [t]: c, [u]: [{ [v]: "UseDualStack" }, true] };
+      m = {};
+      n = { [t]: "getAttr", [u]: [{ [v]: g }, "supportsFIPS"] };
+      o = { [t]: c, [u]: [true, { [t]: "getAttr", [u]: [{ [v]: g }, "supportsDualStack"] }] };
+      p = [k];
+      q = [l];
+      r = [{ [v]: "Region" }];
+      _data = { version: "1.0", parameters: { Region: h, UseDualStack: i, UseFIPS: i, Endpoint: h }, rules: [{ conditions: [{ [t]: b, [u]: [j] }], rules: [{ conditions: p, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d }, { conditions: q, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: d }, { endpoint: { url: j, properties: m, headers: m }, type: e }], type: f }, { conditions: [{ [t]: b, [u]: r }], rules: [{ conditions: [{ [t]: "aws.partition", [u]: r, assign: g }], rules: [{ conditions: [k, l], rules: [{ conditions: [{ [t]: c, [u]: [a, n] }, o], rules: [{ endpoint: { url: "https://cognito-identity-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: m, headers: m }, type: e }], type: f }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: d }], type: f }, { conditions: p, rules: [{ conditions: [{ [t]: c, [u]: [n, a] }], rules: [{ endpoint: { url: "https://cognito-identity-fips.{Region}.{PartitionResult#dnsSuffix}", properties: m, headers: m }, type: e }], type: f }, { error: "FIPS is enabled but this partition does not support FIPS", type: d }], type: f }, { conditions: q, rules: [{ conditions: [o], rules: [{ endpoint: { url: "https://cognito-identity.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: m, headers: m }, type: e }], type: f }, { error: "DualStack is enabled but this partition does not support DualStack", type: d }], type: f }, { endpoint: { url: "https://cognito-identity.{Region}.{PartitionResult#dnsSuffix}", properties: m, headers: m }, type: e }], type: f }], type: f }, { error: "Invalid Configuration: Missing Region", type: d }] };
       ruleSet = _data;
     }
   });
@@ -13493,44 +13144,6 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/CognitoProviderParameters.js
-  var init_CognitoProviderParameters = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/CognitoProviderParameters.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/Logins.js
-  var init_Logins = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/Logins.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/Storage.js
-  var init_Storage = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/Storage.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/resolveLogins.js
-  function resolveLogins(logins) {
-    return Promise.all(Object.keys(logins).reduce((arr, name) => {
-      const tokenOrProvider = logins[name];
-      if (typeof tokenOrProvider === "string") {
-        arr.push([name, tokenOrProvider]);
-      } else {
-        arr.push(tokenOrProvider().then((token) => [name, token]));
-      }
-      return arr;
-    }, [])).then((resolvedPairs) => resolvedPairs.reduce((logins2, [key, value]) => {
-      logins2[key] = value;
-      return logins2;
-    }, {}));
-  }
-  var init_resolveLogins = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/resolveLogins.js"() {
-    }
-  });
-
   // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/loadCognitoIdentity.js
   var loadCognitoIdentity_exports = {};
   __export(loadCognitoIdentity_exports, {
@@ -13541,259 +13154,6 @@ ${toHex(hashedRequest)}`;
   var init_loadCognitoIdentity = __esm({
     "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/loadCognitoIdentity.js"() {
       init_dist_es39();
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js
-  function fromCognitoIdentity(parameters) {
-    return async () => {
-      parameters.logger?.debug("@aws-sdk/credential-provider-cognito-identity", "fromCognitoIdentity");
-      const { GetCredentialsForIdentityCommand: GetCredentialsForIdentityCommand2, CognitoIdentityClient: CognitoIdentityClient2 } = await Promise.resolve().then(() => (init_loadCognitoIdentity(), loadCognitoIdentity_exports));
-      const { Credentials: { AccessKeyId = throwOnMissingAccessKeyId(), Expiration, SecretKey = throwOnMissingSecretKey(), SessionToken } = throwOnMissingCredentials() } = await (parameters.client ?? new CognitoIdentityClient2(Object.assign({}, parameters.clientConfig ?? {}, {
-        region: parameters.clientConfig?.region ?? parameters.parentClientConfig?.region
-      }))).send(new GetCredentialsForIdentityCommand2({
-        CustomRoleArn: parameters.customRoleArn,
-        IdentityId: parameters.identityId,
-        Logins: parameters.logins ? await resolveLogins(parameters.logins) : void 0
-      }));
-      return {
-        identityId: parameters.identityId,
-        accessKeyId: AccessKeyId,
-        secretAccessKey: SecretKey,
-        sessionToken: SessionToken,
-        expiration: Expiration
-      };
-    };
-  }
-  function throwOnMissingAccessKeyId() {
-    throw new CredentialsProviderError("Response from Amazon Cognito contained no access key ID");
-  }
-  function throwOnMissingCredentials() {
-    throw new CredentialsProviderError("Response from Amazon Cognito contained no credentials");
-  }
-  function throwOnMissingSecretKey() {
-    throw new CredentialsProviderError("Response from Amazon Cognito contained no secret key");
-  }
-  var init_fromCognitoIdentity = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js"() {
-      init_dist_es36();
-      init_resolveLogins();
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/IndexedDbStorage.js
-  var STORE_NAME, IndexedDbStorage;
-  var init_IndexedDbStorage = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/IndexedDbStorage.js"() {
-      STORE_NAME = "IdentityIds";
-      IndexedDbStorage = class {
-        constructor(dbName = "aws:cognito-identity-ids") {
-          this.dbName = dbName;
-        }
-        getItem(key) {
-          return this.withObjectStore("readonly", (store) => {
-            const req = store.get(key);
-            return new Promise((resolve) => {
-              req.onerror = () => resolve(null);
-              req.onsuccess = () => resolve(req.result ? req.result.value : null);
-            });
-          }).catch(() => null);
-        }
-        removeItem(key) {
-          return this.withObjectStore("readwrite", (store) => {
-            const req = store.delete(key);
-            return new Promise((resolve, reject) => {
-              req.onerror = () => reject(req.error);
-              req.onsuccess = () => resolve();
-            });
-          });
-        }
-        setItem(id, value) {
-          return this.withObjectStore("readwrite", (store) => {
-            const req = store.put({ id, value });
-            return new Promise((resolve, reject) => {
-              req.onerror = () => reject(req.error);
-              req.onsuccess = () => resolve();
-            });
-          });
-        }
-        getDb() {
-          const openDbRequest = self.indexedDB.open(this.dbName, 1);
-          return new Promise((resolve, reject) => {
-            openDbRequest.onsuccess = () => {
-              resolve(openDbRequest.result);
-            };
-            openDbRequest.onerror = () => {
-              reject(openDbRequest.error);
-            };
-            openDbRequest.onblocked = () => {
-              reject(new Error("Unable to access DB"));
-            };
-            openDbRequest.onupgradeneeded = () => {
-              const db = openDbRequest.result;
-              db.onerror = () => {
-                reject(new Error("Failed to create object store"));
-              };
-              db.createObjectStore(STORE_NAME, { keyPath: "id" });
-            };
-          });
-        }
-        withObjectStore(mode, action) {
-          return this.getDb().then((db) => {
-            const tx = db.transaction(STORE_NAME, mode);
-            tx.oncomplete = () => db.close();
-            return new Promise((resolve, reject) => {
-              tx.onerror = () => reject(tx.error);
-              resolve(action(tx.objectStore(STORE_NAME)));
-            }).catch((err) => {
-              db.close();
-              throw err;
-            });
-          });
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/InMemoryStorage.js
-  var InMemoryStorage;
-  var init_InMemoryStorage = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/InMemoryStorage.js"() {
-      InMemoryStorage = class {
-        constructor(store = {}) {
-          this.store = store;
-        }
-        getItem(key) {
-          if (key in this.store) {
-            return this.store[key];
-          }
-          return null;
-        }
-        removeItem(key) {
-          delete this.store[key];
-        }
-        setItem(key, value) {
-          this.store[key] = value;
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/localStorage.js
-  function localStorage() {
-    if (typeof self === "object" && self.indexedDB) {
-      return new IndexedDbStorage();
-    }
-    if (typeof window === "object" && window.localStorage) {
-      return window.localStorage;
-    }
-    return inMemoryStorage;
-  }
-  var inMemoryStorage;
-  var init_localStorage = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/localStorage.js"() {
-      init_IndexedDbStorage();
-      init_InMemoryStorage();
-      inMemoryStorage = new InMemoryStorage();
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentityPool.js
-  function fromCognitoIdentityPool({ accountId, cache = localStorage(), client, clientConfig, customRoleArn, identityPoolId, logins, userIdentifier = !logins || Object.keys(logins).length === 0 ? "ANONYMOUS" : void 0, logger: logger2, parentClientConfig }) {
-    logger2?.debug("@aws-sdk/credential-provider-cognito-identity", "fromCognitoIdentity");
-    const cacheKey = userIdentifier ? `aws:cognito-identity-credentials:${identityPoolId}:${userIdentifier}` : void 0;
-    let provider = async () => {
-      const { GetIdCommand: GetIdCommand2, CognitoIdentityClient: CognitoIdentityClient2 } = await Promise.resolve().then(() => (init_loadCognitoIdentity(), loadCognitoIdentity_exports));
-      const _client = client ?? new CognitoIdentityClient2(Object.assign({}, clientConfig ?? {}, { region: clientConfig?.region ?? parentClientConfig?.region }));
-      let identityId = cacheKey && await cache.getItem(cacheKey);
-      if (!identityId) {
-        const { IdentityId = throwOnMissingId() } = await _client.send(new GetIdCommand2({
-          AccountId: accountId,
-          IdentityPoolId: identityPoolId,
-          Logins: logins ? await resolveLogins(logins) : void 0
-        }));
-        identityId = IdentityId;
-        if (cacheKey) {
-          Promise.resolve(cache.setItem(cacheKey, identityId)).catch(() => {
-          });
-        }
-      }
-      provider = fromCognitoIdentity({
-        client: _client,
-        customRoleArn,
-        logins,
-        identityId
-      });
-      return provider();
-    };
-    return () => provider().catch(async (err) => {
-      if (cacheKey) {
-        Promise.resolve(cache.removeItem(cacheKey)).catch(() => {
-        });
-      }
-      throw err;
-    });
-  }
-  function throwOnMissingId() {
-    throw new CredentialsProviderError("Response from Amazon Cognito contained no identity ID");
-  }
-  var init_fromCognitoIdentityPool = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentityPool.js"() {
-      init_dist_es36();
-      init_fromCognitoIdentity();
-      init_localStorage();
-      init_resolveLogins();
-    }
-  });
-
-  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/index.js
-  var init_dist_es40 = __esm({
-    "node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/index.js"() {
-      init_CognitoProviderParameters();
-      init_Logins();
-      init_Storage();
-      init_fromCognitoIdentity();
-      init_fromCognitoIdentityPool();
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/configurations.js
-  var init_configurations3 = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/configurations.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/getCacheKey.js
-  var init_getCacheKey = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/getCacheKey.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/updateDiscoveredEndpointInCache.js
-  var init_updateDiscoveredEndpointInCache = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/updateDiscoveredEndpointInCache.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/endpointDiscoveryMiddleware.js
-  var init_endpointDiscoveryMiddleware = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/endpointDiscoveryMiddleware.js"() {
-      init_dist_es2();
-      init_getCacheKey();
-      init_updateDiscoveredEndpointInCache();
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/getEndpointDiscoveryPlugin.js
-  var init_getEndpointDiscoveryPlugin = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/getEndpointDiscoveryPlugin.js"() {
-      init_endpointDiscoveryMiddleware();
-    }
-  });
-
-  // node_modules/@aws-sdk/endpoint-cache/dist-es/Endpoint.js
-  var init_Endpoint = __esm({
-    "node_modules/@aws-sdk/endpoint-cache/dist-es/Endpoint.js"() {
     }
   });
 
@@ -14271,5629 +13631,6 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // node_modules/@aws-sdk/endpoint-cache/dist-es/EndpointCache.js
-  var import_lru_cache, EndpointCache;
-  var init_EndpointCache = __esm({
-    "node_modules/@aws-sdk/endpoint-cache/dist-es/EndpointCache.js"() {
-      import_lru_cache = __toESM(require_lru_cache());
-      EndpointCache = class {
-        constructor(capacity) {
-          this.cache = new import_lru_cache.default(capacity);
-        }
-        getEndpoint(key) {
-          const endpointsWithExpiry = this.get(key);
-          if (!endpointsWithExpiry || endpointsWithExpiry.length === 0) {
-            return void 0;
-          }
-          const endpoints = endpointsWithExpiry.map((endpoint) => endpoint.Address);
-          return endpoints[Math.floor(Math.random() * endpoints.length)];
-        }
-        get(key) {
-          if (!this.has(key)) {
-            return;
-          }
-          const value = this.cache.get(key);
-          if (!value) {
-            return;
-          }
-          const now = Date.now();
-          const endpointsWithExpiry = value.filter((endpoint) => now < endpoint.Expires);
-          if (endpointsWithExpiry.length === 0) {
-            this.delete(key);
-            return void 0;
-          }
-          return endpointsWithExpiry;
-        }
-        set(key, endpoints) {
-          const now = Date.now();
-          this.cache.set(key, endpoints.map(({ Address, CachePeriodInMinutes }) => ({
-            Address,
-            Expires: now + CachePeriodInMinutes * 60 * 1e3
-          })));
-        }
-        delete(key) {
-          this.cache.set(key, []);
-        }
-        has(key) {
-          if (!this.cache.has(key)) {
-            return false;
-          }
-          const endpoints = this.cache.peek(key);
-          if (!endpoints) {
-            return false;
-          }
-          return endpoints.length > 0;
-        }
-        clear() {
-          this.cache.clear();
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/endpoint-cache/dist-es/index.js
-  var init_dist_es41 = __esm({
-    "node_modules/@aws-sdk/endpoint-cache/dist-es/index.js"() {
-      init_Endpoint();
-      init_EndpointCache();
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/resolveEndpointDiscoveryConfig.js
-  var resolveEndpointDiscoveryConfig;
-  var init_resolveEndpointDiscoveryConfig = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/resolveEndpointDiscoveryConfig.js"() {
-      init_dist_es41();
-      resolveEndpointDiscoveryConfig = (input, { endpointDiscoveryCommandCtor }) => ({
-        ...input,
-        endpointDiscoveryCommandCtor,
-        endpointCache: new EndpointCache(input.endpointCacheSize ?? 1e3),
-        endpointDiscoveryEnabled: input.endpointDiscoveryEnabled !== void 0 ? () => Promise.resolve(input.endpointDiscoveryEnabled) : input.endpointDiscoveryEnabledProvider,
-        isClientEndpointDiscoveryEnabled: input.endpointDiscoveryEnabled !== void 0
-      });
-    }
-  });
-
-  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/index.js
-  var init_dist_es42 = __esm({
-    "node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/index.js"() {
-      init_configurations3();
-      init_getEndpointDiscoveryPlugin();
-      init_resolveEndpointDiscoveryConfig();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthSchemeProvider.js
-  function createAwsAuthSigv4HttpAuthOption2(authParameters) {
-    return {
-      schemeId: "aws.auth#sigv4",
-      signingProperties: {
-        name: "dynamodb",
-        region: authParameters.region
-      },
-      propertiesExtractor: (config, context) => ({
-        signingProperties: {
-          config,
-          context
-        }
-      })
-    };
-  }
-  var defaultDynamoDBHttpAuthSchemeParametersProvider, defaultDynamoDBHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig2;
-  var init_httpAuthSchemeProvider2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthSchemeProvider.js"() {
-      init_dist_es32();
-      init_dist_es10();
-      defaultDynamoDBHttpAuthSchemeParametersProvider = async (config, context, input) => {
-        return {
-          operation: getSmithyContext(context).operation,
-          region: await normalizeProvider(config.region)() || (() => {
-            throw new Error("expected `region` to be configured for `aws.auth#sigv4`");
-          })()
-        };
-      };
-      defaultDynamoDBHttpAuthSchemeProvider = (authParameters) => {
-        const options = [];
-        switch (authParameters.operation) {
-          default: {
-            options.push(createAwsAuthSigv4HttpAuthOption2(authParameters));
-          }
-        }
-        return options;
-      };
-      resolveHttpAuthSchemeConfig2 = (config) => {
-        const config_0 = resolveAwsSdkSigV4Config(config);
-        return {
-          ...config_0
-        };
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/EndpointParameters.js
-  var resolveClientEndpointParameters2, commonParams2;
-  var init_EndpointParameters2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/EndpointParameters.js"() {
-      resolveClientEndpointParameters2 = (options) => {
-        return {
-          ...options,
-          useDualstackEndpoint: options.useDualstackEndpoint ?? false,
-          useFipsEndpoint: options.useFipsEndpoint ?? false,
-          defaultSigningName: "dynamodb"
-        };
-      };
-      commonParams2 = {
-        UseFIPS: { type: "builtInParams", name: "useFipsEndpoint" },
-        Endpoint: { type: "builtInParams", name: "endpoint" },
-        Region: { type: "builtInParams", name: "region" },
-        UseDualStack: { type: "builtInParams", name: "useDualstackEndpoint" }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/models/DynamoDBServiceException.js
-  var DynamoDBServiceException;
-  var init_DynamoDBServiceException = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/models/DynamoDBServiceException.js"() {
-      init_dist_es26();
-      DynamoDBServiceException = class _DynamoDBServiceException extends ServiceException {
-        constructor(options) {
-          super(options);
-          Object.setPrototypeOf(this, _DynamoDBServiceException.prototype);
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/models/models_0.js
-  var BackupInUseException, BackupNotFoundException, InternalServerError, RequestLimitExceeded, InvalidEndpointException, ProvisionedThroughputExceededException, ResourceNotFoundException2, ItemCollectionSizeLimitExceededException, ContinuousBackupsUnavailableException, LimitExceededException2, TableInUseException, TableNotFoundException, GlobalTableAlreadyExistsException, ResourceInUseException, TransactionConflictException, ExportNotFoundException, GlobalTableNotFoundException, ImportNotFoundException, DuplicateItemException, IdempotentParameterMismatchException, TransactionInProgressException, ExportConflictException, InvalidExportTimeException, PointInTimeRecoveryUnavailableException, ImportConflictException, TableAlreadyExistsException, InvalidRestoreTimeException, ReplicaAlreadyExistsException, ReplicaNotFoundException, IndexNotFoundException, AttributeValue, ConditionalCheckFailedException, TransactionCanceledException;
-  var init_models_02 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/models/models_0.js"() {
-      init_DynamoDBServiceException();
-      BackupInUseException = class _BackupInUseException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "BackupInUseException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "BackupInUseException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _BackupInUseException.prototype);
-        }
-      };
-      BackupNotFoundException = class _BackupNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "BackupNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "BackupNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _BackupNotFoundException.prototype);
-        }
-      };
-      InternalServerError = class _InternalServerError extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "InternalServerError",
-            $fault: "server",
-            ...opts
-          });
-          this.name = "InternalServerError";
-          this.$fault = "server";
-          Object.setPrototypeOf(this, _InternalServerError.prototype);
-        }
-      };
-      RequestLimitExceeded = class _RequestLimitExceeded extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "RequestLimitExceeded",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "RequestLimitExceeded";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _RequestLimitExceeded.prototype);
-        }
-      };
-      InvalidEndpointException = class _InvalidEndpointException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "InvalidEndpointException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "InvalidEndpointException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _InvalidEndpointException.prototype);
-          this.Message = opts.Message;
-        }
-      };
-      ProvisionedThroughputExceededException = class _ProvisionedThroughputExceededException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ProvisionedThroughputExceededException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ProvisionedThroughputExceededException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ProvisionedThroughputExceededException.prototype);
-        }
-      };
-      ResourceNotFoundException2 = class _ResourceNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ResourceNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ResourceNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ResourceNotFoundException.prototype);
-        }
-      };
-      ItemCollectionSizeLimitExceededException = class _ItemCollectionSizeLimitExceededException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ItemCollectionSizeLimitExceededException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ItemCollectionSizeLimitExceededException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ItemCollectionSizeLimitExceededException.prototype);
-        }
-      };
-      ContinuousBackupsUnavailableException = class _ContinuousBackupsUnavailableException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ContinuousBackupsUnavailableException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ContinuousBackupsUnavailableException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ContinuousBackupsUnavailableException.prototype);
-        }
-      };
-      LimitExceededException2 = class _LimitExceededException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "LimitExceededException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "LimitExceededException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _LimitExceededException.prototype);
-        }
-      };
-      TableInUseException = class _TableInUseException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TableInUseException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TableInUseException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TableInUseException.prototype);
-        }
-      };
-      TableNotFoundException = class _TableNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TableNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TableNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TableNotFoundException.prototype);
-        }
-      };
-      GlobalTableAlreadyExistsException = class _GlobalTableAlreadyExistsException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "GlobalTableAlreadyExistsException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "GlobalTableAlreadyExistsException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _GlobalTableAlreadyExistsException.prototype);
-        }
-      };
-      ResourceInUseException = class _ResourceInUseException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ResourceInUseException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ResourceInUseException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ResourceInUseException.prototype);
-        }
-      };
-      TransactionConflictException = class _TransactionConflictException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TransactionConflictException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TransactionConflictException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TransactionConflictException.prototype);
-        }
-      };
-      ExportNotFoundException = class _ExportNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ExportNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ExportNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ExportNotFoundException.prototype);
-        }
-      };
-      GlobalTableNotFoundException = class _GlobalTableNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "GlobalTableNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "GlobalTableNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _GlobalTableNotFoundException.prototype);
-        }
-      };
-      ImportNotFoundException = class _ImportNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ImportNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ImportNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ImportNotFoundException.prototype);
-        }
-      };
-      DuplicateItemException = class _DuplicateItemException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "DuplicateItemException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "DuplicateItemException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _DuplicateItemException.prototype);
-        }
-      };
-      IdempotentParameterMismatchException = class _IdempotentParameterMismatchException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "IdempotentParameterMismatchException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "IdempotentParameterMismatchException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _IdempotentParameterMismatchException.prototype);
-          this.Message = opts.Message;
-        }
-      };
-      TransactionInProgressException = class _TransactionInProgressException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TransactionInProgressException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TransactionInProgressException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TransactionInProgressException.prototype);
-          this.Message = opts.Message;
-        }
-      };
-      ExportConflictException = class _ExportConflictException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ExportConflictException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ExportConflictException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ExportConflictException.prototype);
-        }
-      };
-      InvalidExportTimeException = class _InvalidExportTimeException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "InvalidExportTimeException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "InvalidExportTimeException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _InvalidExportTimeException.prototype);
-        }
-      };
-      PointInTimeRecoveryUnavailableException = class _PointInTimeRecoveryUnavailableException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "PointInTimeRecoveryUnavailableException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "PointInTimeRecoveryUnavailableException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _PointInTimeRecoveryUnavailableException.prototype);
-        }
-      };
-      ImportConflictException = class _ImportConflictException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ImportConflictException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ImportConflictException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ImportConflictException.prototype);
-        }
-      };
-      TableAlreadyExistsException = class _TableAlreadyExistsException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TableAlreadyExistsException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TableAlreadyExistsException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TableAlreadyExistsException.prototype);
-        }
-      };
-      InvalidRestoreTimeException = class _InvalidRestoreTimeException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "InvalidRestoreTimeException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "InvalidRestoreTimeException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _InvalidRestoreTimeException.prototype);
-        }
-      };
-      ReplicaAlreadyExistsException = class _ReplicaAlreadyExistsException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ReplicaAlreadyExistsException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ReplicaAlreadyExistsException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ReplicaAlreadyExistsException.prototype);
-        }
-      };
-      ReplicaNotFoundException = class _ReplicaNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ReplicaNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ReplicaNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ReplicaNotFoundException.prototype);
-        }
-      };
-      IndexNotFoundException = class _IndexNotFoundException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "IndexNotFoundException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "IndexNotFoundException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _IndexNotFoundException.prototype);
-        }
-      };
-      (function(AttributeValue2) {
-        AttributeValue2.visit = (value, visitor) => {
-          if (value.S !== void 0)
-            return visitor.S(value.S);
-          if (value.N !== void 0)
-            return visitor.N(value.N);
-          if (value.B !== void 0)
-            return visitor.B(value.B);
-          if (value.SS !== void 0)
-            return visitor.SS(value.SS);
-          if (value.NS !== void 0)
-            return visitor.NS(value.NS);
-          if (value.BS !== void 0)
-            return visitor.BS(value.BS);
-          if (value.M !== void 0)
-            return visitor.M(value.M);
-          if (value.L !== void 0)
-            return visitor.L(value.L);
-          if (value.NULL !== void 0)
-            return visitor.NULL(value.NULL);
-          if (value.BOOL !== void 0)
-            return visitor.BOOL(value.BOOL);
-          return visitor._(value.$unknown[0], value.$unknown[1]);
-        };
-      })(AttributeValue || (AttributeValue = {}));
-      ConditionalCheckFailedException = class _ConditionalCheckFailedException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "ConditionalCheckFailedException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "ConditionalCheckFailedException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _ConditionalCheckFailedException.prototype);
-          this.Item = opts.Item;
-        }
-      };
-      TransactionCanceledException = class _TransactionCanceledException extends DynamoDBServiceException {
-        constructor(opts) {
-          super({
-            name: "TransactionCanceledException",
-            $fault: "client",
-            ...opts
-          });
-          this.name = "TransactionCanceledException";
-          this.$fault = "client";
-          Object.setPrototypeOf(this, _TransactionCanceledException.prototype);
-          this.Message = opts.Message;
-          this.CancellationReasons = opts.CancellationReasons;
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/protocols/Aws_json1_0.js
-  function sharedHeaders2(operation) {
-    return {
-      "content-type": "application/x-amz-json-1.0",
-      "x-amz-target": `DynamoDB_20120810.${operation}`
-    };
-  }
-  var se_BatchExecuteStatementCommand, se_BatchGetItemCommand, se_BatchWriteItemCommand, se_CreateBackupCommand, se_CreateGlobalTableCommand, se_CreateTableCommand, se_DeleteBackupCommand, se_DeleteItemCommand, se_DeleteTableCommand, se_DescribeBackupCommand, se_DescribeContinuousBackupsCommand, se_DescribeContributorInsightsCommand, se_DescribeEndpointsCommand, se_DescribeExportCommand, se_DescribeGlobalTableCommand, se_DescribeGlobalTableSettingsCommand, se_DescribeImportCommand, se_DescribeKinesisStreamingDestinationCommand, se_DescribeLimitsCommand, se_DescribeTableCommand, se_DescribeTableReplicaAutoScalingCommand, se_DescribeTimeToLiveCommand, se_DisableKinesisStreamingDestinationCommand, se_EnableKinesisStreamingDestinationCommand, se_ExecuteStatementCommand, se_ExecuteTransactionCommand, se_ExportTableToPointInTimeCommand, se_GetItemCommand, se_ImportTableCommand, se_ListBackupsCommand, se_ListContributorInsightsCommand, se_ListExportsCommand, se_ListGlobalTablesCommand, se_ListImportsCommand, se_ListTablesCommand, se_ListTagsOfResourceCommand, se_PutItemCommand, se_QueryCommand, se_RestoreTableFromBackupCommand, se_RestoreTableToPointInTimeCommand, se_ScanCommand, se_TagResourceCommand2, se_TransactGetItemsCommand, se_TransactWriteItemsCommand, se_UntagResourceCommand2, se_UpdateContinuousBackupsCommand, se_UpdateContributorInsightsCommand, se_UpdateGlobalTableCommand, se_UpdateGlobalTableSettingsCommand, se_UpdateItemCommand, se_UpdateKinesisStreamingDestinationCommand, se_UpdateTableCommand, se_UpdateTableReplicaAutoScalingCommand, se_UpdateTimeToLiveCommand, de_BatchExecuteStatementCommand, de_BatchGetItemCommand, de_BatchWriteItemCommand, de_CreateBackupCommand, de_CreateGlobalTableCommand, de_CreateTableCommand, de_DeleteBackupCommand, de_DeleteItemCommand, de_DeleteTableCommand, de_DescribeBackupCommand, de_DescribeContinuousBackupsCommand, de_DescribeContributorInsightsCommand, de_DescribeEndpointsCommand, de_DescribeExportCommand, de_DescribeGlobalTableCommand, de_DescribeGlobalTableSettingsCommand, de_DescribeImportCommand, de_DescribeKinesisStreamingDestinationCommand, de_DescribeLimitsCommand, de_DescribeTableCommand, de_DescribeTableReplicaAutoScalingCommand, de_DescribeTimeToLiveCommand, de_DisableKinesisStreamingDestinationCommand, de_EnableKinesisStreamingDestinationCommand, de_ExecuteStatementCommand, de_ExecuteTransactionCommand, de_ExportTableToPointInTimeCommand, de_GetItemCommand, de_ImportTableCommand, de_ListBackupsCommand, de_ListContributorInsightsCommand, de_ListExportsCommand, de_ListGlobalTablesCommand, de_ListImportsCommand, de_ListTablesCommand, de_ListTagsOfResourceCommand, de_PutItemCommand, de_QueryCommand, de_RestoreTableFromBackupCommand, de_RestoreTableToPointInTimeCommand, de_ScanCommand, de_TagResourceCommand2, de_TransactGetItemsCommand, de_TransactWriteItemsCommand, de_UntagResourceCommand2, de_UpdateContinuousBackupsCommand, de_UpdateContributorInsightsCommand, de_UpdateGlobalTableCommand, de_UpdateGlobalTableSettingsCommand, de_UpdateItemCommand, de_UpdateKinesisStreamingDestinationCommand, de_UpdateTableCommand, de_UpdateTableReplicaAutoScalingCommand, de_UpdateTimeToLiveCommand, de_CommandError2, de_BackupInUseExceptionRes, de_BackupNotFoundExceptionRes, de_ConditionalCheckFailedExceptionRes, de_ContinuousBackupsUnavailableExceptionRes, de_DuplicateItemExceptionRes, de_ExportConflictExceptionRes, de_ExportNotFoundExceptionRes, de_GlobalTableAlreadyExistsExceptionRes, de_GlobalTableNotFoundExceptionRes, de_IdempotentParameterMismatchExceptionRes, de_ImportConflictExceptionRes, de_ImportNotFoundExceptionRes, de_IndexNotFoundExceptionRes, de_InternalServerErrorRes, de_InvalidEndpointExceptionRes, de_InvalidExportTimeExceptionRes, de_InvalidRestoreTimeExceptionRes, de_ItemCollectionSizeLimitExceededExceptionRes, de_LimitExceededExceptionRes2, de_PointInTimeRecoveryUnavailableExceptionRes, de_ProvisionedThroughputExceededExceptionRes, de_ReplicaAlreadyExistsExceptionRes, de_ReplicaNotFoundExceptionRes, de_RequestLimitExceededRes, de_ResourceInUseExceptionRes, de_ResourceNotFoundExceptionRes2, de_TableAlreadyExistsExceptionRes, de_TableInUseExceptionRes, de_TableNotFoundExceptionRes, de_TransactionCanceledExceptionRes, de_TransactionConflictExceptionRes, de_TransactionInProgressExceptionRes, se_AttributeUpdates, se_AttributeValue, se_AttributeValueList, se_AttributeValueUpdate, se_AutoScalingPolicyUpdate, se_AutoScalingSettingsUpdate, se_AutoScalingTargetTrackingScalingPolicyConfigurationUpdate, se_BatchExecuteStatementInput, se_BatchGetItemInput, se_BatchGetRequestMap, se_BatchStatementRequest, se_BatchWriteItemInput, se_BatchWriteItemRequestMap, se_BinarySetAttributeValue, se_Condition, se_ConditionCheck, se_Delete, se_DeleteItemInput, se_DeleteRequest, se_ExecuteStatementInput, se_ExecuteTransactionInput, se_ExpectedAttributeMap, se_ExpectedAttributeValue, se_ExportTableToPointInTimeInput, se_ExpressionAttributeValueMap, se_FilterConditionMap, se_Get, se_GetItemInput, se_GlobalSecondaryIndexAutoScalingUpdate, se_GlobalSecondaryIndexAutoScalingUpdateList, se_GlobalTableGlobalSecondaryIndexSettingsUpdate, se_GlobalTableGlobalSecondaryIndexSettingsUpdateList, se_ImportTableInput, se_IncrementalExportSpecification, se_Key, se_KeyConditions, se_KeyList, se_KeysAndAttributes, se_ListAttributeValue, se_ListBackupsInput, se_MapAttributeValue, se_ParameterizedStatement, se_ParameterizedStatements, se_PartiQLBatchRequest, se_PreparedStatementParameters, se_Put, se_PutItemInput, se_PutItemInputAttributeMap, se_PutRequest, se_QueryInput, se_ReplicaAutoScalingUpdate, se_ReplicaAutoScalingUpdateList, se_ReplicaGlobalSecondaryIndexAutoScalingUpdate, se_ReplicaGlobalSecondaryIndexAutoScalingUpdateList, se_ReplicaGlobalSecondaryIndexSettingsUpdate, se_ReplicaGlobalSecondaryIndexSettingsUpdateList, se_ReplicaSettingsUpdate, se_ReplicaSettingsUpdateList, se_RestoreTableToPointInTimeInput, se_ScanInput, se_TransactGetItem, se_TransactGetItemList, se_TransactGetItemsInput, se_TransactWriteItem, se_TransactWriteItemList, se_TransactWriteItemsInput, se_Update, se_UpdateGlobalTableSettingsInput, se_UpdateItemInput, se_UpdateTableReplicaAutoScalingInput, se_WriteRequest, se_WriteRequests, de_ArchivalSummary, de_AttributeMap, de_AttributeValue, de_AutoScalingPolicyDescription, de_AutoScalingPolicyDescriptionList, de_AutoScalingSettingsDescription, de_AutoScalingTargetTrackingScalingPolicyConfigurationDescription, de_BackupDescription, de_BackupDetails, de_BackupSummaries, de_BackupSummary, de_BatchExecuteStatementOutput, de_BatchGetItemOutput, de_BatchGetRequestMap, de_BatchGetResponseMap, de_BatchStatementError, de_BatchStatementResponse, de_BatchWriteItemOutput, de_BatchWriteItemRequestMap, de_BillingModeSummary, de_BinarySetAttributeValue, de_CancellationReason, de_CancellationReasonList, de_Capacity, de_ConditionalCheckFailedException, de_ConsumedCapacity, de_ConsumedCapacityMultiple, de_ContinuousBackupsDescription, de_CreateBackupOutput, de_CreateGlobalTableOutput, de_CreateTableOutput, de_DeleteBackupOutput, de_DeleteItemOutput, de_DeleteRequest, de_DeleteTableOutput, de_DescribeBackupOutput, de_DescribeContinuousBackupsOutput, de_DescribeContributorInsightsOutput, de_DescribeExportOutput, de_DescribeGlobalTableOutput, de_DescribeGlobalTableSettingsOutput, de_DescribeImportOutput, de_DescribeTableOutput, de_DescribeTableReplicaAutoScalingOutput, de_ExecuteStatementOutput, de_ExecuteTransactionOutput, de_ExportDescription, de_ExportTableToPointInTimeOutput, de_GetItemOutput, de_GlobalSecondaryIndexDescription, de_GlobalSecondaryIndexDescriptionList, de_GlobalTableDescription, de_ImportSummary, de_ImportSummaryList, de_ImportTableDescription, de_ImportTableOutput, de_IncrementalExportSpecification, de_ItemCollectionKeyAttributeMap, de_ItemCollectionMetrics, de_ItemCollectionMetricsMultiple, de_ItemCollectionMetricsPerTable, de_ItemCollectionSizeEstimateRange, de_ItemList, de_ItemResponse, de_ItemResponseList, de_Key, de_KeyList, de_KeysAndAttributes, de_ListAttributeValue, de_ListBackupsOutput, de_ListImportsOutput, de_MapAttributeValue, de_PartiQLBatchResponse, de_PointInTimeRecoveryDescription, de_ProvisionedThroughputDescription, de_PutItemInputAttributeMap, de_PutItemOutput, de_PutRequest, de_QueryOutput, de_ReplicaAutoScalingDescription, de_ReplicaAutoScalingDescriptionList, de_ReplicaDescription, de_ReplicaDescriptionList, de_ReplicaGlobalSecondaryIndexAutoScalingDescription, de_ReplicaGlobalSecondaryIndexAutoScalingDescriptionList, de_ReplicaGlobalSecondaryIndexSettingsDescription, de_ReplicaGlobalSecondaryIndexSettingsDescriptionList, de_ReplicaSettingsDescription, de_ReplicaSettingsDescriptionList, de_RestoreSummary, de_RestoreTableFromBackupOutput, de_RestoreTableToPointInTimeOutput, de_ScanOutput, de_SecondaryIndexesCapacityMap, de_SourceTableDetails, de_SourceTableFeatureDetails, de_SSEDescription, de_TableAutoScalingDescription, de_TableClassSummary, de_TableDescription, de_TransactGetItemsOutput, de_TransactionCanceledException, de_TransactWriteItemsOutput, de_UpdateContinuousBackupsOutput, de_UpdateGlobalTableOutput, de_UpdateGlobalTableSettingsOutput, de_UpdateItemOutput, de_UpdateTableOutput, de_UpdateTableReplicaAutoScalingOutput, de_WriteRequest, de_WriteRequests, deserializeMetadata3, throwDefaultError3, buildHttpRpcRequest2;
-  var init_Aws_json1_0 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/protocols/Aws_json1_0.js"() {
-      init_dist_es32();
-      init_dist_es2();
-      init_dist_es26();
-      init_esm_browser();
-      init_DynamoDBServiceException();
-      init_models_02();
-      se_BatchExecuteStatementCommand = async (input, context) => {
-        const headers = sharedHeaders2("BatchExecuteStatement");
-        let body;
-        body = JSON.stringify(se_BatchExecuteStatementInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_BatchGetItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("BatchGetItem");
-        let body;
-        body = JSON.stringify(se_BatchGetItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_BatchWriteItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("BatchWriteItem");
-        let body;
-        body = JSON.stringify(se_BatchWriteItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_CreateBackupCommand = async (input, context) => {
-        const headers = sharedHeaders2("CreateBackup");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_CreateGlobalTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("CreateGlobalTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_CreateTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("CreateTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DeleteBackupCommand = async (input, context) => {
-        const headers = sharedHeaders2("DeleteBackup");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DeleteItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("DeleteItem");
-        let body;
-        body = JSON.stringify(se_DeleteItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DeleteTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("DeleteTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeBackupCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeBackup");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeContinuousBackupsCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeContinuousBackups");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeContributorInsightsCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeContributorInsights");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeEndpointsCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeEndpoints");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeExportCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeExport");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeGlobalTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeGlobalTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeGlobalTableSettingsCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeGlobalTableSettings");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeImportCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeImport");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeKinesisStreamingDestinationCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeKinesisStreamingDestination");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeLimitsCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeLimits");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeTableReplicaAutoScalingCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeTableReplicaAutoScaling");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DescribeTimeToLiveCommand = async (input, context) => {
-        const headers = sharedHeaders2("DescribeTimeToLive");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_DisableKinesisStreamingDestinationCommand = async (input, context) => {
-        const headers = sharedHeaders2("DisableKinesisStreamingDestination");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_EnableKinesisStreamingDestinationCommand = async (input, context) => {
-        const headers = sharedHeaders2("EnableKinesisStreamingDestination");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ExecuteStatementCommand = async (input, context) => {
-        const headers = sharedHeaders2("ExecuteStatement");
-        let body;
-        body = JSON.stringify(se_ExecuteStatementInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ExecuteTransactionCommand = async (input, context) => {
-        const headers = sharedHeaders2("ExecuteTransaction");
-        let body;
-        body = JSON.stringify(se_ExecuteTransactionInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ExportTableToPointInTimeCommand = async (input, context) => {
-        const headers = sharedHeaders2("ExportTableToPointInTime");
-        let body;
-        body = JSON.stringify(se_ExportTableToPointInTimeInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_GetItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("GetItem");
-        let body;
-        body = JSON.stringify(se_GetItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ImportTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("ImportTable");
-        let body;
-        body = JSON.stringify(se_ImportTableInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListBackupsCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListBackups");
-        let body;
-        body = JSON.stringify(se_ListBackupsInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListContributorInsightsCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListContributorInsights");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListExportsCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListExports");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListGlobalTablesCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListGlobalTables");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListImportsCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListImports");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListTablesCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListTables");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ListTagsOfResourceCommand = async (input, context) => {
-        const headers = sharedHeaders2("ListTagsOfResource");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_PutItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("PutItem");
-        let body;
-        body = JSON.stringify(se_PutItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_QueryCommand = async (input, context) => {
-        const headers = sharedHeaders2("Query");
-        let body;
-        body = JSON.stringify(se_QueryInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_RestoreTableFromBackupCommand = async (input, context) => {
-        const headers = sharedHeaders2("RestoreTableFromBackup");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_RestoreTableToPointInTimeCommand = async (input, context) => {
-        const headers = sharedHeaders2("RestoreTableToPointInTime");
-        let body;
-        body = JSON.stringify(se_RestoreTableToPointInTimeInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_ScanCommand = async (input, context) => {
-        const headers = sharedHeaders2("Scan");
-        let body;
-        body = JSON.stringify(se_ScanInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_TagResourceCommand2 = async (input, context) => {
-        const headers = sharedHeaders2("TagResource");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_TransactGetItemsCommand = async (input, context) => {
-        const headers = sharedHeaders2("TransactGetItems");
-        let body;
-        body = JSON.stringify(se_TransactGetItemsInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_TransactWriteItemsCommand = async (input, context) => {
-        const headers = sharedHeaders2("TransactWriteItems");
-        let body;
-        body = JSON.stringify(se_TransactWriteItemsInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UntagResourceCommand2 = async (input, context) => {
-        const headers = sharedHeaders2("UntagResource");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateContinuousBackupsCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateContinuousBackups");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateContributorInsightsCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateContributorInsights");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateGlobalTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateGlobalTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateGlobalTableSettingsCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateGlobalTableSettings");
-        let body;
-        body = JSON.stringify(se_UpdateGlobalTableSettingsInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateItemCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateItem");
-        let body;
-        body = JSON.stringify(se_UpdateItemInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateKinesisStreamingDestinationCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateKinesisStreamingDestination");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateTableCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateTable");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateTableReplicaAutoScalingCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateTableReplicaAutoScaling");
-        let body;
-        body = JSON.stringify(se_UpdateTableReplicaAutoScalingInput(input, context));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      se_UpdateTimeToLiveCommand = async (input, context) => {
-        const headers = sharedHeaders2("UpdateTimeToLive");
-        let body;
-        body = JSON.stringify(_json(input));
-        return buildHttpRpcRequest2(context, headers, "/", void 0, body);
-      };
-      de_BatchExecuteStatementCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_BatchExecuteStatementOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_BatchGetItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_BatchGetItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_BatchWriteItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_BatchWriteItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_CreateBackupCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_CreateBackupOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_CreateGlobalTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_CreateGlobalTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_CreateTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_CreateTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DeleteBackupCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DeleteBackupOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DeleteItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DeleteItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DeleteTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DeleteTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeBackupCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeBackupOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeContinuousBackupsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeContinuousBackupsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeContributorInsightsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeContributorInsightsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeEndpointsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeExportCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeExportOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeGlobalTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeGlobalTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeGlobalTableSettingsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeGlobalTableSettingsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeImportCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeImportOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeKinesisStreamingDestinationCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeLimitsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeTableReplicaAutoScalingCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_DescribeTableReplicaAutoScalingOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DescribeTimeToLiveCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_DisableKinesisStreamingDestinationCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_EnableKinesisStreamingDestinationCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ExecuteStatementCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ExecuteStatementOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ExecuteTransactionCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ExecuteTransactionOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ExportTableToPointInTimeCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ExportTableToPointInTimeOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_GetItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_GetItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ImportTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ImportTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListBackupsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ListBackupsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListContributorInsightsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListExportsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListGlobalTablesCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListImportsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ListImportsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListTablesCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ListTagsOfResourceCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_PutItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_PutItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_QueryCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_QueryOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_RestoreTableFromBackupCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_RestoreTableFromBackupOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_RestoreTableToPointInTimeCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_RestoreTableToPointInTimeOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_ScanCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_ScanOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_TagResourceCommand2 = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        await collectBody(output.body, context);
-        const response = {
-          $metadata: deserializeMetadata3(output)
-        };
-        return response;
-      };
-      de_TransactGetItemsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_TransactGetItemsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_TransactWriteItemsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_TransactWriteItemsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UntagResourceCommand2 = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        await collectBody(output.body, context);
-        const response = {
-          $metadata: deserializeMetadata3(output)
-        };
-        return response;
-      };
-      de_UpdateContinuousBackupsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateContinuousBackupsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateContributorInsightsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateGlobalTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateGlobalTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateGlobalTableSettingsCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateGlobalTableSettingsOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateItemCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateItemOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateKinesisStreamingDestinationCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateTableCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateTableOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateTableReplicaAutoScalingCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = de_UpdateTableReplicaAutoScalingOutput(data, context);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_UpdateTimeToLiveCommand = async (output, context) => {
-        if (output.statusCode >= 300) {
-          return de_CommandError2(output, context);
-        }
-        const data = await parseJsonBody(output.body, context);
-        let contents = {};
-        contents = _json(data);
-        const response = {
-          $metadata: deserializeMetadata3(output),
-          ...contents
-        };
-        return response;
-      };
-      de_CommandError2 = async (output, context) => {
-        const parsedOutput = {
-          ...output,
-          body: await parseJsonErrorBody(output.body, context)
-        };
-        const errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
-        switch (errorCode) {
-          case "InternalServerError":
-          case "com.amazonaws.dynamodb#InternalServerError":
-            throw await de_InternalServerErrorRes(parsedOutput, context);
-          case "RequestLimitExceeded":
-          case "com.amazonaws.dynamodb#RequestLimitExceeded":
-            throw await de_RequestLimitExceededRes(parsedOutput, context);
-          case "InvalidEndpointException":
-          case "com.amazonaws.dynamodb#InvalidEndpointException":
-            throw await de_InvalidEndpointExceptionRes(parsedOutput, context);
-          case "ProvisionedThroughputExceededException":
-          case "com.amazonaws.dynamodb#ProvisionedThroughputExceededException":
-            throw await de_ProvisionedThroughputExceededExceptionRes(parsedOutput, context);
-          case "ResourceNotFoundException":
-          case "com.amazonaws.dynamodb#ResourceNotFoundException":
-            throw await de_ResourceNotFoundExceptionRes2(parsedOutput, context);
-          case "ItemCollectionSizeLimitExceededException":
-          case "com.amazonaws.dynamodb#ItemCollectionSizeLimitExceededException":
-            throw await de_ItemCollectionSizeLimitExceededExceptionRes(parsedOutput, context);
-          case "BackupInUseException":
-          case "com.amazonaws.dynamodb#BackupInUseException":
-            throw await de_BackupInUseExceptionRes(parsedOutput, context);
-          case "ContinuousBackupsUnavailableException":
-          case "com.amazonaws.dynamodb#ContinuousBackupsUnavailableException":
-            throw await de_ContinuousBackupsUnavailableExceptionRes(parsedOutput, context);
-          case "LimitExceededException":
-          case "com.amazonaws.dynamodb#LimitExceededException":
-            throw await de_LimitExceededExceptionRes2(parsedOutput, context);
-          case "TableInUseException":
-          case "com.amazonaws.dynamodb#TableInUseException":
-            throw await de_TableInUseExceptionRes(parsedOutput, context);
-          case "TableNotFoundException":
-          case "com.amazonaws.dynamodb#TableNotFoundException":
-            throw await de_TableNotFoundExceptionRes(parsedOutput, context);
-          case "GlobalTableAlreadyExistsException":
-          case "com.amazonaws.dynamodb#GlobalTableAlreadyExistsException":
-            throw await de_GlobalTableAlreadyExistsExceptionRes(parsedOutput, context);
-          case "ResourceInUseException":
-          case "com.amazonaws.dynamodb#ResourceInUseException":
-            throw await de_ResourceInUseExceptionRes(parsedOutput, context);
-          case "BackupNotFoundException":
-          case "com.amazonaws.dynamodb#BackupNotFoundException":
-            throw await de_BackupNotFoundExceptionRes(parsedOutput, context);
-          case "ConditionalCheckFailedException":
-          case "com.amazonaws.dynamodb#ConditionalCheckFailedException":
-            throw await de_ConditionalCheckFailedExceptionRes(parsedOutput, context);
-          case "TransactionConflictException":
-          case "com.amazonaws.dynamodb#TransactionConflictException":
-            throw await de_TransactionConflictExceptionRes(parsedOutput, context);
-          case "ExportNotFoundException":
-          case "com.amazonaws.dynamodb#ExportNotFoundException":
-            throw await de_ExportNotFoundExceptionRes(parsedOutput, context);
-          case "GlobalTableNotFoundException":
-          case "com.amazonaws.dynamodb#GlobalTableNotFoundException":
-            throw await de_GlobalTableNotFoundExceptionRes(parsedOutput, context);
-          case "ImportNotFoundException":
-          case "com.amazonaws.dynamodb#ImportNotFoundException":
-            throw await de_ImportNotFoundExceptionRes(parsedOutput, context);
-          case "DuplicateItemException":
-          case "com.amazonaws.dynamodb#DuplicateItemException":
-            throw await de_DuplicateItemExceptionRes(parsedOutput, context);
-          case "IdempotentParameterMismatchException":
-          case "com.amazonaws.dynamodb#IdempotentParameterMismatchException":
-            throw await de_IdempotentParameterMismatchExceptionRes(parsedOutput, context);
-          case "TransactionCanceledException":
-          case "com.amazonaws.dynamodb#TransactionCanceledException":
-            throw await de_TransactionCanceledExceptionRes(parsedOutput, context);
-          case "TransactionInProgressException":
-          case "com.amazonaws.dynamodb#TransactionInProgressException":
-            throw await de_TransactionInProgressExceptionRes(parsedOutput, context);
-          case "ExportConflictException":
-          case "com.amazonaws.dynamodb#ExportConflictException":
-            throw await de_ExportConflictExceptionRes(parsedOutput, context);
-          case "InvalidExportTimeException":
-          case "com.amazonaws.dynamodb#InvalidExportTimeException":
-            throw await de_InvalidExportTimeExceptionRes(parsedOutput, context);
-          case "PointInTimeRecoveryUnavailableException":
-          case "com.amazonaws.dynamodb#PointInTimeRecoveryUnavailableException":
-            throw await de_PointInTimeRecoveryUnavailableExceptionRes(parsedOutput, context);
-          case "ImportConflictException":
-          case "com.amazonaws.dynamodb#ImportConflictException":
-            throw await de_ImportConflictExceptionRes(parsedOutput, context);
-          case "TableAlreadyExistsException":
-          case "com.amazonaws.dynamodb#TableAlreadyExistsException":
-            throw await de_TableAlreadyExistsExceptionRes(parsedOutput, context);
-          case "InvalidRestoreTimeException":
-          case "com.amazonaws.dynamodb#InvalidRestoreTimeException":
-            throw await de_InvalidRestoreTimeExceptionRes(parsedOutput, context);
-          case "ReplicaAlreadyExistsException":
-          case "com.amazonaws.dynamodb#ReplicaAlreadyExistsException":
-            throw await de_ReplicaAlreadyExistsExceptionRes(parsedOutput, context);
-          case "ReplicaNotFoundException":
-          case "com.amazonaws.dynamodb#ReplicaNotFoundException":
-            throw await de_ReplicaNotFoundExceptionRes(parsedOutput, context);
-          case "IndexNotFoundException":
-          case "com.amazonaws.dynamodb#IndexNotFoundException":
-            throw await de_IndexNotFoundExceptionRes(parsedOutput, context);
-          default:
-            const parsedBody = parsedOutput.body;
-            return throwDefaultError3({
-              output,
-              parsedBody,
-              errorCode
-            });
-        }
-      };
-      de_BackupInUseExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new BackupInUseException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_BackupNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new BackupNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ConditionalCheckFailedExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = de_ConditionalCheckFailedException(body, context);
-        const exception = new ConditionalCheckFailedException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ContinuousBackupsUnavailableExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ContinuousBackupsUnavailableException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_DuplicateItemExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new DuplicateItemException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ExportConflictExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ExportConflictException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ExportNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ExportNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_GlobalTableAlreadyExistsExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new GlobalTableAlreadyExistsException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_GlobalTableNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new GlobalTableNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_IdempotentParameterMismatchExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new IdempotentParameterMismatchException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ImportConflictExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ImportConflictException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ImportNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ImportNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_IndexNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new IndexNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_InternalServerErrorRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new InternalServerError({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_InvalidEndpointExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new InvalidEndpointException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_InvalidExportTimeExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new InvalidExportTimeException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_InvalidRestoreTimeExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new InvalidRestoreTimeException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ItemCollectionSizeLimitExceededExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ItemCollectionSizeLimitExceededException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_LimitExceededExceptionRes2 = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new LimitExceededException2({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_PointInTimeRecoveryUnavailableExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new PointInTimeRecoveryUnavailableException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ProvisionedThroughputExceededExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ProvisionedThroughputExceededException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ReplicaAlreadyExistsExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ReplicaAlreadyExistsException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ReplicaNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ReplicaNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_RequestLimitExceededRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new RequestLimitExceeded({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ResourceInUseExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ResourceInUseException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_ResourceNotFoundExceptionRes2 = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new ResourceNotFoundException2({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TableAlreadyExistsExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new TableAlreadyExistsException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TableInUseExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new TableInUseException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TableNotFoundExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new TableNotFoundException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TransactionCanceledExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = de_TransactionCanceledException(body, context);
-        const exception = new TransactionCanceledException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TransactionConflictExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new TransactionConflictException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      de_TransactionInProgressExceptionRes = async (parsedOutput, context) => {
-        const body = parsedOutput.body;
-        const deserialized = _json(body);
-        const exception = new TransactionInProgressException({
-          $metadata: deserializeMetadata3(parsedOutput),
-          ...deserialized
-        });
-        return decorateServiceException(exception, body);
-      };
-      se_AttributeUpdates = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_AttributeValueUpdate(value, context);
-          return acc;
-        }, {});
-      };
-      se_AttributeValue = (input, context) => {
-        return AttributeValue.visit(input, {
-          B: (value) => ({ B: context.base64Encoder(value) }),
-          BOOL: (value) => ({ BOOL: value }),
-          BS: (value) => ({ BS: se_BinarySetAttributeValue(value, context) }),
-          L: (value) => ({ L: se_ListAttributeValue(value, context) }),
-          M: (value) => ({ M: se_MapAttributeValue(value, context) }),
-          N: (value) => ({ N: value }),
-          NS: (value) => ({ NS: _json(value) }),
-          NULL: (value) => ({ NULL: value }),
-          S: (value) => ({ S: value }),
-          SS: (value) => ({ SS: _json(value) }),
-          _: (name, value) => ({ name: value })
-        });
-      };
-      se_AttributeValueList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_AttributeValue(entry, context);
-        });
-      };
-      se_AttributeValueUpdate = (input, context) => {
-        return take(input, {
-          Action: [],
-          Value: (_2) => se_AttributeValue(_2, context)
-        });
-      };
-      se_AutoScalingPolicyUpdate = (input, context) => {
-        return take(input, {
-          PolicyName: [],
-          TargetTrackingScalingPolicyConfiguration: (_2) => se_AutoScalingTargetTrackingScalingPolicyConfigurationUpdate(_2, context)
-        });
-      };
-      se_AutoScalingSettingsUpdate = (input, context) => {
-        return take(input, {
-          AutoScalingDisabled: [],
-          AutoScalingRoleArn: [],
-          MaximumUnits: [],
-          MinimumUnits: [],
-          ScalingPolicyUpdate: (_2) => se_AutoScalingPolicyUpdate(_2, context)
-        });
-      };
-      se_AutoScalingTargetTrackingScalingPolicyConfigurationUpdate = (input, context) => {
-        return take(input, {
-          DisableScaleIn: [],
-          ScaleInCooldown: [],
-          ScaleOutCooldown: [],
-          TargetValue: serializeFloat
-        });
-      };
-      se_BatchExecuteStatementInput = (input, context) => {
-        return take(input, {
-          ReturnConsumedCapacity: [],
-          Statements: (_2) => se_PartiQLBatchRequest(_2, context)
-        });
-      };
-      se_BatchGetItemInput = (input, context) => {
-        return take(input, {
-          RequestItems: (_2) => se_BatchGetRequestMap(_2, context),
-          ReturnConsumedCapacity: []
-        });
-      };
-      se_BatchGetRequestMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_KeysAndAttributes(value, context);
-          return acc;
-        }, {});
-      };
-      se_BatchStatementRequest = (input, context) => {
-        return take(input, {
-          ConsistentRead: [],
-          Parameters: (_2) => se_PreparedStatementParameters(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          Statement: []
-        });
-      };
-      se_BatchWriteItemInput = (input, context) => {
-        return take(input, {
-          RequestItems: (_2) => se_BatchWriteItemRequestMap(_2, context),
-          ReturnConsumedCapacity: [],
-          ReturnItemCollectionMetrics: []
-        });
-      };
-      se_BatchWriteItemRequestMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_WriteRequests(value, context);
-          return acc;
-        }, {});
-      };
-      se_BinarySetAttributeValue = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return context.base64Encoder(entry);
-        });
-      };
-      se_Condition = (input, context) => {
-        return take(input, {
-          AttributeValueList: (_2) => se_AttributeValueList(_2, context),
-          ComparisonOperator: []
-        });
-      };
-      se_ConditionCheck = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Key: (_2) => se_Key(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: []
-        });
-      };
-      se_Delete = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Key: (_2) => se_Key(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: []
-        });
-      };
-      se_DeleteItemInput = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ConditionalOperator: [],
-          Expected: (_2) => se_ExpectedAttributeMap(_2, context),
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Key: (_2) => se_Key(_2, context),
-          ReturnConsumedCapacity: [],
-          ReturnItemCollectionMetrics: [],
-          ReturnValues: [],
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: []
-        });
-      };
-      se_DeleteRequest = (input, context) => {
-        return take(input, {
-          Key: (_2) => se_Key(_2, context)
-        });
-      };
-      se_ExecuteStatementInput = (input, context) => {
-        return take(input, {
-          ConsistentRead: [],
-          Limit: [],
-          NextToken: [],
-          Parameters: (_2) => se_PreparedStatementParameters(_2, context),
-          ReturnConsumedCapacity: [],
-          ReturnValuesOnConditionCheckFailure: [],
-          Statement: []
-        });
-      };
-      se_ExecuteTransactionInput = (input, context) => {
-        return take(input, {
-          ClientRequestToken: [true, (_2) => _2 ?? v4_default()],
-          ReturnConsumedCapacity: [],
-          TransactStatements: (_2) => se_ParameterizedStatements(_2, context)
-        });
-      };
-      se_ExpectedAttributeMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_ExpectedAttributeValue(value, context);
-          return acc;
-        }, {});
-      };
-      se_ExpectedAttributeValue = (input, context) => {
-        return take(input, {
-          AttributeValueList: (_2) => se_AttributeValueList(_2, context),
-          ComparisonOperator: [],
-          Exists: [],
-          Value: (_2) => se_AttributeValue(_2, context)
-        });
-      };
-      se_ExportTableToPointInTimeInput = (input, context) => {
-        return take(input, {
-          ClientToken: [true, (_2) => _2 ?? v4_default()],
-          ExportFormat: [],
-          ExportTime: (_2) => Math.round(_2.getTime() / 1e3),
-          ExportType: [],
-          IncrementalExportSpecification: (_2) => se_IncrementalExportSpecification(_2, context),
-          S3Bucket: [],
-          S3BucketOwner: [],
-          S3Prefix: [],
-          S3SseAlgorithm: [],
-          S3SseKmsKeyId: [],
-          TableArn: []
-        });
-      };
-      se_ExpressionAttributeValueMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_AttributeValue(value, context);
-          return acc;
-        }, {});
-      };
-      se_FilterConditionMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_Condition(value, context);
-          return acc;
-        }, {});
-      };
-      se_Get = (input, context) => {
-        return take(input, {
-          ExpressionAttributeNames: _json,
-          Key: (_2) => se_Key(_2, context),
-          ProjectionExpression: [],
-          TableName: []
-        });
-      };
-      se_GetItemInput = (input, context) => {
-        return take(input, {
-          AttributesToGet: _json,
-          ConsistentRead: [],
-          ExpressionAttributeNames: _json,
-          Key: (_2) => se_Key(_2, context),
-          ProjectionExpression: [],
-          ReturnConsumedCapacity: [],
-          TableName: []
-        });
-      };
-      se_GlobalSecondaryIndexAutoScalingUpdate = (input, context) => {
-        return take(input, {
-          IndexName: [],
-          ProvisionedWriteCapacityAutoScalingUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context)
-        });
-      };
-      se_GlobalSecondaryIndexAutoScalingUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_GlobalSecondaryIndexAutoScalingUpdate(entry, context);
-        });
-      };
-      se_GlobalTableGlobalSecondaryIndexSettingsUpdate = (input, context) => {
-        return take(input, {
-          IndexName: [],
-          ProvisionedWriteCapacityAutoScalingSettingsUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context),
-          ProvisionedWriteCapacityUnits: []
-        });
-      };
-      se_GlobalTableGlobalSecondaryIndexSettingsUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_GlobalTableGlobalSecondaryIndexSettingsUpdate(entry, context);
-        });
-      };
-      se_ImportTableInput = (input, context) => {
-        return take(input, {
-          ClientToken: [true, (_2) => _2 ?? v4_default()],
-          InputCompressionType: [],
-          InputFormat: [],
-          InputFormatOptions: _json,
-          S3BucketSource: _json,
-          TableCreationParameters: _json
-        });
-      };
-      se_IncrementalExportSpecification = (input, context) => {
-        return take(input, {
-          ExportFromTime: (_2) => Math.round(_2.getTime() / 1e3),
-          ExportToTime: (_2) => Math.round(_2.getTime() / 1e3),
-          ExportViewType: []
-        });
-      };
-      se_Key = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_AttributeValue(value, context);
-          return acc;
-        }, {});
-      };
-      se_KeyConditions = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_Condition(value, context);
-          return acc;
-        }, {});
-      };
-      se_KeyList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_Key(entry, context);
-        });
-      };
-      se_KeysAndAttributes = (input, context) => {
-        return take(input, {
-          AttributesToGet: _json,
-          ConsistentRead: [],
-          ExpressionAttributeNames: _json,
-          Keys: (_2) => se_KeyList(_2, context),
-          ProjectionExpression: []
-        });
-      };
-      se_ListAttributeValue = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_AttributeValue(entry, context);
-        });
-      };
-      se_ListBackupsInput = (input, context) => {
-        return take(input, {
-          BackupType: [],
-          ExclusiveStartBackupArn: [],
-          Limit: [],
-          TableName: [],
-          TimeRangeLowerBound: (_2) => Math.round(_2.getTime() / 1e3),
-          TimeRangeUpperBound: (_2) => Math.round(_2.getTime() / 1e3)
-        });
-      };
-      se_MapAttributeValue = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_AttributeValue(value, context);
-          return acc;
-        }, {});
-      };
-      se_ParameterizedStatement = (input, context) => {
-        return take(input, {
-          Parameters: (_2) => se_PreparedStatementParameters(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          Statement: []
-        });
-      };
-      se_ParameterizedStatements = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_ParameterizedStatement(entry, context);
-        });
-      };
-      se_PartiQLBatchRequest = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_BatchStatementRequest(entry, context);
-        });
-      };
-      se_PreparedStatementParameters = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_AttributeValue(entry, context);
-        });
-      };
-      se_Put = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Item: (_2) => se_PutItemInputAttributeMap(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: []
-        });
-      };
-      se_PutItemInput = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ConditionalOperator: [],
-          Expected: (_2) => se_ExpectedAttributeMap(_2, context),
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Item: (_2) => se_PutItemInputAttributeMap(_2, context),
-          ReturnConsumedCapacity: [],
-          ReturnItemCollectionMetrics: [],
-          ReturnValues: [],
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: []
-        });
-      };
-      se_PutItemInputAttributeMap = (input, context) => {
-        return Object.entries(input).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = se_AttributeValue(value, context);
-          return acc;
-        }, {});
-      };
-      se_PutRequest = (input, context) => {
-        return take(input, {
-          Item: (_2) => se_PutItemInputAttributeMap(_2, context)
-        });
-      };
-      se_QueryInput = (input, context) => {
-        return take(input, {
-          AttributesToGet: _json,
-          ConditionalOperator: [],
-          ConsistentRead: [],
-          ExclusiveStartKey: (_2) => se_Key(_2, context),
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          FilterExpression: [],
-          IndexName: [],
-          KeyConditionExpression: [],
-          KeyConditions: (_2) => se_KeyConditions(_2, context),
-          Limit: [],
-          ProjectionExpression: [],
-          QueryFilter: (_2) => se_FilterConditionMap(_2, context),
-          ReturnConsumedCapacity: [],
-          ScanIndexForward: [],
-          Select: [],
-          TableName: []
-        });
-      };
-      se_ReplicaAutoScalingUpdate = (input, context) => {
-        return take(input, {
-          RegionName: [],
-          ReplicaGlobalSecondaryIndexUpdates: (_2) => se_ReplicaGlobalSecondaryIndexAutoScalingUpdateList(_2, context),
-          ReplicaProvisionedReadCapacityAutoScalingUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context)
-        });
-      };
-      se_ReplicaAutoScalingUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_ReplicaAutoScalingUpdate(entry, context);
-        });
-      };
-      se_ReplicaGlobalSecondaryIndexAutoScalingUpdate = (input, context) => {
-        return take(input, {
-          IndexName: [],
-          ProvisionedReadCapacityAutoScalingUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context)
-        });
-      };
-      se_ReplicaGlobalSecondaryIndexAutoScalingUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_ReplicaGlobalSecondaryIndexAutoScalingUpdate(entry, context);
-        });
-      };
-      se_ReplicaGlobalSecondaryIndexSettingsUpdate = (input, context) => {
-        return take(input, {
-          IndexName: [],
-          ProvisionedReadCapacityAutoScalingSettingsUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context),
-          ProvisionedReadCapacityUnits: []
-        });
-      };
-      se_ReplicaGlobalSecondaryIndexSettingsUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_ReplicaGlobalSecondaryIndexSettingsUpdate(entry, context);
-        });
-      };
-      se_ReplicaSettingsUpdate = (input, context) => {
-        return take(input, {
-          RegionName: [],
-          ReplicaGlobalSecondaryIndexSettingsUpdate: (_2) => se_ReplicaGlobalSecondaryIndexSettingsUpdateList(_2, context),
-          ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context),
-          ReplicaProvisionedReadCapacityUnits: [],
-          ReplicaTableClass: []
-        });
-      };
-      se_ReplicaSettingsUpdateList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_ReplicaSettingsUpdate(entry, context);
-        });
-      };
-      se_RestoreTableToPointInTimeInput = (input, context) => {
-        return take(input, {
-          BillingModeOverride: [],
-          GlobalSecondaryIndexOverride: _json,
-          LocalSecondaryIndexOverride: _json,
-          ProvisionedThroughputOverride: _json,
-          RestoreDateTime: (_2) => Math.round(_2.getTime() / 1e3),
-          SSESpecificationOverride: _json,
-          SourceTableArn: [],
-          SourceTableName: [],
-          TargetTableName: [],
-          UseLatestRestorableTime: []
-        });
-      };
-      se_ScanInput = (input, context) => {
-        return take(input, {
-          AttributesToGet: _json,
-          ConditionalOperator: [],
-          ConsistentRead: [],
-          ExclusiveStartKey: (_2) => se_Key(_2, context),
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          FilterExpression: [],
-          IndexName: [],
-          Limit: [],
-          ProjectionExpression: [],
-          ReturnConsumedCapacity: [],
-          ScanFilter: (_2) => se_FilterConditionMap(_2, context),
-          Segment: [],
-          Select: [],
-          TableName: [],
-          TotalSegments: []
-        });
-      };
-      se_TransactGetItem = (input, context) => {
-        return take(input, {
-          Get: (_2) => se_Get(_2, context)
-        });
-      };
-      se_TransactGetItemList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_TransactGetItem(entry, context);
-        });
-      };
-      se_TransactGetItemsInput = (input, context) => {
-        return take(input, {
-          ReturnConsumedCapacity: [],
-          TransactItems: (_2) => se_TransactGetItemList(_2, context)
-        });
-      };
-      se_TransactWriteItem = (input, context) => {
-        return take(input, {
-          ConditionCheck: (_2) => se_ConditionCheck(_2, context),
-          Delete: (_2) => se_Delete(_2, context),
-          Put: (_2) => se_Put(_2, context),
-          Update: (_2) => se_Update(_2, context)
-        });
-      };
-      se_TransactWriteItemList = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_TransactWriteItem(entry, context);
-        });
-      };
-      se_TransactWriteItemsInput = (input, context) => {
-        return take(input, {
-          ClientRequestToken: [true, (_2) => _2 ?? v4_default()],
-          ReturnConsumedCapacity: [],
-          ReturnItemCollectionMetrics: [],
-          TransactItems: (_2) => se_TransactWriteItemList(_2, context)
-        });
-      };
-      se_Update = (input, context) => {
-        return take(input, {
-          ConditionExpression: [],
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Key: (_2) => se_Key(_2, context),
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: [],
-          UpdateExpression: []
-        });
-      };
-      se_UpdateGlobalTableSettingsInput = (input, context) => {
-        return take(input, {
-          GlobalTableBillingMode: [],
-          GlobalTableGlobalSecondaryIndexSettingsUpdate: (_2) => se_GlobalTableGlobalSecondaryIndexSettingsUpdateList(_2, context),
-          GlobalTableName: [],
-          GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context),
-          GlobalTableProvisionedWriteCapacityUnits: [],
-          ReplicaSettingsUpdate: (_2) => se_ReplicaSettingsUpdateList(_2, context)
-        });
-      };
-      se_UpdateItemInput = (input, context) => {
-        return take(input, {
-          AttributeUpdates: (_2) => se_AttributeUpdates(_2, context),
-          ConditionExpression: [],
-          ConditionalOperator: [],
-          Expected: (_2) => se_ExpectedAttributeMap(_2, context),
-          ExpressionAttributeNames: _json,
-          ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
-          Key: (_2) => se_Key(_2, context),
-          ReturnConsumedCapacity: [],
-          ReturnItemCollectionMetrics: [],
-          ReturnValues: [],
-          ReturnValuesOnConditionCheckFailure: [],
-          TableName: [],
-          UpdateExpression: []
-        });
-      };
-      se_UpdateTableReplicaAutoScalingInput = (input, context) => {
-        return take(input, {
-          GlobalSecondaryIndexUpdates: (_2) => se_GlobalSecondaryIndexAutoScalingUpdateList(_2, context),
-          ProvisionedWriteCapacityAutoScalingUpdate: (_2) => se_AutoScalingSettingsUpdate(_2, context),
-          ReplicaUpdates: (_2) => se_ReplicaAutoScalingUpdateList(_2, context),
-          TableName: []
-        });
-      };
-      se_WriteRequest = (input, context) => {
-        return take(input, {
-          DeleteRequest: (_2) => se_DeleteRequest(_2, context),
-          PutRequest: (_2) => se_PutRequest(_2, context)
-        });
-      };
-      se_WriteRequests = (input, context) => {
-        return input.filter((e4) => e4 != null).map((entry) => {
-          return se_WriteRequest(entry, context);
-        });
-      };
-      de_ArchivalSummary = (output, context) => {
-        return take(output, {
-          ArchivalBackupArn: expectString,
-          ArchivalDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ArchivalReason: expectString
-        });
-      };
-      de_AttributeMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_AttributeValue(awsExpectUnion(value), context);
-          return acc;
-        }, {});
-      };
-      de_AttributeValue = (output, context) => {
-        if (output.B != null) {
-          return {
-            B: context.base64Decoder(output.B)
-          };
-        }
-        if (expectBoolean(output.BOOL) !== void 0) {
-          return { BOOL: expectBoolean(output.BOOL) };
-        }
-        if (output.BS != null) {
-          return {
-            BS: de_BinarySetAttributeValue(output.BS, context)
-          };
-        }
-        if (output.L != null) {
-          return {
-            L: de_ListAttributeValue(output.L, context)
-          };
-        }
-        if (output.M != null) {
-          return {
-            M: de_MapAttributeValue(output.M, context)
-          };
-        }
-        if (expectString(output.N) !== void 0) {
-          return { N: expectString(output.N) };
-        }
-        if (output.NS != null) {
-          return {
-            NS: _json(output.NS)
-          };
-        }
-        if (expectBoolean(output.NULL) !== void 0) {
-          return { NULL: expectBoolean(output.NULL) };
-        }
-        if (expectString(output.S) !== void 0) {
-          return { S: expectString(output.S) };
-        }
-        if (output.SS != null) {
-          return {
-            SS: _json(output.SS)
-          };
-        }
-        return { $unknown: Object.entries(output)[0] };
-      };
-      de_AutoScalingPolicyDescription = (output, context) => {
-        return take(output, {
-          PolicyName: expectString,
-          TargetTrackingScalingPolicyConfiguration: (_2) => de_AutoScalingTargetTrackingScalingPolicyConfigurationDescription(_2, context)
-        });
-      };
-      de_AutoScalingPolicyDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_AutoScalingPolicyDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_AutoScalingSettingsDescription = (output, context) => {
-        return take(output, {
-          AutoScalingDisabled: expectBoolean,
-          AutoScalingRoleArn: expectString,
-          MaximumUnits: expectLong,
-          MinimumUnits: expectLong,
-          ScalingPolicies: (_2) => de_AutoScalingPolicyDescriptionList(_2, context)
-        });
-      };
-      de_AutoScalingTargetTrackingScalingPolicyConfigurationDescription = (output, context) => {
-        return take(output, {
-          DisableScaleIn: expectBoolean,
-          ScaleInCooldown: expectInt32,
-          ScaleOutCooldown: expectInt32,
-          TargetValue: limitedParseDouble
-        });
-      };
-      de_BackupDescription = (output, context) => {
-        return take(output, {
-          BackupDetails: (_2) => de_BackupDetails(_2, context),
-          SourceTableDetails: (_2) => de_SourceTableDetails(_2, context),
-          SourceTableFeatureDetails: (_2) => de_SourceTableFeatureDetails(_2, context)
-        });
-      };
-      de_BackupDetails = (output, context) => {
-        return take(output, {
-          BackupArn: expectString,
-          BackupCreationDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          BackupExpiryDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          BackupName: expectString,
-          BackupSizeBytes: expectLong,
-          BackupStatus: expectString,
-          BackupType: expectString
-        });
-      };
-      de_BackupSummaries = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_BackupSummary(entry, context);
-        });
-        return retVal;
-      };
-      de_BackupSummary = (output, context) => {
-        return take(output, {
-          BackupArn: expectString,
-          BackupCreationDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          BackupExpiryDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          BackupName: expectString,
-          BackupSizeBytes: expectLong,
-          BackupStatus: expectString,
-          BackupType: expectString,
-          TableArn: expectString,
-          TableId: expectString,
-          TableName: expectString
-        });
-      };
-      de_BatchExecuteStatementOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          Responses: (_2) => de_PartiQLBatchResponse(_2, context)
-        });
-      };
-      de_BatchGetItemOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          Responses: (_2) => de_BatchGetResponseMap(_2, context),
-          UnprocessedKeys: (_2) => de_BatchGetRequestMap(_2, context)
-        });
-      };
-      de_BatchGetRequestMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_KeysAndAttributes(value, context);
-          return acc;
-        }, {});
-      };
-      de_BatchGetResponseMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_ItemList(value, context);
-          return acc;
-        }, {});
-      };
-      de_BatchStatementError = (output, context) => {
-        return take(output, {
-          Code: expectString,
-          Item: (_2) => de_AttributeMap(_2, context),
-          Message: expectString
-        });
-      };
-      de_BatchStatementResponse = (output, context) => {
-        return take(output, {
-          Error: (_2) => de_BatchStatementError(_2, context),
-          Item: (_2) => de_AttributeMap(_2, context),
-          TableName: expectString
-        });
-      };
-      de_BatchWriteItemOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          ItemCollectionMetrics: (_2) => de_ItemCollectionMetricsPerTable(_2, context),
-          UnprocessedItems: (_2) => de_BatchWriteItemRequestMap(_2, context)
-        });
-      };
-      de_BatchWriteItemRequestMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_WriteRequests(value, context);
-          return acc;
-        }, {});
-      };
-      de_BillingModeSummary = (output, context) => {
-        return take(output, {
-          BillingMode: expectString,
-          LastUpdateToPayPerRequestDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2)))
-        });
-      };
-      de_BinarySetAttributeValue = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return context.base64Decoder(entry);
-        });
-        return retVal;
-      };
-      de_CancellationReason = (output, context) => {
-        return take(output, {
-          Code: expectString,
-          Item: (_2) => de_AttributeMap(_2, context),
-          Message: expectString
-        });
-      };
-      de_CancellationReasonList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_CancellationReason(entry, context);
-        });
-        return retVal;
-      };
-      de_Capacity = (output, context) => {
-        return take(output, {
-          CapacityUnits: limitedParseDouble,
-          ReadCapacityUnits: limitedParseDouble,
-          WriteCapacityUnits: limitedParseDouble
-        });
-      };
-      de_ConditionalCheckFailedException = (output, context) => {
-        return take(output, {
-          Item: (_2) => de_AttributeMap(_2, context),
-          message: expectString
-        });
-      };
-      de_ConsumedCapacity = (output, context) => {
-        return take(output, {
-          CapacityUnits: limitedParseDouble,
-          GlobalSecondaryIndexes: (_2) => de_SecondaryIndexesCapacityMap(_2, context),
-          LocalSecondaryIndexes: (_2) => de_SecondaryIndexesCapacityMap(_2, context),
-          ReadCapacityUnits: limitedParseDouble,
-          Table: (_2) => de_Capacity(_2, context),
-          TableName: expectString,
-          WriteCapacityUnits: limitedParseDouble
-        });
-      };
-      de_ConsumedCapacityMultiple = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ConsumedCapacity(entry, context);
-        });
-        return retVal;
-      };
-      de_ContinuousBackupsDescription = (output, context) => {
-        return take(output, {
-          ContinuousBackupsStatus: expectString,
-          PointInTimeRecoveryDescription: (_2) => de_PointInTimeRecoveryDescription(_2, context)
-        });
-      };
-      de_CreateBackupOutput = (output, context) => {
-        return take(output, {
-          BackupDetails: (_2) => de_BackupDetails(_2, context)
-        });
-      };
-      de_CreateGlobalTableOutput = (output, context) => {
-        return take(output, {
-          GlobalTableDescription: (_2) => de_GlobalTableDescription(_2, context)
-        });
-      };
-      de_CreateTableOutput = (output, context) => {
-        return take(output, {
-          TableDescription: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_DeleteBackupOutput = (output, context) => {
-        return take(output, {
-          BackupDescription: (_2) => de_BackupDescription(_2, context)
-        });
-      };
-      de_DeleteItemOutput = (output, context) => {
-        return take(output, {
-          Attributes: (_2) => de_AttributeMap(_2, context),
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          ItemCollectionMetrics: (_2) => de_ItemCollectionMetrics(_2, context)
-        });
-      };
-      de_DeleteRequest = (output, context) => {
-        return take(output, {
-          Key: (_2) => de_Key(_2, context)
-        });
-      };
-      de_DeleteTableOutput = (output, context) => {
-        return take(output, {
-          TableDescription: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_DescribeBackupOutput = (output, context) => {
-        return take(output, {
-          BackupDescription: (_2) => de_BackupDescription(_2, context)
-        });
-      };
-      de_DescribeContinuousBackupsOutput = (output, context) => {
-        return take(output, {
-          ContinuousBackupsDescription: (_2) => de_ContinuousBackupsDescription(_2, context)
-        });
-      };
-      de_DescribeContributorInsightsOutput = (output, context) => {
-        return take(output, {
-          ContributorInsightsRuleList: _json,
-          ContributorInsightsStatus: expectString,
-          FailureException: _json,
-          IndexName: expectString,
-          LastUpdateDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableName: expectString
-        });
-      };
-      de_DescribeExportOutput = (output, context) => {
-        return take(output, {
-          ExportDescription: (_2) => de_ExportDescription(_2, context)
-        });
-      };
-      de_DescribeGlobalTableOutput = (output, context) => {
-        return take(output, {
-          GlobalTableDescription: (_2) => de_GlobalTableDescription(_2, context)
-        });
-      };
-      de_DescribeGlobalTableSettingsOutput = (output, context) => {
-        return take(output, {
-          GlobalTableName: expectString,
-          ReplicaSettings: (_2) => de_ReplicaSettingsDescriptionList(_2, context)
-        });
-      };
-      de_DescribeImportOutput = (output, context) => {
-        return take(output, {
-          ImportTableDescription: (_2) => de_ImportTableDescription(_2, context)
-        });
-      };
-      de_DescribeTableOutput = (output, context) => {
-        return take(output, {
-          Table: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_DescribeTableReplicaAutoScalingOutput = (output, context) => {
-        return take(output, {
-          TableAutoScalingDescription: (_2) => de_TableAutoScalingDescription(_2, context)
-        });
-      };
-      de_ExecuteStatementOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          Items: (_2) => de_ItemList(_2, context),
-          LastEvaluatedKey: (_2) => de_Key(_2, context),
-          NextToken: expectString
-        });
-      };
-      de_ExecuteTransactionOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          Responses: (_2) => de_ItemResponseList(_2, context)
-        });
-      };
-      de_ExportDescription = (output, context) => {
-        return take(output, {
-          BilledSizeBytes: expectLong,
-          ClientToken: expectString,
-          EndTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ExportArn: expectString,
-          ExportFormat: expectString,
-          ExportManifest: expectString,
-          ExportStatus: expectString,
-          ExportTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ExportType: expectString,
-          FailureCode: expectString,
-          FailureMessage: expectString,
-          IncrementalExportSpecification: (_2) => de_IncrementalExportSpecification(_2, context),
-          ItemCount: expectLong,
-          S3Bucket: expectString,
-          S3BucketOwner: expectString,
-          S3Prefix: expectString,
-          S3SseAlgorithm: expectString,
-          S3SseKmsKeyId: expectString,
-          StartTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableArn: expectString,
-          TableId: expectString
-        });
-      };
-      de_ExportTableToPointInTimeOutput = (output, context) => {
-        return take(output, {
-          ExportDescription: (_2) => de_ExportDescription(_2, context)
-        });
-      };
-      de_GetItemOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          Item: (_2) => de_AttributeMap(_2, context)
-        });
-      };
-      de_GlobalSecondaryIndexDescription = (output, context) => {
-        return take(output, {
-          Backfilling: expectBoolean,
-          IndexArn: expectString,
-          IndexName: expectString,
-          IndexSizeBytes: expectLong,
-          IndexStatus: expectString,
-          ItemCount: expectLong,
-          KeySchema: _json,
-          Projection: _json,
-          ProvisionedThroughput: (_2) => de_ProvisionedThroughputDescription(_2, context)
-        });
-      };
-      de_GlobalSecondaryIndexDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_GlobalSecondaryIndexDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_GlobalTableDescription = (output, context) => {
-        return take(output, {
-          CreationDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          GlobalTableArn: expectString,
-          GlobalTableName: expectString,
-          GlobalTableStatus: expectString,
-          ReplicationGroup: (_2) => de_ReplicaDescriptionList(_2, context)
-        });
-      };
-      de_ImportSummary = (output, context) => {
-        return take(output, {
-          CloudWatchLogGroupArn: expectString,
-          EndTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ImportArn: expectString,
-          ImportStatus: expectString,
-          InputFormat: expectString,
-          S3BucketSource: _json,
-          StartTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableArn: expectString
-        });
-      };
-      de_ImportSummaryList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ImportSummary(entry, context);
-        });
-        return retVal;
-      };
-      de_ImportTableDescription = (output, context) => {
-        return take(output, {
-          ClientToken: expectString,
-          CloudWatchLogGroupArn: expectString,
-          EndTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ErrorCount: expectLong,
-          FailureCode: expectString,
-          FailureMessage: expectString,
-          ImportArn: expectString,
-          ImportStatus: expectString,
-          ImportedItemCount: expectLong,
-          InputCompressionType: expectString,
-          InputFormat: expectString,
-          InputFormatOptions: _json,
-          ProcessedItemCount: expectLong,
-          ProcessedSizeBytes: expectLong,
-          S3BucketSource: _json,
-          StartTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableArn: expectString,
-          TableCreationParameters: _json,
-          TableId: expectString
-        });
-      };
-      de_ImportTableOutput = (output, context) => {
-        return take(output, {
-          ImportTableDescription: (_2) => de_ImportTableDescription(_2, context)
-        });
-      };
-      de_IncrementalExportSpecification = (output, context) => {
-        return take(output, {
-          ExportFromTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ExportToTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ExportViewType: expectString
-        });
-      };
-      de_ItemCollectionKeyAttributeMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_AttributeValue(awsExpectUnion(value), context);
-          return acc;
-        }, {});
-      };
-      de_ItemCollectionMetrics = (output, context) => {
-        return take(output, {
-          ItemCollectionKey: (_2) => de_ItemCollectionKeyAttributeMap(_2, context),
-          SizeEstimateRangeGB: (_2) => de_ItemCollectionSizeEstimateRange(_2, context)
-        });
-      };
-      de_ItemCollectionMetricsMultiple = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ItemCollectionMetrics(entry, context);
-        });
-        return retVal;
-      };
-      de_ItemCollectionMetricsPerTable = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_ItemCollectionMetricsMultiple(value, context);
-          return acc;
-        }, {});
-      };
-      de_ItemCollectionSizeEstimateRange = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return limitedParseDouble(entry);
-        });
-        return retVal;
-      };
-      de_ItemList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_AttributeMap(entry, context);
-        });
-        return retVal;
-      };
-      de_ItemResponse = (output, context) => {
-        return take(output, {
-          Item: (_2) => de_AttributeMap(_2, context)
-        });
-      };
-      de_ItemResponseList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ItemResponse(entry, context);
-        });
-        return retVal;
-      };
-      de_Key = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_AttributeValue(awsExpectUnion(value), context);
-          return acc;
-        }, {});
-      };
-      de_KeyList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_Key(entry, context);
-        });
-        return retVal;
-      };
-      de_KeysAndAttributes = (output, context) => {
-        return take(output, {
-          AttributesToGet: _json,
-          ConsistentRead: expectBoolean,
-          ExpressionAttributeNames: _json,
-          Keys: (_2) => de_KeyList(_2, context),
-          ProjectionExpression: expectString
-        });
-      };
-      de_ListAttributeValue = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_AttributeValue(awsExpectUnion(entry), context);
-        });
-        return retVal;
-      };
-      de_ListBackupsOutput = (output, context) => {
-        return take(output, {
-          BackupSummaries: (_2) => de_BackupSummaries(_2, context),
-          LastEvaluatedBackupArn: expectString
-        });
-      };
-      de_ListImportsOutput = (output, context) => {
-        return take(output, {
-          ImportSummaryList: (_2) => de_ImportSummaryList(_2, context),
-          NextToken: expectString
-        });
-      };
-      de_MapAttributeValue = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_AttributeValue(awsExpectUnion(value), context);
-          return acc;
-        }, {});
-      };
-      de_PartiQLBatchResponse = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_BatchStatementResponse(entry, context);
-        });
-        return retVal;
-      };
-      de_PointInTimeRecoveryDescription = (output, context) => {
-        return take(output, {
-          EarliestRestorableDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          LatestRestorableDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          PointInTimeRecoveryStatus: expectString
-        });
-      };
-      de_ProvisionedThroughputDescription = (output, context) => {
-        return take(output, {
-          LastDecreaseDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          LastIncreaseDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          NumberOfDecreasesToday: expectLong,
-          ReadCapacityUnits: expectLong,
-          WriteCapacityUnits: expectLong
-        });
-      };
-      de_PutItemInputAttributeMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_AttributeValue(awsExpectUnion(value), context);
-          return acc;
-        }, {});
-      };
-      de_PutItemOutput = (output, context) => {
-        return take(output, {
-          Attributes: (_2) => de_AttributeMap(_2, context),
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          ItemCollectionMetrics: (_2) => de_ItemCollectionMetrics(_2, context)
-        });
-      };
-      de_PutRequest = (output, context) => {
-        return take(output, {
-          Item: (_2) => de_PutItemInputAttributeMap(_2, context)
-        });
-      };
-      de_QueryOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          Count: expectInt32,
-          Items: (_2) => de_ItemList(_2, context),
-          LastEvaluatedKey: (_2) => de_Key(_2, context),
-          ScannedCount: expectInt32
-        });
-      };
-      de_ReplicaAutoScalingDescription = (output, context) => {
-        return take(output, {
-          GlobalSecondaryIndexes: (_2) => de_ReplicaGlobalSecondaryIndexAutoScalingDescriptionList(_2, context),
-          RegionName: expectString,
-          ReplicaProvisionedReadCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ReplicaProvisionedWriteCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ReplicaStatus: expectString
-        });
-      };
-      de_ReplicaAutoScalingDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ReplicaAutoScalingDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_ReplicaDescription = (output, context) => {
-        return take(output, {
-          GlobalSecondaryIndexes: _json,
-          KMSMasterKeyId: expectString,
-          ProvisionedThroughputOverride: _json,
-          RegionName: expectString,
-          ReplicaInaccessibleDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          ReplicaStatus: expectString,
-          ReplicaStatusDescription: expectString,
-          ReplicaStatusPercentProgress: expectString,
-          ReplicaTableClassSummary: (_2) => de_TableClassSummary(_2, context)
-        });
-      };
-      de_ReplicaDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ReplicaDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_ReplicaGlobalSecondaryIndexAutoScalingDescription = (output, context) => {
-        return take(output, {
-          IndexName: expectString,
-          IndexStatus: expectString,
-          ProvisionedReadCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ProvisionedWriteCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context)
-        });
-      };
-      de_ReplicaGlobalSecondaryIndexAutoScalingDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ReplicaGlobalSecondaryIndexAutoScalingDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_ReplicaGlobalSecondaryIndexSettingsDescription = (output, context) => {
-        return take(output, {
-          IndexName: expectString,
-          IndexStatus: expectString,
-          ProvisionedReadCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ProvisionedReadCapacityUnits: expectLong,
-          ProvisionedWriteCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ProvisionedWriteCapacityUnits: expectLong
-        });
-      };
-      de_ReplicaGlobalSecondaryIndexSettingsDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ReplicaGlobalSecondaryIndexSettingsDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_ReplicaSettingsDescription = (output, context) => {
-        return take(output, {
-          RegionName: expectString,
-          ReplicaBillingModeSummary: (_2) => de_BillingModeSummary(_2, context),
-          ReplicaGlobalSecondaryIndexSettings: (_2) => de_ReplicaGlobalSecondaryIndexSettingsDescriptionList(_2, context),
-          ReplicaProvisionedReadCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ReplicaProvisionedReadCapacityUnits: expectLong,
-          ReplicaProvisionedWriteCapacityAutoScalingSettings: (_2) => de_AutoScalingSettingsDescription(_2, context),
-          ReplicaProvisionedWriteCapacityUnits: expectLong,
-          ReplicaStatus: expectString,
-          ReplicaTableClassSummary: (_2) => de_TableClassSummary(_2, context)
-        });
-      };
-      de_ReplicaSettingsDescriptionList = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_ReplicaSettingsDescription(entry, context);
-        });
-        return retVal;
-      };
-      de_RestoreSummary = (output, context) => {
-        return take(output, {
-          RestoreDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          RestoreInProgress: expectBoolean,
-          SourceBackupArn: expectString,
-          SourceTableArn: expectString
-        });
-      };
-      de_RestoreTableFromBackupOutput = (output, context) => {
-        return take(output, {
-          TableDescription: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_RestoreTableToPointInTimeOutput = (output, context) => {
-        return take(output, {
-          TableDescription: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_ScanOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          Count: expectInt32,
-          Items: (_2) => de_ItemList(_2, context),
-          LastEvaluatedKey: (_2) => de_Key(_2, context),
-          ScannedCount: expectInt32
-        });
-      };
-      de_SecondaryIndexesCapacityMap = (output, context) => {
-        return Object.entries(output).reduce((acc, [key, value]) => {
-          if (value === null) {
-            return acc;
-          }
-          acc[key] = de_Capacity(value, context);
-          return acc;
-        }, {});
-      };
-      de_SourceTableDetails = (output, context) => {
-        return take(output, {
-          BillingMode: expectString,
-          ItemCount: expectLong,
-          KeySchema: _json,
-          ProvisionedThroughput: _json,
-          TableArn: expectString,
-          TableCreationDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableId: expectString,
-          TableName: expectString,
-          TableSizeBytes: expectLong
-        });
-      };
-      de_SourceTableFeatureDetails = (output, context) => {
-        return take(output, {
-          GlobalSecondaryIndexes: _json,
-          LocalSecondaryIndexes: _json,
-          SSEDescription: (_2) => de_SSEDescription(_2, context),
-          StreamDescription: _json,
-          TimeToLiveDescription: _json
-        });
-      };
-      de_SSEDescription = (output, context) => {
-        return take(output, {
-          InaccessibleEncryptionDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          KMSMasterKeyArn: expectString,
-          SSEType: expectString,
-          Status: expectString
-        });
-      };
-      de_TableAutoScalingDescription = (output, context) => {
-        return take(output, {
-          Replicas: (_2) => de_ReplicaAutoScalingDescriptionList(_2, context),
-          TableName: expectString,
-          TableStatus: expectString
-        });
-      };
-      de_TableClassSummary = (output, context) => {
-        return take(output, {
-          LastUpdateDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          TableClass: expectString
-        });
-      };
-      de_TableDescription = (output, context) => {
-        return take(output, {
-          ArchivalSummary: (_2) => de_ArchivalSummary(_2, context),
-          AttributeDefinitions: _json,
-          BillingModeSummary: (_2) => de_BillingModeSummary(_2, context),
-          CreationDateTime: (_2) => expectNonNull(parseEpochTimestamp(expectNumber(_2))),
-          DeletionProtectionEnabled: expectBoolean,
-          GlobalSecondaryIndexes: (_2) => de_GlobalSecondaryIndexDescriptionList(_2, context),
-          GlobalTableVersion: expectString,
-          ItemCount: expectLong,
-          KeySchema: _json,
-          LatestStreamArn: expectString,
-          LatestStreamLabel: expectString,
-          LocalSecondaryIndexes: _json,
-          ProvisionedThroughput: (_2) => de_ProvisionedThroughputDescription(_2, context),
-          Replicas: (_2) => de_ReplicaDescriptionList(_2, context),
-          RestoreSummary: (_2) => de_RestoreSummary(_2, context),
-          SSEDescription: (_2) => de_SSEDescription(_2, context),
-          StreamSpecification: _json,
-          TableArn: expectString,
-          TableClassSummary: (_2) => de_TableClassSummary(_2, context),
-          TableId: expectString,
-          TableName: expectString,
-          TableSizeBytes: expectLong,
-          TableStatus: expectString
-        });
-      };
-      de_TransactGetItemsOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          Responses: (_2) => de_ItemResponseList(_2, context)
-        });
-      };
-      de_TransactionCanceledException = (output, context) => {
-        return take(output, {
-          CancellationReasons: (_2) => de_CancellationReasonList(_2, context),
-          Message: expectString
-        });
-      };
-      de_TransactWriteItemsOutput = (output, context) => {
-        return take(output, {
-          ConsumedCapacity: (_2) => de_ConsumedCapacityMultiple(_2, context),
-          ItemCollectionMetrics: (_2) => de_ItemCollectionMetricsPerTable(_2, context)
-        });
-      };
-      de_UpdateContinuousBackupsOutput = (output, context) => {
-        return take(output, {
-          ContinuousBackupsDescription: (_2) => de_ContinuousBackupsDescription(_2, context)
-        });
-      };
-      de_UpdateGlobalTableOutput = (output, context) => {
-        return take(output, {
-          GlobalTableDescription: (_2) => de_GlobalTableDescription(_2, context)
-        });
-      };
-      de_UpdateGlobalTableSettingsOutput = (output, context) => {
-        return take(output, {
-          GlobalTableName: expectString,
-          ReplicaSettings: (_2) => de_ReplicaSettingsDescriptionList(_2, context)
-        });
-      };
-      de_UpdateItemOutput = (output, context) => {
-        return take(output, {
-          Attributes: (_2) => de_AttributeMap(_2, context),
-          ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
-          ItemCollectionMetrics: (_2) => de_ItemCollectionMetrics(_2, context)
-        });
-      };
-      de_UpdateTableOutput = (output, context) => {
-        return take(output, {
-          TableDescription: (_2) => de_TableDescription(_2, context)
-        });
-      };
-      de_UpdateTableReplicaAutoScalingOutput = (output, context) => {
-        return take(output, {
-          TableAutoScalingDescription: (_2) => de_TableAutoScalingDescription(_2, context)
-        });
-      };
-      de_WriteRequest = (output, context) => {
-        return take(output, {
-          DeleteRequest: (_2) => de_DeleteRequest(_2, context),
-          PutRequest: (_2) => de_PutRequest(_2, context)
-        });
-      };
-      de_WriteRequests = (output, context) => {
-        const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
-          return de_WriteRequest(entry, context);
-        });
-        return retVal;
-      };
-      deserializeMetadata3 = (output) => ({
-        httpStatusCode: output.statusCode,
-        requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"] ?? output.headers["x-amz-request-id"],
-        extendedRequestId: output.headers["x-amz-id-2"],
-        cfId: output.headers["x-amz-cf-id"]
-      });
-      throwDefaultError3 = withBaseException(DynamoDBServiceException);
-      buildHttpRpcRequest2 = async (context, headers, path, resolvedHostname, body) => {
-        const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
-        const contents = {
-          protocol,
-          hostname,
-          port,
-          method: "POST",
-          path: basePath.endsWith("/") ? basePath.slice(0, -1) + path : basePath + path,
-          headers
-        };
-        if (resolvedHostname !== void 0) {
-          contents.hostname = resolvedHostname;
-        }
-        if (body !== void 0) {
-          contents.body = body;
-        }
-        return new HttpRequest(contents);
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeEndpointsCommand.js
-  var DescribeEndpointsCommand;
-  var init_DescribeEndpointsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeEndpointsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeEndpointsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeEndpoints", {}).n("DynamoDBClient", "DescribeEndpointsCommand").f(void 0, void 0).ser(se_DescribeEndpointsCommand).de(de_DescribeEndpointsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/package.json
-  var package_default2;
-  var init_package2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/package.json"() {
-      package_default2 = {
-        name: "@aws-sdk/client-dynamodb",
-        description: "AWS SDK for JavaScript Dynamodb Client for Node.js, Browser and React Native",
-        version: "3.529.1",
-        scripts: {
-          build: "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
-          "build:cjs": "node ../../scripts/compilation/inline client-dynamodb",
-          "build:es": "tsc -p tsconfig.es.json",
-          "build:include:deps": "lerna run --scope $npm_package_name --include-dependencies build",
-          "build:types": "tsc -p tsconfig.types.json",
-          "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
-          clean: "rimraf ./dist-* && rimraf *.tsbuildinfo",
-          "extract:docs": "api-extractor run --local",
-          "generate:client": "node ../../scripts/generate-clients/single-service --solo dynamodb"
-        },
-        main: "./dist-cjs/index.js",
-        types: "./dist-types/index.d.ts",
-        module: "./dist-es/index.js",
-        sideEffects: false,
-        dependencies: {
-          "@aws-crypto/sha256-browser": "3.0.0",
-          "@aws-crypto/sha256-js": "3.0.0",
-          "@aws-sdk/client-sts": "3.529.1",
-          "@aws-sdk/core": "3.529.1",
-          "@aws-sdk/credential-provider-node": "3.529.1",
-          "@aws-sdk/middleware-endpoint-discovery": "3.525.0",
-          "@aws-sdk/middleware-host-header": "3.523.0",
-          "@aws-sdk/middleware-logger": "3.523.0",
-          "@aws-sdk/middleware-recursion-detection": "3.523.0",
-          "@aws-sdk/middleware-user-agent": "3.525.0",
-          "@aws-sdk/region-config-resolver": "3.525.0",
-          "@aws-sdk/types": "3.523.0",
-          "@aws-sdk/util-endpoints": "3.525.0",
-          "@aws-sdk/util-user-agent-browser": "3.523.0",
-          "@aws-sdk/util-user-agent-node": "3.525.0",
-          "@smithy/config-resolver": "^2.1.4",
-          "@smithy/core": "^1.3.5",
-          "@smithy/fetch-http-handler": "^2.4.3",
-          "@smithy/hash-node": "^2.1.3",
-          "@smithy/invalid-dependency": "^2.1.3",
-          "@smithy/middleware-content-length": "^2.1.3",
-          "@smithy/middleware-endpoint": "^2.4.4",
-          "@smithy/middleware-retry": "^2.1.4",
-          "@smithy/middleware-serde": "^2.1.3",
-          "@smithy/middleware-stack": "^2.1.3",
-          "@smithy/node-config-provider": "^2.2.4",
-          "@smithy/node-http-handler": "^2.4.1",
-          "@smithy/protocol-http": "^3.2.1",
-          "@smithy/smithy-client": "^2.4.2",
-          "@smithy/types": "^2.10.1",
-          "@smithy/url-parser": "^2.1.3",
-          "@smithy/util-base64": "^2.1.1",
-          "@smithy/util-body-length-browser": "^2.1.1",
-          "@smithy/util-body-length-node": "^2.2.1",
-          "@smithy/util-defaults-mode-browser": "^2.1.4",
-          "@smithy/util-defaults-mode-node": "^2.2.3",
-          "@smithy/util-endpoints": "^1.1.4",
-          "@smithy/util-middleware": "^2.1.3",
-          "@smithy/util-retry": "^2.1.3",
-          "@smithy/util-utf8": "^2.1.1",
-          "@smithy/util-waiter": "^2.1.3",
-          tslib: "^2.5.0",
-          uuid: "^9.0.1"
-        },
-        devDependencies: {
-          "@smithy/service-client-documentation-generator": "^2.1.1",
-          "@tsconfig/node14": "1.0.3",
-          "@types/node": "^14.14.31",
-          "@types/uuid": "^9.0.4",
-          concurrently: "7.0.0",
-          "downlevel-dts": "0.10.1",
-          rimraf: "3.0.2",
-          typescript: "~4.9.5"
-        },
-        engines: {
-          node: ">=14.0.0"
-        },
-        typesVersions: {
-          "<4.0": {
-            "dist-types/*": [
-              "dist-types/ts3.4/*"
-            ]
-          }
-        },
-        files: [
-          "dist-*/**"
-        ],
-        author: {
-          name: "AWS SDK for JavaScript Team",
-          url: "https://aws.amazon.com/javascript/"
-        },
-        license: "Apache-2.0",
-        browser: {
-          "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.browser"
-        },
-        "react-native": {
-          "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.native"
-        },
-        homepage: "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-dynamodb",
-        repository: {
-          type: "git",
-          url: "https://github.com/aws/aws-sdk-js-v3.git",
-          directory: "clients/client-dynamodb"
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/ruleset.js
-  var w2, x2, y2, z2, a3, b3, c3, d3, e3, f3, g3, h3, i3, j3, k3, l3, m3, n3, o3, p3, q3, r3, s3, t3, u3, v3, _data2, ruleSet2;
-  var init_ruleset2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/ruleset.js"() {
-      w2 = "required";
-      x2 = "fn";
-      y2 = "argv";
-      z2 = "ref";
-      a3 = true;
-      b3 = "isSet";
-      c3 = "booleanEquals";
-      d3 = "error";
-      e3 = "endpoint";
-      f3 = "tree";
-      g3 = "PartitionResult";
-      h3 = "getAttr";
-      i3 = "stringEquals";
-      j3 = { [w2]: false, "type": "String" };
-      k3 = { [w2]: true, "default": false, "type": "Boolean" };
-      l3 = { [z2]: "Endpoint" };
-      m3 = { [x2]: c3, [y2]: [{ [z2]: "UseFIPS" }, true] };
-      n3 = { [x2]: c3, [y2]: [{ [z2]: "UseDualStack" }, true] };
-      o3 = {};
-      p3 = { [z2]: "Region" };
-      q3 = { [x2]: h3, [y2]: [{ [z2]: g3 }, "supportsFIPS"] };
-      r3 = { [z2]: g3 };
-      s3 = { [x2]: c3, [y2]: [true, { [x2]: h3, [y2]: [r3, "supportsDualStack"] }] };
-      t3 = [m3];
-      u3 = [n3];
-      v3 = [p3];
-      _data2 = { version: "1.0", parameters: { Region: j3, UseDualStack: k3, UseFIPS: k3, Endpoint: j3 }, rules: [{ conditions: [{ [x2]: b3, [y2]: [l3] }], rules: [{ conditions: t3, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d3 }, { conditions: u3, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: d3 }, { endpoint: { url: l3, properties: o3, headers: o3 }, type: e3 }], type: f3 }, { conditions: [{ [x2]: b3, [y2]: v3 }], rules: [{ conditions: [{ [x2]: "aws.partition", [y2]: v3, assign: g3 }], rules: [{ conditions: [m3, n3], rules: [{ conditions: [{ [x2]: c3, [y2]: [a3, q3] }, s3], rules: [{ endpoint: { url: "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: o3, headers: o3 }, type: e3 }], type: f3 }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: d3 }], type: f3 }, { conditions: t3, rules: [{ conditions: [{ [x2]: c3, [y2]: [q3, a3] }], rules: [{ conditions: [{ [x2]: i3, [y2]: [{ [x2]: h3, [y2]: [r3, "name"] }, "aws-us-gov"] }], endpoint: { url: "https://dynamodb.{Region}.amazonaws.com", properties: o3, headers: o3 }, type: e3 }, { endpoint: { url: "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", properties: o3, headers: o3 }, type: e3 }], type: f3 }, { error: "FIPS is enabled but this partition does not support FIPS", type: d3 }], type: f3 }, { conditions: u3, rules: [{ conditions: [s3], rules: [{ endpoint: { url: "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: o3, headers: o3 }, type: e3 }], type: f3 }, { error: "DualStack is enabled but this partition does not support DualStack", type: d3 }], type: f3 }, { conditions: [{ [x2]: i3, [y2]: [p3, "local"] }], endpoint: { url: "http://localhost:8000", properties: { authSchemes: [{ name: "sigv4", signingName: "dynamodb", signingRegion: "us-east-1" }] }, headers: o3 }, type: e3 }, { endpoint: { url: "https://dynamodb.{Region}.{PartitionResult#dnsSuffix}", properties: o3, headers: o3 }, type: e3 }], type: f3 }], type: f3 }, { error: "Invalid Configuration: Missing Region", type: d3 }] };
-      ruleSet2 = _data2;
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/endpointResolver.js
-  var defaultEndpointResolver2;
-  var init_endpointResolver2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/endpointResolver.js"() {
-      init_dist_es6();
-      init_ruleset2();
-      defaultEndpointResolver2 = (endpointParams, context = {}) => {
-        return resolveEndpoint(ruleSet2, {
-          endpointParams,
-          logger: context.logger
-        });
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.shared.js
-  var getRuntimeConfig3;
-  var init_runtimeConfig_shared2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.shared.js"() {
-      init_dist_es32();
-      init_dist_es26();
-      init_dist_es13();
-      init_dist_es20();
-      init_dist_es19();
-      init_httpAuthSchemeProvider2();
-      init_endpointResolver2();
-      getRuntimeConfig3 = (config) => {
-        return {
-          apiVersion: "2012-08-10",
-          base64Decoder: config?.base64Decoder ?? fromBase64,
-          base64Encoder: config?.base64Encoder ?? toBase64,
-          disableHostPrefix: config?.disableHostPrefix ?? false,
-          endpointProvider: config?.endpointProvider ?? defaultEndpointResolver2,
-          extensions: config?.extensions ?? [],
-          httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultDynamoDBHttpAuthSchemeProvider,
-          httpAuthSchemes: config?.httpAuthSchemes ?? [
-            {
-              schemeId: "aws.auth#sigv4",
-              identityProvider: (ipc) => ipc.getIdentityProvider("aws.auth#sigv4"),
-              signer: new AwsSdkSigV4Signer()
-            }
-          ],
-          logger: config?.logger ?? new NoOpLogger(),
-          serviceId: config?.serviceId ?? "DynamoDB",
-          urlParser: config?.urlParser ?? parseUrl,
-          utf8Decoder: config?.utf8Decoder ?? fromUtf8,
-          utf8Encoder: config?.utf8Encoder ?? toUtf8
-        };
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.browser.js
-  var import_sha256_browser2, getRuntimeConfig4;
-  var init_runtimeConfig_browser2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.browser.js"() {
-      init_package2();
-      import_sha256_browser2 = __toESM(require_build5());
-      init_dist_es33();
-      init_dist_es11();
-      init_dist_es23();
-      init_dist_es34();
-      init_dist_es35();
-      init_dist_es17();
-      init_runtimeConfig_shared2();
-      init_dist_es26();
-      init_dist_es37();
-      getRuntimeConfig4 = (config) => {
-        const defaultsMode = resolveDefaultsModeConfig(config);
-        const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
-        const clientSharedValues = getRuntimeConfig3(config);
-        return {
-          ...clientSharedValues,
-          ...config,
-          runtime: "browser",
-          defaultsMode,
-          bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
-          credentialDefaultProvider: config?.credentialDefaultProvider ?? ((_2) => () => Promise.reject(new Error("Credential is missing"))),
-          defaultUserAgentProvider: config?.defaultUserAgentProvider ?? defaultUserAgent({ serviceId: clientSharedValues.serviceId, clientVersion: package_default2.version }),
-          endpointDiscoveryEnabledProvider: config?.endpointDiscoveryEnabledProvider ?? (() => Promise.resolve(void 0)),
-          maxAttempts: config?.maxAttempts ?? DEFAULT_MAX_ATTEMPTS,
-          region: config?.region ?? invalidProvider("Region is missing"),
-          requestHandler: FetchHttpHandler.create(config?.requestHandler ?? defaultConfigProvider),
-          retryMode: config?.retryMode ?? (async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE),
-          sha256: config?.sha256 ?? import_sha256_browser2.Sha256,
-          streamCollector: config?.streamCollector ?? streamCollector,
-          useDualstackEndpoint: config?.useDualstackEndpoint ?? (() => Promise.resolve(DEFAULT_USE_DUALSTACK_ENDPOINT)),
-          useFipsEndpoint: config?.useFipsEndpoint ?? (() => Promise.resolve(DEFAULT_USE_FIPS_ENDPOINT))
-        };
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthExtensionConfiguration.js
-  var getHttpAuthExtensionConfiguration2, resolveHttpAuthRuntimeConfig2;
-  var init_httpAuthExtensionConfiguration2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthExtensionConfiguration.js"() {
-      getHttpAuthExtensionConfiguration2 = (runtimeConfig) => {
-        const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
-        let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
-        let _credentials = runtimeConfig.credentials;
-        return {
-          setHttpAuthScheme(httpAuthScheme) {
-            const index = _httpAuthSchemes.findIndex((scheme) => scheme.schemeId === httpAuthScheme.schemeId);
-            if (index === -1) {
-              _httpAuthSchemes.push(httpAuthScheme);
-            } else {
-              _httpAuthSchemes.splice(index, 1, httpAuthScheme);
-            }
-          },
-          httpAuthSchemes() {
-            return _httpAuthSchemes;
-          },
-          setHttpAuthSchemeProvider(httpAuthSchemeProvider) {
-            _httpAuthSchemeProvider = httpAuthSchemeProvider;
-          },
-          httpAuthSchemeProvider() {
-            return _httpAuthSchemeProvider;
-          },
-          setCredentials(credentials) {
-            _credentials = credentials;
-          },
-          credentials() {
-            return _credentials;
-          }
-        };
-      };
-      resolveHttpAuthRuntimeConfig2 = (config) => {
-        return {
-          httpAuthSchemes: config.httpAuthSchemes(),
-          httpAuthSchemeProvider: config.httpAuthSchemeProvider(),
-          credentials: config.credentials()
-        };
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeExtensions.js
-  var asPartial2, resolveRuntimeExtensions2;
-  var init_runtimeExtensions2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeExtensions.js"() {
-      init_dist_es38();
-      init_dist_es2();
-      init_dist_es26();
-      init_httpAuthExtensionConfiguration2();
-      asPartial2 = (t4) => t4;
-      resolveRuntimeExtensions2 = (runtimeConfig, extensions) => {
-        const extensionConfiguration = {
-          ...asPartial2(getAwsRegionExtensionConfiguration(runtimeConfig)),
-          ...asPartial2(getDefaultExtensionConfiguration(runtimeConfig)),
-          ...asPartial2(getHttpHandlerExtensionConfiguration(runtimeConfig)),
-          ...asPartial2(getHttpAuthExtensionConfiguration2(runtimeConfig))
-        };
-        extensions.forEach((extension) => extension.configure(extensionConfiguration));
-        return {
-          ...runtimeConfig,
-          ...resolveAwsRegionExtensionConfiguration(extensionConfiguration),
-          ...resolveDefaultRuntimeConfig(extensionConfiguration),
-          ...resolveHttpHandlerRuntimeConfig(extensionConfiguration),
-          ...resolveHttpAuthRuntimeConfig2(extensionConfiguration)
-        };
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDBClient.js
-  var DynamoDBClient;
-  var init_DynamoDBClient = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDBClient.js"() {
-      init_dist_es42();
-      init_dist_es3();
-      init_dist_es4();
-      init_dist_es5();
-      init_dist_es8();
-      init_dist_es11();
-      init_dist_es28();
-      init_dist_es29();
-      init_dist_es15();
-      init_dist_es27();
-      init_dist_es26();
-      init_httpAuthSchemeProvider2();
-      init_DescribeEndpointsCommand();
-      init_EndpointParameters2();
-      init_runtimeConfig_browser2();
-      init_runtimeExtensions2();
-      DynamoDBClient = class extends Client {
-        constructor(...[configuration]) {
-          const _config_0 = getRuntimeConfig4(configuration || {});
-          const _config_1 = resolveClientEndpointParameters2(_config_0);
-          const _config_2 = resolveRegionConfig(_config_1);
-          const _config_3 = resolveEndpointConfig(_config_2);
-          const _config_4 = resolveRetryConfig(_config_3);
-          const _config_5 = resolveHostHeaderConfig(_config_4);
-          const _config_6 = resolveUserAgentConfig(_config_5);
-          const _config_7 = resolveHttpAuthSchemeConfig2(_config_6);
-          const _config_8 = resolveEndpointDiscoveryConfig(_config_7, {
-            endpointDiscoveryCommandCtor: DescribeEndpointsCommand
-          });
-          const _config_9 = resolveRuntimeExtensions2(_config_8, configuration?.extensions || []);
-          super(_config_9);
-          this.config = _config_9;
-          this.middlewareStack.use(getRetryPlugin(this.config));
-          this.middlewareStack.use(getContentLengthPlugin(this.config));
-          this.middlewareStack.use(getHostHeaderPlugin(this.config));
-          this.middlewareStack.use(getLoggerPlugin(this.config));
-          this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
-          this.middlewareStack.use(getUserAgentPlugin(this.config));
-          this.middlewareStack.use(getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
-            httpAuthSchemeParametersProvider: this.getDefaultHttpAuthSchemeParametersProvider(),
-            identityProviderConfigProvider: this.getIdentityProviderConfigProvider()
-          }));
-          this.middlewareStack.use(getHttpSigningPlugin(this.config));
-        }
-        destroy() {
-          super.destroy();
-        }
-        getDefaultHttpAuthSchemeParametersProvider() {
-          return defaultDynamoDBHttpAuthSchemeParametersProvider;
-        }
-        getIdentityProviderConfigProvider() {
-          return async (config) => new DefaultIdentityProviderConfig({
-            "aws.auth#sigv4": config.credentials
-          });
-        }
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchExecuteStatementCommand.js
-  var BatchExecuteStatementCommand;
-  var init_BatchExecuteStatementCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchExecuteStatementCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      BatchExecuteStatementCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "BatchExecuteStatement", {}).n("DynamoDBClient", "BatchExecuteStatementCommand").f(void 0, void 0).ser(se_BatchExecuteStatementCommand).de(de_BatchExecuteStatementCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchGetItemCommand.js
-  var BatchGetItemCommand;
-  var init_BatchGetItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchGetItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      BatchGetItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "BatchGetItem", {}).n("DynamoDBClient", "BatchGetItemCommand").f(void 0, void 0).ser(se_BatchGetItemCommand).de(de_BatchGetItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchWriteItemCommand.js
-  var BatchWriteItemCommand;
-  var init_BatchWriteItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/BatchWriteItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      BatchWriteItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "BatchWriteItem", {}).n("DynamoDBClient", "BatchWriteItemCommand").f(void 0, void 0).ser(se_BatchWriteItemCommand).de(de_BatchWriteItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateBackupCommand.js
-  var CreateBackupCommand;
-  var init_CreateBackupCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateBackupCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      CreateBackupCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "CreateBackup", {}).n("DynamoDBClient", "CreateBackupCommand").f(void 0, void 0).ser(se_CreateBackupCommand).de(de_CreateBackupCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateGlobalTableCommand.js
-  var CreateGlobalTableCommand;
-  var init_CreateGlobalTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateGlobalTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      CreateGlobalTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "CreateGlobalTable", {}).n("DynamoDBClient", "CreateGlobalTableCommand").f(void 0, void 0).ser(se_CreateGlobalTableCommand).de(de_CreateGlobalTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateTableCommand.js
-  var CreateTableCommand;
-  var init_CreateTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/CreateTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      CreateTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "CreateTable", {}).n("DynamoDBClient", "CreateTableCommand").f(void 0, void 0).ser(se_CreateTableCommand).de(de_CreateTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteBackupCommand.js
-  var DeleteBackupCommand;
-  var init_DeleteBackupCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteBackupCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DeleteBackupCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DeleteBackup", {}).n("DynamoDBClient", "DeleteBackupCommand").f(void 0, void 0).ser(se_DeleteBackupCommand).de(de_DeleteBackupCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteItemCommand.js
-  var DeleteItemCommand;
-  var init_DeleteItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DeleteItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DeleteItem", {}).n("DynamoDBClient", "DeleteItemCommand").f(void 0, void 0).ser(se_DeleteItemCommand).de(de_DeleteItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteTableCommand.js
-  var DeleteTableCommand;
-  var init_DeleteTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DeleteTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DeleteTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DeleteTable", {}).n("DynamoDBClient", "DeleteTableCommand").f(void 0, void 0).ser(se_DeleteTableCommand).de(de_DeleteTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeBackupCommand.js
-  var DescribeBackupCommand;
-  var init_DescribeBackupCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeBackupCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeBackupCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeBackup", {}).n("DynamoDBClient", "DescribeBackupCommand").f(void 0, void 0).ser(se_DescribeBackupCommand).de(de_DescribeBackupCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeContinuousBackupsCommand.js
-  var DescribeContinuousBackupsCommand;
-  var init_DescribeContinuousBackupsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeContinuousBackupsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeContinuousBackupsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeContinuousBackups", {}).n("DynamoDBClient", "DescribeContinuousBackupsCommand").f(void 0, void 0).ser(se_DescribeContinuousBackupsCommand).de(de_DescribeContinuousBackupsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeContributorInsightsCommand.js
-  var DescribeContributorInsightsCommand;
-  var init_DescribeContributorInsightsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeContributorInsightsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeContributorInsightsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeContributorInsights", {}).n("DynamoDBClient", "DescribeContributorInsightsCommand").f(void 0, void 0).ser(se_DescribeContributorInsightsCommand).de(de_DescribeContributorInsightsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeExportCommand.js
-  var DescribeExportCommand;
-  var init_DescribeExportCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeExportCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeExportCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeExport", {}).n("DynamoDBClient", "DescribeExportCommand").f(void 0, void 0).ser(se_DescribeExportCommand).de(de_DescribeExportCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeGlobalTableCommand.js
-  var DescribeGlobalTableCommand;
-  var init_DescribeGlobalTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeGlobalTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeGlobalTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeGlobalTable", {}).n("DynamoDBClient", "DescribeGlobalTableCommand").f(void 0, void 0).ser(se_DescribeGlobalTableCommand).de(de_DescribeGlobalTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeGlobalTableSettingsCommand.js
-  var DescribeGlobalTableSettingsCommand;
-  var init_DescribeGlobalTableSettingsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeGlobalTableSettingsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeGlobalTableSettingsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeGlobalTableSettings", {}).n("DynamoDBClient", "DescribeGlobalTableSettingsCommand").f(void 0, void 0).ser(se_DescribeGlobalTableSettingsCommand).de(de_DescribeGlobalTableSettingsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeImportCommand.js
-  var DescribeImportCommand;
-  var init_DescribeImportCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeImportCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeImportCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeImport", {}).n("DynamoDBClient", "DescribeImportCommand").f(void 0, void 0).ser(se_DescribeImportCommand).de(de_DescribeImportCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeKinesisStreamingDestinationCommand.js
-  var DescribeKinesisStreamingDestinationCommand;
-  var init_DescribeKinesisStreamingDestinationCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeKinesisStreamingDestinationCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeKinesisStreamingDestinationCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeKinesisStreamingDestination", {}).n("DynamoDBClient", "DescribeKinesisStreamingDestinationCommand").f(void 0, void 0).ser(se_DescribeKinesisStreamingDestinationCommand).de(de_DescribeKinesisStreamingDestinationCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeLimitsCommand.js
-  var DescribeLimitsCommand;
-  var init_DescribeLimitsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeLimitsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeLimitsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeLimits", {}).n("DynamoDBClient", "DescribeLimitsCommand").f(void 0, void 0).ser(se_DescribeLimitsCommand).de(de_DescribeLimitsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTableCommand.js
-  var DescribeTableCommand;
-  var init_DescribeTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeTable", {}).n("DynamoDBClient", "DescribeTableCommand").f(void 0, void 0).ser(se_DescribeTableCommand).de(de_DescribeTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTableReplicaAutoScalingCommand.js
-  var DescribeTableReplicaAutoScalingCommand;
-  var init_DescribeTableReplicaAutoScalingCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTableReplicaAutoScalingCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeTableReplicaAutoScalingCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeTableReplicaAutoScaling", {}).n("DynamoDBClient", "DescribeTableReplicaAutoScalingCommand").f(void 0, void 0).ser(se_DescribeTableReplicaAutoScalingCommand).de(de_DescribeTableReplicaAutoScalingCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTimeToLiveCommand.js
-  var DescribeTimeToLiveCommand;
-  var init_DescribeTimeToLiveCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeTimeToLiveCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DescribeTimeToLiveCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DescribeTimeToLive", {}).n("DynamoDBClient", "DescribeTimeToLiveCommand").f(void 0, void 0).ser(se_DescribeTimeToLiveCommand).de(de_DescribeTimeToLiveCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DisableKinesisStreamingDestinationCommand.js
-  var DisableKinesisStreamingDestinationCommand;
-  var init_DisableKinesisStreamingDestinationCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DisableKinesisStreamingDestinationCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      DisableKinesisStreamingDestinationCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "DisableKinesisStreamingDestination", {}).n("DynamoDBClient", "DisableKinesisStreamingDestinationCommand").f(void 0, void 0).ser(se_DisableKinesisStreamingDestinationCommand).de(de_DisableKinesisStreamingDestinationCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/EnableKinesisStreamingDestinationCommand.js
-  var EnableKinesisStreamingDestinationCommand;
-  var init_EnableKinesisStreamingDestinationCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/EnableKinesisStreamingDestinationCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      EnableKinesisStreamingDestinationCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "EnableKinesisStreamingDestination", {}).n("DynamoDBClient", "EnableKinesisStreamingDestinationCommand").f(void 0, void 0).ser(se_EnableKinesisStreamingDestinationCommand).de(de_EnableKinesisStreamingDestinationCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExecuteStatementCommand.js
-  var ExecuteStatementCommand;
-  var init_ExecuteStatementCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExecuteStatementCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ExecuteStatementCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ExecuteStatement", {}).n("DynamoDBClient", "ExecuteStatementCommand").f(void 0, void 0).ser(se_ExecuteStatementCommand).de(de_ExecuteStatementCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExecuteTransactionCommand.js
-  var ExecuteTransactionCommand;
-  var init_ExecuteTransactionCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExecuteTransactionCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ExecuteTransactionCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ExecuteTransaction", {}).n("DynamoDBClient", "ExecuteTransactionCommand").f(void 0, void 0).ser(se_ExecuteTransactionCommand).de(de_ExecuteTransactionCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExportTableToPointInTimeCommand.js
-  var ExportTableToPointInTimeCommand;
-  var init_ExportTableToPointInTimeCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ExportTableToPointInTimeCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ExportTableToPointInTimeCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ExportTableToPointInTime", {}).n("DynamoDBClient", "ExportTableToPointInTimeCommand").f(void 0, void 0).ser(se_ExportTableToPointInTimeCommand).de(de_ExportTableToPointInTimeCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/GetItemCommand.js
-  var GetItemCommand;
-  var init_GetItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/GetItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      GetItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "GetItem", {}).n("DynamoDBClient", "GetItemCommand").f(void 0, void 0).ser(se_GetItemCommand).de(de_GetItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ImportTableCommand.js
-  var ImportTableCommand;
-  var init_ImportTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ImportTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ImportTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ImportTable", {}).n("DynamoDBClient", "ImportTableCommand").f(void 0, void 0).ser(se_ImportTableCommand).de(de_ImportTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListBackupsCommand.js
-  var ListBackupsCommand;
-  var init_ListBackupsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListBackupsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListBackupsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListBackups", {}).n("DynamoDBClient", "ListBackupsCommand").f(void 0, void 0).ser(se_ListBackupsCommand).de(de_ListBackupsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListContributorInsightsCommand.js
-  var ListContributorInsightsCommand;
-  var init_ListContributorInsightsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListContributorInsightsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListContributorInsightsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListContributorInsights", {}).n("DynamoDBClient", "ListContributorInsightsCommand").f(void 0, void 0).ser(se_ListContributorInsightsCommand).de(de_ListContributorInsightsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListExportsCommand.js
-  var ListExportsCommand;
-  var init_ListExportsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListExportsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListExportsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListExports", {}).n("DynamoDBClient", "ListExportsCommand").f(void 0, void 0).ser(se_ListExportsCommand).de(de_ListExportsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListGlobalTablesCommand.js
-  var ListGlobalTablesCommand;
-  var init_ListGlobalTablesCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListGlobalTablesCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListGlobalTablesCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListGlobalTables", {}).n("DynamoDBClient", "ListGlobalTablesCommand").f(void 0, void 0).ser(se_ListGlobalTablesCommand).de(de_ListGlobalTablesCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListImportsCommand.js
-  var ListImportsCommand;
-  var init_ListImportsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListImportsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListImportsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListImports", {}).n("DynamoDBClient", "ListImportsCommand").f(void 0, void 0).ser(se_ListImportsCommand).de(de_ListImportsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListTablesCommand.js
-  var ListTablesCommand;
-  var init_ListTablesCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListTablesCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListTablesCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListTables", {}).n("DynamoDBClient", "ListTablesCommand").f(void 0, void 0).ser(se_ListTablesCommand).de(de_ListTablesCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListTagsOfResourceCommand.js
-  var ListTagsOfResourceCommand;
-  var init_ListTagsOfResourceCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ListTagsOfResourceCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ListTagsOfResourceCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "ListTagsOfResource", {}).n("DynamoDBClient", "ListTagsOfResourceCommand").f(void 0, void 0).ser(se_ListTagsOfResourceCommand).de(de_ListTagsOfResourceCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/PutItemCommand.js
-  var PutItemCommand;
-  var init_PutItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/PutItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      PutItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "PutItem", {}).n("DynamoDBClient", "PutItemCommand").f(void 0, void 0).ser(se_PutItemCommand).de(de_PutItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/QueryCommand.js
-  var QueryCommand;
-  var init_QueryCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/QueryCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      QueryCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "Query", {}).n("DynamoDBClient", "QueryCommand").f(void 0, void 0).ser(se_QueryCommand).de(de_QueryCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/RestoreTableFromBackupCommand.js
-  var RestoreTableFromBackupCommand;
-  var init_RestoreTableFromBackupCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/RestoreTableFromBackupCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      RestoreTableFromBackupCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "RestoreTableFromBackup", {}).n("DynamoDBClient", "RestoreTableFromBackupCommand").f(void 0, void 0).ser(se_RestoreTableFromBackupCommand).de(de_RestoreTableFromBackupCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/RestoreTableToPointInTimeCommand.js
-  var RestoreTableToPointInTimeCommand;
-  var init_RestoreTableToPointInTimeCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/RestoreTableToPointInTimeCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      RestoreTableToPointInTimeCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "RestoreTableToPointInTime", {}).n("DynamoDBClient", "RestoreTableToPointInTimeCommand").f(void 0, void 0).ser(se_RestoreTableToPointInTimeCommand).de(de_RestoreTableToPointInTimeCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ScanCommand.js
-  var ScanCommand;
-  var init_ScanCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/ScanCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      ScanCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "Scan", {}).n("DynamoDBClient", "ScanCommand").f(void 0, void 0).ser(se_ScanCommand).de(de_ScanCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TagResourceCommand.js
-  var TagResourceCommand2;
-  var init_TagResourceCommand2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TagResourceCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      TagResourceCommand2 = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "TagResource", {}).n("DynamoDBClient", "TagResourceCommand").f(void 0, void 0).ser(se_TagResourceCommand2).de(de_TagResourceCommand2).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TransactGetItemsCommand.js
-  var TransactGetItemsCommand;
-  var init_TransactGetItemsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TransactGetItemsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      TransactGetItemsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "TransactGetItems", {}).n("DynamoDBClient", "TransactGetItemsCommand").f(void 0, void 0).ser(se_TransactGetItemsCommand).de(de_TransactGetItemsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TransactWriteItemsCommand.js
-  var TransactWriteItemsCommand;
-  var init_TransactWriteItemsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/TransactWriteItemsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      TransactWriteItemsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "TransactWriteItems", {}).n("DynamoDBClient", "TransactWriteItemsCommand").f(void 0, void 0).ser(se_TransactWriteItemsCommand).de(de_TransactWriteItemsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UntagResourceCommand.js
-  var UntagResourceCommand2;
-  var init_UntagResourceCommand2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UntagResourceCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UntagResourceCommand2 = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UntagResource", {}).n("DynamoDBClient", "UntagResourceCommand").f(void 0, void 0).ser(se_UntagResourceCommand2).de(de_UntagResourceCommand2).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateContinuousBackupsCommand.js
-  var UpdateContinuousBackupsCommand;
-  var init_UpdateContinuousBackupsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateContinuousBackupsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateContinuousBackupsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateContinuousBackups", {}).n("DynamoDBClient", "UpdateContinuousBackupsCommand").f(void 0, void 0).ser(se_UpdateContinuousBackupsCommand).de(de_UpdateContinuousBackupsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateContributorInsightsCommand.js
-  var UpdateContributorInsightsCommand;
-  var init_UpdateContributorInsightsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateContributorInsightsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateContributorInsightsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateContributorInsights", {}).n("DynamoDBClient", "UpdateContributorInsightsCommand").f(void 0, void 0).ser(se_UpdateContributorInsightsCommand).de(de_UpdateContributorInsightsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateGlobalTableCommand.js
-  var UpdateGlobalTableCommand;
-  var init_UpdateGlobalTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateGlobalTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateGlobalTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateGlobalTable", {}).n("DynamoDBClient", "UpdateGlobalTableCommand").f(void 0, void 0).ser(se_UpdateGlobalTableCommand).de(de_UpdateGlobalTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateGlobalTableSettingsCommand.js
-  var UpdateGlobalTableSettingsCommand;
-  var init_UpdateGlobalTableSettingsCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateGlobalTableSettingsCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateGlobalTableSettingsCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateGlobalTableSettings", {}).n("DynamoDBClient", "UpdateGlobalTableSettingsCommand").f(void 0, void 0).ser(se_UpdateGlobalTableSettingsCommand).de(de_UpdateGlobalTableSettingsCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateItemCommand.js
-  var UpdateItemCommand;
-  var init_UpdateItemCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateItemCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateItemCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateItem", {}).n("DynamoDBClient", "UpdateItemCommand").f(void 0, void 0).ser(se_UpdateItemCommand).de(de_UpdateItemCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateKinesisStreamingDestinationCommand.js
-  var UpdateKinesisStreamingDestinationCommand;
-  var init_UpdateKinesisStreamingDestinationCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateKinesisStreamingDestinationCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateKinesisStreamingDestinationCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateKinesisStreamingDestination", {}).n("DynamoDBClient", "UpdateKinesisStreamingDestinationCommand").f(void 0, void 0).ser(se_UpdateKinesisStreamingDestinationCommand).de(de_UpdateKinesisStreamingDestinationCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTableCommand.js
-  var UpdateTableCommand;
-  var init_UpdateTableCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTableCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateTableCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateTable", {}).n("DynamoDBClient", "UpdateTableCommand").f(void 0, void 0).ser(se_UpdateTableCommand).de(de_UpdateTableCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTableReplicaAutoScalingCommand.js
-  var UpdateTableReplicaAutoScalingCommand;
-  var init_UpdateTableReplicaAutoScalingCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTableReplicaAutoScalingCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateTableReplicaAutoScalingCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateTableReplicaAutoScaling", {}).n("DynamoDBClient", "UpdateTableReplicaAutoScalingCommand").f(void 0, void 0).ser(se_UpdateTableReplicaAutoScalingCommand).de(de_UpdateTableReplicaAutoScalingCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTimeToLiveCommand.js
-  var UpdateTimeToLiveCommand;
-  var init_UpdateTimeToLiveCommand = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/UpdateTimeToLiveCommand.js"() {
-      init_dist_es15();
-      init_dist_es14();
-      init_dist_es26();
-      init_EndpointParameters2();
-      init_Aws_json1_0();
-      UpdateTimeToLiveCommand = class extends Command.classBuilder().ep({
-        ...commonParams2
-      }).m(function(Command2, cs, config, o4) {
-        return [
-          getSerdePlugin(config, this.serialize, this.deserialize),
-          getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
-        ];
-      }).s("DynamoDB_20120810", "UpdateTimeToLive", {}).n("DynamoDBClient", "UpdateTimeToLiveCommand").f(void 0, void 0).ser(se_UpdateTimeToLiveCommand).de(de_UpdateTimeToLiveCommand).build() {
-      };
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDB.js
-  var commands2, DynamoDB;
-  var init_DynamoDB = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDB.js"() {
-      init_dist_es26();
-      init_BatchExecuteStatementCommand();
-      init_BatchGetItemCommand();
-      init_BatchWriteItemCommand();
-      init_CreateBackupCommand();
-      init_CreateGlobalTableCommand();
-      init_CreateTableCommand();
-      init_DeleteBackupCommand();
-      init_DeleteItemCommand();
-      init_DeleteTableCommand();
-      init_DescribeBackupCommand();
-      init_DescribeContinuousBackupsCommand();
-      init_DescribeContributorInsightsCommand();
-      init_DescribeEndpointsCommand();
-      init_DescribeExportCommand();
-      init_DescribeGlobalTableCommand();
-      init_DescribeGlobalTableSettingsCommand();
-      init_DescribeImportCommand();
-      init_DescribeKinesisStreamingDestinationCommand();
-      init_DescribeLimitsCommand();
-      init_DescribeTableCommand();
-      init_DescribeTableReplicaAutoScalingCommand();
-      init_DescribeTimeToLiveCommand();
-      init_DisableKinesisStreamingDestinationCommand();
-      init_EnableKinesisStreamingDestinationCommand();
-      init_ExecuteStatementCommand();
-      init_ExecuteTransactionCommand();
-      init_ExportTableToPointInTimeCommand();
-      init_GetItemCommand();
-      init_ImportTableCommand();
-      init_ListBackupsCommand();
-      init_ListContributorInsightsCommand();
-      init_ListExportsCommand();
-      init_ListGlobalTablesCommand();
-      init_ListImportsCommand();
-      init_ListTablesCommand();
-      init_ListTagsOfResourceCommand();
-      init_PutItemCommand();
-      init_QueryCommand();
-      init_RestoreTableFromBackupCommand();
-      init_RestoreTableToPointInTimeCommand();
-      init_ScanCommand();
-      init_TagResourceCommand2();
-      init_TransactGetItemsCommand();
-      init_TransactWriteItemsCommand();
-      init_UntagResourceCommand2();
-      init_UpdateContinuousBackupsCommand();
-      init_UpdateContributorInsightsCommand();
-      init_UpdateGlobalTableCommand();
-      init_UpdateGlobalTableSettingsCommand();
-      init_UpdateItemCommand();
-      init_UpdateKinesisStreamingDestinationCommand();
-      init_UpdateTableCommand();
-      init_UpdateTableReplicaAutoScalingCommand();
-      init_UpdateTimeToLiveCommand();
-      init_DynamoDBClient();
-      commands2 = {
-        BatchExecuteStatementCommand,
-        BatchGetItemCommand,
-        BatchWriteItemCommand,
-        CreateBackupCommand,
-        CreateGlobalTableCommand,
-        CreateTableCommand,
-        DeleteBackupCommand,
-        DeleteItemCommand,
-        DeleteTableCommand,
-        DescribeBackupCommand,
-        DescribeContinuousBackupsCommand,
-        DescribeContributorInsightsCommand,
-        DescribeEndpointsCommand,
-        DescribeExportCommand,
-        DescribeGlobalTableCommand,
-        DescribeGlobalTableSettingsCommand,
-        DescribeImportCommand,
-        DescribeKinesisStreamingDestinationCommand,
-        DescribeLimitsCommand,
-        DescribeTableCommand,
-        DescribeTableReplicaAutoScalingCommand,
-        DescribeTimeToLiveCommand,
-        DisableKinesisStreamingDestinationCommand,
-        EnableKinesisStreamingDestinationCommand,
-        ExecuteStatementCommand,
-        ExecuteTransactionCommand,
-        ExportTableToPointInTimeCommand,
-        GetItemCommand,
-        ImportTableCommand,
-        ListBackupsCommand,
-        ListContributorInsightsCommand,
-        ListExportsCommand,
-        ListGlobalTablesCommand,
-        ListImportsCommand,
-        ListTablesCommand,
-        ListTagsOfResourceCommand,
-        PutItemCommand,
-        QueryCommand,
-        RestoreTableFromBackupCommand,
-        RestoreTableToPointInTimeCommand,
-        ScanCommand,
-        TagResourceCommand: TagResourceCommand2,
-        TransactGetItemsCommand,
-        TransactWriteItemsCommand,
-        UntagResourceCommand: UntagResourceCommand2,
-        UpdateContinuousBackupsCommand,
-        UpdateContributorInsightsCommand,
-        UpdateGlobalTableCommand,
-        UpdateGlobalTableSettingsCommand,
-        UpdateItemCommand,
-        UpdateKinesisStreamingDestinationCommand,
-        UpdateTableCommand,
-        UpdateTableReplicaAutoScalingCommand,
-        UpdateTimeToLiveCommand
-      };
-      DynamoDB = class extends DynamoDBClient {
-      };
-      createAggregatedClient(commands2, DynamoDB);
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/index.js
-  var init_commands2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/commands/index.js"() {
-      init_BatchExecuteStatementCommand();
-      init_BatchGetItemCommand();
-      init_BatchWriteItemCommand();
-      init_CreateBackupCommand();
-      init_CreateGlobalTableCommand();
-      init_CreateTableCommand();
-      init_DeleteBackupCommand();
-      init_DeleteItemCommand();
-      init_DeleteTableCommand();
-      init_DescribeBackupCommand();
-      init_DescribeContinuousBackupsCommand();
-      init_DescribeContributorInsightsCommand();
-      init_DescribeEndpointsCommand();
-      init_DescribeExportCommand();
-      init_DescribeGlobalTableCommand();
-      init_DescribeGlobalTableSettingsCommand();
-      init_DescribeImportCommand();
-      init_DescribeKinesisStreamingDestinationCommand();
-      init_DescribeLimitsCommand();
-      init_DescribeTableCommand();
-      init_DescribeTableReplicaAutoScalingCommand();
-      init_DescribeTimeToLiveCommand();
-      init_DisableKinesisStreamingDestinationCommand();
-      init_EnableKinesisStreamingDestinationCommand();
-      init_ExecuteStatementCommand();
-      init_ExecuteTransactionCommand();
-      init_ExportTableToPointInTimeCommand();
-      init_GetItemCommand();
-      init_ImportTableCommand();
-      init_ListBackupsCommand();
-      init_ListContributorInsightsCommand();
-      init_ListExportsCommand();
-      init_ListGlobalTablesCommand();
-      init_ListImportsCommand();
-      init_ListTablesCommand();
-      init_ListTagsOfResourceCommand();
-      init_PutItemCommand();
-      init_QueryCommand();
-      init_RestoreTableFromBackupCommand();
-      init_RestoreTableToPointInTimeCommand();
-      init_ScanCommand();
-      init_TagResourceCommand2();
-      init_TransactGetItemsCommand();
-      init_TransactWriteItemsCommand();
-      init_UntagResourceCommand2();
-      init_UpdateContinuousBackupsCommand();
-      init_UpdateContributorInsightsCommand();
-      init_UpdateGlobalTableCommand();
-      init_UpdateGlobalTableSettingsCommand();
-      init_UpdateItemCommand();
-      init_UpdateKinesisStreamingDestinationCommand();
-      init_UpdateTableCommand();
-      init_UpdateTableReplicaAutoScalingCommand();
-      init_UpdateTimeToLiveCommand();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/Interfaces.js
-  var init_Interfaces2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/Interfaces.js"() {
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListContributorInsightsPaginator.js
-  var paginateListContributorInsights;
-  var init_ListContributorInsightsPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListContributorInsightsPaginator.js"() {
-      init_dist_es28();
-      init_ListContributorInsightsCommand();
-      init_DynamoDBClient();
-      paginateListContributorInsights = createPaginator(DynamoDBClient, ListContributorInsightsCommand, "NextToken", "NextToken", "MaxResults");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListExportsPaginator.js
-  var paginateListExports;
-  var init_ListExportsPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListExportsPaginator.js"() {
-      init_dist_es28();
-      init_ListExportsCommand();
-      init_DynamoDBClient();
-      paginateListExports = createPaginator(DynamoDBClient, ListExportsCommand, "NextToken", "NextToken", "MaxResults");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListImportsPaginator.js
-  var paginateListImports;
-  var init_ListImportsPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListImportsPaginator.js"() {
-      init_dist_es28();
-      init_ListImportsCommand();
-      init_DynamoDBClient();
-      paginateListImports = createPaginator(DynamoDBClient, ListImportsCommand, "NextToken", "NextToken", "PageSize");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListTablesPaginator.js
-  var paginateListTables;
-  var init_ListTablesPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ListTablesPaginator.js"() {
-      init_dist_es28();
-      init_ListTablesCommand();
-      init_DynamoDBClient();
-      paginateListTables = createPaginator(DynamoDBClient, ListTablesCommand, "ExclusiveStartTableName", "LastEvaluatedTableName", "Limit");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/QueryPaginator.js
-  var paginateQuery;
-  var init_QueryPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/QueryPaginator.js"() {
-      init_dist_es28();
-      init_QueryCommand();
-      init_DynamoDBClient();
-      paginateQuery = createPaginator(DynamoDBClient, QueryCommand, "ExclusiveStartKey", "LastEvaluatedKey", "Limit");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ScanPaginator.js
-  var paginateScan;
-  var init_ScanPaginator = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/ScanPaginator.js"() {
-      init_dist_es28();
-      init_ScanCommand();
-      init_DynamoDBClient();
-      paginateScan = createPaginator(DynamoDBClient, ScanCommand, "ExclusiveStartKey", "LastEvaluatedKey", "Limit");
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/index.js
-  var init_pagination3 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/pagination/index.js"() {
-      init_Interfaces2();
-      init_ListContributorInsightsPaginator();
-      init_ListExportsPaginator();
-      init_ListImportsPaginator();
-      init_ListTablesPaginator();
-      init_QueryPaginator();
-      init_ScanPaginator();
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/utils/sleep.js
-  var init_sleep = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/utils/sleep.js"() {
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/waiter.js
-  var WaiterState;
-  var init_waiter2 = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/waiter.js"() {
-      (function(WaiterState2) {
-        WaiterState2["ABORTED"] = "ABORTED";
-        WaiterState2["FAILURE"] = "FAILURE";
-        WaiterState2["SUCCESS"] = "SUCCESS";
-        WaiterState2["RETRY"] = "RETRY";
-        WaiterState2["TIMEOUT"] = "TIMEOUT";
-      })(WaiterState || (WaiterState = {}));
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/poller.js
-  var init_poller = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/poller.js"() {
-      init_sleep();
-      init_waiter2();
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/utils/validate.js
-  var init_validate = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/utils/validate.js"() {
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/utils/index.js
-  var init_utils3 = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/utils/index.js"() {
-      init_sleep();
-      init_validate();
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/createWaiter.js
-  var init_createWaiter = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/createWaiter.js"() {
-      init_poller();
-      init_utils3();
-      init_waiter2();
-    }
-  });
-
-  // node_modules/@smithy/util-waiter/dist-es/index.js
-  var init_dist_es43 = __esm({
-    "node_modules/@smithy/util-waiter/dist-es/index.js"() {
-      init_createWaiter();
-      init_waiter2();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableExists.js
-  var init_waitForTableExists = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableExists.js"() {
-      init_dist_es43();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableNotExists.js
-  var init_waitForTableNotExists = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/waitForTableNotExists.js"() {
-      init_dist_es43();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/index.js
-  var init_waiters = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/waiters/index.js"() {
-      init_waitForTableExists();
-      init_waitForTableNotExists();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/models/index.js
-  var init_models2 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/models/index.js"() {
-      init_models_02();
-    }
-  });
-
-  // node_modules/@aws-sdk/client-dynamodb/dist-es/index.js
-  var init_dist_es44 = __esm({
-    "node_modules/@aws-sdk/client-dynamodb/dist-es/index.js"() {
-      init_DynamoDBClient();
-      init_DynamoDB();
-      init_commands2();
-      init_pagination3();
-      init_waiters();
-      init_models2();
-      init_dist_es7();
-    }
-  });
-
-  // src/frontend/utils/createDynamoDBClient.js
-  var require_createDynamoDBClient = __commonJS({
-    "src/frontend/utils/createDynamoDBClient.js"(exports, module) {
-      init_dist_es39();
-      init_dist_es40();
-      init_dist_es44();
-      var createDynamoDBClient2 = (region = "us-west-2", identityPoolId = "us-west-2:5cf2c915-001b-4190-ad65-6f10af3a375c") => {
-        return new DynamoDBClient({
-          region,
-          credentials: fromCognitoIdentityPool({
-            client: new CognitoIdentityClient({ region }),
-            identityPoolId
-          })
-        });
-      };
-      module.exports = { createDynamoDBClient: createDynamoDBClient2 };
-    }
-  });
-
-  // node_modules/cute-con/src/index.js
-  var init_src = __esm({
-    "node_modules/cute-con/src/index.js"() {
-    }
-  });
-
-  // src/frontend/utils/fetchDynamoDB.js
-  var require_fetchDynamoDB = __commonJS({
-    "src/frontend/utils/fetchDynamoDB.js"(exports, module) {
-      init_dist_es44();
-      init_src();
-      async function fetchPostsFromBoard2(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
-        theDirectoryWeWant = `/${theDirectoryWeWant}/`;
-        try {
-          const params = {
-            TableName: tableName,
-            // Replace with your DynamoDB table name
-            KeyConditionExpression: "#pk = :boardId",
-            ExpressionAttributeNames: {
-              "#pk": "dir"
-            },
-            ExpressionAttributeValues: {
-              ":boardId": { S: theDirectoryWeWant }
-            },
-            ScanIndexForward: false,
-            // Set to false to get the newest posts first
-            Limit: limit
-          };
-          if (startAfterPostId) {
-            params.ExclusiveStartKey = {
-              "dir": { S: theDirectoryWeWant },
-              "unix": { S: startAfterPostId }
-            };
-          }
-          const command = new QueryCommand(params);
-          const { Items, LastEvaluatedKey } = await dynamoDBClient.send(command);
-          let processedItems = [];
-          for (let i4 = 0; i4 < Items.length; i4++) {
-            if (Items[i4].JSON) {
-              const fromJson = JSON.parse(Items[i4].JSON.S);
-              processedItems[i4] = {
-                dir: fromJson.dir.S,
-                imgURL: fromJson.imgURL || "",
-                comments: fromJson.comments || "",
-                ogfilename: fromJson.ogfilename || "",
-                text: fromJson.text || "",
-                unix: fromJson.unix || ""
-              };
-            } else {
-              processedItems[i4] = {
-                dir: Items[i4].dir.S,
-                imgURL: Items[i4].imgURL?.S || "",
-                comments: Items[i4].comments?.S || "",
-                ogfilename: Items[i4].ogfilename?.S || "",
-                text: Items[i4].text?.S || "",
-                unix: Items[i4].unix.N || ""
-              };
-            }
-          }
-          return {
-            items: processedItems,
-            lastEvaluatedKey: LastEvaluatedKey ? LastEvaluatedKey.unix.S : null
-          };
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-          throw new Error("Failed to fetch posts");
-        }
-      }
-      module.exports = fetchPostsFromBoard2;
-    }
-  });
-
-  // src/frontend/utils/convertImageToCompressedWebP.js
-  var require_convertImageToCompressedWebP = __commonJS({
-    "src/frontend/utils/convertImageToCompressedWebP.js"(exports, module) {
-      async function compressImage2(file) {
-        const MAX_SIZE_MB = 3;
-        const MB = 1024 * 1024;
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => {
-            let quality = 0.8;
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, img.width, img.height);
-            const compress = () => {
-              canvas.toBlob((blob) => {
-                if (blob.size / MB <= MAX_SIZE_MB) {
-                  resolve(blob);
-                } else if (quality > 0.1) {
-                  quality -= 0.1;
-                  canvas.toBlob(compress, "image/webp", quality);
-                } else {
-                  reject(new Error("Unable to compress image below 3 MB"));
-                }
-              }, "image/webp", quality);
-            };
-            compress();
-          };
-          img.onerror = () => {
-            reject(new Error("Image loading error"));
-          };
-          const reader = new FileReader();
-          reader.onload = (e4) => {
-            img.src = e4.target.result;
-          };
-          reader.onerror = () => {
-            reject(new Error("FileReader error"));
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-      module.exports.compressImage = compressImage2;
-    }
-  });
-
-  // src/frontend/utils/GCF_PostPost.js
-  var require_GCF_PostPost = __commonJS({
-    "src/frontend/utils/GCF_PostPost.js"(exports, module) {
-      async function uploadSockToCloudFunction2(dir, fileName, imageBlob, text) {
-        const cloudFunctionUrl = "https://us-central1-enduring-maxim-411523.cloudfunctions.net/girlsock-directory_image-upload";
-        const imageContent = await toBase642(imageBlob);
-        fileName += ".webp";
-        const body = JSON.stringify({
-          dir,
-          fileName,
-          imageContent,
-          text
-        });
-        try {
-          const response = await fetch(cloudFunctionUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body
-          });
-          const responseClone = response.clone();
-          return await responseClone;
-        } catch (error) {
-          throw new Error(`Network error: ${error.message}`);
-        }
-      }
-      function toBase642(file) {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result.split(",")[1]);
-          reader.onerror = (error) => reject(error);
-        });
-      }
-      module.exports.uploadSockToCloudFunction = uploadSockToCloudFunction2;
-    }
-  });
-
-  // src/frontend/components/girl.js
-  var girl_exports = {};
-  __export(girl_exports, {
-    sock: () => sock
-  });
-  var sock;
-  var init_girl = __esm({
-    "src/frontend/components/girl.js"() {
-      init_cute_html();
-      sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => X`
-    <article>
-        <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
-        <div class="meta">
-            <span style="max-width: 50%; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${imgFileName}</span>
-            <span style="display: inline-block; overflow: hidden;"><span id="imgRes-${id}">(${imgRes})</span> / <i>${timeStr}</i></span>
-        </div>
-        <div class="body">
-            ${txt}
-        </div>
-        <div id="comments-${unix}" class="comments">
-
-            <details>
-                <summary>Write comment</summary>
-                <form>
-                    <textarea class="comment-body" name="comment-body" rows="4"></textarea>
-                    <br>
-                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)">
-                </form>
-            </details>
-            
-        </div>
-    </article>
-`;
-    }
-  });
-
   // node_modules/uriurl/index.js
   var require_uriurl = __commonJS({
     "node_modules/uriurl/index.js"(exports, module) {
@@ -19929,11 +13666,2349 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/frontend/socks.index.js
-  init_cute_html();
+  // src/frontend/utils/createDynamoDBClient.js
+  init_dist_es39();
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js
+  init_dist_es36();
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/resolveLogins.js
+  function resolveLogins(logins) {
+    return Promise.all(Object.keys(logins).reduce((arr, name) => {
+      const tokenOrProvider = logins[name];
+      if (typeof tokenOrProvider === "string") {
+        arr.push([name, tokenOrProvider]);
+      } else {
+        arr.push(tokenOrProvider().then((token) => [name, token]));
+      }
+      return arr;
+    }, [])).then((resolvedPairs) => resolvedPairs.reduce((logins2, [key, value]) => {
+      logins2[key] = value;
+      return logins2;
+    }, {}));
+  }
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js
+  function fromCognitoIdentity(parameters) {
+    return async () => {
+      parameters.logger?.debug("@aws-sdk/credential-provider-cognito-identity", "fromCognitoIdentity");
+      const { GetCredentialsForIdentityCommand: GetCredentialsForIdentityCommand2, CognitoIdentityClient: CognitoIdentityClient2 } = await Promise.resolve().then(() => (init_loadCognitoIdentity(), loadCognitoIdentity_exports));
+      const { Credentials: { AccessKeyId = throwOnMissingAccessKeyId(), Expiration, SecretKey = throwOnMissingSecretKey(), SessionToken } = throwOnMissingCredentials() } = await (parameters.client ?? new CognitoIdentityClient2(Object.assign({}, parameters.clientConfig ?? {}, {
+        region: parameters.clientConfig?.region ?? parameters.parentClientConfig?.region
+      }))).send(new GetCredentialsForIdentityCommand2({
+        CustomRoleArn: parameters.customRoleArn,
+        IdentityId: parameters.identityId,
+        Logins: parameters.logins ? await resolveLogins(parameters.logins) : void 0
+      }));
+      return {
+        identityId: parameters.identityId,
+        accessKeyId: AccessKeyId,
+        secretAccessKey: SecretKey,
+        sessionToken: SessionToken,
+        expiration: Expiration
+      };
+    };
+  }
+  function throwOnMissingAccessKeyId() {
+    throw new CredentialsProviderError("Response from Amazon Cognito contained no access key ID");
+  }
+  function throwOnMissingCredentials() {
+    throw new CredentialsProviderError("Response from Amazon Cognito contained no credentials");
+  }
+  function throwOnMissingSecretKey() {
+    throw new CredentialsProviderError("Response from Amazon Cognito contained no secret key");
+  }
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentityPool.js
+  init_dist_es36();
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/IndexedDbStorage.js
+  var STORE_NAME = "IdentityIds";
+  var IndexedDbStorage = class {
+    constructor(dbName = "aws:cognito-identity-ids") {
+      this.dbName = dbName;
+    }
+    getItem(key) {
+      return this.withObjectStore("readonly", (store) => {
+        const req = store.get(key);
+        return new Promise((resolve) => {
+          req.onerror = () => resolve(null);
+          req.onsuccess = () => resolve(req.result ? req.result.value : null);
+        });
+      }).catch(() => null);
+    }
+    removeItem(key) {
+      return this.withObjectStore("readwrite", (store) => {
+        const req = store.delete(key);
+        return new Promise((resolve, reject) => {
+          req.onerror = () => reject(req.error);
+          req.onsuccess = () => resolve();
+        });
+      });
+    }
+    setItem(id, value) {
+      return this.withObjectStore("readwrite", (store) => {
+        const req = store.put({ id, value });
+        return new Promise((resolve, reject) => {
+          req.onerror = () => reject(req.error);
+          req.onsuccess = () => resolve();
+        });
+      });
+    }
+    getDb() {
+      const openDbRequest = self.indexedDB.open(this.dbName, 1);
+      return new Promise((resolve, reject) => {
+        openDbRequest.onsuccess = () => {
+          resolve(openDbRequest.result);
+        };
+        openDbRequest.onerror = () => {
+          reject(openDbRequest.error);
+        };
+        openDbRequest.onblocked = () => {
+          reject(new Error("Unable to access DB"));
+        };
+        openDbRequest.onupgradeneeded = () => {
+          const db = openDbRequest.result;
+          db.onerror = () => {
+            reject(new Error("Failed to create object store"));
+          };
+          db.createObjectStore(STORE_NAME, { keyPath: "id" });
+        };
+      });
+    }
+    withObjectStore(mode, action) {
+      return this.getDb().then((db) => {
+        const tx = db.transaction(STORE_NAME, mode);
+        tx.oncomplete = () => db.close();
+        return new Promise((resolve, reject) => {
+          tx.onerror = () => reject(tx.error);
+          resolve(action(tx.objectStore(STORE_NAME)));
+        }).catch((err) => {
+          db.close();
+          throw err;
+        });
+      });
+    }
+  };
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/InMemoryStorage.js
+  var InMemoryStorage = class {
+    constructor(store = {}) {
+      this.store = store;
+    }
+    getItem(key) {
+      if (key in this.store) {
+        return this.store[key];
+      }
+      return null;
+    }
+    removeItem(key) {
+      delete this.store[key];
+    }
+    setItem(key, value) {
+      this.store[key] = value;
+    }
+  };
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/localStorage.js
+  var inMemoryStorage = new InMemoryStorage();
+  function localStorage() {
+    if (typeof self === "object" && self.indexedDB) {
+      return new IndexedDbStorage();
+    }
+    if (typeof window === "object" && window.localStorage) {
+      return window.localStorage;
+    }
+    return inMemoryStorage;
+  }
+
+  // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentityPool.js
+  function fromCognitoIdentityPool({ accountId, cache = localStorage(), client, clientConfig, customRoleArn, identityPoolId, logins, userIdentifier = !logins || Object.keys(logins).length === 0 ? "ANONYMOUS" : void 0, logger: logger2, parentClientConfig }) {
+    logger2?.debug("@aws-sdk/credential-provider-cognito-identity", "fromCognitoIdentity");
+    const cacheKey = userIdentifier ? `aws:cognito-identity-credentials:${identityPoolId}:${userIdentifier}` : void 0;
+    let provider = async () => {
+      const { GetIdCommand: GetIdCommand2, CognitoIdentityClient: CognitoIdentityClient2 } = await Promise.resolve().then(() => (init_loadCognitoIdentity(), loadCognitoIdentity_exports));
+      const _client = client ?? new CognitoIdentityClient2(Object.assign({}, clientConfig ?? {}, { region: clientConfig?.region ?? parentClientConfig?.region }));
+      let identityId = cacheKey && await cache.getItem(cacheKey);
+      if (!identityId) {
+        const { IdentityId = throwOnMissingId() } = await _client.send(new GetIdCommand2({
+          AccountId: accountId,
+          IdentityPoolId: identityPoolId,
+          Logins: logins ? await resolveLogins(logins) : void 0
+        }));
+        identityId = IdentityId;
+        if (cacheKey) {
+          Promise.resolve(cache.setItem(cacheKey, identityId)).catch(() => {
+          });
+        }
+      }
+      provider = fromCognitoIdentity({
+        client: _client,
+        customRoleArn,
+        logins,
+        identityId
+      });
+      return provider();
+    };
+    return () => provider().catch(async (err) => {
+      if (cacheKey) {
+        Promise.resolve(cache.removeItem(cacheKey)).catch(() => {
+        });
+      }
+      throw err;
+    });
+  }
+  function throwOnMissingId() {
+    throw new CredentialsProviderError("Response from Amazon Cognito contained no identity ID");
+  }
+
+  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/endpointDiscoveryMiddleware.js
+  init_dist_es2();
+
+  // node_modules/@aws-sdk/endpoint-cache/dist-es/EndpointCache.js
+  var import_lru_cache = __toESM(require_lru_cache());
+  var EndpointCache = class {
+    constructor(capacity) {
+      this.cache = new import_lru_cache.default(capacity);
+    }
+    getEndpoint(key) {
+      const endpointsWithExpiry = this.get(key);
+      if (!endpointsWithExpiry || endpointsWithExpiry.length === 0) {
+        return void 0;
+      }
+      const endpoints = endpointsWithExpiry.map((endpoint) => endpoint.Address);
+      return endpoints[Math.floor(Math.random() * endpoints.length)];
+    }
+    get(key) {
+      if (!this.has(key)) {
+        return;
+      }
+      const value = this.cache.get(key);
+      if (!value) {
+        return;
+      }
+      const now = Date.now();
+      const endpointsWithExpiry = value.filter((endpoint) => now < endpoint.Expires);
+      if (endpointsWithExpiry.length === 0) {
+        this.delete(key);
+        return void 0;
+      }
+      return endpointsWithExpiry;
+    }
+    set(key, endpoints) {
+      const now = Date.now();
+      this.cache.set(key, endpoints.map(({ Address, CachePeriodInMinutes }) => ({
+        Address,
+        Expires: now + CachePeriodInMinutes * 60 * 1e3
+      })));
+    }
+    delete(key) {
+      this.cache.set(key, []);
+    }
+    has(key) {
+      if (!this.cache.has(key)) {
+        return false;
+      }
+      const endpoints = this.cache.peek(key);
+      if (!endpoints) {
+        return false;
+      }
+      return endpoints.length > 0;
+    }
+    clear() {
+      this.cache.clear();
+    }
+  };
+
+  // node_modules/@aws-sdk/middleware-endpoint-discovery/dist-es/resolveEndpointDiscoveryConfig.js
+  var resolveEndpointDiscoveryConfig = (input, { endpointDiscoveryCommandCtor }) => ({
+    ...input,
+    endpointDiscoveryCommandCtor,
+    endpointCache: new EndpointCache(input.endpointCacheSize ?? 1e3),
+    endpointDiscoveryEnabled: input.endpointDiscoveryEnabled !== void 0 ? () => Promise.resolve(input.endpointDiscoveryEnabled) : input.endpointDiscoveryEnabledProvider,
+    isClientEndpointDiscoveryEnabled: input.endpointDiscoveryEnabled !== void 0
+  });
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDBClient.js
+  init_dist_es3();
+  init_dist_es4();
+  init_dist_es5();
+  init_dist_es8();
+  init_dist_es11();
+  init_dist_es28();
+  init_dist_es29();
+  init_dist_es15();
+  init_dist_es27();
+  init_dist_es26();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthSchemeProvider.js
+  init_dist_es32();
+  init_dist_es10();
+  var defaultDynamoDBHttpAuthSchemeParametersProvider = async (config, context, input) => {
+    return {
+      operation: getSmithyContext(context).operation,
+      region: await normalizeProvider(config.region)() || (() => {
+        throw new Error("expected `region` to be configured for `aws.auth#sigv4`");
+      })()
+    };
+  };
+  function createAwsAuthSigv4HttpAuthOption2(authParameters) {
+    return {
+      schemeId: "aws.auth#sigv4",
+      signingProperties: {
+        name: "dynamodb",
+        region: authParameters.region
+      },
+      propertiesExtractor: (config, context) => ({
+        signingProperties: {
+          config,
+          context
+        }
+      })
+    };
+  }
+  var defaultDynamoDBHttpAuthSchemeProvider = (authParameters) => {
+    const options = [];
+    switch (authParameters.operation) {
+      default: {
+        options.push(createAwsAuthSigv4HttpAuthOption2(authParameters));
+      }
+    }
+    return options;
+  };
+  var resolveHttpAuthSchemeConfig2 = (config) => {
+    const config_0 = resolveAwsSdkSigV4Config(config);
+    return {
+      ...config_0
+    };
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeEndpointsCommand.js
+  init_dist_es15();
+  init_dist_es14();
+  init_dist_es26();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/EndpointParameters.js
+  var resolveClientEndpointParameters2 = (options) => {
+    return {
+      ...options,
+      useDualstackEndpoint: options.useDualstackEndpoint ?? false,
+      useFipsEndpoint: options.useFipsEndpoint ?? false,
+      defaultSigningName: "dynamodb"
+    };
+  };
+  var commonParams2 = {
+    UseFIPS: { type: "builtInParams", name: "useFipsEndpoint" },
+    Endpoint: { type: "builtInParams", name: "endpoint" },
+    Region: { type: "builtInParams", name: "region" },
+    UseDualStack: { type: "builtInParams", name: "useDualstackEndpoint" }
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/protocols/Aws_json1_0.js
+  init_dist_es32();
+  init_dist_es2();
+  init_dist_es26();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/models/DynamoDBServiceException.js
+  init_dist_es26();
+  var DynamoDBServiceException = class _DynamoDBServiceException extends ServiceException {
+    constructor(options) {
+      super(options);
+      Object.setPrototypeOf(this, _DynamoDBServiceException.prototype);
+    }
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/models/models_0.js
+  var BackupInUseException = class _BackupInUseException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "BackupInUseException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "BackupInUseException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _BackupInUseException.prototype);
+    }
+  };
+  var BackupNotFoundException = class _BackupNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "BackupNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "BackupNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _BackupNotFoundException.prototype);
+    }
+  };
+  var InternalServerError = class _InternalServerError extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "InternalServerError",
+        $fault: "server",
+        ...opts
+      });
+      this.name = "InternalServerError";
+      this.$fault = "server";
+      Object.setPrototypeOf(this, _InternalServerError.prototype);
+    }
+  };
+  var RequestLimitExceeded = class _RequestLimitExceeded extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "RequestLimitExceeded",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "RequestLimitExceeded";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _RequestLimitExceeded.prototype);
+    }
+  };
+  var InvalidEndpointException = class _InvalidEndpointException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "InvalidEndpointException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "InvalidEndpointException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _InvalidEndpointException.prototype);
+      this.Message = opts.Message;
+    }
+  };
+  var ProvisionedThroughputExceededException = class _ProvisionedThroughputExceededException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ProvisionedThroughputExceededException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ProvisionedThroughputExceededException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ProvisionedThroughputExceededException.prototype);
+    }
+  };
+  var ResourceNotFoundException2 = class _ResourceNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ResourceNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ResourceNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ResourceNotFoundException.prototype);
+    }
+  };
+  var ItemCollectionSizeLimitExceededException = class _ItemCollectionSizeLimitExceededException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ItemCollectionSizeLimitExceededException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ItemCollectionSizeLimitExceededException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ItemCollectionSizeLimitExceededException.prototype);
+    }
+  };
+  var ContinuousBackupsUnavailableException = class _ContinuousBackupsUnavailableException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ContinuousBackupsUnavailableException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ContinuousBackupsUnavailableException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ContinuousBackupsUnavailableException.prototype);
+    }
+  };
+  var LimitExceededException2 = class _LimitExceededException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "LimitExceededException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "LimitExceededException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _LimitExceededException.prototype);
+    }
+  };
+  var TableInUseException = class _TableInUseException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TableInUseException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TableInUseException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TableInUseException.prototype);
+    }
+  };
+  var TableNotFoundException = class _TableNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TableNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TableNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TableNotFoundException.prototype);
+    }
+  };
+  var GlobalTableAlreadyExistsException = class _GlobalTableAlreadyExistsException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "GlobalTableAlreadyExistsException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "GlobalTableAlreadyExistsException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _GlobalTableAlreadyExistsException.prototype);
+    }
+  };
+  var ResourceInUseException = class _ResourceInUseException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ResourceInUseException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ResourceInUseException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ResourceInUseException.prototype);
+    }
+  };
+  var TransactionConflictException = class _TransactionConflictException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TransactionConflictException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TransactionConflictException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TransactionConflictException.prototype);
+    }
+  };
+  var ExportNotFoundException = class _ExportNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ExportNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ExportNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ExportNotFoundException.prototype);
+    }
+  };
+  var GlobalTableNotFoundException = class _GlobalTableNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "GlobalTableNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "GlobalTableNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _GlobalTableNotFoundException.prototype);
+    }
+  };
+  var ImportNotFoundException = class _ImportNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ImportNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ImportNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ImportNotFoundException.prototype);
+    }
+  };
+  var DuplicateItemException = class _DuplicateItemException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "DuplicateItemException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "DuplicateItemException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _DuplicateItemException.prototype);
+    }
+  };
+  var IdempotentParameterMismatchException = class _IdempotentParameterMismatchException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "IdempotentParameterMismatchException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "IdempotentParameterMismatchException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _IdempotentParameterMismatchException.prototype);
+      this.Message = opts.Message;
+    }
+  };
+  var TransactionInProgressException = class _TransactionInProgressException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TransactionInProgressException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TransactionInProgressException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TransactionInProgressException.prototype);
+      this.Message = opts.Message;
+    }
+  };
+  var ExportConflictException = class _ExportConflictException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ExportConflictException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ExportConflictException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ExportConflictException.prototype);
+    }
+  };
+  var InvalidExportTimeException = class _InvalidExportTimeException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "InvalidExportTimeException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "InvalidExportTimeException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _InvalidExportTimeException.prototype);
+    }
+  };
+  var PointInTimeRecoveryUnavailableException = class _PointInTimeRecoveryUnavailableException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "PointInTimeRecoveryUnavailableException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "PointInTimeRecoveryUnavailableException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _PointInTimeRecoveryUnavailableException.prototype);
+    }
+  };
+  var ImportConflictException = class _ImportConflictException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ImportConflictException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ImportConflictException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ImportConflictException.prototype);
+    }
+  };
+  var TableAlreadyExistsException = class _TableAlreadyExistsException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TableAlreadyExistsException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TableAlreadyExistsException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TableAlreadyExistsException.prototype);
+    }
+  };
+  var InvalidRestoreTimeException = class _InvalidRestoreTimeException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "InvalidRestoreTimeException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "InvalidRestoreTimeException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _InvalidRestoreTimeException.prototype);
+    }
+  };
+  var ReplicaAlreadyExistsException = class _ReplicaAlreadyExistsException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ReplicaAlreadyExistsException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ReplicaAlreadyExistsException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ReplicaAlreadyExistsException.prototype);
+    }
+  };
+  var ReplicaNotFoundException = class _ReplicaNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ReplicaNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ReplicaNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ReplicaNotFoundException.prototype);
+    }
+  };
+  var IndexNotFoundException = class _IndexNotFoundException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "IndexNotFoundException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "IndexNotFoundException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _IndexNotFoundException.prototype);
+    }
+  };
+  var AttributeValue;
+  (function(AttributeValue2) {
+    AttributeValue2.visit = (value, visitor) => {
+      if (value.S !== void 0)
+        return visitor.S(value.S);
+      if (value.N !== void 0)
+        return visitor.N(value.N);
+      if (value.B !== void 0)
+        return visitor.B(value.B);
+      if (value.SS !== void 0)
+        return visitor.SS(value.SS);
+      if (value.NS !== void 0)
+        return visitor.NS(value.NS);
+      if (value.BS !== void 0)
+        return visitor.BS(value.BS);
+      if (value.M !== void 0)
+        return visitor.M(value.M);
+      if (value.L !== void 0)
+        return visitor.L(value.L);
+      if (value.NULL !== void 0)
+        return visitor.NULL(value.NULL);
+      if (value.BOOL !== void 0)
+        return visitor.BOOL(value.BOOL);
+      return visitor._(value.$unknown[0], value.$unknown[1]);
+    };
+  })(AttributeValue || (AttributeValue = {}));
+  var ConditionalCheckFailedException = class _ConditionalCheckFailedException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "ConditionalCheckFailedException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "ConditionalCheckFailedException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _ConditionalCheckFailedException.prototype);
+      this.Item = opts.Item;
+    }
+  };
+  var TransactionCanceledException = class _TransactionCanceledException extends DynamoDBServiceException {
+    constructor(opts) {
+      super({
+        name: "TransactionCanceledException",
+        $fault: "client",
+        ...opts
+      });
+      this.name = "TransactionCanceledException";
+      this.$fault = "client";
+      Object.setPrototypeOf(this, _TransactionCanceledException.prototype);
+      this.Message = opts.Message;
+      this.CancellationReasons = opts.CancellationReasons;
+    }
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/protocols/Aws_json1_0.js
+  var se_DescribeEndpointsCommand = async (input, context) => {
+    const headers = sharedHeaders2("DescribeEndpoints");
+    let body;
+    body = JSON.stringify(_json(input));
+    return buildHttpRpcRequest2(context, headers, "/", void 0, body);
+  };
+  var se_QueryCommand = async (input, context) => {
+    const headers = sharedHeaders2("Query");
+    let body;
+    body = JSON.stringify(se_QueryInput(input, context));
+    return buildHttpRpcRequest2(context, headers, "/", void 0, body);
+  };
+  var de_DescribeEndpointsCommand = async (output, context) => {
+    if (output.statusCode >= 300) {
+      return de_CommandError2(output, context);
+    }
+    const data = await parseJsonBody(output.body, context);
+    let contents = {};
+    contents = _json(data);
+    const response = {
+      $metadata: deserializeMetadata3(output),
+      ...contents
+    };
+    return response;
+  };
+  var de_QueryCommand = async (output, context) => {
+    if (output.statusCode >= 300) {
+      return de_CommandError2(output, context);
+    }
+    const data = await parseJsonBody(output.body, context);
+    let contents = {};
+    contents = de_QueryOutput(data, context);
+    const response = {
+      $metadata: deserializeMetadata3(output),
+      ...contents
+    };
+    return response;
+  };
+  var de_CommandError2 = async (output, context) => {
+    const parsedOutput = {
+      ...output,
+      body: await parseJsonErrorBody(output.body, context)
+    };
+    const errorCode = loadRestJsonErrorCode(output, parsedOutput.body);
+    switch (errorCode) {
+      case "InternalServerError":
+      case "com.amazonaws.dynamodb#InternalServerError":
+        throw await de_InternalServerErrorRes(parsedOutput, context);
+      case "RequestLimitExceeded":
+      case "com.amazonaws.dynamodb#RequestLimitExceeded":
+        throw await de_RequestLimitExceededRes(parsedOutput, context);
+      case "InvalidEndpointException":
+      case "com.amazonaws.dynamodb#InvalidEndpointException":
+        throw await de_InvalidEndpointExceptionRes(parsedOutput, context);
+      case "ProvisionedThroughputExceededException":
+      case "com.amazonaws.dynamodb#ProvisionedThroughputExceededException":
+        throw await de_ProvisionedThroughputExceededExceptionRes(parsedOutput, context);
+      case "ResourceNotFoundException":
+      case "com.amazonaws.dynamodb#ResourceNotFoundException":
+        throw await de_ResourceNotFoundExceptionRes2(parsedOutput, context);
+      case "ItemCollectionSizeLimitExceededException":
+      case "com.amazonaws.dynamodb#ItemCollectionSizeLimitExceededException":
+        throw await de_ItemCollectionSizeLimitExceededExceptionRes(parsedOutput, context);
+      case "BackupInUseException":
+      case "com.amazonaws.dynamodb#BackupInUseException":
+        throw await de_BackupInUseExceptionRes(parsedOutput, context);
+      case "ContinuousBackupsUnavailableException":
+      case "com.amazonaws.dynamodb#ContinuousBackupsUnavailableException":
+        throw await de_ContinuousBackupsUnavailableExceptionRes(parsedOutput, context);
+      case "LimitExceededException":
+      case "com.amazonaws.dynamodb#LimitExceededException":
+        throw await de_LimitExceededExceptionRes2(parsedOutput, context);
+      case "TableInUseException":
+      case "com.amazonaws.dynamodb#TableInUseException":
+        throw await de_TableInUseExceptionRes(parsedOutput, context);
+      case "TableNotFoundException":
+      case "com.amazonaws.dynamodb#TableNotFoundException":
+        throw await de_TableNotFoundExceptionRes(parsedOutput, context);
+      case "GlobalTableAlreadyExistsException":
+      case "com.amazonaws.dynamodb#GlobalTableAlreadyExistsException":
+        throw await de_GlobalTableAlreadyExistsExceptionRes(parsedOutput, context);
+      case "ResourceInUseException":
+      case "com.amazonaws.dynamodb#ResourceInUseException":
+        throw await de_ResourceInUseExceptionRes(parsedOutput, context);
+      case "BackupNotFoundException":
+      case "com.amazonaws.dynamodb#BackupNotFoundException":
+        throw await de_BackupNotFoundExceptionRes(parsedOutput, context);
+      case "ConditionalCheckFailedException":
+      case "com.amazonaws.dynamodb#ConditionalCheckFailedException":
+        throw await de_ConditionalCheckFailedExceptionRes(parsedOutput, context);
+      case "TransactionConflictException":
+      case "com.amazonaws.dynamodb#TransactionConflictException":
+        throw await de_TransactionConflictExceptionRes(parsedOutput, context);
+      case "ExportNotFoundException":
+      case "com.amazonaws.dynamodb#ExportNotFoundException":
+        throw await de_ExportNotFoundExceptionRes(parsedOutput, context);
+      case "GlobalTableNotFoundException":
+      case "com.amazonaws.dynamodb#GlobalTableNotFoundException":
+        throw await de_GlobalTableNotFoundExceptionRes(parsedOutput, context);
+      case "ImportNotFoundException":
+      case "com.amazonaws.dynamodb#ImportNotFoundException":
+        throw await de_ImportNotFoundExceptionRes(parsedOutput, context);
+      case "DuplicateItemException":
+      case "com.amazonaws.dynamodb#DuplicateItemException":
+        throw await de_DuplicateItemExceptionRes(parsedOutput, context);
+      case "IdempotentParameterMismatchException":
+      case "com.amazonaws.dynamodb#IdempotentParameterMismatchException":
+        throw await de_IdempotentParameterMismatchExceptionRes(parsedOutput, context);
+      case "TransactionCanceledException":
+      case "com.amazonaws.dynamodb#TransactionCanceledException":
+        throw await de_TransactionCanceledExceptionRes(parsedOutput, context);
+      case "TransactionInProgressException":
+      case "com.amazonaws.dynamodb#TransactionInProgressException":
+        throw await de_TransactionInProgressExceptionRes(parsedOutput, context);
+      case "ExportConflictException":
+      case "com.amazonaws.dynamodb#ExportConflictException":
+        throw await de_ExportConflictExceptionRes(parsedOutput, context);
+      case "InvalidExportTimeException":
+      case "com.amazonaws.dynamodb#InvalidExportTimeException":
+        throw await de_InvalidExportTimeExceptionRes(parsedOutput, context);
+      case "PointInTimeRecoveryUnavailableException":
+      case "com.amazonaws.dynamodb#PointInTimeRecoveryUnavailableException":
+        throw await de_PointInTimeRecoveryUnavailableExceptionRes(parsedOutput, context);
+      case "ImportConflictException":
+      case "com.amazonaws.dynamodb#ImportConflictException":
+        throw await de_ImportConflictExceptionRes(parsedOutput, context);
+      case "TableAlreadyExistsException":
+      case "com.amazonaws.dynamodb#TableAlreadyExistsException":
+        throw await de_TableAlreadyExistsExceptionRes(parsedOutput, context);
+      case "InvalidRestoreTimeException":
+      case "com.amazonaws.dynamodb#InvalidRestoreTimeException":
+        throw await de_InvalidRestoreTimeExceptionRes(parsedOutput, context);
+      case "ReplicaAlreadyExistsException":
+      case "com.amazonaws.dynamodb#ReplicaAlreadyExistsException":
+        throw await de_ReplicaAlreadyExistsExceptionRes(parsedOutput, context);
+      case "ReplicaNotFoundException":
+      case "com.amazonaws.dynamodb#ReplicaNotFoundException":
+        throw await de_ReplicaNotFoundExceptionRes(parsedOutput, context);
+      case "IndexNotFoundException":
+      case "com.amazonaws.dynamodb#IndexNotFoundException":
+        throw await de_IndexNotFoundExceptionRes(parsedOutput, context);
+      default:
+        const parsedBody = parsedOutput.body;
+        return throwDefaultError3({
+          output,
+          parsedBody,
+          errorCode
+        });
+    }
+  };
+  var de_BackupInUseExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new BackupInUseException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_BackupNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new BackupNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ConditionalCheckFailedExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = de_ConditionalCheckFailedException(body, context);
+    const exception = new ConditionalCheckFailedException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ContinuousBackupsUnavailableExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ContinuousBackupsUnavailableException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_DuplicateItemExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new DuplicateItemException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ExportConflictExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ExportConflictException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ExportNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ExportNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_GlobalTableAlreadyExistsExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new GlobalTableAlreadyExistsException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_GlobalTableNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new GlobalTableNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_IdempotentParameterMismatchExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new IdempotentParameterMismatchException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ImportConflictExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ImportConflictException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ImportNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ImportNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_IndexNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new IndexNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_InternalServerErrorRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new InternalServerError({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_InvalidEndpointExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new InvalidEndpointException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_InvalidExportTimeExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new InvalidExportTimeException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_InvalidRestoreTimeExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new InvalidRestoreTimeException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ItemCollectionSizeLimitExceededExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ItemCollectionSizeLimitExceededException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_LimitExceededExceptionRes2 = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new LimitExceededException2({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_PointInTimeRecoveryUnavailableExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new PointInTimeRecoveryUnavailableException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ProvisionedThroughputExceededExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ProvisionedThroughputExceededException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ReplicaAlreadyExistsExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ReplicaAlreadyExistsException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ReplicaNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ReplicaNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_RequestLimitExceededRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new RequestLimitExceeded({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ResourceInUseExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ResourceInUseException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_ResourceNotFoundExceptionRes2 = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new ResourceNotFoundException2({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TableAlreadyExistsExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new TableAlreadyExistsException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TableInUseExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new TableInUseException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TableNotFoundExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new TableNotFoundException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TransactionCanceledExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = de_TransactionCanceledException(body, context);
+    const exception = new TransactionCanceledException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TransactionConflictExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new TransactionConflictException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var de_TransactionInProgressExceptionRes = async (parsedOutput, context) => {
+    const body = parsedOutput.body;
+    const deserialized = _json(body);
+    const exception = new TransactionInProgressException({
+      $metadata: deserializeMetadata3(parsedOutput),
+      ...deserialized
+    });
+    return decorateServiceException(exception, body);
+  };
+  var se_AttributeValue = (input, context) => {
+    return AttributeValue.visit(input, {
+      B: (value) => ({ B: context.base64Encoder(value) }),
+      BOOL: (value) => ({ BOOL: value }),
+      BS: (value) => ({ BS: se_BinarySetAttributeValue(value, context) }),
+      L: (value) => ({ L: se_ListAttributeValue(value, context) }),
+      M: (value) => ({ M: se_MapAttributeValue(value, context) }),
+      N: (value) => ({ N: value }),
+      NS: (value) => ({ NS: _json(value) }),
+      NULL: (value) => ({ NULL: value }),
+      S: (value) => ({ S: value }),
+      SS: (value) => ({ SS: _json(value) }),
+      _: (name, value) => ({ name: value })
+    });
+  };
+  var se_AttributeValueList = (input, context) => {
+    return input.filter((e4) => e4 != null).map((entry) => {
+      return se_AttributeValue(entry, context);
+    });
+  };
+  var se_BinarySetAttributeValue = (input, context) => {
+    return input.filter((e4) => e4 != null).map((entry) => {
+      return context.base64Encoder(entry);
+    });
+  };
+  var se_Condition = (input, context) => {
+    return take(input, {
+      AttributeValueList: (_2) => se_AttributeValueList(_2, context),
+      ComparisonOperator: []
+    });
+  };
+  var se_ExpressionAttributeValueMap = (input, context) => {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = se_AttributeValue(value, context);
+      return acc;
+    }, {});
+  };
+  var se_FilterConditionMap = (input, context) => {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = se_Condition(value, context);
+      return acc;
+    }, {});
+  };
+  var se_Key = (input, context) => {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = se_AttributeValue(value, context);
+      return acc;
+    }, {});
+  };
+  var se_KeyConditions = (input, context) => {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = se_Condition(value, context);
+      return acc;
+    }, {});
+  };
+  var se_ListAttributeValue = (input, context) => {
+    return input.filter((e4) => e4 != null).map((entry) => {
+      return se_AttributeValue(entry, context);
+    });
+  };
+  var se_MapAttributeValue = (input, context) => {
+    return Object.entries(input).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = se_AttributeValue(value, context);
+      return acc;
+    }, {});
+  };
+  var se_QueryInput = (input, context) => {
+    return take(input, {
+      AttributesToGet: _json,
+      ConditionalOperator: [],
+      ConsistentRead: [],
+      ExclusiveStartKey: (_2) => se_Key(_2, context),
+      ExpressionAttributeNames: _json,
+      ExpressionAttributeValues: (_2) => se_ExpressionAttributeValueMap(_2, context),
+      FilterExpression: [],
+      IndexName: [],
+      KeyConditionExpression: [],
+      KeyConditions: (_2) => se_KeyConditions(_2, context),
+      Limit: [],
+      ProjectionExpression: [],
+      QueryFilter: (_2) => se_FilterConditionMap(_2, context),
+      ReturnConsumedCapacity: [],
+      ScanIndexForward: [],
+      Select: [],
+      TableName: []
+    });
+  };
+  var de_AttributeMap = (output, context) => {
+    return Object.entries(output).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = de_AttributeValue(awsExpectUnion(value), context);
+      return acc;
+    }, {});
+  };
+  var de_AttributeValue = (output, context) => {
+    if (output.B != null) {
+      return {
+        B: context.base64Decoder(output.B)
+      };
+    }
+    if (expectBoolean(output.BOOL) !== void 0) {
+      return { BOOL: expectBoolean(output.BOOL) };
+    }
+    if (output.BS != null) {
+      return {
+        BS: de_BinarySetAttributeValue(output.BS, context)
+      };
+    }
+    if (output.L != null) {
+      return {
+        L: de_ListAttributeValue(output.L, context)
+      };
+    }
+    if (output.M != null) {
+      return {
+        M: de_MapAttributeValue(output.M, context)
+      };
+    }
+    if (expectString(output.N) !== void 0) {
+      return { N: expectString(output.N) };
+    }
+    if (output.NS != null) {
+      return {
+        NS: _json(output.NS)
+      };
+    }
+    if (expectBoolean(output.NULL) !== void 0) {
+      return { NULL: expectBoolean(output.NULL) };
+    }
+    if (expectString(output.S) !== void 0) {
+      return { S: expectString(output.S) };
+    }
+    if (output.SS != null) {
+      return {
+        SS: _json(output.SS)
+      };
+    }
+    return { $unknown: Object.entries(output)[0] };
+  };
+  var de_BinarySetAttributeValue = (output, context) => {
+    const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
+      return context.base64Decoder(entry);
+    });
+    return retVal;
+  };
+  var de_CancellationReason = (output, context) => {
+    return take(output, {
+      Code: expectString,
+      Item: (_2) => de_AttributeMap(_2, context),
+      Message: expectString
+    });
+  };
+  var de_CancellationReasonList = (output, context) => {
+    const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
+      return de_CancellationReason(entry, context);
+    });
+    return retVal;
+  };
+  var de_Capacity = (output, context) => {
+    return take(output, {
+      CapacityUnits: limitedParseDouble,
+      ReadCapacityUnits: limitedParseDouble,
+      WriteCapacityUnits: limitedParseDouble
+    });
+  };
+  var de_ConditionalCheckFailedException = (output, context) => {
+    return take(output, {
+      Item: (_2) => de_AttributeMap(_2, context),
+      message: expectString
+    });
+  };
+  var de_ConsumedCapacity = (output, context) => {
+    return take(output, {
+      CapacityUnits: limitedParseDouble,
+      GlobalSecondaryIndexes: (_2) => de_SecondaryIndexesCapacityMap(_2, context),
+      LocalSecondaryIndexes: (_2) => de_SecondaryIndexesCapacityMap(_2, context),
+      ReadCapacityUnits: limitedParseDouble,
+      Table: (_2) => de_Capacity(_2, context),
+      TableName: expectString,
+      WriteCapacityUnits: limitedParseDouble
+    });
+  };
+  var de_ItemList = (output, context) => {
+    const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
+      return de_AttributeMap(entry, context);
+    });
+    return retVal;
+  };
+  var de_Key = (output, context) => {
+    return Object.entries(output).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = de_AttributeValue(awsExpectUnion(value), context);
+      return acc;
+    }, {});
+  };
+  var de_ListAttributeValue = (output, context) => {
+    const retVal = (output || []).filter((e4) => e4 != null).map((entry) => {
+      return de_AttributeValue(awsExpectUnion(entry), context);
+    });
+    return retVal;
+  };
+  var de_MapAttributeValue = (output, context) => {
+    return Object.entries(output).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = de_AttributeValue(awsExpectUnion(value), context);
+      return acc;
+    }, {});
+  };
+  var de_QueryOutput = (output, context) => {
+    return take(output, {
+      ConsumedCapacity: (_2) => de_ConsumedCapacity(_2, context),
+      Count: expectInt32,
+      Items: (_2) => de_ItemList(_2, context),
+      LastEvaluatedKey: (_2) => de_Key(_2, context),
+      ScannedCount: expectInt32
+    });
+  };
+  var de_SecondaryIndexesCapacityMap = (output, context) => {
+    return Object.entries(output).reduce((acc, [key, value]) => {
+      if (value === null) {
+        return acc;
+      }
+      acc[key] = de_Capacity(value, context);
+      return acc;
+    }, {});
+  };
+  var de_TransactionCanceledException = (output, context) => {
+    return take(output, {
+      CancellationReasons: (_2) => de_CancellationReasonList(_2, context),
+      Message: expectString
+    });
+  };
+  var deserializeMetadata3 = (output) => ({
+    httpStatusCode: output.statusCode,
+    requestId: output.headers["x-amzn-requestid"] ?? output.headers["x-amzn-request-id"] ?? output.headers["x-amz-request-id"],
+    extendedRequestId: output.headers["x-amz-id-2"],
+    cfId: output.headers["x-amz-cf-id"]
+  });
+  var throwDefaultError3 = withBaseException(DynamoDBServiceException);
+  var buildHttpRpcRequest2 = async (context, headers, path, resolvedHostname, body) => {
+    const { hostname, protocol = "https", port, path: basePath } = await context.endpoint();
+    const contents = {
+      protocol,
+      hostname,
+      port,
+      method: "POST",
+      path: basePath.endsWith("/") ? basePath.slice(0, -1) + path : basePath + path,
+      headers
+    };
+    if (resolvedHostname !== void 0) {
+      contents.hostname = resolvedHostname;
+    }
+    if (body !== void 0) {
+      contents.body = body;
+    }
+    return new HttpRequest(contents);
+  };
+  function sharedHeaders2(operation) {
+    return {
+      "content-type": "application/x-amz-json-1.0",
+      "x-amz-target": `DynamoDB_20120810.${operation}`
+    };
+  }
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/DescribeEndpointsCommand.js
+  var DescribeEndpointsCommand = class extends Command.classBuilder().ep({
+    ...commonParams2
+  }).m(function(Command2, cs, config, o4) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
+    ];
+  }).s("DynamoDB_20120810", "DescribeEndpoints", {}).n("DynamoDBClient", "DescribeEndpointsCommand").f(void 0, void 0).ser(se_DescribeEndpointsCommand).de(de_DescribeEndpointsCommand).build() {
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/package.json
+  var package_default2 = {
+    name: "@aws-sdk/client-dynamodb",
+    description: "AWS SDK for JavaScript Dynamodb Client for Node.js, Browser and React Native",
+    version: "3.529.1",
+    scripts: {
+      build: "concurrently 'yarn:build:cjs' 'yarn:build:es' 'yarn:build:types'",
+      "build:cjs": "node ../../scripts/compilation/inline client-dynamodb",
+      "build:es": "tsc -p tsconfig.es.json",
+      "build:include:deps": "lerna run --scope $npm_package_name --include-dependencies build",
+      "build:types": "tsc -p tsconfig.types.json",
+      "build:types:downlevel": "downlevel-dts dist-types dist-types/ts3.4",
+      clean: "rimraf ./dist-* && rimraf *.tsbuildinfo",
+      "extract:docs": "api-extractor run --local",
+      "generate:client": "node ../../scripts/generate-clients/single-service --solo dynamodb"
+    },
+    main: "./dist-cjs/index.js",
+    types: "./dist-types/index.d.ts",
+    module: "./dist-es/index.js",
+    sideEffects: false,
+    dependencies: {
+      "@aws-crypto/sha256-browser": "3.0.0",
+      "@aws-crypto/sha256-js": "3.0.0",
+      "@aws-sdk/client-sts": "3.529.1",
+      "@aws-sdk/core": "3.529.1",
+      "@aws-sdk/credential-provider-node": "3.529.1",
+      "@aws-sdk/middleware-endpoint-discovery": "3.525.0",
+      "@aws-sdk/middleware-host-header": "3.523.0",
+      "@aws-sdk/middleware-logger": "3.523.0",
+      "@aws-sdk/middleware-recursion-detection": "3.523.0",
+      "@aws-sdk/middleware-user-agent": "3.525.0",
+      "@aws-sdk/region-config-resolver": "3.525.0",
+      "@aws-sdk/types": "3.523.0",
+      "@aws-sdk/util-endpoints": "3.525.0",
+      "@aws-sdk/util-user-agent-browser": "3.523.0",
+      "@aws-sdk/util-user-agent-node": "3.525.0",
+      "@smithy/config-resolver": "^2.1.4",
+      "@smithy/core": "^1.3.5",
+      "@smithy/fetch-http-handler": "^2.4.3",
+      "@smithy/hash-node": "^2.1.3",
+      "@smithy/invalid-dependency": "^2.1.3",
+      "@smithy/middleware-content-length": "^2.1.3",
+      "@smithy/middleware-endpoint": "^2.4.4",
+      "@smithy/middleware-retry": "^2.1.4",
+      "@smithy/middleware-serde": "^2.1.3",
+      "@smithy/middleware-stack": "^2.1.3",
+      "@smithy/node-config-provider": "^2.2.4",
+      "@smithy/node-http-handler": "^2.4.1",
+      "@smithy/protocol-http": "^3.2.1",
+      "@smithy/smithy-client": "^2.4.2",
+      "@smithy/types": "^2.10.1",
+      "@smithy/url-parser": "^2.1.3",
+      "@smithy/util-base64": "^2.1.1",
+      "@smithy/util-body-length-browser": "^2.1.1",
+      "@smithy/util-body-length-node": "^2.2.1",
+      "@smithy/util-defaults-mode-browser": "^2.1.4",
+      "@smithy/util-defaults-mode-node": "^2.2.3",
+      "@smithy/util-endpoints": "^1.1.4",
+      "@smithy/util-middleware": "^2.1.3",
+      "@smithy/util-retry": "^2.1.3",
+      "@smithy/util-utf8": "^2.1.1",
+      "@smithy/util-waiter": "^2.1.3",
+      tslib: "^2.5.0",
+      uuid: "^9.0.1"
+    },
+    devDependencies: {
+      "@smithy/service-client-documentation-generator": "^2.1.1",
+      "@tsconfig/node14": "1.0.3",
+      "@types/node": "^14.14.31",
+      "@types/uuid": "^9.0.4",
+      concurrently: "7.0.0",
+      "downlevel-dts": "0.10.1",
+      rimraf: "3.0.2",
+      typescript: "~4.9.5"
+    },
+    engines: {
+      node: ">=14.0.0"
+    },
+    typesVersions: {
+      "<4.0": {
+        "dist-types/*": [
+          "dist-types/ts3.4/*"
+        ]
+      }
+    },
+    files: [
+      "dist-*/**"
+    ],
+    author: {
+      name: "AWS SDK for JavaScript Team",
+      url: "https://aws.amazon.com/javascript/"
+    },
+    license: "Apache-2.0",
+    browser: {
+      "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.browser"
+    },
+    "react-native": {
+      "./dist-es/runtimeConfig": "./dist-es/runtimeConfig.native"
+    },
+    homepage: "https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-dynamodb",
+    repository: {
+      type: "git",
+      url: "https://github.com/aws/aws-sdk-js-v3.git",
+      directory: "clients/client-dynamodb"
+    }
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.browser.js
+  var import_sha256_browser2 = __toESM(require_build5());
+  init_dist_es33();
+  init_dist_es11();
+  init_dist_es23();
+  init_dist_es34();
+  init_dist_es35();
+  init_dist_es17();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.shared.js
+  init_dist_es32();
+  init_dist_es26();
+  init_dist_es13();
+  init_dist_es20();
+  init_dist_es19();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/endpointResolver.js
+  init_dist_es6();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/ruleset.js
+  var w = "required";
+  var x = "fn";
+  var y = "argv";
+  var z = "ref";
+  var a2 = true;
+  var b2 = "isSet";
+  var c2 = "booleanEquals";
+  var d2 = "error";
+  var e2 = "endpoint";
+  var f2 = "tree";
+  var g2 = "PartitionResult";
+  var h2 = "getAttr";
+  var i2 = "stringEquals";
+  var j2 = { [w]: false, "type": "String" };
+  var k2 = { [w]: true, "default": false, "type": "Boolean" };
+  var l2 = { [z]: "Endpoint" };
+  var m2 = { [x]: c2, [y]: [{ [z]: "UseFIPS" }, true] };
+  var n2 = { [x]: c2, [y]: [{ [z]: "UseDualStack" }, true] };
+  var o2 = {};
+  var p2 = { [z]: "Region" };
+  var q2 = { [x]: h2, [y]: [{ [z]: g2 }, "supportsFIPS"] };
+  var r2 = { [z]: g2 };
+  var s2 = { [x]: c2, [y]: [true, { [x]: h2, [y]: [r2, "supportsDualStack"] }] };
+  var t2 = [m2];
+  var u2 = [n2];
+  var v2 = [p2];
+  var _data2 = { version: "1.0", parameters: { Region: j2, UseDualStack: k2, UseFIPS: k2, Endpoint: j2 }, rules: [{ conditions: [{ [x]: b2, [y]: [l2] }], rules: [{ conditions: t2, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: d2 }, { conditions: u2, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: d2 }, { endpoint: { url: l2, properties: o2, headers: o2 }, type: e2 }], type: f2 }, { conditions: [{ [x]: b2, [y]: v2 }], rules: [{ conditions: [{ [x]: "aws.partition", [y]: v2, assign: g2 }], rules: [{ conditions: [m2, n2], rules: [{ conditions: [{ [x]: c2, [y]: [a2, q2] }, s2], rules: [{ endpoint: { url: "https://dynamodb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: o2, headers: o2 }, type: e2 }], type: f2 }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: d2 }], type: f2 }, { conditions: t2, rules: [{ conditions: [{ [x]: c2, [y]: [q2, a2] }], rules: [{ conditions: [{ [x]: i2, [y]: [{ [x]: h2, [y]: [r2, "name"] }, "aws-us-gov"] }], endpoint: { url: "https://dynamodb.{Region}.amazonaws.com", properties: o2, headers: o2 }, type: e2 }, { endpoint: { url: "https://dynamodb-fips.{Region}.{PartitionResult#dnsSuffix}", properties: o2, headers: o2 }, type: e2 }], type: f2 }, { error: "FIPS is enabled but this partition does not support FIPS", type: d2 }], type: f2 }, { conditions: u2, rules: [{ conditions: [s2], rules: [{ endpoint: { url: "https://dynamodb.{Region}.{PartitionResult#dualStackDnsSuffix}", properties: o2, headers: o2 }, type: e2 }], type: f2 }, { error: "DualStack is enabled but this partition does not support DualStack", type: d2 }], type: f2 }, { conditions: [{ [x]: i2, [y]: [p2, "local"] }], endpoint: { url: "http://localhost:8000", properties: { authSchemes: [{ name: "sigv4", signingName: "dynamodb", signingRegion: "us-east-1" }] }, headers: o2 }, type: e2 }, { endpoint: { url: "https://dynamodb.{Region}.{PartitionResult#dnsSuffix}", properties: o2, headers: o2 }, type: e2 }], type: f2 }], type: f2 }, { error: "Invalid Configuration: Missing Region", type: d2 }] };
+  var ruleSet2 = _data2;
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/endpoint/endpointResolver.js
+  var defaultEndpointResolver2 = (endpointParams, context = {}) => {
+    return resolveEndpoint(ruleSet2, {
+      endpointParams,
+      logger: context.logger
+    });
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.shared.js
+  var getRuntimeConfig3 = (config) => {
+    return {
+      apiVersion: "2012-08-10",
+      base64Decoder: config?.base64Decoder ?? fromBase64,
+      base64Encoder: config?.base64Encoder ?? toBase64,
+      disableHostPrefix: config?.disableHostPrefix ?? false,
+      endpointProvider: config?.endpointProvider ?? defaultEndpointResolver2,
+      extensions: config?.extensions ?? [],
+      httpAuthSchemeProvider: config?.httpAuthSchemeProvider ?? defaultDynamoDBHttpAuthSchemeProvider,
+      httpAuthSchemes: config?.httpAuthSchemes ?? [
+        {
+          schemeId: "aws.auth#sigv4",
+          identityProvider: (ipc) => ipc.getIdentityProvider("aws.auth#sigv4"),
+          signer: new AwsSdkSigV4Signer()
+        }
+      ],
+      logger: config?.logger ?? new NoOpLogger(),
+      serviceId: config?.serviceId ?? "DynamoDB",
+      urlParser: config?.urlParser ?? parseUrl,
+      utf8Decoder: config?.utf8Decoder ?? fromUtf8,
+      utf8Encoder: config?.utf8Encoder ?? toUtf8
+    };
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeConfig.browser.js
+  init_dist_es26();
+  init_dist_es37();
+  var getRuntimeConfig4 = (config) => {
+    const defaultsMode = resolveDefaultsModeConfig(config);
+    const defaultConfigProvider = () => defaultsMode().then(loadConfigsForDefaultMode);
+    const clientSharedValues = getRuntimeConfig3(config);
+    return {
+      ...clientSharedValues,
+      ...config,
+      runtime: "browser",
+      defaultsMode,
+      bodyLengthChecker: config?.bodyLengthChecker ?? calculateBodyLength,
+      credentialDefaultProvider: config?.credentialDefaultProvider ?? ((_2) => () => Promise.reject(new Error("Credential is missing"))),
+      defaultUserAgentProvider: config?.defaultUserAgentProvider ?? defaultUserAgent({ serviceId: clientSharedValues.serviceId, clientVersion: package_default2.version }),
+      endpointDiscoveryEnabledProvider: config?.endpointDiscoveryEnabledProvider ?? (() => Promise.resolve(void 0)),
+      maxAttempts: config?.maxAttempts ?? DEFAULT_MAX_ATTEMPTS,
+      region: config?.region ?? invalidProvider("Region is missing"),
+      requestHandler: FetchHttpHandler.create(config?.requestHandler ?? defaultConfigProvider),
+      retryMode: config?.retryMode ?? (async () => (await defaultConfigProvider()).retryMode || DEFAULT_RETRY_MODE),
+      sha256: config?.sha256 ?? import_sha256_browser2.Sha256,
+      streamCollector: config?.streamCollector ?? streamCollector,
+      useDualstackEndpoint: config?.useDualstackEndpoint ?? (() => Promise.resolve(DEFAULT_USE_DUALSTACK_ENDPOINT)),
+      useFipsEndpoint: config?.useFipsEndpoint ?? (() => Promise.resolve(DEFAULT_USE_FIPS_ENDPOINT))
+    };
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeExtensions.js
+  init_dist_es38();
+  init_dist_es2();
+  init_dist_es26();
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/auth/httpAuthExtensionConfiguration.js
+  var getHttpAuthExtensionConfiguration2 = (runtimeConfig) => {
+    const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
+    let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
+    let _credentials = runtimeConfig.credentials;
+    return {
+      setHttpAuthScheme(httpAuthScheme) {
+        const index = _httpAuthSchemes.findIndex((scheme) => scheme.schemeId === httpAuthScheme.schemeId);
+        if (index === -1) {
+          _httpAuthSchemes.push(httpAuthScheme);
+        } else {
+          _httpAuthSchemes.splice(index, 1, httpAuthScheme);
+        }
+      },
+      httpAuthSchemes() {
+        return _httpAuthSchemes;
+      },
+      setHttpAuthSchemeProvider(httpAuthSchemeProvider) {
+        _httpAuthSchemeProvider = httpAuthSchemeProvider;
+      },
+      httpAuthSchemeProvider() {
+        return _httpAuthSchemeProvider;
+      },
+      setCredentials(credentials) {
+        _credentials = credentials;
+      },
+      credentials() {
+        return _credentials;
+      }
+    };
+  };
+  var resolveHttpAuthRuntimeConfig2 = (config) => {
+    return {
+      httpAuthSchemes: config.httpAuthSchemes(),
+      httpAuthSchemeProvider: config.httpAuthSchemeProvider(),
+      credentials: config.credentials()
+    };
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/runtimeExtensions.js
+  var asPartial2 = (t4) => t4;
+  var resolveRuntimeExtensions2 = (runtimeConfig, extensions) => {
+    const extensionConfiguration = {
+      ...asPartial2(getAwsRegionExtensionConfiguration(runtimeConfig)),
+      ...asPartial2(getDefaultExtensionConfiguration(runtimeConfig)),
+      ...asPartial2(getHttpHandlerExtensionConfiguration(runtimeConfig)),
+      ...asPartial2(getHttpAuthExtensionConfiguration2(runtimeConfig))
+    };
+    extensions.forEach((extension) => extension.configure(extensionConfiguration));
+    return {
+      ...runtimeConfig,
+      ...resolveAwsRegionExtensionConfiguration(extensionConfiguration),
+      ...resolveDefaultRuntimeConfig(extensionConfiguration),
+      ...resolveHttpHandlerRuntimeConfig(extensionConfiguration),
+      ...resolveHttpAuthRuntimeConfig2(extensionConfiguration)
+    };
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/DynamoDBClient.js
+  var DynamoDBClient = class extends Client {
+    constructor(...[configuration]) {
+      const _config_0 = getRuntimeConfig4(configuration || {});
+      const _config_1 = resolveClientEndpointParameters2(_config_0);
+      const _config_2 = resolveRegionConfig(_config_1);
+      const _config_3 = resolveEndpointConfig(_config_2);
+      const _config_4 = resolveRetryConfig(_config_3);
+      const _config_5 = resolveHostHeaderConfig(_config_4);
+      const _config_6 = resolveUserAgentConfig(_config_5);
+      const _config_7 = resolveHttpAuthSchemeConfig2(_config_6);
+      const _config_8 = resolveEndpointDiscoveryConfig(_config_7, {
+        endpointDiscoveryCommandCtor: DescribeEndpointsCommand
+      });
+      const _config_9 = resolveRuntimeExtensions2(_config_8, configuration?.extensions || []);
+      super(_config_9);
+      this.config = _config_9;
+      this.middlewareStack.use(getRetryPlugin(this.config));
+      this.middlewareStack.use(getContentLengthPlugin(this.config));
+      this.middlewareStack.use(getHostHeaderPlugin(this.config));
+      this.middlewareStack.use(getLoggerPlugin(this.config));
+      this.middlewareStack.use(getRecursionDetectionPlugin(this.config));
+      this.middlewareStack.use(getUserAgentPlugin(this.config));
+      this.middlewareStack.use(getHttpAuthSchemeEndpointRuleSetPlugin(this.config, {
+        httpAuthSchemeParametersProvider: this.getDefaultHttpAuthSchemeParametersProvider(),
+        identityProviderConfigProvider: this.getIdentityProviderConfigProvider()
+      }));
+      this.middlewareStack.use(getHttpSigningPlugin(this.config));
+    }
+    destroy() {
+      super.destroy();
+    }
+    getDefaultHttpAuthSchemeParametersProvider() {
+      return defaultDynamoDBHttpAuthSchemeParametersProvider;
+    }
+    getIdentityProviderConfigProvider() {
+      return async (config) => new DefaultIdentityProviderConfig({
+        "aws.auth#sigv4": config.credentials
+      });
+    }
+  };
+
+  // node_modules/@aws-sdk/client-dynamodb/dist-es/commands/QueryCommand.js
+  init_dist_es15();
+  init_dist_es14();
+  init_dist_es26();
+  var QueryCommand = class extends Command.classBuilder().ep({
+    ...commonParams2
+  }).m(function(Command2, cs, config, o4) {
+    return [
+      getSerdePlugin(config, this.serialize, this.deserialize),
+      getEndpointPlugin(config, Command2.getEndpointParameterInstructions())
+    ];
+  }).s("DynamoDB_20120810", "Query", {}).n("DynamoDBClient", "QueryCommand").f(void 0, void 0).ser(se_QueryCommand).de(de_QueryCommand).build() {
+  };
+
+  // src/frontend/utils/createDynamoDBClient.js
+  var createDynamoDBClient = (region = "us-west-2", identityPoolId = "us-west-2:5cf2c915-001b-4190-ad65-6f10af3a375c") => {
+    return new DynamoDBClient({
+      region,
+      credentials: fromCognitoIdentityPool({
+        client: new CognitoIdentityClient({ region }),
+        identityPoolId
+      })
+    });
+  };
+
+  // src/frontend/utils/fetchDynamoDB.js
+  async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
+    theDirectoryWeWant = `/${theDirectoryWeWant}/`;
+    try {
+      const params = {
+        TableName: tableName,
+        // Replace with your DynamoDB table name
+        KeyConditionExpression: "#pk = :boardId",
+        ExpressionAttributeNames: {
+          "#pk": "dir"
+        },
+        ExpressionAttributeValues: {
+          ":boardId": { S: theDirectoryWeWant }
+        },
+        ScanIndexForward: false,
+        // Set to false to get the newest posts first
+        Limit: limit
+      };
+      if (startAfterPostId) {
+        params.ExclusiveStartKey = {
+          "dir": { S: theDirectoryWeWant },
+          "unix": { S: startAfterPostId }
+        };
+      }
+      const command = new QueryCommand(params);
+      const { Items, LastEvaluatedKey } = await dynamoDBClient.send(command);
+      let processedItems = [];
+      for (let i4 = 0; i4 < Items.length; i4++) {
+        if (Items[i4].JSON) {
+          const fromJson = JSON.parse(Items[i4].JSON.S);
+          processedItems[i4] = {
+            dir: fromJson.dir.S,
+            imgURL: fromJson.imgURL || "",
+            comments: fromJson.comments || "",
+            ogfilename: fromJson.ogfilename || "",
+            text: fromJson.text || "",
+            unix: fromJson.unix || ""
+          };
+        } else {
+          processedItems[i4] = {
+            dir: Items[i4].dir.S,
+            imgURL: Items[i4].imgURL?.S || "",
+            comments: Items[i4].comments?.S || "",
+            ogfilename: Items[i4].ogfilename?.S || "",
+            text: Items[i4].text?.S || "",
+            unix: Items[i4].unix.N || ""
+          };
+        }
+      }
+      return {
+        items: processedItems,
+        lastEvaluatedKey: LastEvaluatedKey ? LastEvaluatedKey.unix.S : null
+      };
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      throw new Error("Failed to fetch posts");
+    }
+  }
+
+  // src/frontend/utils/convertImageToCompressedWebP.js
+  async function compressImage(file) {
+    const MAX_SIZE_MB = 3;
+    const MB = 1024 * 1024;
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        let quality = 0.8;
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        const compress = () => {
+          canvas.toBlob((blob) => {
+            if (blob.size / MB <= MAX_SIZE_MB) {
+              resolve(blob);
+            } else if (quality > 0.1) {
+              quality -= 0.1;
+              canvas.toBlob(compress, "image/webp", quality);
+            } else {
+              reject(new Error("Unable to compress image below 3 MB"));
+            }
+          }, "image/webp", quality);
+        };
+        compress();
+      };
+      img.onerror = () => {
+        reject(new Error("Image loading error"));
+      };
+      const reader = new FileReader();
+      reader.onload = (e4) => {
+        img.src = e4.target.result;
+      };
+      reader.onerror = () => {
+        reject(new Error("FileReader error"));
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // src/frontend/utils/GCF_PostPost.js
+  async function uploadSockToCloudFunction(dir, fileName, imageBlob, text) {
+    const cloudFunctionUrl = "https://us-central1-enduring-maxim-411523.cloudfunctions.net/girlsock-directory_image-upload";
+    const imageContent = await toBase642(imageBlob);
+    fileName += ".webp";
+    const body = JSON.stringify({
+      dir,
+      fileName,
+      imageContent,
+      text
+    });
+    try {
+      const response = await fetch(cloudFunctionUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body
+      });
+      const responseClone = response.clone();
+      return await responseClone;
+    } catch (error) {
+      throw new Error(`Network error: ${error.message}`);
+    }
+  }
+  function toBase642(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  // node_modules/cute-html/dist/cute-html.mjs
+  var t3 = { d: (e4, n4) => {
+    for (var i4 in n4)
+      t3.o(n4, i4) && !t3.o(e4, i4) && Object.defineProperty(e4, i4, { enumerable: true, get: n4[i4] });
+  }, o: (t4, e4) => Object.prototype.hasOwnProperty.call(t4, e4) };
+  var e3 = {};
+  t3.d(e3, { $: () => k3, $$: () => q3, _: () => W, q: () => H, X: () => O });
+  var n3 = globalThis;
+  var i3 = n3.trustedTypes;
+  var s3 = i3 ? i3.createPolicy("lit-html", { createHTML: (t4) => t4 }) : void 0;
+  var o3 = "$lit$";
+  var r3 = `lit$${(Math.random() + "").slice(9)}$`;
+  var h3 = "?" + r3;
+  var l3 = `<${h3}>`;
+  var c3 = document;
+  var a3 = () => c3.createComment("");
+  var $ = (t4) => null === t4 || "object" != typeof t4 && "function" != typeof t4;
+  var d3 = Array.isArray;
+  var p3 = "[ 	\n\f\r]";
+  var A = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
+  var u3 = /-->/g;
+  var _ = />/g;
+  var f3 = RegExp(`>|${p3}(?:([^\\s"'>=/]+)(${p3}*=${p3}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g");
+  var g3 = /'/g;
+  var y2 = /"/g;
+  var m3 = /^(?:script|style|textarea|title)$/i;
+  var v3 = (t4) => (e4, ...n4) => ({ _$litType$: t4, strings: e4, values: n4 });
+  var H = v3(1);
+  var x2 = (v3(2), Symbol.for("lit-noChange"));
+  var N = Symbol.for("lit-nothing");
+  var T = /* @__PURE__ */ new WeakMap();
+  var M = c3.createTreeWalker(c3, 129);
+  function b3(t4, e4) {
+    if (!Array.isArray(t4) || !t4.hasOwnProperty("raw"))
+      throw Error("invalid template strings array");
+    return void 0 !== s3 ? s3.createHTML(e4) : e4;
+  }
+  var E = (t4, e4) => {
+    const n4 = t4.length - 1, i4 = [];
+    let s4, h4 = 2 === e4 ? "<svg>" : "", c4 = A;
+    for (let e5 = 0; e5 < n4; e5++) {
+      const n5 = t4[e5];
+      let a4, $2, d4 = -1, p4 = 0;
+      for (; p4 < n5.length && (c4.lastIndex = p4, $2 = c4.exec(n5), null !== $2); )
+        p4 = c4.lastIndex, c4 === A ? "!--" === $2[1] ? c4 = u3 : void 0 !== $2[1] ? c4 = _ : void 0 !== $2[2] ? (m3.test($2[2]) && (s4 = RegExp("</" + $2[2], "g")), c4 = f3) : void 0 !== $2[3] && (c4 = f3) : c4 === f3 ? ">" === $2[0] ? (c4 = s4 ?? A, d4 = -1) : void 0 === $2[1] ? d4 = -2 : (d4 = c4.lastIndex - $2[2].length, a4 = $2[1], c4 = void 0 === $2[3] ? f3 : '"' === $2[3] ? y2 : g3) : c4 === y2 || c4 === g3 ? c4 = f3 : c4 === u3 || c4 === _ ? c4 = A : (c4 = f3, s4 = void 0);
+      const v5 = c4 === f3 && t4[e5 + 1].startsWith("/>") ? " " : "";
+      h4 += c4 === A ? n5 + l3 : d4 >= 0 ? (i4.push(a4), n5.slice(0, d4) + o3 + n5.slice(d4) + r3 + v5) : n5 + r3 + (-2 === d4 ? e5 : v5);
+    }
+    return [b3(t4, h4 + (t4[n4] || "<?>") + (2 === e4 ? "</svg>" : "")), i4];
+  };
+  var C = class _C {
+    constructor({ strings: t4, _$litType$: e4 }, n4) {
+      let s4;
+      this.parts = [];
+      let l4 = 0, c4 = 0;
+      const $2 = t4.length - 1, d4 = this.parts, [p4, A2] = E(t4, e4);
+      if (this.el = _C.createElement(p4, n4), M.currentNode = this.el.content, 2 === e4) {
+        const t5 = this.el.content.firstChild;
+        t5.replaceWith(...t5.childNodes);
+      }
+      for (; null !== (s4 = M.nextNode()) && d4.length < $2; ) {
+        if (1 === s4.nodeType) {
+          if (s4.hasAttributes())
+            for (const t5 of s4.getAttributeNames())
+              if (t5.endsWith(o3)) {
+                const e5 = A2[c4++], n5 = s4.getAttribute(t5).split(r3), i4 = /([.?@])?(.*)/.exec(e5);
+                d4.push({ type: 1, index: l4, name: i4[2], strings: n5, ctor: "." === i4[1] ? I : "?" === i4[1] ? B : "@" === i4[1] ? P : j3 }), s4.removeAttribute(t5);
+              } else
+                t5.startsWith(r3) && (d4.push({ type: 6, index: l4 }), s4.removeAttribute(t5));
+          if (m3.test(s4.tagName)) {
+            const t5 = s4.textContent.split(r3), e5 = t5.length - 1;
+            if (e5 > 0) {
+              s4.textContent = i3 ? i3.emptyScript : "";
+              for (let n5 = 0; n5 < e5; n5++)
+                s4.append(t5[n5], a3()), M.nextNode(), d4.push({ type: 2, index: ++l4 });
+              s4.append(t5[e5], a3());
+            }
+          }
+        } else if (8 === s4.nodeType)
+          if (s4.data === h3)
+            d4.push({ type: 2, index: l4 });
+          else {
+            let t5 = -1;
+            for (; -1 !== (t5 = s4.data.indexOf(r3, t5 + 1)); )
+              d4.push({ type: 7, index: l4 }), t5 += r3.length - 1;
+          }
+        l4++;
+      }
+    }
+    static createElement(t4, e4) {
+      const n4 = c3.createElement("template");
+      return n4.innerHTML = t4, n4;
+    }
+  };
+  function w2(t4, e4, n4 = t4, i4) {
+    if (e4 === x2)
+      return e4;
+    let s4 = void 0 !== i4 ? n4._$Co?.[i4] : n4._$Cl;
+    const o4 = $(e4) ? void 0 : e4._$litDirective$;
+    return s4?.constructor !== o4 && (s4?._$AO?.(false), void 0 === o4 ? s4 = void 0 : (s4 = new o4(t4), s4._$AT(t4, n4, i4)), void 0 !== i4 ? (n4._$Co ??= [])[i4] = s4 : n4._$Cl = s4), void 0 !== s4 && (e4 = w2(t4, s4._$AS(t4, e4.values), s4, i4)), e4;
+  }
+  var S = class {
+    constructor(t4, e4) {
+      this._$AV = [], this._$AN = void 0, this._$AD = t4, this._$AM = e4;
+    }
+    get parentNode() {
+      return this._$AM.parentNode;
+    }
+    get _$AU() {
+      return this._$AM._$AU;
+    }
+    u(t4) {
+      const { el: { content: e4 }, parts: n4 } = this._$AD, i4 = (t4?.creationScope ?? c3).importNode(e4, true);
+      M.currentNode = i4;
+      let s4 = M.nextNode(), o4 = 0, r4 = 0, h4 = n4[0];
+      for (; void 0 !== h4; ) {
+        if (o4 === h4.index) {
+          let e5;
+          2 === h4.type ? e5 = new L(s4, s4.nextSibling, this, t4) : 1 === h4.type ? e5 = new h4.ctor(s4, h4.name, h4.strings, this, t4) : 6 === h4.type && (e5 = new U(s4, this, t4)), this._$AV.push(e5), h4 = n4[++r4];
+        }
+        o4 !== h4?.index && (s4 = M.nextNode(), o4++);
+      }
+      return M.currentNode = c3, i4;
+    }
+    p(t4) {
+      let e4 = 0;
+      for (const n4 of this._$AV)
+        void 0 !== n4 && (void 0 !== n4.strings ? (n4._$AI(t4, n4, e4), e4 += n4.strings.length - 2) : n4._$AI(t4[e4])), e4++;
+    }
+  };
+  var L = class _L {
+    get _$AU() {
+      return this._$AM?._$AU ?? this._$Cv;
+    }
+    constructor(t4, e4, n4, i4) {
+      this.type = 2, this._$AH = N, this._$AN = void 0, this._$AA = t4, this._$AB = e4, this._$AM = n4, this.options = i4, this._$Cv = i4?.isConnected ?? true;
+    }
+    get parentNode() {
+      let t4 = this._$AA.parentNode;
+      const e4 = this._$AM;
+      return void 0 !== e4 && 11 === t4?.nodeType && (t4 = e4.parentNode), t4;
+    }
+    get startNode() {
+      return this._$AA;
+    }
+    get endNode() {
+      return this._$AB;
+    }
+    _$AI(t4, e4 = this) {
+      t4 = w2(this, t4, e4), $(t4) ? t4 === N || null == t4 || "" === t4 ? (this._$AH !== N && this._$AR(), this._$AH = N) : t4 !== this._$AH && t4 !== x2 && this._(t4) : void 0 !== t4._$litType$ ? this.$(t4) : void 0 !== t4.nodeType ? this.T(t4) : ((t5) => d3(t5) || "function" == typeof t5?.[Symbol.iterator])(t4) ? this.k(t4) : this._(t4);
+    }
+    S(t4) {
+      return this._$AA.parentNode.insertBefore(t4, this._$AB);
+    }
+    T(t4) {
+      this._$AH !== t4 && (this._$AR(), this._$AH = this.S(t4));
+    }
+    _(t4) {
+      this._$AH !== N && $(this._$AH) ? this._$AA.nextSibling.data = t4 : this.T(c3.createTextNode(t4)), this._$AH = t4;
+    }
+    $(t4) {
+      const { values: e4, _$litType$: n4 } = t4, i4 = "number" == typeof n4 ? this._$AC(t4) : (void 0 === n4.el && (n4.el = C.createElement(b3(n4.h, n4.h[0]), this.options)), n4);
+      if (this._$AH?._$AD === i4)
+        this._$AH.p(e4);
+      else {
+        const t5 = new S(i4, this), n5 = t5.u(this.options);
+        t5.p(e4), this.T(n5), this._$AH = t5;
+      }
+    }
+    _$AC(t4) {
+      let e4 = T.get(t4.strings);
+      return void 0 === e4 && T.set(t4.strings, e4 = new C(t4)), e4;
+    }
+    k(t4) {
+      d3(this._$AH) || (this._$AH = [], this._$AR());
+      const e4 = this._$AH;
+      let n4, i4 = 0;
+      for (const s4 of t4)
+        i4 === e4.length ? e4.push(n4 = new _L(this.S(a3()), this.S(a3()), this, this.options)) : n4 = e4[i4], n4._$AI(s4), i4++;
+      i4 < e4.length && (this._$AR(n4 && n4._$AB.nextSibling, i4), e4.length = i4);
+    }
+    _$AR(t4 = this._$AA.nextSibling, e4) {
+      for (this._$AP?.(false, true, e4); t4 && t4 !== this._$AB; ) {
+        const e5 = t4.nextSibling;
+        t4.remove(), t4 = e5;
+      }
+    }
+    setConnected(t4) {
+      void 0 === this._$AM && (this._$Cv = t4, this._$AP?.(t4));
+    }
+  };
+  var j3 = class {
+    get tagName() {
+      return this.element.tagName;
+    }
+    get _$AU() {
+      return this._$AM._$AU;
+    }
+    constructor(t4, e4, n4, i4, s4) {
+      this.type = 1, this._$AH = N, this._$AN = void 0, this.element = t4, this.name = e4, this._$AM = i4, this.options = s4, n4.length > 2 || "" !== n4[0] || "" !== n4[1] ? (this._$AH = Array(n4.length - 1).fill(new String()), this.strings = n4) : this._$AH = N;
+    }
+    _$AI(t4, e4 = this, n4, i4) {
+      const s4 = this.strings;
+      let o4 = false;
+      if (void 0 === s4)
+        t4 = w2(this, t4, e4, 0), o4 = !$(t4) || t4 !== this._$AH && t4 !== x2, o4 && (this._$AH = t4);
+      else {
+        const i5 = t4;
+        let r4, h4;
+        for (t4 = s4[0], r4 = 0; r4 < s4.length - 1; r4++)
+          h4 = w2(this, i5[n4 + r4], e4, r4), h4 === x2 && (h4 = this._$AH[r4]), o4 ||= !$(h4) || h4 !== this._$AH[r4], h4 === N ? t4 = N : t4 !== N && (t4 += (h4 ?? "") + s4[r4 + 1]), this._$AH[r4] = h4;
+      }
+      o4 && !i4 && this.j(t4);
+    }
+    j(t4) {
+      t4 === N ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, t4 ?? "");
+    }
+  };
+  var I = class extends j3 {
+    constructor() {
+      super(...arguments), this.type = 3;
+    }
+    j(t4) {
+      this.element[this.name] = t4 === N ? void 0 : t4;
+    }
+  };
+  var B = class extends j3 {
+    constructor() {
+      super(...arguments), this.type = 4;
+    }
+    j(t4) {
+      this.element.toggleAttribute(this.name, !!t4 && t4 !== N);
+    }
+  };
+  var P = class extends j3 {
+    constructor(t4, e4, n4, i4, s4) {
+      super(t4, e4, n4, i4, s4), this.type = 5;
+    }
+    _$AI(t4, e4 = this) {
+      if ((t4 = w2(this, t4, e4, 0) ?? N) === x2)
+        return;
+      const n4 = this._$AH, i4 = t4 === N && n4 !== N || t4.capture !== n4.capture || t4.once !== n4.once || t4.passive !== n4.passive, s4 = t4 !== N && (n4 === N || i4);
+      i4 && this.element.removeEventListener(this.name, this, n4), s4 && this.element.addEventListener(this.name, this, t4), this._$AH = t4;
+    }
+    handleEvent(t4) {
+      "function" == typeof this._$AH ? this._$AH.call(this.options?.host ?? this.element, t4) : this._$AH.handleEvent(t4);
+    }
+  };
+  var U = class {
+    constructor(t4, e4, n4) {
+      this.element = t4, this.type = 6, this._$AN = void 0, this._$AM = e4, this.options = n4;
+    }
+    get _$AU() {
+      return this._$AM._$AU;
+    }
+    _$AI(t4) {
+      w2(this, t4);
+    }
+  };
+  var R = n3.litHtmlPolyfillSupport;
+  R?.(C, L), (n3.litHtmlVersions ??= []).push("3.1.2");
+  var O = (t4, e4, n4) => {
+    const i4 = n4?.renderBefore ?? e4;
+    let s4 = i4._$litPart$;
+    if (void 0 === s4) {
+      const t5 = n4?.renderBefore ?? null;
+      i4._$litPart$ = s4 = new L(e4.insertBefore(a3(), t5), t5, void 0, n4 ?? {});
+    }
+    return s4._$AI(t4), s4;
+  };
+  var W = (...t4) => (console.log(...t4), t4[t4.length - 1]);
+  var k3 = function(t4) {
+    var e4 = document.querySelector(t4);
+    if (!e4)
+      throw new Error("Element not found: ".concat(t4));
+    return e4.render = function(t5) {
+      "function" == typeof t5 && (t5 = t5()), "string" == typeof t5 ? e4.innerHTML = t5 : t5 instanceof HTMLElement ? (e4.innerHTML = "", e4.appendChild(t5)) : O(t5, e4);
+    }, e4.inject = function(t5) {
+      if ("function" == typeof t5 && (t5 = t5()), "string" == typeof t5)
+        e4.insertAdjacentHTML("beforeend", t5);
+      else if (t5 instanceof HTMLElement)
+        e4.appendChild(t5);
+      else {
+        var n4 = document.createElement("template");
+        O(t5, n4.content), e4.appendChild(n4.content);
+      }
+    }, e4.hide = function() {
+      return e4.style.display = "none";
+    }, e4.show = function() {
+      return e4.style.display = "";
+    }, e4.toggle = function() {
+      return e4.style.display = "none" === e4.style.display ? "" : "none";
+    }, e4;
+  };
+  var q3 = function(t4) {
+    var e4 = document.querySelectorAll(t4);
+    if (!e4.length)
+      throw new Error("No elements found: ".concat(t4));
+    return e4.render = function(t5) {
+      e4.forEach(function(e5) {
+        "function" == typeof t5 && (t5 = t5()), "string" == typeof t5 ? e5.innerHTML = t5 : t5 instanceof HTMLElement ? (e5.innerHTML = "", e5.appendChild(t5.cloneNode(true))) : O(t5, e5);
+      });
+    }, e4.inject = function(t5) {
+      e4.forEach(function(e5) {
+        if ("function" == typeof t5 && (t5 = t5()), "string" == typeof t5)
+          e5.insertAdjacentHTML("beforeend", t5);
+        else if (t5 instanceof HTMLElement)
+          e5.appendChild(t5.cloneNode(true));
+        else {
+          var n4 = document.createElement("template");
+          O(t5, n4.content), e5.appendChild(n4.content.cloneNode(true));
+        }
+      });
+    }, e4.hide = function() {
+      return e4.forEach(function(t5) {
+        return t5.style.display = "none";
+      });
+    }, e4.show = function() {
+      return e4.forEach(function(t5) {
+        return t5.style.display = "";
+      });
+    }, e4;
+  };
+  var D = e3.$;
+  var V = e3.$$;
+  var z2 = e3._;
+  var X = e3.q;
+  var Z = e3.X;
+
+  // src/frontend/components/girl.js
+  var sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => X`
+    <article>
+        <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
+        <div class="meta">
+            <span style="max-width: 50%; display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${imgFileName}</span>
+            <span style="display: inline-block; overflow: hidden;"><span id="imgRes-${id}">(${imgRes})</span> / <i>${timeStr}</i></span>
+        </div>
+        <div class="body">
+            ${txt}
+        </div>
+        <div id="comments-${unix}" class="comments">
+
+            <details>
+                <summary>Write comment</summary>
+                <form>
+                    <textarea id="comment-textarea-${unix}" class="comment-body" name="comment-body" rows="4"></textarea>
+                    <br>
+                    <input id="comment-button-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(event, this)">
+                </form>
+            </details>
+            
+        </div>
+    </article>
+`;
 
   // node_modules/date-fns/toDate.mjs
-  function toDate(argument) {
+  function toDate2(argument) {
     const argStr = Object.prototype.toString.call(argument);
     if (argument instanceof Date || typeof argument === "object" && argStr === "[object Date]") {
       return new argument.constructor(+argument);
@@ -19965,7 +16040,7 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.mjs
   function getTimezoneOffsetInMilliseconds(date) {
-    const _date = toDate(date);
+    const _date = toDate2(date);
     const utcDate = new Date(
       Date.UTC(
         _date.getFullYear(),
@@ -19983,8 +16058,8 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/date-fns/compareAsc.mjs
   function compareAsc(dateLeft, dateRight) {
-    const _dateLeft = toDate(dateLeft);
-    const _dateRight = toDate(dateRight);
+    const _dateLeft = toDate2(dateLeft);
+    const _dateRight = toDate2(dateRight);
     const diff = _dateLeft.getTime() - _dateRight.getTime();
     if (diff < 0) {
       return -1;
@@ -19997,8 +16072,8 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/date-fns/differenceInCalendarMonths.mjs
   function differenceInCalendarMonths(dateLeft, dateRight) {
-    const _dateLeft = toDate(dateLeft);
-    const _dateRight = toDate(dateRight);
+    const _dateLeft = toDate2(dateLeft);
+    const _dateRight = toDate2(dateRight);
     const yearDiff = _dateLeft.getFullYear() - _dateRight.getFullYear();
     const monthDiff = _dateLeft.getMonth() - _dateRight.getMonth();
     return yearDiff * 12 + monthDiff;
@@ -20015,19 +16090,19 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/date-fns/differenceInMilliseconds.mjs
   function differenceInMilliseconds(dateLeft, dateRight) {
-    return +toDate(dateLeft) - +toDate(dateRight);
+    return +toDate2(dateLeft) - +toDate2(dateRight);
   }
 
   // node_modules/date-fns/endOfDay.mjs
   function endOfDay(date) {
-    const _date = toDate(date);
+    const _date = toDate2(date);
     _date.setHours(23, 59, 59, 999);
     return _date;
   }
 
   // node_modules/date-fns/endOfMonth.mjs
   function endOfMonth(date) {
-    const _date = toDate(date);
+    const _date = toDate2(date);
     const month = _date.getMonth();
     _date.setFullYear(_date.getFullYear(), month + 1, 0);
     _date.setHours(23, 59, 59, 999);
@@ -20036,14 +16111,14 @@ ${toHex(hashedRequest)}`;
 
   // node_modules/date-fns/isLastDayOfMonth.mjs
   function isLastDayOfMonth(date) {
-    const _date = toDate(date);
+    const _date = toDate2(date);
     return +endOfDay(_date) === +endOfMonth(_date);
   }
 
   // node_modules/date-fns/differenceInMonths.mjs
   function differenceInMonths(dateLeft, dateRight) {
-    const _dateLeft = toDate(dateLeft);
-    const _dateRight = toDate(dateRight);
+    const _dateLeft = toDate2(dateLeft);
+    const _dateRight = toDate2(dateRight);
     const sign = compareAsc(_dateLeft, _dateRight);
     const difference = Math.abs(
       differenceInCalendarMonths(_dateLeft, _dateRight)
@@ -20057,7 +16132,7 @@ ${toHex(hashedRequest)}`;
       }
       _dateLeft.setMonth(_dateLeft.getMonth() - sign * difference);
       let isLastMonthNotFull = compareAsc(_dateLeft, _dateRight) === -sign;
-      if (isLastDayOfMonth(toDate(dateLeft)) && difference === 1 && compareAsc(dateLeft, _dateRight) === 1) {
+      if (isLastDayOfMonth(toDate2(dateLeft)) && difference === 1 && compareAsc(dateLeft, _dateRight) === 1) {
         isLastMonthNotFull = false;
       }
       result = sign * (difference - Number(isLastMonthNotFull));
@@ -20598,11 +16673,11 @@ ${toHex(hashedRequest)}`;
     let dateLeft;
     let dateRight;
     if (comparison > 0) {
-      dateLeft = toDate(baseDate);
-      dateRight = toDate(date);
+      dateLeft = toDate2(baseDate);
+      dateRight = toDate2(date);
     } else {
-      dateLeft = toDate(date);
-      dateRight = toDate(baseDate);
+      dateLeft = toDate2(date);
+      dateRight = toDate2(baseDate);
     }
     const seconds = differenceInSeconds(dateRight, dateLeft);
     const offsetInSeconds = (getTimezoneOffsetInMilliseconds(dateRight) - getTimezoneOffsetInMilliseconds(dateLeft)) / 1e3;
@@ -20669,17 +16744,12 @@ ${toHex(hashedRequest)}`;
   }
 
   // src/frontend/socks.index.js
-  var { createDynamoDBClient } = require_createDynamoDBClient();
-  var fetchPostsFromBoard = require_fetchDynamoDB();
-  var { compressImage } = require_convertImageToCompressedWebP();
-  var { uploadSockToCloudFunction } = require_GCF_PostPost();
-  var { sock: sock2 } = (init_girl(), __toCommonJS(girl_exports));
-  var { getFileNameFromUri } = require_uriurl();
+  var import_uriurl = __toESM(require_uriurl());
   var USER_POSTS_TABLE = "girlsockdir";
   async function main() {
     let dirToPull = getLastPartOfUrl();
     await getLatest(dirToPull);
-    D("#post-form-submit").onclick = submitPost;
+    D("#post-form-submit").onclick = onclick_submitPost;
   }
   async function getLatest(dir) {
     CuteLoadingModal.show();
@@ -20688,10 +16758,11 @@ ${toHex(hashedRequest)}`;
     if (posts.items.length === 0 || void 0 || null)
       alert("Nothing found or server error.");
     for (let i4 = 0; i4 < posts.items.length; i4++) {
-      let userPost = sock2(posts.items[i4].imgURL, posts.items[i4].ogfilename, "1x1", 0, posts.items[i4].text, posts.items[i4], unixToRelativeTime(posts.items[i4].unix), posts.items[i4].unix);
+      let userPost = sock(posts.items[i4].imgURL, posts.items[i4].ogfilename, "1x1", 0, posts.items[i4].text, posts.items[i4], unixToRelativeTime(posts.items[i4].unix), posts.items[i4].unix);
       await D("#articles").inject(userPost);
       for (let c4 = 0; c4 < posts.items[i4].comments.length; c4++) {
-        D(`#comments-${posts.items[i4].unix}`).inject(X`<div class="comment">${posts.items[i4].comments[c4].text}</div>`);
+        D(`#comments-${posts.items[i4].unix}`).inject(X`
+                <div class="comment">${posts.items[i4].comments[c4].text}</div>`);
       }
     }
     V("img.image").forEach((img) => {
@@ -20699,7 +16770,7 @@ ${toHex(hashedRequest)}`;
       img.complete ? setDim() : img.onload = setDim;
     });
   }
-  async function submitPost(event) {
+  async function onclick_submitPost(event) {
     event.preventDefault();
     CuteLoadingModal.show();
     let dir = getLastPartOfUrl();
@@ -20707,12 +16778,11 @@ ${toHex(hashedRequest)}`;
     const textInput = D("#post-body")?.value;
     if (fileInput.files.length > 0) {
       const compressedImage = await compressImage(fileInput.files[0]);
-      const response = await uploadSockToCloudFunction(`/${dir}/`, getFileNameFromUri(fileInput.files[0].name), compressedImage, textInput);
+      const response = await uploadSockToCloudFunction(`/${dir}/`, (0, import_uriurl.getFileNameFromUri)(fileInput.files[0].name), compressedImage, textInput);
       console.log(response);
       if (response.ok) {
         CuteLoadingModal.hide();
         window.location.reload();
-        console.log("reloaded");
       } else {
         CuteLoadingModal.hide();
         alert("Upload failed: " + response);
@@ -20744,70 +16814,70 @@ ${toHex(hashedRequest)}`;
 })();
 /*! Bundled license information:
 
+tslib/tslib.es6.js:
+  (*! *****************************************************************************
+  Copyright (c) Microsoft Corporation.
+  
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+  
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** *)
+
+tslib/tslib.es6.js:
+  (*! *****************************************************************************
+  Copyright (c) Microsoft Corporation.
+  
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+  
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** *)
+
+tslib/tslib.es6.js:
+  (*! *****************************************************************************
+  Copyright (c) Microsoft Corporation.
+  
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+  
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** *)
+
+tslib/tslib.es6.js:
+  (*! *****************************************************************************
+  Copyright (c) Microsoft Corporation.
+  
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+  
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+  PERFORMANCE OF THIS SOFTWARE.
+  ***************************************************************************** *)
+
 cute-html/dist/cute-html.mjs:
   (*! For license information please see cute-html.mjs.LICENSE.txt *)
-
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
-
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
-
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
-
-tslib/tslib.es6.js:
-  (*! *****************************************************************************
-  Copyright (c) Microsoft Corporation.
-  
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted.
-  
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-  PERFORMANCE OF THIS SOFTWARE.
-  ***************************************************************************** *)
 */

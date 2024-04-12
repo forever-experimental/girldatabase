@@ -18,9 +18,9 @@ export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeSt
             <details>
                 <summary>Write comment</summary>
                 <form>
-                    <textarea class="comment-body" name="comment-body" rows="4"></textarea>
+                    <textarea id="comment-textarea-${unix}" class="comment-body" name="comment-body" rows="4"></textarea>
                     <br>
-                    <input id="comments-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(this)">
+                    <input id="comment-button-${unix}" class="comment-form-submit" type="submit" value="Add comment" onclick="submitComment(event, this)">
                 </form>
             </details>
             
