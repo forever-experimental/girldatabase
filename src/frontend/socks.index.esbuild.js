@@ -5788,6 +5788,7 @@
     "node_modules/@smithy/signature-v4/dist-es/SignatureV4.js"() {
       init_dist_es24();
       init_dist_es10();
+      init_dist_es21();
       init_dist_es19();
       init_constants5();
       init_credentialDerivation();
@@ -5938,7 +5939,7 @@ ${toHex(hashedRequest)}`;
               }
             }
             const normalizedPath = `${path?.startsWith("/") ? "/" : ""}${normalizedPathSegments.join("/")}${normalizedPathSegments.length > 0 && path?.endsWith("/") ? "/" : ""}`;
-            const doubleEncoded = encodeURIComponent(normalizedPath);
+            const doubleEncoded = escapeUri(normalizedPath);
             return doubleEncoded.replace(/%2F/g, "/");
           }
           return path;
