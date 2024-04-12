@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@google-cloud/functions-framework": "3.3.0",
-    "@aws-sdk/lib-storage": "^3.490.0",
-    "@aws-sdk/client-dynamodb": "^3.490.0",
-    "dotenv": "^16.0.0",
-    "cors": "^2.8.5"
-  }
-}
