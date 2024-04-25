@@ -1,5 +1,5 @@
 Currently posting comments is handled by a Cloudflare Worker.
-Maintained at: https://github.com/awwworker/girl.awww.workers.dev
+Maintained at: https://github.com/awwworker/girlsock.directory_cloudflare_worker
 
 Making posts is handled by a Google Cloud Function.
   It communicates with a DynamoDB database and a R2 Cloudflare storage bucket.
