@@ -1,23 +1,22 @@
 {
-  "name": "girlsock.directory",
-  "private": true,
   "scripts": {
-    "build": "esbuild src/frontend/socks.index.js --bundle --outfile=src/frontend/socks.index.esbuild.js"
+    "build": "npx esbuild src/frontend/fetchPosts.js --bundle --outfile=src/frontend/fetchPosts.esbuild.js",
+    "server": "node localhost_test_server.js"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity": "3.529.*",
     "@aws-sdk/client-dynamodb": "3.529.*",
     "@aws-sdk/credential-provider-cognito-identity": "3.529.*",
     "@aws-sdk/util-dynamodb": "3.529.*",
-    "uriurl": "0.1.*",
-    "date-fns": "3.3.*",
     "cute-con": "1.0.*",
+    "cute-fetch": "0.2.*",
     "cute-html": "1.0.*",
-    "cute-fetch": "0.2.*"
+    "date-fns": "3.3.*",
+    "express": "^4.19.2",
+    "uriurl": "0.1.*"
   },
   "devDependencies": {
     "buffer": "6.0.*",
-    "process": "0.11.*",
-    "esbuild": "0.20.*"
+    "process": "0.11.*"
   }
 }

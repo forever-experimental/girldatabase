@@ -1,9 +1,7 @@
-import { html } from 'cute-html';
-
 // the below is inserted into the <div class="comments"></div>
 // <div class="comment">comment here</div>
 
-export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => html`
+export const sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => `
     <article>
         <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
         <div class="meta">
