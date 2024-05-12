@@ -78,11 +78,11 @@
 
     const firstSegment = pathSegments[0];
     if (atHomeDir()) {
-        const {homedir} = await import('./src/frontend/components/homedir.js');
+        const {homedir} = await import('/src/frontend/components/homedir.js');
         $('#main').render(homedir)
     }
     else {
-        const {directory} = await import('./src/frontend/components/directory.js');
+        const {directory} = await import('/src/frontend/components/directory.js');
         if (firstSegment === 'th') $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
         else if (firstSegment === 'f') $('#main').render(directory("f", "Every post must have a girl that is in some way thick, fat, chubby, or obese."));
         else if (firstSegment === 'ai') $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
