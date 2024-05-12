@@ -1,6 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@1.0.1';
-
-export const homedir = () => html`
+export const homedir = () => `
     <style>
         #flex { display: flex; gap: 1em; }
         #flex > div { flex: 1; border: 1px solid var(--border); padding: 1em; }

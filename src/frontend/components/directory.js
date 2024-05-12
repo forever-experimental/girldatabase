@@ -1,6 +1,4 @@
-import { html } from 'https://cdn.jsdelivr.net/npm/cute-html@1.0.1';
-
-export const directory = (title, description) => html`
+export const directory = (title, description) => `
     <!-- directory description -->
     <div style="text-align: center; padding: 4em 1em;">
         <h1 style="margin: 0; font-family: 'PT Serif', serif;">Welcome to /${title}/</h1>
