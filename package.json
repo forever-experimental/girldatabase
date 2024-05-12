@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "npx esbuild src/frontend/fetchPosts.js --bundle --outfile=src/frontend/fetchPosts.esbuild.js",
+    "build": "npx esbuild src/fetchPosts.js --bundle --outfile=src/frontend/fetchPosts.esbuild.js",
     "server": "node localhost_test_server.js"
   },
   "dependencies": {
