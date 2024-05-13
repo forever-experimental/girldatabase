@@ -8,10 +8,10 @@
         <script src="//cdn.jsdelivr.net/npm/html-piercer@0.3"></script> <!-- imports { $ } -->
         <script src="//cdn.jsdelivr.net/npm/cute-modal@0.2"></script> <!-- imports { CuteModal } -->
 
-
-        <script> // URL Management
+        <script> // Global URL Management
         let manualBaseOverride = ''; // Override base URL
         const pathSegments = window.location.pathname.split('/').filter(part => part !== "");
+        var DIRECTORY = pathSegments.length === 0 ? "/" : `/${pathSegments[pathSegments.length-1]}/`;
         </script>
 
         <!-- stylesheets -->
@@ -59,45 +59,43 @@
                 Stats are public at <a href="https://girl.goatcounter.com/">girl.goatcounter.com</a>
             </footer>
         </div>
-    </body>
+        <script src="/src/submitComment.js"></script>
 
-    <script>
-        const script = document.createElement('script');
-        script.src = `/src/submitComment.js`;
-        document.body.appendChild(script);
-    </script>
+        <script type="module"> // Dynamic rendering based on path logic
+        const atHomeDir = () => {
+            if (manualBaseOverride) {
+                const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
+                return pathSegments.slice(overrideSegments.length).length === 0;
+            }
+            return pathSegments.length === 0;
+        };
 
-    <script type="module"> // Dynamic rendering based on path logic
-    const atHomeDir = () => {
-        if (manualBaseOverride) {
-            const overrideSegments = manualBaseOverride.split('/').filter(part => part !== "");
-            return pathSegments.slice(overrideSegments.length).length === 0;
+        const firstSegment = pathSegments[0];
+        if (atHomeDir()) {
+            const {homedir} = await import('/src/components/homedir.js');
+            $('#main').render(homedir)
         }
-        return pathSegments.length === 0;
-    };
+        else {
+            const {directory} = await import('/src/components/directory.js');
+            if (firstSegment === 'th') $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
+            else if (firstSegment === 'f') $('#main').render(directory("f", "Every post must have a girl that is in some way thick, fat, chubby, or obese."));
+            else if (firstSegment === 'ai') $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
+            else if (firstSegment === 'l') $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
+            else if (firstSegment === 'test') $('#main').render(directory("test", "Test directory."));
+            else $('#main').render(`<p>The page you are looking for does not exist.</p>`);
+        }
+        if (!atHomeDir()) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = `/src/fetchPosts.esbuild.js`;
+            document.body.appendChild(script);
 
-    const firstSegment = pathSegments[0];
-    if (atHomeDir()) {
-        const {homedir} = await import('/src/components/homedir.js');
-        $('#main').render(homedir)
-    }
-    else {
-        const {directory} = await import('/src/components/directory.js');
-        if (firstSegment === 'th') $('#main').render(directory("th", "Every post must have a girl with thigh highs."));
-        else if (firstSegment === 'f') $('#main').render(directory("f", "Every post must have a girl that is in some way thick, fat, chubby, or obese."));
-        else if (firstSegment === 'ai') $('#main').render(directory("ai", "This board is meant to serve as a place for AI-related discussion. While it is not required for images posted here to be AI-generated, doing so to showcase features of AI is encouraged."));
-        else if (firstSegment === 'l') $('#main').render(directory("l", "This board is meant for discussion surrounding conlangs, and by extension linguistics in general. Both serious analysis and humorous posts are welcome."));
-        else if (firstSegment === 'test') $('#main').render(directory("test", "Test directory."));
-        else $('#main').render(`<p>The page you are looking for does not exist.</p>`);
-    }
-    if (!atHomeDir()) {
-        const script = document.createElement('script');
-        script.type = 'module';
-        script.src = `/src/fetchPosts.esbuild.js`;
-        document.body.appendChild(script);
-    }
-
-    </script>
-    <!--    <script type="module" src="/src/submitPost.js"></script>-->
+            const script2 = document.createElement('script');
+            script2.type = 'module';
+            script2.src = `/src/submitPost.js`;
+            document.body.appendChild(script2);
+        }
+        </script>
+    </body>
 
 </html>

@@ -15240,7 +15240,6 @@ ${toHex(hashedRequest)}`;
 
   // src/utils/fetchDynamoDB.js
   async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
-    theDirectoryWeWant = `/${theDirectoryWeWant}/`;
     try {
       const params = {
         TableName: tableName,
@@ -16060,8 +16059,7 @@ ${toHex(hashedRequest)}`;
   // src/fetchPosts.js
   var USER_POSTS_TABLE = "girlsockdir";
   async function main() {
-    let dirToPull = getLastPartOfUrl();
-    await getLatest(dirToPull);
+    await getLatest(DIRECTORY);
   }
   async function getLatest(dir) {
     CuteModal.show("Loading....");
@@ -16081,10 +16079,6 @@ ${toHex(hashedRequest)}`;
     });
   }
   var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1e3)) + " ago";
-  var getLastPartOfUrl = () => {
-    const segments = window.location.pathname.split("/").filter(Boolean);
-    return segments.pop();
-  };
   main();
 })();
 /*! Bundled license information:

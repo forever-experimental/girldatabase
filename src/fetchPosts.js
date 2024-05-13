@@ -6,8 +6,7 @@ import {formatDistanceToNow} from 'date-fns';
 const USER_POSTS_TABLE = "girlsockdir";
 
 async function main() {
-    let dirToPull = getLastPartOfUrl();
-    await getLatest(dirToPull);
+    await getLatest(DIRECTORY);
 }
 
 async function getLatest(dir) {
@@ -31,10 +30,5 @@ async function getLatest(dir) {
 }
 
 const unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1000)) + ' ago';
-
-const getLastPartOfUrl = () => {
-    const segments = window.location.pathname.split('/').filter(Boolean); // Split by '/' and filter out empty segments
-    return segments.pop(); // Get the last segment
-};
 
 main();

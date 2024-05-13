@@ -3,7 +3,6 @@ import {QueryCommand} from "@aws-sdk/client-dynamodb";
 //import {_} from 'https://cdn.jsdelivr.net/npm/cute-con';
 
 export async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null,) {
-    theDirectoryWeWant = `/${theDirectoryWeWant}/`;
     try {
         const params = {
             TableName: tableName, // Replace with your DynamoDB table name
