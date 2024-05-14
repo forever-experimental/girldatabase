@@ -13387,7 +13387,7 @@ ${toHex(hashedRequest)}`;
     }
   });
 
-  // src/frontend/utils/createDynamoDBClient.js
+  // src/utils/createDynamoDBClient.js
   init_dist_es39();
 
   // node_modules/@aws-sdk/credential-provider-cognito-identity/dist-es/fromCognitoIdentity.js
@@ -15227,7 +15227,7 @@ ${toHex(hashedRequest)}`;
   }).s("DynamoDB_20120810", "Query", {}).n("DynamoDBClient", "QueryCommand").f(void 0, void 0).ser(se_QueryCommand).de(de_QueryCommand).build() {
   };
 
-  // src/frontend/utils/createDynamoDBClient.js
+  // src/utils/createDynamoDBClient.js
   var createDynamoDBClient = (region = "us-west-2", identityPoolId = "us-west-2:5cf2c915-001b-4190-ad65-6f10af3a375c") => {
     return new DynamoDBClient({
       region,
@@ -15238,9 +15238,8 @@ ${toHex(hashedRequest)}`;
     });
   };
 
-  // src/frontend/utils/fetchDynamoDB.js
+  // src/utils/fetchDynamoDB.js
   async function fetchPostsFromBoard(tableName, dynamoDBClient, theDirectoryWeWant, limit = 5, startAfterPostId = null) {
-    theDirectoryWeWant = `/${theDirectoryWeWant}/`;
     try {
       const params = {
         TableName: tableName,
@@ -15297,7 +15296,7 @@ ${toHex(hashedRequest)}`;
     }
   }
 
-  // src/frontend/components/girl.js
+  // src/components/girl.js
   var sock = (imgUri, imgFileName, imgRes, commentsCount, txt, id, timeStr, unix) => `
     <article>
         <img class="image" id="img-${id}" src="${imgUri}" alt="user attached image" loading="lazy" onclick="imgToggleBig(this);">
@@ -16057,11 +16056,10 @@ ${toHex(hashedRequest)}`;
     return formatDistance2(date, Date.now(), options);
   }
 
-  // src/frontend/fetchPosts.js
+  // src/fetchPosts.js
   var USER_POSTS_TABLE = "girlsockdir";
   async function main() {
-    let dirToPull = getLastPartOfUrl();
-    await getLatest(dirToPull);
+    await getLatest(DIRECTORY);
   }
   async function getLatest(dir) {
     CuteModal.show("Loading....");
@@ -16081,10 +16079,6 @@ ${toHex(hashedRequest)}`;
     });
   }
   var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1e3)) + " ago";
-  var getLastPartOfUrl = () => {
-    const segments = window.location.pathname.split("/").filter(Boolean);
-    return segments.pop();
-  };
   main();
 })();
 /*! Bundled license information:
