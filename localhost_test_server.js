@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
-const PORT = 3000;
+const PORT = 6969;
 
 // Middleware to serve 404.html if index.html is missing
 app.use((req, res, next) => {

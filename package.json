@@ -8,6 +8,7 @@
     "@aws-sdk/client-dynamodb": "3.529.*",
     "@aws-sdk/credential-provider-cognito-identity": "3.529.*",
     "@aws-sdk/util-dynamodb": "3.529.*",
+    "cors": "^2.8.5",
     "cute-con": "1.0.*",
     "cute-fetch": "0.2.*",
     "cute-html": "1.0.*",

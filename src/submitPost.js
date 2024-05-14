@@ -19,7 +19,7 @@ async function onclick_submitPost(event) {
     CuteModal.show('Submitting...');
     if ($('#post-image').files.length > 0) {
         const compressedBlob = await compressImage($('#post-image').files[0]);
-        const response = await fetch('//girl.bit.コム/post', {
+        const response = await fetch('https://girl.bit.コム/post', {
         //const response = await fetch('//127.0.0.1:8787/post', {
             method: 'POST',
             headers: {
