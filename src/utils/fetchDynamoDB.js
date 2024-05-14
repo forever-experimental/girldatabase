@@ -1,4 +1,3 @@
-// DynamoDB utility functions
 import {QueryCommand} from "@aws-sdk/client-dynamodb";
 //import {_} from 'https://cdn.jsdelivr.net/npm/cute-con';
 
