@@ -1,5 +1,5 @@
 <script> // ALL THIS CODE DOES IS REPLACE ITSELF WITH index.html
-fetch(`index.html`).then(response => response.text()).then(html => {
+fetch(`/index.html`).then(response => response.text()).then(html => {
     document.open();
     document.write(html);
     document.close();
