@@ -16067,7 +16067,7 @@ ${toHex(hashedRequest)}`;
     CuteModal.hide();
     if (posts.items.length === 0 || void 0 || null) alert("Nothing found or server error.");
     for (let i3 = 0; i3 < posts.items.length; i3++) {
-      let userPost = sock(posts.items[i3].imgURL, posts.items[i3].ogfilename, "1x1", 0, posts.items[i3].text, posts.items[i3], unixToRelativeTime(posts.items[i3].unix), posts.items[i3].unix);
+      let userPost = sock(posts.items[i3].imgURL, posts.items[i3].ogfilename, "1x1", 0, posts.items[i3].text, posts.items[i3], compatibilityNewUnixTime(posts.items[i3].unix), posts.items[i3].unix);
       await $("#articles").inject(userPost);
       for (let c3 = 0; c3 < posts.items[i3].comments.length; c3++) {
         $(`#comments-${posts.items[i3].unix}`).inject(`<div class="comment">${posts.items[i3].comments[c3].text}</div>`);
@@ -16078,7 +16078,11 @@ ${toHex(hashedRequest)}`;
       img.complete ? setDim() : img.onload = setDim;
     });
   }
-  var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime * 1e3)) + " ago";
+  function compatibilityNewUnixTime(unixTime) {
+    if (unixTime < 1725108348) return unixToRelativeTime(unixTime * 1e3);
+    else return unixToRelativeTime(unixTime);
+  }
+  var unixToRelativeTime = (unixTime) => formatDistanceToNow(new Date(unixTime)) + " ago";
   main();
 })();
 /*! Bundled license information:
